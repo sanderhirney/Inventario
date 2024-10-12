@@ -358,6 +358,7 @@
     <Component class="javax.swing.JTextField" name="Campo_factura">
       <Events>
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="Campo_facturaFocusLost"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Campo_facturaActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="Combo_Proveedor">

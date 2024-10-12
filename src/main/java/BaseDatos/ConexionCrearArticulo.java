@@ -46,7 +46,7 @@ public class ConexionCrearArticulo {
         {
             resultado=0;
         }
-       
+       conectar.Cerrar();
     }//consulta
            catch(SQLException ex)
     {

@@ -268,6 +268,11 @@ DefaultTableModel modelo;
                 Campo_facturaFocusLost(evt);
             }
         });
+        Campo_factura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Campo_facturaActionPerformed(evt);
+            }
+        });
 
         Boton_Buscar.setText("Buscar");
         Boton_Buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -810,6 +815,11 @@ DefaultTableModel modelo;
         {
             JOptionPane.showMessageDialog(null, "Numero de documento ya existente", "Error", JOptionPane.ERROR_MESSAGE);
             Campo_factura.setText("");
+            Boton_Buscar.setEnabled(false);
+            Boton_Guardar.setEnabled(false);
+        }else{
+            Boton_Buscar.setEnabled(true);
+            Boton_Guardar.setEnabled(true);
         }
     }//GEN-LAST:event_Campo_facturaFocusLost
 
@@ -820,6 +830,10 @@ DefaultTableModel modelo;
             System.out.println("se hizo click en el codigo: "+Tabla_datos.getValueAt(0, 0).toString());
         }
     }//GEN-LAST:event_Tabla_datosMouseClicked
+
+    private void Campo_facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Campo_facturaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Campo_facturaActionPerformed
     
      public void setCodigoArticuloRec(List<Integer> recibido)
      {
