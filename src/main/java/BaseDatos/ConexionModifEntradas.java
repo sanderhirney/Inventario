@@ -147,13 +147,14 @@ public class ConexionModifEntradas {
      public void ActualizarExistencia()
      {//una vez que he hecho la validacion correspondiente 
          //procedo a actualizar
-         for(int i=0; i<=cod_articulos.size(); i++)
-         {
-             try
-             {
+          try
+            {   
                  
-                    conectar.Conectar();
-                    conex= conectar.getConexion();
+             conectar.Conectar();
+             conex= conectar.getConexion();
+                for(int i=0; i<=cod_articulos.size(); i++)
+                         {
+            
                     consulta= conex.prepareStatement("update existencias set existencias=? where codigo=? and seccion=?");
                     consulta.setDouble(1, (existencias_totales.get(i)-cantidad_doc.get(i)));
                     consulta.setInt(2, cod_articulos.get(i));
@@ -168,13 +169,13 @@ public class ConexionModifEntradas {
                         resultado=0;
                     }
                 
-             }
-             catch(Exception ex)
+             }//for
+             
+         }catch(Exception ex)
              {
                  
                  JOptionPane.showMessageDialog(null, "No se pudo actualizar las existencias  de los articulos del Documento de entrada.\n Ventana Ver Documentos de entrada \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
              }
-         }
      }
      public void ActualizarCostos()
      {

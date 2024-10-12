@@ -33,10 +33,12 @@ public class ConexionReporteEntradas {
     {
         
           try
+              
        {
-       for(int i=0; i<codigoArticulos.size(); i++){
         conectar.Conectar();
         conex= conectar.getConexion();
+       for(int i=0; i<codigoArticulos.size(); i++){
+        
         consulta= conex.prepareStatement("select id_grupo, id_subgrupo,nombre, unidad_medida from articulos where codigo=?");
         consulta.setInt(1, codigoArticulos.get(i));
         ejecutar=consulta.executeQuery();
@@ -62,10 +64,11 @@ public class ConexionReporteEntradas {
     {
           try
     {
-        for(int i=0; i<codigoArticulos.size(); i++)
-        {
         conectar.Conectar();
         conex= conectar.getConexion();
+        for(int i=0; i<codigoArticulos.size(); i++)
+        {
+        
         consulta= conex.prepareStatement("select nombre from unidades where cod_unidad=?");
         consulta.setInt(1, codigo_medida.get(i));
         ejecutar=consulta.executeQuery();

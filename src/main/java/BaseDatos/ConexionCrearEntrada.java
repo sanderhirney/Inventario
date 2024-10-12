@@ -19,8 +19,8 @@ public class ConexionCrearEntrada {
     Conexion conectar= new Conexion();
     ResultSet ResultadoConsulta;
     int ejecutar;
-    int resultado;//recoge el valor de resultado de ingresar a BD tabla doc_entradas
-    int resultado_sig;//recoge el valor de resultado de ingresar a BD tabla historiales
+    int resultadoDocumento;//recoge el valor de resultado de ingresar a BD tabla doc_entradas
+    int resultadoHistorial;//recoge el valor de resultado de ingresar a BD tabla historiales
     String id_documento;
     //int codigo_articulo;
     java.sql.Date fecha_operacion;
@@ -51,10 +51,11 @@ public class ConexionCrearEntrada {
         
         try
     {
-        for(int i=0; i<codigo_articulo.size(); i++)
-        {
         conectar.Conectar();
         conex= conectar.getConexion();
+        for(int i=0; i<codigo_articulo.size(); i++)
+        {
+        
         consulta= conex.prepareStatement("insert into historiales values (DEFAULT, ?, ?, ?, ?, ?, ?, ?)");
         consulta.setDate(1, fecha_operacion);
         consulta.setInt(2, codigo_articulo.get(i));
@@ -65,16 +66,17 @@ public class ConexionCrearEntrada {
         consulta.setString(7, id_documento);
         consulta.addBatch();
         consulta.executeBatch();
+            
         }
         
 
         if( consulta!=null )
         {
-           resultado=1;
+           resultadoHistorial=1;
         }
         if( consulta==null )
         {
-            resultado=0;
+            resultadoHistorial=0;
         }//else
        conectar.Cerrar();
     }//consulta
@@ -137,12 +139,12 @@ public class ConexionCrearEntrada {
         ejecutar=consulta.executeUpdate();
         if( ejecutar>0 )
         {
-           resultado_sig=1;
+           resultadoDocumento=1;
          
         }
         else
         {
-            resultado_sig=0;
+            resultadoDocumento=0;
         }//else
        conectar.Cerrar();
     }//try
@@ -156,11 +158,11 @@ public class ConexionCrearEntrada {
     
     public int respuesta()
     {
-        return resultado;
+        return resultadoDocumento;
     }
     public int getResultFinal()
     {
-        return resultado_sig;
+        return resultadoHistorial;
     }
     
     public void setCodigo(String id)

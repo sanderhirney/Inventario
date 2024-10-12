@@ -146,9 +146,10 @@ public class ConexionGuardarTemporal {
                             consulta.setDouble(5, articulos_individual.get(i));
                             consulta.setDouble(6, 0);
                             consulta.addBatch();
+                            consulta.executeBatch();
                             }
         
-                                consulta.executeBatch();
+                               
 
 
                                  //ejecutar=consulta.executeQuery();
@@ -182,9 +183,10 @@ public class ConexionGuardarTemporal {
                             consulta.setDouble(5, 0);
                             consulta.setDouble(6, articulos_individual.get(i));
                             consulta.addBatch();
+                            consulta.executeBatch();
                             }
         
-                                consulta.executeBatch();
+                                
                                 conectar.Cerrar();
 
                                  //ejecutar=consulta.executeQuery();

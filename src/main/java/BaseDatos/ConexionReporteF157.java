@@ -112,13 +112,13 @@ public class ConexionReporteF157 {
     }
     private void consultaDescripcionGrupos()
     {        
+        try{
+            conectar.Conectar();
+            conex= conectar.getConexion();
+        
         for(int i=0; i<codigoConceptos.size(); i++){
             if(tipoConceptos.get(i).equals("E")){
-
-                                            try
-                         {
-                           conectar.Conectar();
-                           conex= conectar.getConexion();
+                           
                            consulta= conex.prepareStatement("select descripcion from conceptos where codigo=?");
                            consulta.setInt(1, codigoConceptos.get(i));
                            ejecutar=consulta.executeQuery();
@@ -128,18 +128,11 @@ public class ConexionReporteF157 {
                                 
                              }//if
 
-                         }//consulta
-                                catch(SQLException ex)
-                         {
-                             JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de lectura de descripcion de conceptos.\n Ventana Crear Reporte SalidaF 15-7 \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
-                         }
-                
+                       
             }
             if(tipoConceptos.get(i).equals("S")){
-                                    try
-                         {
-                           conectar.Conectar();
-                           conex= conectar.getConexion();
+                          
+                           
                            consulta= conex.prepareStatement("select descripcion from conceptos where codigo=?");
                            consulta.setInt(1, codigoConceptos.get(i));
                            ejecutar=consulta.executeQuery();
@@ -149,15 +142,16 @@ public class ConexionReporteF157 {
                                 
                              }//if
 
-                         }//consulta
-                                catch(SQLException ex)
+                      
+                         
+            }
+        }
+       conectar.Cerrar();
+    }       catch(SQLException ex)
                          {
                              JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de lectura de descripcion de conceptos.\n Ventana Crear Reporte SalidaF 15-7 \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
                          }
-            }
-        }
-   
-    }//consulta
+    }//funcion
  
      private  void consultarDatosReporte(){
         try{
@@ -180,12 +174,15 @@ public class ConexionReporteF157 {
     }
  
      private void consultarIngresosEgresosMes(){
+         
+         try{
+             
+            conectar.Conectar();
+            conex= conectar.getConexion();
          for(int i=0; i<codigoConceptos.size(); i++){
              if(tipoConceptos.get(i).equals("E"))
              {              
-                     try{
-                       conectar.Conectar();
-                       conex= conectar.getConexion();
+                   
                        consulta= conex.prepareStatement(consultaIngresosBsMes);
                        consulta.setInt(1, mesFin);
                        consulta.setInt(2, anio);
@@ -199,17 +196,12 @@ public class ConexionReporteF157 {
                           consecutivoHasta.add(ejecutar.getInt("maximo"));
                        }
 
-                       conectar.Cerrar();
-                     }
-                   catch(SQLException e){
-                       JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Consulta Ingresos en Bs.\n Ventana Crear Reporte Salidas Historial \n Contacte al Desarrollador \n "+e ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
-                       }
+                      
+                  
              }
              if(tipoConceptos.get(i).equals("S"))
              {              
-                 try{
-                       conectar.Conectar();
-                       conex= conectar.getConexion();
+               
                        consulta= conex.prepareStatement(consultaEgresosBsMes);
                        consulta.setInt(1, mesFin);
                        consulta.setInt(2, anio);
@@ -223,21 +215,24 @@ public class ConexionReporteF157 {
                           consecutivoHasta.add(ejecutar.getInt("maximo"));
                        }
 
-                       conectar.Cerrar();
-                     }
-                   catch(SQLException e){
-                       JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Consulta Egresos en Bs.\n Ventana Crear Reporte Salidas Historial \n Contacte al Desarrollador \n "+e ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
-                       }
+                       
+                                        
              }
      }
-    }
+     conectar.Cerrar();    
+     }catch(SQLException e){
+                       JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Consulta Egresos en Bs.\n Ventana Crear Reporte Salidas Historial \n Contacte al Desarrollador \n "+e ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+                       }
+     }//funcio
      private void consultarIngresosEgresosAnteriores(){
+        try{ 
+         conectar.Conectar();
+          conex= conectar.getConexion();
          for(int i=0; i<codigoConceptos.size(); i++){
              if(tipoConceptos.get(i).equals("E"))
              {              
-                     try{
-                       conectar.Conectar();
-                       conex= conectar.getConexion();
+                    
+                       
                        consulta= conex.prepareStatement(consultaIngresosAnteriores);
                        consulta.setInt(1, (mesFin-1));
                        consulta.setInt(2, anio);
@@ -248,17 +243,12 @@ public class ConexionReporteF157 {
                          ingresosAnteriores+=ejecutar.getDouble("ingresosAnteriores");
                        }
 
-                       conectar.Cerrar();
-                     }
-                   catch(SQLException e){
-                       JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Consulta Ingresos en Bs.\n Ventana Crear Reporte Salidas Historial \n Contacte al Desarrollador \n "+e ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
-                       }
+                    
+                   
              }
              if(tipoConceptos.get(i).equals("S"))
              {              
-                 try{
-                       conectar.Conectar();
-                       conex= conectar.getConexion();
+                 
                        consulta= conex.prepareStatement(consultaEgresosAnteriores);
                        consulta.setInt(1, (mesFin-1));
                        consulta.setInt(2, anio);
@@ -270,14 +260,16 @@ public class ConexionReporteF157 {
                           
                        }
 
-                       conectar.Cerrar();
-                     }
-                   catch(SQLException e){
+                       
+                     
+                   
+             }
+         }//for
+         conectar.Cerrar();
+     }catch(SQLException e){
                        JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Consulta Egresos en Bs.\n Ventana Crear Reporte Salidas Historial \n Contacte al Desarrollador \n "+e ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
                        }
-             }
-     }
-     }
+     }//funcion
      private void calculoExistenciaAnterior(){
          existenciaAnterior=ingresosAnteriores-egresosAnteriores;
          if(existenciaAnterior<0){

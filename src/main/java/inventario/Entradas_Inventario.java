@@ -507,10 +507,12 @@ DefaultTableModel modelo;
         entrada.setTotalOperacion(total_operacion);
         entrada.setConsecutivo(consecutivo);
         entrada.documento();
-        entrada.historial();
         
-        if(entrada.respuesta()==1 && entrada.getResultFinal()==1)
+        
+        if(entrada.respuesta()==1)
         {
+            entrada.historial();
+            if(entrada.getResultFinal()==1){
              //actualizo las existencias y costos con la tabla
       
                 operaciones.setCodigo(codigo_art);
@@ -568,7 +570,7 @@ DefaultTableModel modelo;
                 //temporal documento y temporal articulo
                 //vaciar la misma ya que si fue modificada quedara alli
                
-               
+              
                if(entrada.getResultFinal()==1 && entrada.respuesta()==1 && operaciones2.getResultadoOperacion()==1)
             {
                          
@@ -601,9 +603,9 @@ DefaultTableModel modelo;
                                     jasper.llamarReporte();
                 
                                  }//if temp resultado
-            }//if entrada resultado final
-                        
-           }//entrada.respuesta==1  
+            }//if entrada resultado final//si pudo realizar correctamente las operaciones de calculos de existencias y costos
+            }//si pudo ingresar al historial            
+            }//entrada.respuesta==1  si pudo ingreaar al documetno
             if(entrada.respuesta()==0 || entrada.getResultFinal()==0)
             {
                 Campo_factura.setText("");
