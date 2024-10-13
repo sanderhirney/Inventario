@@ -149,11 +149,7 @@ public class ConexionGuardarTemporal {
                             consulta.executeBatch();
                             }
         
-                               
-
-
-                                 //ejecutar=consulta.executeQuery();
-
+                     
                              conectar.Cerrar();
                              }//consulta
                                     catch(SQLException ex)
