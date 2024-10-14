@@ -36,21 +36,14 @@ List<String> rif_proveedor=new ArrayList<>();
  String nombre_recibido;
  String codigo_recibido;
  Date fecha= new Date();
- Date fecha_documento;
+ 
  java.sql.Date sql = new java.sql.Date(fecha.getTime());
  java.sql.Date fecha_doc;
  long fechalong;
- Double total_operacion=0.0;//variable usada para guardar el total del valor movido por concepto
- //actualizar costos y existencias
- List<Double> ExistenciasNuevas=new ArrayList<>();
- List<Double> CostosNuevos=new ArrayList<>();
- List<Double> ExistenciasActuales=new ArrayList<>();
- List<Double> CostosActuales=new ArrayList<>();
- //////***para hacer los calculos****//
  
- List<Double> costo_total= new ArrayList<>();
- List<Double> existencia_total=new ArrayList<>();
- List<Double> costo_promedio=new ArrayList<>();
+ 
+ List<Double> CostosActuales=new ArrayList<>();
+ 
  List<Double> existencia_promedio=new ArrayList<>();
  //tabla
 DefaultTableModel modelo;
@@ -59,32 +52,26 @@ DefaultTableModel modelo;
  ConexionVerConceptos conceptos= new ConexionVerConceptos();
  ConexionVerProveedores proveedor= new ConexionVerProveedores();
  ConexionEmpresas secciones=new ConexionEmpresas();
- ConexionOperacionesEntrada operaciones=new ConexionOperacionesEntrada();
+ 
  ConexionConsultarDecimales decimales=new ConexionConsultarDecimales();
- ConexionCrearEntrada entrada= new ConexionCrearEntrada();
+ 
 
  Iterator lista1;
  Iterator lista2;
  
  //variables que seran usadas para enviar datos
  String id_documento;
- String documento;
- String codigo_proveedor;
+ 
  String nombre_seccion;
  int codigo_seccion;
  int numero_art;
- int cod_concepto_entrada;
+ 
  //Variable de tipo de documento
  //1=Entrada
  //0= Salida
  int tipo=1;
  //sql sera la variable que de la fecha de la operacion
- List<Integer> codigo_art = new ArrayList<>();
- List<String> nombre_art= new ArrayList<>();
- List<Double> cantidad_art=new ArrayList<>();
- List<Double> precio_art=new ArrayList<>();
- List<Double> total_linea=new ArrayList<>();
- int cantidad_articulos=0;
+ 
  //variables para la cantidad de decimales
  int decimalPrecioUnitario=0;
  int decimalCalculoTotal=0;
@@ -458,7 +445,29 @@ DefaultTableModel modelo;
     }// </editor-fold>//GEN-END:initComponents
 
     private void Boton_RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_RegistrarActionPerformed
-   try
+  ConexionOperacionesEntrada operaciones=new ConexionOperacionesEntrada();
+  ConexionCrearEntrada entrada= new ConexionCrearEntrada();  
+  List<Integer> codigo_art = new ArrayList<>();
+     List<String> nombre_art= new ArrayList<>();
+    List<Double> cantidad_art=new ArrayList<>();
+    List<Double> precio_art=new ArrayList<>();
+    List<Double> total_linea=new ArrayList<>(); 
+    int cod_concepto_entrada;
+    String documento;
+    String codigo_proveedor;
+    Date fecha_documento;
+    Double total_operacion=0.0;//variable usada para guardar el total del valor movido por concepto
+    //////***para hacer los calculos****//
+ 
+ List<Double> costo_total= new ArrayList<>();
+ List<Double> existencia_total=new ArrayList<>();
+ List<Double> costo_promedio=new ArrayList<>();
+ int cantidad_articulos=0;
+ 
+ //actualizar costos y existencias
+ List<Double> ExistenciasNuevas=new ArrayList<>();
+ List<Double> CostosNuevos=new ArrayList<>();
+    try
    {
         
         fecha_documento=Fecha_documento.getDate();//obtengo la fecha del jdtachooser y lo guardo en un date
@@ -514,7 +523,7 @@ DefaultTableModel modelo;
             entrada.historial();
             if(entrada.getResultFinal()==1){
              //actualizo las existencias y costos con la tabla
-      
+              List<Double> ExistenciasActuales=new ArrayList<>();
                 operaciones.setCodigo(codigo_art);
                 operaciones.setDocumento(documento);
                 operaciones.setFecha(fecha_doc);
@@ -524,11 +533,12 @@ DefaultTableModel modelo;
                 
                 ExistenciasActuales=operaciones.obtenerExistencia();
                 CostosActuales=operaciones.obtenerPrecio();
-               
+                
                 try//aqui aplico la formula del inventario promedio ponderado en si es costo total / existencia total
                 {//esta operacion debe hacerse cada vez que hay una nueva entrada
                 for(int i=0; i<ExistenciasActuales.size(); i++)
                 {
+                    System.out.println("sumando a"+cantidad_art.get(i));
                     costo_total.add( (CostosActuales.get(i)*ExistenciasActuales.get(i))+(   precio_art.get(i)*cantidad_art.get(i)    )  );//total de costo del que hay mas el costo total del que llega
                     existencia_total.add(ExistenciasActuales.get(i)+cantidad_art.get(i));//las que hay mas la que llegan
                     costo_promedio.add(costo_total.get(i) /existencia_total.get(i));//costo ponderado
@@ -589,12 +599,9 @@ DefaultTableModel modelo;
                                     Etiq_nombre.setText("");
                                     Campo_Cantidad.setText("");
                                     Campo_Precio.setText("");
-                                    ExistenciasActuales.clear();
+                                    //
                                     modelo.setRowCount(0);//limpio la tabla
-                                    codigo_art.clear();
-                                    nombre_art.clear();
-                                    cantidad_art.clear();
-                                    precio_art.clear();
+                                    
                                     cantidad_articulos=0;
                                     JOptionPane.showMessageDialog(null, "Informacion Registrada, Exitosamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
                               
@@ -604,7 +611,10 @@ DefaultTableModel modelo;
                 
                                  }//if temp resultado
             }//if entrada resultado final//si pudo realizar correctamente las operaciones de calculos de existencias y costos
-            }//si pudo ingresar al historial            
+            }//si pudo ingresar al historial
+            else{
+                JOptionPane.showMessageDialog(null, "Ocurrio un error al ingresar la entrada a los historiales", "Informacion", JOptionPane.ERROR_MESSAGE);
+            }            
             }//entrada.respuesta==1  si pudo ingreaar al documetno
             if(entrada.respuesta()==0 || entrada.getResultFinal()==0)
             {
@@ -613,12 +623,9 @@ DefaultTableModel modelo;
                 Etiq_nombre.setText("");
                 Campo_Cantidad.setText("");
                 Campo_Precio.setText("");
-                ExistenciasActuales.clear();
+                //ExistenciasActuales.clear();
                 modelo.setRowCount(0);//limpio la tabla
-                codigo_art.clear();
-                nombre_art.clear();
-                cantidad_art.clear();
-                precio_art.clear();
+                
                 cantidad_articulos=0;
                 JOptionPane.showMessageDialog(null,"Error al registrar la entrada, Deshaciendo cambios", "Error grave", JOptionPane.ERROR_MESSAGE);
            
@@ -650,7 +657,7 @@ DefaultTableModel modelo;
                 Etiq_nombre.setText("");
                 Campo_Cantidad.setText("");
                 Campo_Precio.setText("");
-                ExistenciasActuales.clear();
+                
                 modelo.setRowCount(0);//limpio la tabla
                 codigo_art.clear();
                 nombre_art.clear();

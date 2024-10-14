@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -116,24 +117,24 @@ public class ConexionOperacionesEntrada {
                  //si ya existe solo debe actualizar la existencia
             if(existencia.get(i)==0)
             {
-        consulta= conex.prepareStatement("update existencias set existencias=?, fecha=?, numero_dco=?, seccion=? where codigo=?");
-        consulta.setDouble(1, existencias_nuevo.get(i));
-        consulta.setDate(2, fecha);
-        consulta.setString(3, documento);
-        consulta.setInt(4, seccion);
-        consulta.setInt(5, codigo.get(i));
-        
-        
-        resultado_operaciones=consulta.executeUpdate();
+                
+                consulta= conex.prepareStatement("update existencias set existencias=?, fecha=?, numero_dco=?, seccion=? where codigo=?");
+                consulta.setDouble(1, existencias_nuevo.get(i));
+                consulta.setDate(2, fecha);
+                consulta.setString(3, documento);
+                consulta.setInt(4, seccion);
+                consulta.setInt(5, codigo.get(i));
+                resultado_operaciones=consulta.executeUpdate();
             }//if
-            if(existencia.get(i)!=0.0)
+            else
             {
+                
                 consulta= conex.prepareStatement("update existencias set existencias=?, fecha=?, numero_dco=? where codigo=? and seccion=?");
-        consulta.setDouble(1, existencias_nuevo.get(i));
-        consulta.setDate(2, fecha);
-        consulta.setString(3, documento);
-        consulta.setInt(4, codigo.get(i));
-        consulta.setInt(5, seccion);
+                consulta.setDouble(1, existencias_nuevo.get(i));
+                consulta.setDate(2, fecha);
+                consulta.setString(3, documento);
+                consulta.setInt(4, codigo.get(i));
+                consulta.setInt(5, seccion);
         
         
         resultado_operaciones=consulta.executeUpdate();
@@ -176,7 +177,7 @@ public class ConexionOperacionesEntrada {
                   consulta.setInt(5, codigo.get(i));
                   resultado_operaciones=consulta.executeUpdate();
                  }//if
-                 if(precio.get(i)!=0.0)
+                 else
                  {
                     
                     consulta= conex.prepareStatement("update costos set costo=?, numero_documento=?, fecha_precio=? where codigo_articulo=? and seccion=?");

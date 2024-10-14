@@ -269,6 +269,7 @@ JFrame ventanaPrincipal;
                 entrada.setCostosDoc(buscar.getCostosDoc());
 
                 entrada.EstadoExistencias();
+                entrada.actualizar();//actualizo eixstencia y costo, este se ejecuta siempre y cuando no haya error
                 if(entrada.getEstadoExistencia()==0)
                 {
                     //hubo error porque al reversar quedaria negativo
@@ -283,6 +284,7 @@ JFrame ventanaPrincipal;
                 }
                 if(entrada.getEstadoExistencia()==1)
                 {
+                   
                     //no hubo error
                     //procedo a borrar los movimientos de la base de datos
                     //ya que se va a modificar
