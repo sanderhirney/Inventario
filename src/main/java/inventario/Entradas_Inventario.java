@@ -904,6 +904,8 @@ DefaultTableModel modelo;
             
         for(int i=0; i<codigo_articulo_rec.size(); i++)
         {
+            System.out.println("voy en: "+codigo_articulo_rec.get(i));
+            System.out.println("cantidad es: "+cantidad_articulo_rec.size());
             try{
             formato_campo=(formatoCampo.format(costo_doc_rec.get(i)));
             formato_total=(formatoTotal.format((cantidad_articulo_rec.get(i)) *(costo_doc_rec.get(i))));

@@ -350,7 +350,7 @@ JFrame ventanaPrincipal;
                 temp.nombre_articulos();
                 if(documento_seleccionado.equals("")){documento_seleccionado="NO SUMINISTRADO";}
                 Entradas_Inventario ventana=new Entradas_Inventario(null, true);
-                ventana.setCantidadArticuloRec(temp.getCantidadArticulos());
+                ventana.setCantidadArticuloRec(temp.getCantidadArtDoc());
                 ventana.setCodigoArticuloRec(temp.getCodArticulos());
                 ventana.setNombreArticuloRec(temp.getNombreArticulos());
                 ventana.setCodProveedorRec(temp.getProveedor());

@@ -94,23 +94,25 @@ public class ConexionVerTempEntradas {
     
     public void articulo()
     {
-       
+        
           try
       {
         conectar.Conectar();
         conex= conectar.getConexion();
         
-        consulta= conex.prepareStatement("select cod_articulos, costo_articulos, cantidad_salida from temporal_articulo where documento=? and seccion=?");
+        consulta= conex.prepareStatement("select cod_articulos, costo_articulos, cantidad_entrada from temporal_articulo where documento=? and seccion=?");
         consulta.setString(1, String.valueOf(documento));
         consulta.setInt(2, seccion);
         ejecutar=consulta.executeQuery();
-        System.out.println("resultado es: "+ejecutar);
+       
         while( ejecutar.next() )
         {
+            
             cod_articulos.add(ejecutar.getInt("cod_articulos"));
             costos_articulos_doc.add(ejecutar.getDouble("costo_articulos"));
-            cantidad_art_doc.add(ejecutar.getDouble("cantidad_salida"));
-        }//whiles
+            cantidad_art_doc.add(ejecutar.getDouble("cantidad_entrada"));
+           
+        }//while
         }//try
                catch(SQLException ex)
     {
