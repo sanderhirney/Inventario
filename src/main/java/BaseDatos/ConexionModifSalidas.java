@@ -51,6 +51,7 @@ public class ConexionModifSalidas {
         }//while
       
       }//for
+        conectar.Cerrar();
     }//try
            catch(SQLException ex)
     {
@@ -77,6 +78,7 @@ public class ConexionModifSalidas {
         }//while
       
       }//for
+        conectar.Cerrar();
     }//try
            catch(SQLException ex)
     {
@@ -113,7 +115,7 @@ public class ConexionModifSalidas {
                      
         }//while
         
-                
+          conectar.Cerrar();
              }//consulta
                     catch(SQLException ex)
              {
@@ -140,69 +142,35 @@ public class ConexionModifSalidas {
          }
      }
      
-     public void ActualizarExistencia()
+     private void ActualizarExistencia()
      {//una vez que he hecho la validacion correspondiente 
-         //procedo a actualizar
-         for(int i=0; i<=cod_articulos.size(); i++)
-         {
+         //procedo a actualizar las existencias es decir las devuelvo
+         
              try
              {
                  
                     conectar.Conectar();
                     conex= conectar.getConexion();
+                   
+                   for(int i=0; i<=cod_articulos.size()-1; i++)
+             {
                     consulta= conex.prepareStatement("update existencias set existencias=? where codigo=? and seccion=?");
-                    consulta.setDouble(1, (existencias_totales.get(i)-cantidad_doc.get(i)));
+                    consulta.setDouble(1, (existencias_totales.get(i)+cantidad_doc.get(i)));
                     consulta.setInt(2, cod_articulos.get(i));
                     consulta.setInt(3, seccion);
-                    ejecutar=consulta.executeQuery();
-                    if(ejecutar.next())
-                    {
-                        resultado=1;
-                    }
-                    else
-                    {
-                        resultado=0;
-                    }
+                    resultado=consulta.executeUpdate();
+                   
                 
              }
-             catch(Exception ex)
+                    conectar.Cerrar();
+            
+         } catch(Exception ex)
              {
                  
-                 JOptionPane.showMessageDialog(null, "No se pudo actualizar las existencias  de los articulos del Documento de salida.\n Ventana Ver Documentos de entrada \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+                 JOptionPane.showMessageDialog(null, "No se pudo actualizar las existencias  de los articulos del Documento de salida.\n Ventana Ver Documentos de salida \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
              }
-         }
      }
-     public void ActualizarCostos()
-     {
-         for(int i=0; i<=cod_articulos.size(); i++)
-         {
-             try
-             {
-                 
-                    conectar.Conectar();
-                    conex= conectar.getConexion();
-                    consulta= conex.prepareStatement("update costos set costo=? where codigo_articulo=? and seccion=?");
-                    consulta.setDouble(1, ((costos_totales.get(i))-(costos_doc.get(i)-cantidad_doc.get(i))) / ((existencias_totales.get(i)-cantidad_doc.get(i))));
-                    consulta.setInt(2, cod_articulos.get(i));
-                    consulta.setInt(3, seccion);
-                    ejecutar=consulta.executeQuery();
-                    if(ejecutar.next())
-                    {
-                        resultado=1;
-                    }
-                    else
-                    {
-                        resultado=0;
-                    }
-                
-             }
-             catch(Exception ex)
-             {
-                 
-                 JOptionPane.showMessageDialog(null, "No se pudo actualizar las existencias  de los articulos del Documento de salida.\n Ventana Ver Documentos de entrada \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
-             }
-         }
-     }
+     
     
      public void borrarDocumento()
      {
@@ -268,6 +236,12 @@ public class ConexionModifSalidas {
              }
      }
           
+      public void actualizar(){
+        if(estado_existencia==1){
+            
+            ActualizarExistencia();
+        }
+    }
      
     public void setCodigoArticulo(List<Integer> recibido)
     {

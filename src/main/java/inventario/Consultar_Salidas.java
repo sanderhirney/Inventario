@@ -281,8 +281,8 @@ JFrame ventanaPrincipal;
                     salida.documento();
                     salida.setCantidadDoc(buscar.getCantidadesDoc());
                     salida.setCostosDoc(buscar.getCostosDoc());
-
                     salida.EstadoExistencias();
+                    salida.actualizar();
                     if(salida.getEstadoExistencia()==0)
                     {
                         //hubo error porque al reversar quedaria negativo
@@ -293,7 +293,7 @@ JFrame ventanaPrincipal;
                         s.append(lista7.next());
                         }
 
-                        JOptionPane.showMessageDialog(null, "Error: no se puede modificar el documento seleccionado\n el o los articulos: "+s+"poseen movimientos", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Error: no se puede modificar el documento seleccionado\n el o los articulos: "+s+"\n"+"poseen movimientos", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                     if(salida.getEstadoExistencia()==1)
                     {
@@ -368,7 +368,7 @@ JFrame ventanaPrincipal;
                 temp.articulo();
                 temp.nombre_articulos();
                 Salida_Inventario ventana=new Salida_Inventario(null, true);
-                ventana.setCantidadArticuloRec(temp.getCantidadArticulos());
+                ventana.setCantidadArticuloRec(temp.getCantidadArtDoc());
                 ventana.setCodigoArticuloRec(temp.getCodArticulos());
                 ventana.setNombreArticuloRec(temp.getNombreArticulos());
                 ventana.setCodServicioRec(temp.getServicio());

@@ -57,7 +57,7 @@ public class ConexionVerTempSalidas {
             }//try
                     catch(SQLException ex)
              {
-                 JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de los Documento de entrada.\n Ventana Ver Documentos de entrada \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+                 JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de los Documento de sALIDA.\n Ventana Ver Documentos de entrada \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
              }
         
     }//consulta
@@ -104,7 +104,7 @@ public class ConexionVerTempSalidas {
         consulta.setString(1, String.valueOf(documento));
         consulta.setInt(2, seccion);
         ejecutar=consulta.executeQuery();
-        System.out.println("resultado es: "+ejecutar);
+        
         while( ejecutar.next() )
         {
             cod_articulos.add(ejecutar.getInt("cod_articulos"));
