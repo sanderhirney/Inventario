@@ -163,7 +163,7 @@ public class ConexionModifEntradas {
                     
                 
              }//for
-             
+             conectar.Cerrar();
          }catch(Exception ex)
              {
                  
@@ -172,25 +172,30 @@ public class ConexionModifEntradas {
      }
      private void ActualizarCostos()
      {
-         for(int i=0; i<=cod_articulos.size()-1; i++)
-         {   double costos_temp_doc_reverso=costos_doc.get(i)*cantidad_doc.get(i);
-             double existencias_temp=existencias_totales.get(i)-cantidad_doc.get(i);
-             double costos_fin=costos_totales.get(i)-costos_temp_doc_reverso;
-             
+            try
+             {
+                    conectar.Conectar();
+                    conex= conectar.getConexion();
+                for(int i=0; i<=cod_articulos.size()-1; i++)
+                {   double costos_temp_doc_reverso=costos_doc.get(i)*cantidad_doc.get(i);
+                    double existencias_temp=existencias_totales.get(i)-cantidad_doc.get(i);
+                    double costos_fin=costos_totales.get(i)-costos_temp_doc_reverso;
+                    double costo_actualizar;
+                    if(existencias_temp==0.0){
+                        costo_actualizar=0;
+                    }else{
+                    costo_actualizar=(costos_fin) / (existencias_temp);
+                }
              System.out.println("Costo temp: "+costos_temp_doc_reverso);
              System.out.println("existencias temp"+existencias_temp);
              System.out.println("Costos finales: "+costos_fin);
-             try
-             {
-                 
-                    conectar.Conectar();
-                    conex= conectar.getConexion();
+           
                     consulta= conex.prepareStatement("update costos set costo=? where codigo_articulo=? and seccion=?");
-                    consulta.setDouble(1, (costos_fin) / (existencias_temp) );
+                    consulta.setDouble(1, costo_actualizar );
                     consulta.setInt(2, cod_articulos.get(i));
                     consulta.setInt(3, seccion);
                     resultado=consulta.executeUpdate();
-                   
+              }//for     
                 conectar.Cerrar();
              }
              catch(Exception ex)
@@ -198,7 +203,7 @@ public class ConexionModifEntradas {
                  
                  JOptionPane.showMessageDialog(null, "No se pudo actualizar las existencias  de los articulos del Documento de entrada.\n Ventana Ver Documentos de entrada \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
              }
-         }
+         
      }
      public void guardar_temporal()
      {
