@@ -30,9 +30,10 @@ public class ConexionVerConceptos {
         {
                      descripciones.add(ejecutar.getString("descripcion"));
                      codigos.add(ejecutar.getInt("codigo"));
-                     conectar.Cerrar();
+                    
                      
         }//if
+         conectar.Cerrar();
        
     }//consulta
            catch(SQLException ex)
@@ -52,9 +53,10 @@ public class ConexionVerConceptos {
         {
                      descripciones.add(ejecutar.getString("descripcion"));
                      codigos.add(ejecutar.getInt("codigo"));
-                     conectar.Cerrar();
+                    
                      
         }//if
+         conectar.Cerrar();
        
     }//consulta
            catch(SQLException ex)

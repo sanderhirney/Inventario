@@ -177,7 +177,8 @@ public class ConexionModifEntradas {
                     conectar.Conectar();
                     conex= conectar.getConexion();
                 for(int i=0; i<=cod_articulos.size()-1; i++)
-                {   double costos_temp_doc_reverso=costos_doc.get(i)*cantidad_doc.get(i);
+                {   
+                    double costos_temp_doc_reverso=costos_doc.get(i)*cantidad_doc.get(i);
                     double existencias_temp=existencias_totales.get(i)-cantidad_doc.get(i);
                     double costos_fin=costos_totales.get(i)-costos_temp_doc_reverso;
                     double costo_actualizar;
