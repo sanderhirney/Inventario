@@ -538,7 +538,7 @@ DefaultTableModel modelo;
                 {//esta operacion debe hacerse cada vez que hay una nueva entrada
                 for(int i=0; i<ExistenciasActuales.size(); i++)
                 {
-                    System.out.println("sumando a"+cantidad_art.get(i));
+                    
                     costo_total.add( (CostosActuales.get(i)*ExistenciasActuales.get(i))+(   precio_art.get(i)*cantidad_art.get(i)    )  );//total de costo del que hay mas el costo total del que llega
                     existencia_total.add(ExistenciasActuales.get(i)+cantidad_art.get(i));//las que hay mas la que llegan
                     costo_promedio.add(costo_total.get(i) /existencia_total.get(i));//costo ponderado

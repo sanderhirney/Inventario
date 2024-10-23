@@ -24,7 +24,8 @@ public class ConexionModifEntradas {
     List<Integer> articulos_error=new ArrayList<>();//esta variable almacenara los codigos de los articulos que quedarian con existencia negativa si se reversa una entrada
     int seccion;
     int resultado;
-    
+    int decimal_unitario;
+    int decimal_totales;
     String numero_documento;
     Date fecha_documento;
     Date fecha_operacion;
@@ -182,17 +183,20 @@ public class ConexionModifEntradas {
                     double existencias_temp=existencias_totales.get(i)-cantidad_doc.get(i);
                     double costos_fin=costos_totales.get(i)-costos_temp_doc_reverso;
                     double costo_actualizar;
+                    double costo_final_ingresar;
                     if(existencias_temp==0.0){
-                        costo_actualizar=0;
+                        
+                        costo_final_ingresar=0;
                     }else{
                     costo_actualizar=(costos_fin) / (existencias_temp);
+                    costo_final_ingresar=((Double)(Math.round (costo_actualizar*Math.pow(10, decimal_totales)) / Math.pow(10, decimal_totales))) ;
                 }
              System.out.println("Costo temp: "+costos_temp_doc_reverso);
              System.out.println("existencias temp"+existencias_temp);
              System.out.println("Costos finales: "+costos_fin);
            
                     consulta= conex.prepareStatement("update costos set costo=? where codigo_articulo=? and seccion=?");
-                    consulta.setDouble(1, costo_actualizar );
+                    consulta.setDouble(1, costo_final_ingresar );
                     consulta.setInt(2, cod_articulos.get(i));
                     consulta.setInt(3, seccion);
                     resultado=consulta.executeUpdate();
@@ -324,6 +328,12 @@ public class ConexionModifEntradas {
     public Date getFechaDoc()
     {
         return fecha_documento;
+    }
+    public void getDecimalUnitario(int recibido){
+        decimal_unitario=recibido;
+    }
+    public void getDecimalTotales(int recibido){
+        decimal_totales=recibido;
     }
     
     

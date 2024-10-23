@@ -44,8 +44,8 @@ String nombre_seccion;
 String documento_seleccionado;
 TableRowSorter filtro;
 List<BigDecimal>formateado=new ArrayList<>();
-int decimal_campo;
-int decimal_cantidad;
+int decimal_unitario;
+int decimal_totales;
 JFrame ventanaPrincipal;
     public Consultar_Entradas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -75,15 +75,15 @@ JFrame ventanaPrincipal;
          ConexionConsultarDecimales decimales=new ConexionConsultarDecimales();
          decimales.setSeccion(codigo_seccion);
          decimales.consulta();
-         decimal_campo=decimales.getDecimalCampo();
-         decimal_cantidad=decimales.getDecimalTotal();
+         decimal_unitario=decimales.getDecimalCampo();
+         decimal_totales=decimales.getDecimalTotal();
          for(int i=0; i<documento.size(); i++)
            {
               
                Double temporal; 
             temporal=((cantidad_articulos.get(i))  * (valor.get(i))) ;
             BigDecimal formato=new BigDecimal(temporal);
-            formateado.add(formato.setScale(decimal_cantidad, RoundingMode.FLOOR));
+            formateado.add(formato.setScale(decimal_totales, RoundingMode.FLOOR));
          
            }//for
          //los meto al iterador para poder mostrarlos en la tabla
