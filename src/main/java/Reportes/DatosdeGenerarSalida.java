@@ -119,7 +119,7 @@ public class DatosdeGenerarSalida implements JRDataSource{
     
     private String decimalesPrecioUnitario(int index){
         String precioUnitarioFinal;
-        String mascaraPrecioUnitario="#.";//para la mascara
+        String mascaraPrecioUnitario="###,###.";//para la mascara
                
             
             for(int i=0; i<decimalesPrecioUnitario; i++)
@@ -128,13 +128,13 @@ public class DatosdeGenerarSalida implements JRDataSource{
                 
             }
             DecimalFormat formatoPrecioUnitario=new DecimalFormat(mascaraPrecioUnitario);
-            precioUnitarioFinal=(formatoPrecioUnitario.format(precioUnitario.get(index)).replace(',','.'));
-        
+            //precioUnitarioFinal=(formatoPrecioUnitario.format(precioUnitario.get(index)).replace(',','.'));
+            precioUnitarioFinal=(formatoPrecioUnitario.format(precioUnitario.get(index)));
         return precioUnitarioFinal;
     }
     private String decimalesCalculoTotal(int index){
         String calculoTotalFinal;
-        String mascaraCalculoTotal="#.";//para la mascara
+        String mascaraCalculoTotal="###,###.";//para la mascara
         Double temporal;
         
             temporal=precioUnitario.get(index)*cantidad.get(index);
@@ -144,13 +144,13 @@ public class DatosdeGenerarSalida implements JRDataSource{
                 
             }
             DecimalFormat formatoPrecioUnitario=new DecimalFormat(mascaraCalculoTotal);
-            calculoTotalFinal=(formatoPrecioUnitario.format(temporal).replace(',','.'));
-        
+            //calculoTotalFinal=(formatoPrecioUnitario.format(temporal).replace(',','.'));
+            calculoTotalFinal=(formatoPrecioUnitario.format(temporal));
         return calculoTotalFinal;
     }
     private String decimalesTotalSalida(){
         String calculoTotalSalida;
-        String mascaraCalculoTotal="#.";//para la mascara
+        String mascaraCalculoTotal="###,###.";//para la mascara
         Double temporal;
         Double total=0.0;
             for(int i=0; i<precioUnitario.size(); i++){
@@ -164,8 +164,8 @@ public class DatosdeGenerarSalida implements JRDataSource{
                 
             }
             DecimalFormat formatoTotalSalida=new DecimalFormat(mascaraCalculoTotal);
-            calculoTotalSalida=(formatoTotalSalida.format(total).replace(',','.'));
-        
+            //calculoTotalSalida=(formatoTotalSalida.format(total).replace(',','.'));
+           calculoTotalSalida=(formatoTotalSalida.format(total));
         return calculoTotalSalida;
     }
     

@@ -118,7 +118,7 @@ public class DatosdeGenerarF157 implements JRDataSource{
     private Double decimalesIngresos(int index){
         String ingresosFinal;
         double ingresosRetorno;
-        String mascaraDecimalIngresos="#.";//para la mascara
+        String mascaraDecimalIngresos="###,###.";//para la mascara
                
             
             for(int i=0; i<decimalesCalculoTotal; i++)
@@ -127,8 +127,8 @@ public class DatosdeGenerarF157 implements JRDataSource{
                 
             }
            DecimalFormat formatoIngresos=new DecimalFormat(mascaraDecimalIngresos);
-            ingresosFinal=(formatoIngresos.format(ingresosBolivares.get(index)).replace(',','.'));
-          
+            //ingresosFinal=(formatoIngresos.format(ingresosBolivares.get(index)).replace(',','.'));
+          ingresosFinal=(formatoIngresos.format(ingresosBolivares.get(index)));
             ingresosRetorno=Double.parseDouble(ingresosFinal);
         return ingresosRetorno;
         
@@ -136,7 +136,7 @@ public class DatosdeGenerarF157 implements JRDataSource{
     private Double decimalesEgresos(int index){
         String egresosFinal;
         double egresosRetorno;
-        String mascaraDecimalEgresos="#.";//para la mascara
+        String mascaraDecimalEgresos="###,###.";//para la mascara
                
             
             for(int i=0; i<decimalesCalculoTotal; i++)
@@ -145,37 +145,20 @@ public class DatosdeGenerarF157 implements JRDataSource{
                 
             }
            DecimalFormat formatoIngresos=new DecimalFormat(mascaraDecimalEgresos);
-            egresosFinal=(formatoIngresos.format(egresosBolivares.get(index)).replace(',','.'));
-          
+            //egresosFinal=(formatoIngresos.format(egresosBolivares.get(index)).replace(',','.'));
+            egresosFinal=(formatoIngresos.format(egresosBolivares.get(index)));
             egresosRetorno=Double.parseDouble(egresosFinal);
         return egresosRetorno;
         
     }
     
-    /*
-    private String decimalesCalculoTotal(int index){
-        String calculoTotalFinal;
-        String mascaraCalculoTotal="#.";//para la mascara
-        Double temporal;
-        
-            temporal=precioUnitario.get(index)*cantidad.get(index);
-            for(int i=0; i<decimalesCalculoTotal; i++)
-            {
-                mascaraCalculoTotal=mascaraCalculoTotal+("0");
-                
-            }
-            DecimalFormat formatoPrecioUnitario=new DecimalFormat(mascaraCalculoTotal);
-            calculoTotalFinal=(formatoPrecioUnitario.format(temporal).replace(',','.'));
-        
-        return calculoTotalFinal;
-    }
-    */
+    
     private void calculosTotales() {
         String ingresos;
         String egresos;
         String calculoFinal;
         String anterior;
-        String mascaraCalculoTotal="#.";//para la mascara
+        String mascaraCalculoTotal="###,###.";//para la mascara
         Double temporalIngresos=0.0;
         Double temporalEgresos=0.0;
         Double temporalFinal=0.0;

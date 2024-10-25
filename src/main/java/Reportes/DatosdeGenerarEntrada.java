@@ -155,7 +155,7 @@ public class DatosdeGenerarEntrada implements JRDataSource{
     }
     private String decimalesTotalEntrada(){
         String calculoTotalEntrada;
-        String mascaraCalculoTotal="#.";//para la mascara
+        String mascaraCalculoTotal="###,###.";//para la mascara
         Double temporal;
         Double total=0.0;
             for(int i=0; i<precioUnitario.size(); i++){
@@ -169,8 +169,8 @@ public class DatosdeGenerarEntrada implements JRDataSource{
                 
             }
             DecimalFormat formatoTotalEntrada=new DecimalFormat(mascaraCalculoTotal);
-            calculoTotalEntrada=(formatoTotalEntrada.format(total).replace(',','.'));
-        
+            //calculoTotalEntrada=(formatoTotalEntrada.format(total).replace(',','.'));
+            calculoTotalEntrada=(formatoTotalEntrada.format(total));
         return calculoTotalEntrada;
     }
     
