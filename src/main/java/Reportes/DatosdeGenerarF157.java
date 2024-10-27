@@ -67,7 +67,7 @@ public class DatosdeGenerarF157 implements JRDataSource{
         ingresosBolivares=reporte.getIngresosBsMes();
         egresosBolivares=reporte.getEgresosBsMes();
         existenciaAnterior=reporte.getExistenciasAnteriores();
-        calculosTotales();
+        
     }
        
     @Override
@@ -95,13 +95,13 @@ public class DatosdeGenerarF157 implements JRDataSource{
             break;
             case "EgresoBolivares" : valor=decimalesEgresos(index);
             break;
-            case "IngresosTotal" : valor=totalIngresos;
+            case "IngresosTotal" : valor=totalIngresos();
             break;
-           case "EgresosTotal" : valor=totalEgresos;
+           case "EgresosTotal" : valor=totalEgresos();
             break;
-            case "ExistenciaAnterior":valor=existenciaAnterior;
+            case "ExistenciaAnterior":valor=existenciaAnterior();
             break;
-            case "ExistenciaFinal": valor=existenciaFinal;
+            case "ExistenciaFinal": valor=calculosTotales();
             break;
                                                
         }
@@ -115,9 +115,9 @@ public class DatosdeGenerarF157 implements JRDataSource{
         return new DatosdeGenerarF157();
     }
     
-    private Double decimalesIngresos(int index){
+    private String decimalesIngresos(int index){
         String ingresosFinal;
-        double ingresosRetorno;
+        
         String mascaraDecimalIngresos="###,###.";//para la mascara
                
             
@@ -129,13 +129,13 @@ public class DatosdeGenerarF157 implements JRDataSource{
            DecimalFormat formatoIngresos=new DecimalFormat(mascaraDecimalIngresos);
             //ingresosFinal=(formatoIngresos.format(ingresosBolivares.get(index)).replace(',','.'));
           ingresosFinal=(formatoIngresos.format(ingresosBolivares.get(index)));
-            ingresosRetorno=Double.parseDouble(ingresosFinal);
-        return ingresosRetorno;
+            
+        return ingresosFinal;
         
     }
-    private Double decimalesEgresos(int index){
+    private String decimalesEgresos(int index){
         String egresosFinal;
-        double egresosRetorno;
+       
         String mascaraDecimalEgresos="###,###.";//para la mascara
                
             
@@ -147,17 +147,63 @@ public class DatosdeGenerarF157 implements JRDataSource{
            DecimalFormat formatoIngresos=new DecimalFormat(mascaraDecimalEgresos);
             //egresosFinal=(formatoIngresos.format(egresosBolivares.get(index)).replace(',','.'));
             egresosFinal=(formatoIngresos.format(egresosBolivares.get(index)));
-            egresosRetorno=Double.parseDouble(egresosFinal);
-        return egresosRetorno;
+            
+        return egresosFinal;
         
     }
     
-    
-    private void calculosTotales() {
+    private String totalIngresos(){
         String ingresos;
-        String egresos;
-        String calculoFinal;
+         Double temporalIngresos=0.0;
+          String mascaraCalculoTotal="###,###.";//para la mascara
+        for(int i=0; i<codigoConcepto.size(); i++)
+            {
+                temporalIngresos+=ingresosBolivares.get(i);
+            }
+        for(int i=0; i<decimalesCalculoTotal; i++)
+            {
+                mascaraCalculoTotal=mascaraCalculoTotal+("0");
+                
+            }
+        DecimalFormat formatoTotales=new DecimalFormat(mascaraCalculoTotal);
+         ingresos=(formatoTotales.format((temporalIngresos)));
+         return ingresos;
+    }
+    private String existenciaAnterior(){
         String anterior;
+         
+          String mascaraExistenciaAnterior="###,###.";//para la mascara
+       
+        for(int i=0; i<decimalesCalculoTotal; i++)
+            {
+                mascaraExistenciaAnterior=mascaraExistenciaAnterior+("0");
+                
+            }
+        DecimalFormat formatoTotales=new DecimalFormat(mascaraExistenciaAnterior);
+         anterior=(formatoTotales.format((existenciaAnterior)));
+         return anterior;
+    }
+    private String totalEgresos(){
+        String egresos;
+         Double temporalEgresos=0.0;
+          String mascaraCalculoTotal="###,###.";//para la mascara
+        for(int i=0; i<codigoConcepto.size(); i++)
+            {
+                temporalEgresos+=egresosBolivares.get(i);
+            }
+        for(int i=0; i<decimalesCalculoTotal; i++)
+            {
+                mascaraCalculoTotal=mascaraCalculoTotal+("0");
+                
+            }
+        DecimalFormat formatoTotales=new DecimalFormat(mascaraCalculoTotal);
+         egresos=(formatoTotales.format((temporalEgresos)));
+         return egresos;
+    }
+    private String calculosTotales() {
+       
+        String calculoFinal;
+       
         String mascaraCalculoTotal="###,###.";//para la mascara
         Double temporalIngresos=0.0;
         Double temporalEgresos=0.0;
@@ -177,14 +223,11 @@ public class DatosdeGenerarF157 implements JRDataSource{
                 
             }
             DecimalFormat formatoTotales=new DecimalFormat(mascaraCalculoTotal);
-            ingresos=(formatoTotales.format((temporalIngresos)).replace(',','.'));
-            egresos=(formatoTotales.format((temporalEgresos)).replace(',','.'));
-            calculoFinal=(formatoTotales.format(temporalFinal).replace(',','.'));
-            anterior=(formatoTotales.format(existenciaAnterior).replace(',','.'));
-            totalIngresos=Double.valueOf(ingresos);
-            totalEgresos=Double.valueOf(egresos);
-            existenciaFinal=Double.valueOf(calculoFinal);
-            existenciaAnteriorDecimales=Double.valueOf(anterior);
+          
+            calculoFinal=(formatoTotales.format(temporalFinal));
+            
+            return calculoFinal;
+            
     }
             
 }
