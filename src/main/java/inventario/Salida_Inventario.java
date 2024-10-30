@@ -22,57 +22,54 @@ public class Salida_Inventario extends javax.swing.JDialog {
     DefaultTableModel modelo;
     Iterator lista1;
     Iterator lista2;
+    Iterator lista3;
     List<String> descripcion_concepto=new ArrayList<>();
     List<Integer> codigo_concepto=new ArrayList<>();
-   ConexionVerConceptos conceptos=new ConexionVerConceptos();
-   List<String> descripcion_servicios =new ArrayList<>();
-   List<Integer> codigo_servicios=new ArrayList<>();
-   ConexionVerServicios servicios= new ConexionVerServicios();
-   ConexionEmpresas secciones=new ConexionEmpresas();
-   //para guardar los articulos
-   List<Integer> codigo_articulo=new ArrayList<>();
-   List<Double> cantidad_articulo=new ArrayList<>();
-   List<Double> precio_articulo=new ArrayList<>();
+    ConexionVerConceptos conceptos=new ConexionVerConceptos();
+    List<String> descripcion_servicios =new ArrayList<>();
+    List<Integer> codigo_servicios=new ArrayList<>();
+    ConexionVerServicios servicios= new ConexionVerServicios();
+    ConexionEmpresas secciones=new ConexionEmpresas();
+    //para guardar los articulos
+    List<Integer> codigo_articulo=new ArrayList<>();
+    List<Double> cantidad_articulo=new ArrayList<>();
+    List<Double> precio_articulo=new ArrayList<>();
     List<Double> total_articulo=new ArrayList<>();
-   List<Integer> existencias_Actuales=new ArrayList<>();
-   int continuar=0;
-   List<Double> existencias_actualizadas=new ArrayList<>();
-   List<Double> existencias_obtenidas=new ArrayList<>();
-   //fecha
-   Date fecha= new Date();
-   Double total_operacion=0.0;//variable usada para guardar el total del valor movido por concepto
-   
-   java.sql.Date fechasql = new java.sql.Date(fecha.getTime());
-   int codigo_seccion;
-   
-   //
-  String nombre_recibido;
-  String codigo_recibido;
-  String nombre_seccion;
-  Double obtenido;
-  int existencia_unidad;//aqui guardo la existencia de cada articulo al momento de guardarlo
-  int concepto_salida;
-  int servicio_salida;
-  int cantidad_articulos=0;
-  int estado_decimal=0;//no se ha presionado el punto; 1 si se presiona el punto para llevar el control del decimal en el campo
-  int tope=0;//cantidad de decimales programados
-  int cantidad_numero_campo=0; //variable que suma la cantidad de enteros+el punto+cantidad de decimales programadas
-   //variables para la cantidad de decimales
-  int decimal_campo=0;
-  int decimal_cantidad=0;
- ConexionConsultarDecimales decimales=new ConexionConsultarDecimales();
- //variables para recibir datos cuando se ha seleccionado modificar una salida
- int cod_servicio_salida_rec;
- List<Double> cantidad_articulos_rec;
- List<Integer>  cod_articulos_rec;
- List<String> nombre_articulos_rec;
- int cod_concepto_rec;
- List<Double> costos_art_rec;
-
-int numero_documento_rec=0;
- public Dimension resolucion;//variable para leer el ancho y alto de la ventana
- //para darle formato al campo al momento de realizar la multiplicacion de cantidad*costo unitaroio
-  int consecutivo=0;
+    List<Integer> existencias_Actuales=new ArrayList<>();
+    int continuar=0;
+    List<Double> existencias_actualizadas=new ArrayList<>();
+    List<Double> existencias_obtenidas=new ArrayList<>();
+    //fecha
+    Date fecha= new Date();
+    Double total_operacion=0.0;//variable usada para guardar el total del valor movido por concepto
+    java.sql.Date fechasql = new java.sql.Date(fecha.getTime());
+    int codigo_seccion;
+    String nombre_recibido;
+    String codigo_recibido;
+    String nombre_seccion;
+    Double obtenido;
+    int existencia_unidad;//aqui guardo la existencia de cada articulo al momento de guardarlo
+    int concepto_salida;
+    int servicio_salida;
+    int cantidad_articulos=0;
+    int estado_decimal=0;//no se ha presionado el punto; 1 si se presiona el punto para llevar el control del decimal en el campo
+    int tope=0;//cantidad de decimales programados
+    int cantidad_numero_campo=0; //variable que suma la cantidad de enteros+el punto+cantidad de decimales programadas
+    //variables para la cantidad de decimales
+    int decimal_campo=0;
+    int decimal_cantidad=0;
+    ConexionConsultarDecimales decimales=new ConexionConsultarDecimales();
+    //variables para recibir datos cuando se ha seleccionado modificar una salida
+    int cod_servicio_salida_rec;
+    List<Double> cantidad_articulos_rec;
+    List<Integer>  cod_articulos_rec;
+    List<String> nombre_articulos_rec;
+    int cod_concepto_rec;
+    List<Double> costos_art_rec;
+    int numero_documento_rec=0;
+    public Dimension resolucion;//variable para leer el ancho y alto de la ventana
+    //para darle formato al campo al momento de realizar la multiplicacion de cantidad*costo unitaroio
+    int consecutivo=0;
  public Salida_Inventario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -87,9 +84,10 @@ int numero_documento_rec=0;
         descripcion_concepto=conceptos.descripcion();
         codigo_concepto=conceptos.codigo();
         lista1=descripcion_concepto.iterator();
+        lista3=codigo_concepto.iterator();
         while(lista1.hasNext())
                 {
-                    Combo_Conceptos.addItem(lista1.next());
+                    Combo_Conceptos.addItem(lista3.next()+"-"+lista1.next());
                     
                 }
         servicios.consulta();

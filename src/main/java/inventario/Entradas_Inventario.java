@@ -59,6 +59,7 @@ DefaultTableModel modelo;
 
  Iterator lista1;
  Iterator lista2;
+ Iterator lista3;
  
  //variables que seran usadas para enviar datos
  String id_documento;
@@ -109,9 +110,10 @@ DefaultTableModel modelo;
         rif_proveedor=proveedor.rif_proveedor();
         
         lista1=descripcion.iterator();
+        lista3=codigo.iterator();
         while(lista1.hasNext())
         {
-        Combo_Concepto.addItem(lista1.next());
+        Combo_Concepto.addItem(lista3.next()+"-"+lista1.next());
         }//while
         lista2=nombre_proveedor.iterator();
         while(lista2.hasNext())

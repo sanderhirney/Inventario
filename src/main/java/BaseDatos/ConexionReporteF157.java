@@ -76,12 +76,26 @@ public class ConexionReporteF157 {
                                     and secciones=?
                                     and concepto_salidas=?
                              """;
+    
+    String consultaGruposEntrada="""
+                                select DISTINCT(concepto_entrada) from doc_entradas
+                                where 
+                                extract(month from fecha_documento)=?
+                                order by concepto_entrada asc
+                                """;
+    String consultaGruposSalida="""
+                                select DISTINCT(concepto_salidas) from doc_salidas 
+                                where
+                                extract(month from fecha_documento)=?
+                                order by concepto_salidas asc
+                                """;
     private void consultaCodigoGrupos(){ 
                         try
                   {
                       conectar.Conectar();
                       conex= conectar.getConexion();
-                      consulta= conex.prepareStatement("select DISTINCT(concepto_entrada) from doc_entradas order by concepto_entrada asc");
+                      consulta= conex.prepareStatement(consultaGruposEntrada);
+                      consulta.setInt(1, mesFin);
                       ejecutar=consulta.executeQuery();
                       while( ejecutar.next())
                       {
@@ -97,7 +111,8 @@ public class ConexionReporteF157 {
                   {
                       conectar.Conectar();
                       conex= conectar.getConexion();
-                      consulta= conex.prepareStatement("select DISTINCT(concepto_salidas) from doc_salidas order by concepto_salidas asc");
+                      consulta= conex.prepareStatement(consultaGruposSalida);
+                      consulta.setInt(1, mesFin);
                       ejecutar=consulta.executeQuery();
                       while( ejecutar.next())
                       {
