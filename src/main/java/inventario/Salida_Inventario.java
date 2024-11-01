@@ -30,18 +30,14 @@ public class Salida_Inventario extends javax.swing.JDialog {
     List<Integer> codigo_servicios=new ArrayList<>();
     ConexionVerServicios servicios= new ConexionVerServicios();
     ConexionEmpresas secciones=new ConexionEmpresas();
-    //para guardar los articulos
-    List<Integer> codigo_articulo=new ArrayList<>();
-    List<Double> cantidad_articulo=new ArrayList<>();
-    List<Double> precio_articulo=new ArrayList<>();
-    List<Double> total_articulo=new ArrayList<>();
+    
     List<Integer> existencias_Actuales=new ArrayList<>();
     int continuar=0;
     List<Double> existencias_actualizadas=new ArrayList<>();
     List<Double> existencias_obtenidas=new ArrayList<>();
     //fecha
     Date fecha= new Date();
-    Double total_operacion=0.0;//variable usada para guardar el total del valor movido por concepto
+   
     java.sql.Date fechasql = new java.sql.Date(fecha.getTime());
     int codigo_seccion;
     String nombre_recibido;
@@ -49,9 +45,8 @@ public class Salida_Inventario extends javax.swing.JDialog {
     String nombre_seccion;
     Double obtenido;
     int existencia_unidad;//aqui guardo la existencia de cada articulo al momento de guardarlo
-    int concepto_salida;
-    int servicio_salida;
-    int cantidad_articulos=0;
+   
+   
     int estado_decimal=0;//no se ha presionado el punto; 1 si se presiona el punto para llevar el control del decimal en el campo
     int tope=0;//cantidad de decimales programados
     int cantidad_numero_campo=0; //variable que suma la cantidad de enteros+el punto+cantidad de decimales programadas
@@ -344,8 +339,15 @@ public class Salida_Inventario extends javax.swing.JDialog {
 
     private void Boton_RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_RegistrarActionPerformed
         // TODO add your handling code here:
-      /*  try
-        {*/
+    //para guardar los articulos
+    List<Integer> codigo_articulo=new ArrayList<>();
+    List<Double> cantidad_articulo=new ArrayList<>();
+    List<Double> precio_articulo=new ArrayList<>();
+    List<Double> total_articulo=new ArrayList<>();
+    int cantidad_articulos=0;
+    int concepto_salida;
+    int servicio_salida;
+    Double total_operacion=0.0;//variable usada para guardar el total del valor movido por concepto
            
                 int filas=modelo.getRowCount();
                 
@@ -565,22 +567,19 @@ public class Salida_Inventario extends javax.swing.JDialog {
             }
             else
             {
-               Double temporal_format;// variables serviran para formatear bien el costo del articulo
-            
-                
-                
-            Double temporal;
-            temporal=(Double.parseDouble(Campo_Cantidad.getText().trim()))* (obtenido);
-            temporal_format=(Math.round (temporal*Math.pow(10, decimal_cantidad))) / Math.pow(10, decimal_cantidad) ;
+                Double temporal_format;// variables serviran para formatear bien el costo del articulo
+                Double temporal;
+                temporal=(Double.parseDouble(Campo_Cantidad.getText().trim()))* (obtenido);
+                temporal_format=(Math.round (temporal*Math.pow(10, decimal_cantidad))) / Math.pow(10, decimal_cantidad) ;
 
-            modelo.addRow(new Object[]{codigo_recibido, nombre_recibido, Campo_Cantidad.getText().trim(), obtenido, temporal_format });
-            Campo_Cantidad.setText("");
-            Etiq_codigo.setText("");
-            Etiq_nombre.setText("");
-            etiqueta_costo.setText("");
-            Combo_Conceptos.setEnabled(false);
-            Combo_Servicio.setEnabled(false);
-            }//else
+                modelo.addRow(new Object[]{codigo_recibido, nombre_recibido, Campo_Cantidad.getText().trim(), obtenido, temporal_format });
+                Campo_Cantidad.setText("");
+                Etiq_codigo.setText("");
+                Etiq_nombre.setText("");
+                etiqueta_costo.setText("");
+                Combo_Conceptos.setEnabled(false);
+                Combo_Servicio.setEnabled(false);
+                }//else
         }//else
     }//GEN-LAST:event_Boton_GuardarActionPerformed
 

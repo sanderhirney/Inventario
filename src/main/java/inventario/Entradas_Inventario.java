@@ -630,7 +630,8 @@ DefaultTableModel modelo;
                 modelo.setRowCount(0);//limpio la tabla
                 
                 cantidad_articulos=0;
-                JOptionPane.showMessageDialog(null,"Error al registrar la entrada, Deshaciendo cambios", "Error grave", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Error al registrar la entrada, No se conservo informacion", "Error grave", JOptionPane.ERROR_MESSAGE);
+             /*   JOptionPane.showMessageDialog(null,"Error al registrar la entrada, Deshaciendo cambios", "Error grave", JOptionPane.ERROR_MESSAGE);
            
                 //borrar el ultimo registro del documento de entrada
                 ConexionDeshacerDocEntradas borrar=new ConexionDeshacerDocEntradas();
@@ -643,7 +644,7 @@ DefaultTableModel modelo;
                 {
                     JOptionPane.showMessageDialog(null,"No se ha podido borrar los cambios efectuados. \n Contacte al desarrollador", "Error Grave", JOptionPane.INFORMATION_MESSAGE);
                     
-                }
+                }*/
             }
             
        
