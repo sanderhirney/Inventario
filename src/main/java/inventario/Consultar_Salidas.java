@@ -26,6 +26,7 @@ List<Double> cantidad_articulos=new ArrayList<>();
 List<String> documento=new ArrayList<>();
 List<Date> fecha=new ArrayList<>();
 List<String> nombre_concepto=new ArrayList<>();
+List<String> nombre_servicio=new ArrayList<>();
 List<Integer> codigo_concepto=new ArrayList<>();
 List<Double> valor=new ArrayList<>();
 List<BigDecimal> formateado=new ArrayList<>(); 
@@ -74,9 +75,11 @@ JFrame ventanaPrincipal;
          salidas.consulta();
          salidas.temporal();
          salidas.conceptos();
+         salidas.servicios();
          if(salidas.getResultado()==1)
          {
                 cod_servicio=salidas.getServicio();
+                nombre_servicio=salidas.getNombreServicio();
                 fecha=salidas.getFecha();
                 documento=salidas.getDocumento();
                 nombre_concepto=salidas.getNombreConcepto();
@@ -100,7 +103,7 @@ JFrame ventanaPrincipal;
                     {
                         lista1=fecha.iterator();
                         lista2=documento.iterator();
-                        lista3=nombre_concepto.iterator();
+                        lista3=nombre_servicio.iterator();
                         lista4=cantidad_articulos.iterator();
                         lista5=formateado.iterator();
                         lista6=estado.iterator();
@@ -159,7 +162,7 @@ JFrame ventanaPrincipal;
 
             },
             new String [] {
-                "Fecha", "Documento", "Concepto", "Cant. Artic.", "Monto", "Estado"
+                "Fecha", "Documento", "Servicio", "Cant. Artic.", "Monto", "Estado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -280,6 +283,7 @@ JFrame ventanaPrincipal;
                     salida.costos_totales();
                     salida.documento();
                     salida.setCantidadDoc(buscar.getCantidadesDoc());
+                    salida.setDespachoDoc(buscar.getValorDespachoDoc());
                     salida.setCostosDoc(buscar.getCostosDoc());
                     salida.EstadoExistencias();
                     salida.actualizar();
@@ -317,6 +321,7 @@ JFrame ventanaPrincipal;
                     temp.setCodArticulos(buscar.getCodigoArticulos());
                     temp.setCostosArticulos(buscar.getCostosDoc());
                     temp.setArticulosIndividual(buscar.getCantidadesDoc());
+                    temp.setValorDespachoIndividual(buscar.getValorDespachoDoc());
                     temp.temp_doc();
                     temp.temp_articulo();
                     if(temp.resultado()==0)
@@ -328,6 +333,7 @@ JFrame ventanaPrincipal;
                     //procedo a mostrar la ventana de salida
                     Salida_Inventario ventana=new Salida_Inventario(null, true);
                     ventana.setCantidadArticuloRec(buscar.getCantidadesDoc());
+                    ventana.setValorDespachoRec(buscar.getValorDespachoDoc());
                     ventana.setCodigoArticuloRec(buscar.getCodigoArticulos());
                     ventana.setNombreArticuloRec(buscar.getNombreArticulos());
                     ventana.setCodServicioRec(salida.getCodServicio());
@@ -369,6 +375,7 @@ JFrame ventanaPrincipal;
                 temp.nombre_articulos();
                 Salida_Inventario ventana=new Salida_Inventario(null, true);
                 ventana.setCantidadArticuloRec(temp.getCantidadArtDoc());
+                ventana.setValorDespachoRec(temp.getCantidadArtDoc());
                 ventana.setCodigoArticuloRec(temp.getCodArticulos());
                 ventana.setNombreArticuloRec(temp.getNombreArticulos());
                 ventana.setCodServicioRec(temp.getServicio());

@@ -92,7 +92,7 @@
               <Table columnCount="6" rowCount="0">
                 <Column editable="false" title="Fecha" type="java.lang.Object"/>
                 <Column editable="false" title="Documento" type="java.lang.Object"/>
-                <Column editable="false" title="Concepto" type="java.lang.Object"/>
+                <Column editable="false" title="Servicio" type="java.lang.Object"/>
                 <Column editable="false" title="Cant. Artic." type="java.lang.Object"/>
                 <Column editable="false" title="Monto" type="java.lang.Object"/>
                 <Column editable="false" title="Estado" type="java.lang.Object"/>

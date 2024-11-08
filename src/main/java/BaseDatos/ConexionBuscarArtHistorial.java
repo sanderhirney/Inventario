@@ -17,6 +17,8 @@ public class ConexionBuscarArtHistorial {
     List<Integer> cod_articulos=new ArrayList<>();
     List<String> nombre_articulos=new ArrayList<>();
     List<Double> cantidad=new ArrayList<>();
+    List<Double> valor_despacho=new ArrayList<>();
+
     List<Double> costos_doc=new ArrayList<>();
     String num_documento;
     
@@ -50,7 +52,7 @@ public class ConexionBuscarArtHistorial {
         }//es decir es una entrada
         if(quien_llama==0)
         {
-        consulta= conex.prepareStatement("select cod_articulo, valor_salida, precio from historiales where seccion=? and numero_doc=?");
+        consulta= conex.prepareStatement("select cod_articulo, valor_salida, valor_despacho, precio from historiales where seccion=? and numero_doc=?");
         consulta.setInt(1, seccion);
         consulta.setString(2, num_documento);
         ejecutar=consulta.executeQuery();
@@ -58,6 +60,7 @@ public class ConexionBuscarArtHistorial {
         {
                      cod_articulos.add(ejecutar.getInt("cod_articulo"));
                      cantidad.add(ejecutar.getDouble("valor_salida"));
+                     valor_despacho.add(ejecutar.getDouble("valor_despacho"));
                      costos_doc.add(ejecutar.getDouble("precio"));
            
            }//while
@@ -67,7 +70,7 @@ public class ConexionBuscarArtHistorial {
               }//try
                        catch(SQLException ex)
              {
-            JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de buscar Articulos en historial.\n Ventana Modificar Entrada \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de buscar Articulos en historial.\n Ventana Modificar Salida \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
           }
     }//codigo_articulos
     
@@ -117,6 +120,10 @@ public class ConexionBuscarArtHistorial {
     public List<Double> getCantidadesDoc()
     {
         return cantidad;
+    }
+    public List<Double> getValorDespachoDoc()
+    {
+        return valor_despacho;
     }
     public List<Double> getCostosDoc()
     {

@@ -35,6 +35,7 @@ public class ConexionCrearSalida {
     List<Integer> codigo_articulo = new ArrayList<>();
     List<String> nombre_articulo= new ArrayList<>();
     List<Double> cantidad_articulo=new ArrayList<>();
+    List<Double> valor_despacho=new ArrayList<>();
     List<Double> precio_articulo=new ArrayList<>();
     int numero_documento;//variable que recibe el numero del documento donde se actualizara la informacion
     public void documento()
@@ -150,13 +151,14 @@ public class ConexionCrearSalida {
         {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("insert into historiales values (DEFAULT, ?, ?, ?, ?, ?, ?, (SELECT MAX(id) FROM doc_salidas))");
+        consulta= conex.prepareStatement("insert into historiales values (DEFAULT, ?, ?, ?, ?, ?, ?, (SELECT MAX(id) FROM doc_salidas), ?)");
         consulta.setDate(1, fecha_documento);
         consulta.setInt(2, codigo_articulo.get(i));
         consulta.setInt(3, valor_entrada);
         consulta.setDouble(4, cantidad_articulo.get(i));
         consulta.setInt(5, seccion);
         consulta.setDouble(6, precio_articulo.get(i));
+        consulta.setDouble(7, valor_despacho.get(i));
         consulta.addBatch();
         consulta.executeBatch();
             
@@ -225,6 +227,10 @@ public class ConexionCrearSalida {
     public void setCantidadArticulo(List<Double> recibido)
     {
         cantidad_articulo=recibido;
+    }
+    public void setValorDespacho(List<Double> recibido)
+    {
+        valor_despacho=recibido;
     }
     public void setPrecioArticulo(List<Double> recibido)
     {

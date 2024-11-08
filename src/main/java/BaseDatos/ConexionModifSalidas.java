@@ -19,6 +19,7 @@ public class ConexionModifSalidas {
     List<Double> costo_unitario=new ArrayList<>();
     List<Double> existencias_totales=new ArrayList<>();
     List<Double> cantidad_doc=new ArrayList<>();
+    List<Double> despacho_doc=new ArrayList<>();
     List<Double> costos_doc=new ArrayList<>();
     List<Integer> articulos_error=new ArrayList<>();//esta variable almacenara los codigos de los articulos que quedarian con existencia negativa si se reversa una entrada
     int seccion;
@@ -262,6 +263,10 @@ public class ConexionModifSalidas {
     public void setCantidadDoc(List<Double> recibido)
     {
         cantidad_doc=recibido;
+    }
+     public void setDespachoDoc(List<Double> recibido)
+    {
+        despacho_doc=recibido;
     }
     public int getEstadoExistencia()
     {

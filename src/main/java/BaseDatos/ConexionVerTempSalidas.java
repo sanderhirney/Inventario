@@ -22,6 +22,7 @@ public class ConexionVerTempSalidas {
     List<Integer> cod_articulos=new ArrayList<>();
     List<String> nombre_articulos=new ArrayList<>();
     List<Double> cantidad_art_doc=new ArrayList<>();
+    List<Double> valor_pedido_doc=new ArrayList<>();
     List<Double> costos_articulos_doc=new ArrayList<>();
     List<Double> valor=new ArrayList<>();
     int cod_servicio;
@@ -100,7 +101,7 @@ public class ConexionVerTempSalidas {
         conectar.Conectar();
         conex= conectar.getConexion();
         
-        consulta= conex.prepareStatement("select cod_articulos, costo_articulos, cantidad_salida from temporal_articulo where documento=? and seccion=?");
+        consulta= conex.prepareStatement("select cod_articulos, costo_articulos, cantidad_salida, cantidad_pedido from temporal_articulo where documento=? and seccion=?");
         consulta.setString(1, String.valueOf(documento));
         consulta.setInt(2, seccion);
         ejecutar=consulta.executeQuery();
@@ -110,6 +111,7 @@ public class ConexionVerTempSalidas {
             cod_articulos.add(ejecutar.getInt("cod_articulos"));
             costos_articulos_doc.add(ejecutar.getDouble("costo_articulos"));
             cantidad_art_doc.add(ejecutar.getDouble("cantidad_salida"));
+            valor_pedido_doc.add(ejecutar.getDouble("cantidad_pedido"));
         }//whiles
         }//try
                catch(SQLException ex)
@@ -184,6 +186,10 @@ public class ConexionVerTempSalidas {
     public List<Double> getCantidadArtDoc()
     {
         return cantidad_art_doc;
+    }
+    public List<Double> getValorPedidoArtDoc()
+    {
+        return valor_pedido_doc;
     }
     public List<Double> getCostosArtDoc()
     {

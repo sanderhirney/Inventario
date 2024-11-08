@@ -453,6 +453,8 @@ DefaultTableModel modelo;
   List<Integer> codigo_art = new ArrayList<>();
      List<String> nombre_art= new ArrayList<>();
     List<Double> cantidad_art=new ArrayList<>();
+    List<Double> valor_pedido=new ArrayList<>();
+
     List<Double> precio_art=new ArrayList<>();
     List<Double> total_linea=new ArrayList<>(); 
     int cod_concepto_entrada;
@@ -491,6 +493,7 @@ DefaultTableModel modelo;
             cantidad_art.add(Double.valueOf( (modelo.getValueAt(i, 2)).toString() ) );
             precio_art.add(  (Double.valueOf((modelo.getValueAt(i, 3)).toString())));
             total_linea.add(Double.valueOf ((modelo.getValueAt(i, 4)).toString()));
+            valor_pedido.add(0d);
             cantidad_articulos++;
         }//aqui leo todas las variables
         for(int i=0; i<filas; i++)
@@ -512,6 +515,7 @@ DefaultTableModel modelo;
         entrada.setProveedor(codigo_proveedor);
         entrada.setSeccion(codigo_seccion);
         entrada.setCantidad(cantidad_articulos);
+        entrada.setPedidoArticulo(valor_pedido);
         entrada.setConcepto(cod_concepto_entrada);
         entrada.setCodigoArticulo(codigo_art);
         entrada.setCantidadArticulo(cantidad_art);

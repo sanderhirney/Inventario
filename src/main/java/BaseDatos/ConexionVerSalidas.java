@@ -17,6 +17,7 @@ public class ConexionVerSalidas {
     List<Date> fecha=new ArrayList<>();
     List<String> documento=new ArrayList<>();
     List<String> concepto=new ArrayList<>();
+    List<String> servicio=new ArrayList<>();
     List<Integer> cod_concepto=new ArrayList<>();
     List<Double> articulos=new ArrayList<>();
     List<Double> valor=new ArrayList<>();
@@ -115,8 +116,41 @@ public class ConexionVerSalidas {
     {
         JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de la descripcion de los conceptos.\n Ventana Ver Documentos de salida \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
     }
+          
         
     }//consulta
+     
+     public void servicios()
+   {
+
+                  try
+            {
+                conectar.Conectar();
+                conex= conectar.getConexion();
+
+
+                for(int i=0; i<cod_concepto.size(); i++)//i del tamaño de la lista cod_concepto
+                {
+
+
+                consulta= conex.prepareStatement("select nombre_servicio from servicios where cod_servicio=?");
+                consulta.setInt(1, cod_servicio.get(i));
+                ejecutar=consulta.executeQuery();
+                if(ejecutar.next())
+                {
+                   servicio.add(ejecutar.getString("nombre_servicio"));
+                }//if
+                }//for
+
+               conectar.Cerrar();
+            }//consulta
+                   catch(SQLException ex)
+            {
+                JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de la descripcion de los servicios.\n Ventana Ver Documentos de salida \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+            }
+
+    }
+
     
     
     public List<Date> getFecha()
@@ -146,6 +180,9 @@ public class ConexionVerSalidas {
     public List<Integer> getServicio()
     {
         return cod_servicio;
+    }
+    public List<String> getNombreServicio(){
+        return servicio;
     }
     
    public int getResultado()
