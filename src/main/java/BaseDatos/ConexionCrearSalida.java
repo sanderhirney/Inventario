@@ -35,13 +35,14 @@ public class ConexionCrearSalida {
     List<Integer> codigo_articulo = new ArrayList<>();
     List<String> nombre_articulo= new ArrayList<>();
     List<Double> cantidad_articulo=new ArrayList<>();
-    List<Double> valor_despacho=new ArrayList<>();
+    List<Double> valor_pedido=new ArrayList<>();
     List<Double> precio_articulo=new ArrayList<>();
     int numero_documento;//variable que recibe el numero del documento donde se actualizara la informacion
+    int modificacion=1;//variable que usare para indicar en historial si es modificacion o no el 0 indica que es nuevo
     public void documento()
     {
         if(consecutivo==0){
-   
+          modificacion=0;
            Month mesOperacion =(LocalDate.now().getMonth());
            int mesDeCreacionDocumento=mesOperacion.getValue();
            int anioDeCreacionDocumento=(LocalDate.now().getYear());
@@ -145,43 +146,80 @@ public class ConexionCrearSalida {
     public void historial()
     {
        
-        try
-    {
-        for (int i=0; i<=codigo_articulo.size()-1; i++)
-        {
-        conectar.Conectar();
-        conex= conectar.getConexion();
-        consulta= conex.prepareStatement("insert into historiales values (DEFAULT, ?, ?, ?, ?, ?, ?, (SELECT MAX(id) FROM doc_salidas), ?)");
-        consulta.setDate(1, fecha_documento);
-        consulta.setInt(2, codigo_articulo.get(i));
-        consulta.setInt(3, valor_entrada);
-        consulta.setDouble(4, cantidad_articulo.get(i));
-        consulta.setInt(5, seccion);
-        consulta.setDouble(6, precio_articulo.get(i));
-        consulta.setDouble(7, valor_despacho.get(i));
-        consulta.addBatch();
-        consulta.executeBatch();
+                
+        if(modificacion==0){//es decir es un documento nuevo
+               try
+               {
+                   for (int i=0; i<=codigo_articulo.size()-1; i++)
+                   {
+                   conectar.Conectar();
+                   conex= conectar.getConexion();
+                   consulta= conex.prepareStatement("insert into historiales values (DEFAULT, ?, ?, ?, ?, ?, ?, (SELECT MAX(id) FROM doc_salidas), ?)");
+                   consulta.setDate(1, fecha_documento);
+                   consulta.setInt(2, codigo_articulo.get(i));
+                   consulta.setInt(3, valor_entrada);
+                   consulta.setDouble(4, cantidad_articulo.get(i));
+                   consulta.setInt(5, seccion);
+                   consulta.setDouble(6, precio_articulo.get(i));
+                   consulta.setDouble(7, valor_pedido.get(i));
+                   consulta.addBatch();
+                   consulta.executeBatch();
+                   }
+                    if( consulta!=null )
+                    {
+                      resultado_sig=1;
+                     
+                    }
+                    if( consulta==null )
+                    {
+                       resultado_sig=0;
+                    }//else
+                 conectar.Cerrar();
+               }//consulta
+                      catch(SQLException ex)
+               {
+                   JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de entrada de historiales en la salida.\n Ventana Crear Salida \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+                  
+               }
+        }else{
+              try
+               {
+                   for (int i=0; i<=codigo_articulo.size()-1; i++)
+                   {
+                   conectar.Conectar();
+                   conex= conectar.getConexion();
+                   consulta= conex.prepareStatement("insert into historiales values (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?)");
+                   consulta.setDate(1, fecha_documento);
+                   consulta.setInt(2, codigo_articulo.get(i));
+                   consulta.setInt(3, valor_entrada);
+                   consulta.setDouble(4, cantidad_articulo.get(i));
+                   consulta.setInt(5, seccion);
+                   consulta.setDouble(6, precio_articulo.get(i));
+                   consulta.setInt(7, numero_documento);
+                   consulta.setDouble(8, valor_pedido.get(i));
+                   consulta.addBatch();
+                   consulta.executeBatch();
+                   }
+                    if( consulta!=null )
+                    {
+                      resultado_sig=1;
+                     
+                    }
+                    if( consulta==null )
+                    {
+                       resultado_sig=0;
+                    }//else
+                 conectar.Cerrar();
+               }//consulta
+                      catch(SQLException ex)
+               {
+                   JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de entrada de historiales en la salida.\n Ventana Crear Salida \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+                  
+               }
             
+        }//es decir es una modificacion
        
-        }
        
-
-        if( consulta!=null )
-        {
-           resultado_sig=1;
-           conectar.Cerrar();
-        }
-        if( consulta==null )
-        {
-            resultado_sig=0;
-        }//else
-       
-    }//consulta
-           catch(SQLException ex)
-    {
-        JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de entrada de historiales en la salida.\n Ventana Crear Salida \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
-        System.out.println("Si aqui fue el error: "+ex);
-    }
     }//consulta
     
     public int respuesta()
@@ -224,13 +262,13 @@ public class ConexionCrearSalida {
     {
         nombre_articulo=recibido;
     }
-    public void setCantidadArticulo(List<Double> recibido)
+    public void setValorDespacho(List<Double> recibido)
     {
         cantidad_articulo=recibido;
     }
-    public void setValorDespacho(List<Double> recibido)
+    public void setValorPedido(List<Double> recibido)
     {
-        valor_despacho=recibido;
+        valor_pedido=recibido;
     }
     public void setPrecioArticulo(List<Double> recibido)
     {

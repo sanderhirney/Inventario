@@ -34,13 +34,13 @@ public class ConexionVerSalidas {
       {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select fecha_documento, id, num_articulos, concepto_salidas, valor_operacion, servicio from doc_salidas where secciones=? and asentado=1");
+        consulta= conex.prepareStatement("select fecha_documento, consecutivo, num_articulos, concepto_salidas, valor_operacion, servicio from doc_salidas where secciones=? and asentado=1");
         consulta.setInt(1, seccion);
         ejecutar=consulta.executeQuery();
         while( ejecutar.next() )
         {
                      fecha.add(ejecutar.getDate("fecha_documento"));
-                     documento.add(ejecutar.getString("id"));
+                     documento.add(ejecutar.getString("consecutivo"));
                      articulos.add(ejecutar.getDouble("num_articulos"));
                      cod_concepto.add(ejecutar.getInt("concepto_salidas"));
                      valor.add(ejecutar.getDouble("valor_operacion"));

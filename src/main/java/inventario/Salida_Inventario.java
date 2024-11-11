@@ -33,8 +33,7 @@ public class Salida_Inventario extends javax.swing.JDialog {
     
     List<Integer> existencias_Actuales=new ArrayList<>();
     int continuar=0;
-    List<Double> existencias_actualizadas=new ArrayList<>();
-    List<Double> existencias_obtenidas=new ArrayList<>();
+  
     //fecha
     Date fecha= new Date();
    
@@ -139,6 +138,8 @@ public class Salida_Inventario extends javax.swing.JDialog {
         Boton_Cancelar = new javax.swing.JButton();
         Etiq_Cantidad1 = new javax.swing.JLabel();
         Campo_Pedido = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        etiqueta_existencia = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -247,6 +248,8 @@ public class Salida_Inventario extends javax.swing.JDialog {
             }
         });
 
+        jLabel2.setText("Existencia: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -277,13 +280,17 @@ public class Salida_Inventario extends javax.swing.JDialog {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(Combo_Servicio, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Campo_Pedido, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(Campo_Despacho, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(jLabel1)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(etiqueta_costo, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(Campo_Pedido, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(etiqueta_costo, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel2)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(etiqueta_existencia, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -317,24 +324,31 @@ public class Salida_Inventario extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(Separador2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Etiq_Articulo)
-                    .addComponent(Boton_Buscar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Etiq_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Etiq_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Etiq_Cantidad1)
-                    .addComponent(Campo_Pedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Etiq_Cantidad)
-                        .addComponent(Campo_Despacho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1))
-                    .addComponent(etiqueta_costo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Etiq_Articulo)
+                            .addComponent(Boton_Buscar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Etiq_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Etiq_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Etiq_Cantidad1)
+                            .addComponent(Campo_Pedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(Etiq_Cantidad)
+                                .addComponent(Campo_Despacho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(etiqueta_costo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(etiqueta_existencia, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Etiq_Concepto)
@@ -368,6 +382,8 @@ public class Salida_Inventario extends javax.swing.JDialog {
     int cantidad_articulos=0;
     int concepto_salida;
     int servicio_salida;
+    List<Double> existencias_actualizadas=new ArrayList<>();
+    List<Double> existencias_obtenidas=new ArrayList<>();
     Double total_operacion=0.0;//variable usada para guardar el total del valor movido por concepto
            
                 int filas=modelo.getRowCount();
@@ -375,8 +391,8 @@ public class Salida_Inventario extends javax.swing.JDialog {
                 for (int i=0; i<filas; i++)
                 {
                     codigo_articulo.add(Integer.parseInt(Tabla_datos.getValueAt(i, 0).toString()));
-                    valor_despacho.add(Double.parseDouble(Tabla_datos.getValueAt(i, 2).toString()));//omito la fila de nombre de articulo, ya que el nombre lo obtengo por el codigo
-                    valor_pedido.add(Double.parseDouble(Tabla_datos.getValueAt(i, 3).toString()));
+                    valor_pedido.add(Double.parseDouble(Tabla_datos.getValueAt(i, 2).toString()));
+                    valor_despacho.add(Double.parseDouble(Tabla_datos.getValueAt(i, 3).toString()));//omito la fila de nombre de articulo, ya que el nombre lo obtengo por el codigo
                     precio_articulo.add(Double.parseDouble(Tabla_datos.getValueAt(i, 4).toString()));
                     total_articulo.add(valor_despacho.get(i)*precio_articulo.get(i));
                     cantidad_articulos++;
@@ -399,11 +415,11 @@ public class Salida_Inventario extends javax.swing.JDialog {
             {
                 ConexionCrearSalida salida=new ConexionCrearSalida();
                 ConexionOperacionesSalidas operaciones=new ConexionOperacionesSalidas();
-                salida.setCantidadArticulo(valor_despacho);
+                salida.setValorDespacho(valor_despacho);
                 salida.setFechaDocumento(fechasql);
                 salida.setServicio(servicio_salida);
                 salida.setCantidad(cantidad_articulos);
-                salida.setValorDespacho(valor_pedido);
+                salida.setValorPedido(valor_pedido);
                 salida.setConcepto(concepto_salida);
                 salida.setSeccion(codigo_seccion);
                 salida.setCodigoArticulo(codigo_articulo);
@@ -530,7 +546,7 @@ public class Salida_Inventario extends javax.swing.JDialog {
       obtenido=consulta.obtenerPrecioUnidad();
       existencia_unidad=consulta.existenciaUnidad();
       etiqueta_costo.setText(obtenido.toString());//convierto a String para poder mostrar en la eqtiqueta
-       
+      etiqueta_existencia.setText(String.valueOf(existencia_unidad));
     }//GEN-LAST:event_Boton_BuscarActionPerformed
 
     private void Campo_DespachoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Campo_DespachoKeyTyped
@@ -592,14 +608,16 @@ public class Salida_Inventario extends javax.swing.JDialog {
             {
                 Double temporal_format;// variables serviran para formatear bien el costo del articulo
                 Double temporal;
-                temporal=(Double.parseDouble(Campo_Despacho.getText().trim()))* (obtenido);
+                temporal=(Double.valueOf(Campo_Despacho.getText().trim()))* (obtenido);
                 temporal_format=(Math.round (temporal*Math.pow(10, decimal_cantidad))) / Math.pow(10, decimal_cantidad) ;
 
-                modelo.addRow(new Object[]{codigo_recibido, nombre_recibido, Campo_Despacho.getText().trim(),Campo_Pedido.getText().trim(), obtenido, temporal_format });
+                modelo.addRow(new Object[]{codigo_recibido, nombre_recibido,Campo_Pedido.getText().trim(),  Campo_Despacho.getText().trim(), obtenido, temporal_format });
                 Campo_Despacho.setText("");
+                Campo_Pedido.setText("");
                 Etiq_codigo.setText("");
                 Etiq_nombre.setText("");
                 etiqueta_costo.setText("");
+                etiqueta_existencia.setText("");
                 Combo_Conceptos.setEnabled(false);
                 Combo_Servicio.setEnabled(false);
                 }//else
@@ -743,7 +761,9 @@ public void setConsecutivo(int recibido){
     private javax.swing.JSeparator Separador2;
     private javax.swing.JTable Tabla_datos;
     private javax.swing.JLabel etiqueta_costo;
+    private javax.swing.JLabel etiqueta_existencia;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
     // End of variables declaration//GEN-END:variables

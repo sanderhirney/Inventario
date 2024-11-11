@@ -53,14 +53,18 @@
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="Combo_Servicio" min="-2" pref="171" max="-2" attributes="0"/>
+                                          <Component id="Campo_Pedido" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="Campo_Despacho" min="-2" pref="90" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Component id="etiqueta_costo" min="-2" pref="167" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="etiqueta_existencia" min="-2" pref="167" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="Campo_Pedido" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
@@ -110,28 +114,39 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="Separador2" min="-2" pref="17" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="Etiq_Articulo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Boton_Buscar" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="Etiq_codigo" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                  <Component id="Etiq_nombre" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="Etiq_Cantidad1" min="-2" max="-2" attributes="0"/>
-                  <Component id="Campo_Pedido" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="Etiq_Cantidad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="Campo_Despacho" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="Etiq_Articulo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="Boton_Buscar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="Etiq_codigo" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="Etiq_nombre" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="Etiq_Cantidad1" min="-2" max="-2" attributes="0"/>
+                          <Component id="Campo_Pedido" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="Etiq_Cantidad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="Campo_Despacho" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                              <Component id="etiqueta_costo" min="-2" pref="20" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
-                  <Component id="etiqueta_costo" min="-2" pref="20" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="etiqueta_existencia" min="-2" pref="20" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -357,6 +372,13 @@
       <Events>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="Campo_PedidoKeyTyped"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Existencia: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="etiqueta_existencia">
     </Component>
   </SubComponents>
 </Form>

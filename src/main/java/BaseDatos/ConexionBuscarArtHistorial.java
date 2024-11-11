@@ -17,7 +17,7 @@ public class ConexionBuscarArtHistorial {
     List<Integer> cod_articulos=new ArrayList<>();
     List<String> nombre_articulos=new ArrayList<>();
     List<Double> cantidad=new ArrayList<>();
-    List<Double> valor_despacho=new ArrayList<>();
+    List<Double> valor_pedido=new ArrayList<>();
 
     List<Double> costos_doc=new ArrayList<>();
     String num_documento;
@@ -52,7 +52,7 @@ public class ConexionBuscarArtHistorial {
         }//es decir es una entrada
         if(quien_llama==0)
         {
-        consulta= conex.prepareStatement("select cod_articulo, valor_salida, valor_despacho, precio from historiales where seccion=? and numero_doc=?");
+        consulta= conex.prepareStatement("select cod_articulo, valor_salida, valor_pedido, precio from historiales where seccion=? and numero_doc=?");
         consulta.setInt(1, seccion);
         consulta.setString(2, num_documento);
         ejecutar=consulta.executeQuery();
@@ -60,7 +60,7 @@ public class ConexionBuscarArtHistorial {
         {
                      cod_articulos.add(ejecutar.getInt("cod_articulo"));
                      cantidad.add(ejecutar.getDouble("valor_salida"));
-                     valor_despacho.add(ejecutar.getDouble("valor_despacho"));
+                     valor_pedido.add(ejecutar.getDouble("valor_pedido"));
                      costos_doc.add(ejecutar.getDouble("precio"));
            
            }//while
@@ -121,9 +121,9 @@ public class ConexionBuscarArtHistorial {
     {
         return cantidad;
     }
-    public List<Double> getValorDespachoDoc()
+    public List<Double> getValorPedidoDoc()
     {
-        return valor_despacho;
+        return valor_pedido;
     }
     public List<Double> getCostosDoc()
     {

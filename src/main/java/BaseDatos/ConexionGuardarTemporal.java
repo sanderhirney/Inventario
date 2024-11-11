@@ -43,7 +43,7 @@ public class ConexionGuardarTemporal {
     int codigo_empresa;
     List<Integer> cod_articulos;
     List<Double> articulos_individual;
-    List<Double> valor_despacho_individual;
+    List<Double> valor_pedido_individual;
     List<Double> costos_articulos;
     List<Double> cantidad_art_entrada;
     List<Double> cantidad_art_salida;
@@ -179,7 +179,7 @@ public class ConexionGuardarTemporal {
                             consulta.setString(4, String.valueOf(documento_salida));
                             consulta.setDouble(5, 0);
                             consulta.setDouble(6, articulos_individual.get(i));
-                            consulta.setDouble(7, valor_despacho_individual.get(i));
+                            consulta.setDouble(7, valor_pedido_individual.get(i));
                             consulta.addBatch();
                             consulta.executeBatch();
                             }
@@ -250,9 +250,9 @@ public class ConexionGuardarTemporal {
     {
         articulos_individual=recibido;//cantidad de articulos
     }
-    public void setValorDespachoIndividual(List<Double> recibido)
+    public void setValorPedidoIndividual(List<Double> recibido)
     {
-        valor_despacho_individual=recibido;//cantidad de articulos
+        valor_pedido_individual=recibido;//cantidad de articulos
     }
     public void setCodArticulos(List<Integer> recibido)
     {
