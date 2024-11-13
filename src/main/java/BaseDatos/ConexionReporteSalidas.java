@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -90,7 +91,7 @@ public class ConexionReporteSalidas {
             consulta= conex.prepareStatement("select fecha_documento, id, concepto_salidas, consecutivo from doc_salidas where id=(select MAX(id) from doc_salidas)");
             ejecutar=consulta.executeQuery();
             if(ejecutar.next()){
-                codigoDocumento=ejecutar.getInt("id");
+                codigoDocumento=ejecutar.getInt("consecutivo");
                 fecha=ejecutar.getDate("fecha_documento");
                 codigoConcepto=ejecutar.getInt("concepto_salidas");
                 consecutivo=ejecutar.getInt("consecutivo");
@@ -105,10 +106,14 @@ public class ConexionReporteSalidas {
    
     private  void consultarHistorial(){
         try{
+            LocalDate fecha_temporal=fecha.toLocalDate();
+            int mes=fecha_temporal.getMonthValue();
+            
             conectar.Conectar();
             conex= conectar.getConexion();
-            consulta= conex.prepareStatement("select cod_articulo, valor_salida, precio from historiales where numero_doc=?");
+            consulta= conex.prepareStatement("select cod_articulo, valor_salida, precio from historiales where numero_doc=? and extract(month from fecha)=?");
             consulta.setString(1, String.valueOf(codigoDocumento));//convertir codigoDocumento a string
+            consulta.setInt(2, mes);
             ejecutar=consulta.executeQuery();
             
             while(ejecutar.next()){

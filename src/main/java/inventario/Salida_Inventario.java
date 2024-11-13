@@ -62,6 +62,7 @@ public class Salida_Inventario extends javax.swing.JDialog {
     int cod_concepto_rec;
     List<Double> costos_art_rec;
     int numero_documento_rec=0;
+    Date fecha_documento_rec;
     public Dimension resolucion;//variable para leer el ancho y alto de la ventana
     //para darle formato al campo al momento de realizar la multiplicacion de cantidad*costo unitaroio
     int consecutivo=0;
@@ -73,7 +74,7 @@ public class Salida_Inventario extends javax.swing.JDialog {
         secciones.consulta();
         codigo_seccion=secciones.codigo_empresa();
         nombre_seccion=secciones.nombre_empresa();
-        modelo= (DefaultTableModel)Tabla_datos.getModel();//para poder manipular la tabla
+       modelo= (DefaultTableModel)Tabla_datos.getModel();//para poder manipular la tabla
         conceptos.setTipo(0);//1 cuando es concepto de entrada y 0 cuando es concepto de salida
         conceptos.consulta();
         descripcion_concepto=conceptos.descripcion();
@@ -374,6 +375,9 @@ public class Salida_Inventario extends javax.swing.JDialog {
     private void Boton_RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_RegistrarActionPerformed
         // TODO add your handling code here:
     //para guardar los articulos
+     int filas=modelo.getRowCount();
+    
+     
     List<Integer> codigo_articulo=new ArrayList<>();
     List<Double> valor_despacho=new ArrayList<>();
     List<Double> valor_pedido=new ArrayList<>();
@@ -386,14 +390,14 @@ public class Salida_Inventario extends javax.swing.JDialog {
     List<Double> existencias_obtenidas=new ArrayList<>();
     Double total_operacion=0.0;//variable usada para guardar el total del valor movido por concepto
            
-                int filas=modelo.getRowCount();
+               
                 
                 for (int i=0; i<filas; i++)
                 {
-                    codigo_articulo.add(Integer.parseInt(Tabla_datos.getValueAt(i, 0).toString()));
-                    valor_pedido.add(Double.parseDouble(Tabla_datos.getValueAt(i, 2).toString()));
-                    valor_despacho.add(Double.parseDouble(Tabla_datos.getValueAt(i, 3).toString()));//omito la fila de nombre de articulo, ya que el nombre lo obtengo por el codigo
-                    precio_articulo.add(Double.parseDouble(Tabla_datos.getValueAt(i, 4).toString()));
+                    codigo_articulo.add(Integer.valueOf(modelo.getValueAt(i, 0).toString()));
+                    valor_pedido.add(Double.valueOf(modelo.getValueAt(i, 2).toString()));
+                    valor_despacho.add(Double.valueOf(modelo.getValueAt(i, 3).toString()));//omito la fila de nombre de articulo, ya que el nombre lo obtengo por el codigo
+                    precio_articulo.add(Double.valueOf(modelo.getValueAt(i, 4).toString()));
                     total_articulo.add(valor_despacho.get(i)*precio_articulo.get(i));
                     cantidad_articulos++;
                     
@@ -413,6 +417,7 @@ public class Salida_Inventario extends javax.swing.JDialog {
             }
             if(cantidad_articulos>0)
             {
+               
                 ConexionCrearSalida salida=new ConexionCrearSalida();
                 ConexionOperacionesSalidas operaciones=new ConexionOperacionesSalidas();
                 salida.setValorDespacho(valor_despacho);
@@ -471,6 +476,7 @@ public class Salida_Inventario extends javax.swing.JDialog {
                                if(temp.resultado()>0 || operaciones.getResultadoOperacion()>0)
                                {
                                      modelo.setRowCount(0);
+                                   
                                     JOptionPane.showMessageDialog(null,"Informacion Ingresada Satisfactoriamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
                                    
                                     Combo_Conceptos.setEnabled(true);
@@ -681,12 +687,16 @@ public void setDocumentoRec(int recibido)
 {
     numero_documento_rec=recibido;
 }
+public void setFechaDocumentoRec(Date recibido)
+{
+    fecha_documento_rec=recibido;
+}
 public void setConsecutivo(int recibido){
     consecutivo=recibido;
 }
     public void llenar_formulario()
 {
-
+   fechasql=(java.sql.Date) fecha_documento_rec;
    for(int i=0; i<cod_articulos_rec.size(); i++)
         {
          double temporal= cantidad_articulos_rec.get(i)*costos_art_rec.get(i); 

@@ -2,10 +2,14 @@
 package BaseDatos;
 //1 para si y 0 para no
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 public class ConexionModifSalidas {
@@ -24,13 +28,11 @@ public class ConexionModifSalidas {
     List<Integer> articulos_error=new ArrayList<>();//esta variable almacenara los codigos de los articulos que quedarian con existencia negativa si se reversa una entrada
     int seccion;
     int resultado;
-    
     int numero_documento;//aunque en salida es int lo casteo a String
-    
-   
-   
     int cod_concepto;
     int cod_servicio;
+    Date fecha_documento;
+    
     //
     int estado_existencia;//variable que verifica que no queden existencias negativas luego de reversar //0 no queda en negativo 1 si queda en negativo
     public void costo_unitario()
@@ -99,11 +101,15 @@ public class ConexionModifSalidas {
      {
           try
             {
+                LocalDate fecha_temporal=fecha_documento.toLocalDate();
+                int mes_documento=fecha_temporal.getMonthValue();
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select concepto_salidas, servicio from doc_salidas where id=? and secciones=?");
+        consulta= conex.prepareStatement("select concepto_salidas, servicio from doc_salidas where consecutivo=? and secciones=? and extract(month from fecha_documento)=?");
         consulta.setInt(1, numero_documento);
         consulta.setInt(2, seccion);
+        consulta.setInt(3, mes_documento);
+
         ejecutar=consulta.executeQuery();
         while( ejecutar.next() )
         {
@@ -111,6 +117,7 @@ public class ConexionModifSalidas {
                      
                      cod_concepto=ejecutar.getInt("concepto_salidas");
                      cod_servicio=ejecutar.getInt("servicio");
+                     
 
                      resultado=1;
                      
@@ -177,13 +184,16 @@ public class ConexionModifSalidas {
      {
            try
              {
+                 LocalDate fecha_temporal=fecha_documento.toLocalDate();
+                 int mes=fecha_temporal.getMonthValue();
                  
                     conectar.Conectar();
                     conex= conectar.getConexion();
                    // consulta= conex.prepareStatement("delete from doc_salidas where id=? and secciones=?");
-                    consulta= conex.prepareStatement("update doc_salidas set asentado=0 where id=? and secciones=?");
+                    consulta= conex.prepareStatement("update doc_salidas set asentado=0 where consecutivo=? and secciones=? and extract(month from fecha_documento)=?");
                     consulta.setInt(1, numero_documento);
                     consulta.setInt(2, seccion);
+                    consulta.setInt(3, mes);
                     operacion_borrar=consulta.executeUpdate();
                     if(operacion_borrar > 0)
                     {
@@ -263,6 +273,10 @@ public class ConexionModifSalidas {
     public void setCantidadDoc(List<Double> recibido)
     {
         cantidad_doc=recibido;
+    }
+    public void setFechaDoc(Date recibido)
+    {
+        fecha_documento=recibido;
     }
      public void setDespachoDoc(List<Double> recibido)
     {

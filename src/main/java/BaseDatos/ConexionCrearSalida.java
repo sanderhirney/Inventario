@@ -38,7 +38,8 @@ public class ConexionCrearSalida {
     List<Double> valor_pedido=new ArrayList<>();
     List<Double> precio_articulo=new ArrayList<>();
     int numero_documento;//variable que recibe el numero del documento donde se actualizara la informacion
-    int modificacion=1;//variable que usare para indicar en historial si es modificacion o no el 0 indica que es nuevo
+    int modificacion=1;//indica que es modificacion. Bandera para controlar en el historial
+    //recordar que la salida tiene la caracteristica que el conescutivo es creado automaticamente
     public void documento()
     {
         if(consecutivo==0){
@@ -107,22 +108,22 @@ public class ConexionCrearSalida {
             //en asentado se guardara un 1 indicando que esta bien guardado
             //es decir; que no esta abierto para modificacion
     {
-        
+        LocalDate fecha_temporal=fecha_documento.toLocalDate();
+        int mes=fecha_temporal.getMonthValue();
         try
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("update doc_salidas  set fecha_documento=?,  servicio=?, num_articulos=?, concepto_salidas=?, secciones=?, valor_operacion=?, asentado=? where id=?");
+        consulta= conex.prepareStatement("update doc_salidas  set  servicio=?, num_articulos=?, concepto_salidas=?, secciones=?, valor_operacion=?, asentado=? where consecutivo=? and extract(month from fecha_documento)=?");
         
-        consulta.setDate(1, fecha_documento);
-        consulta.setInt(2, servicio);
-        consulta.setInt(3, cantidad);
-        consulta.setInt(4, concepto_salida);
-        consulta.setInt(5, seccion);
-        consulta.setDouble(6, total_operacion);
-        consulta.setInt(7, 1);//para indicar que no esta abierto para actualizar
-        consulta.setInt(8, numero_documento);
-        
+        consulta.setInt(1, servicio);
+        consulta.setInt(2, cantidad);
+        consulta.setInt(3, concepto_salida);
+        consulta.setInt(4, seccion);
+        consulta.setDouble(5, total_operacion);
+        consulta.setInt(6, 1);//para indicar que no esta abierto para actualizar
+        consulta.setInt(7, numero_documento);
+        consulta.setInt(8, mes);
         ejecutar=consulta.executeUpdate();
         
         if( ejecutar> 0 )
@@ -133,7 +134,7 @@ public class ConexionCrearSalida {
         {
             resultado=0;
         }
-       System.out.println("resultado de actualizar: "+resultado);
+      
     }//consulta
            catch(SQLException ex)
     {
@@ -148,20 +149,23 @@ public class ConexionCrearSalida {
        
                 
         if(modificacion==0){//es decir es un documento nuevo
-               try
+              try
                {
-                   for (int i=0; i<=codigo_articulo.size()-1; i++)
-                   {
                    conectar.Conectar();
                    conex= conectar.getConexion();
-                   consulta= conex.prepareStatement("insert into historiales values (DEFAULT, ?, ?, ?, ?, ?, ?, (SELECT MAX(id) FROM doc_salidas), ?)");
+               
+                   for (int i=0; i<=codigo_articulo.size()-1; i++)
+                   {
+                    
+                   consulta= conex.prepareStatement("insert into historiales values (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?)");
                    consulta.setDate(1, fecha_documento);
                    consulta.setInt(2, codigo_articulo.get(i));
                    consulta.setInt(3, valor_entrada);
                    consulta.setDouble(4, cantidad_articulo.get(i));
                    consulta.setInt(5, seccion);
                    consulta.setDouble(6, precio_articulo.get(i));
-                   consulta.setDouble(7, valor_pedido.get(i));
+                   consulta.setInt(7, consecutivo);
+                   consulta.setDouble(8, valor_pedido.get(i));
                    consulta.addBatch();
                    consulta.executeBatch();
                    }
@@ -184,10 +188,12 @@ public class ConexionCrearSalida {
         }else{
               try
                {
-                   for (int i=0; i<=codigo_articulo.size()-1; i++)
-                   {
                    conectar.Conectar();
                    conex= conectar.getConexion();
+               
+                   for (int i=0; i<=codigo_articulo.size()-1; i++)
+                   {
+                  
                    consulta= conex.prepareStatement("insert into historiales values (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?)");
                    consulta.setDate(1, fecha_documento);
                    consulta.setInt(2, codigo_articulo.get(i));
@@ -216,10 +222,10 @@ public class ConexionCrearSalida {
                    JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de entrada de historiales en la salida.\n Ventana Crear Salida \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
                   
                }
+              
+               }
             
-        }//es decir es una modificacion
-       
-       
+           
     }//consulta
     
     public int respuesta()

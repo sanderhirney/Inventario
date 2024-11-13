@@ -252,6 +252,7 @@ JFrame ventanaPrincipal;
         else
         {
             fila_seleccionada=tabla_salidas.getSelectedRow();
+            Date fecha_temporal=fecha.get(fila_seleccionada);
             //aqui leo los datos del documento seleccionado para realizar todas las operaciones 
             //1 .- calculo el costo total de cada articulo del documento antes de reversar 
             //2.- luego del paso 1, le resto el costo total del articulo al costo del que estoy reversando
@@ -277,6 +278,8 @@ JFrame ventanaPrincipal;
                     ConexionModifSalidas salida= new ConexionModifSalidas();
                     salida.setSeccion(codigo_seccion);
                     salida.setDocumento(documento_seleccionado);
+                    System.out.println("Fecha temporal es::::::::::"+fecha_temporal);
+                    salida.setFechaDoc(fecha_temporal);
                     salida.setCodigoArticulo(buscar.getCodigoArticulos());
                     salida.costo_unitario();
                     salida.existencia_unitaria();
@@ -340,6 +343,7 @@ JFrame ventanaPrincipal;
                     ventana.setCostosDoc(buscar.getCostosDoc());
                     ////ventana.setCodServicioRec(salida.getConceptoSalida());
                     ventana.setCodConceptoRec(salida.getConceptoSalida());
+                    ventana.setFechaDocumentoRec(fecha_temporal);
                     //una vez que llego aqu procedo a borrar en bd para mostrar
                     ventana.setDocumentoRec(documento_seleccionado);
                     salida.borrarDocumento();//borro porque ya se guardo en el historial
@@ -356,7 +360,7 @@ JFrame ventanaPrincipal;
                     }
                     if(salida.getResulatdo()==0)
                     {
-                        JOptionPane.showMessageDialog(null,"Ocurrio un error al llamar la entrada seleccionada. \n pudo haber sido ocasionado por un error al leer datos de la base de datos \n o por un error al actualizar la informacion en la base de datos.\n Contacte al desarrollador", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null,"Ocurrio un error al llamar la salida seleccionada. \n pudo haber sido ocasionado por un error al leer datos de la base de datos \n o por un error al actualizar la informacion en la base de datos.\n Contacte al desarrollador", "Error", JOptionPane.ERROR_MESSAGE);
                     }
 
                     }//if temp
@@ -380,6 +384,7 @@ JFrame ventanaPrincipal;
                 ventana.setNombreArticuloRec(temp.getNombreArticulos());
                 ventana.setCodServicioRec(temp.getServicio());
                 ventana.setCostosDoc(temp.getCostosArtDoc());
+                ventana.setFechaDocumentoRec(fecha_temporal);
                 ventana.setCodConceptoRec(temp.getCodConcepto());
                 ventana.setDocumentoRec(documento_seleccionado);
                 this.dispose();//cierro la ventana donde aparece el listado de documentos
