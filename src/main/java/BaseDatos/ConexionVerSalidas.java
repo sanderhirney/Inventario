@@ -14,7 +14,8 @@ public class ConexionVerSalidas {
     PreparedStatement consulta;
     Conexion conectar= new Conexion();
     ResultSet ejecutar;
-    List<Date> fecha=new ArrayList<>();
+    List<Date> fechaDespacho=new ArrayList<>();
+    List<Date> fechaPedido=new ArrayList<>();
     List<String> documento=new ArrayList<>();
     List<String> concepto=new ArrayList<>();
     List<String> servicio=new ArrayList<>();
@@ -34,18 +35,20 @@ public class ConexionVerSalidas {
       {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select fecha_documento, consecutivo, num_articulos, concepto_salidas, valor_operacion, servicio from doc_salidas where secciones=? and asentado=1");
+        consulta= conex.prepareStatement("select fecha_documento, consecutivo, num_articulos, concepto_salidas, valor_operacion, servicio, fecha_pedido from doc_salidas where secciones=? and asentado=1");
         consulta.setInt(1, seccion);
         ejecutar=consulta.executeQuery();
         while( ejecutar.next() )
         {
-                     fecha.add(ejecutar.getDate("fecha_documento"));
+                     fechaDespacho.add(ejecutar.getDate("fecha_documento"));
+                     
                      documento.add(ejecutar.getString("consecutivo"));
                      articulos.add(ejecutar.getDouble("num_articulos"));
                      cod_concepto.add(ejecutar.getInt("concepto_salidas"));
                      valor.add(ejecutar.getDouble("valor_operacion"));
                      cod_servicio.add(ejecutar.getInt("servicio"));
                      estado.add("Guardado");
+                     fechaPedido.add(ejecutar.getDate("fecha_pedido"));
                      resultado=0;
                      
                 }//while
@@ -64,18 +67,19 @@ public class ConexionVerSalidas {
       {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select fecha_documento, numero_documentos, cantidad_articulos, conceptos, valor_operacion, servicios from temporal_doc_salida where seccion=?");
+        consulta= conex.prepareStatement("select fecha_documento, numero_documentos, cantidad_articulos, conceptos, valor_operacion, servicios, fecha_pedido from temporal_doc_salida where seccion=?");
         consulta.setInt(1, seccion);
         ejecutar=consulta.executeQuery();
         while( ejecutar.next() )
         {
-                     fecha.add(ejecutar.getDate("fecha_documento"));
+                     fechaDespacho.add(ejecutar.getDate("fecha_documento"));
                      documento.add(ejecutar.getString("numero_documentos"));
                      articulos.add(ejecutar.getDouble("cantidad_articulos"));
                      cod_concepto.add(ejecutar.getInt("conceptos"));
                      valor.add(ejecutar.getDouble("valor_operacion"));
                      cod_servicio.add(ejecutar.getInt("servicios"));
                      estado.add("No Guardado");
+                     fechaPedido.add(ejecutar.getDate("fecha_pedido"));
                      resultado=0;
                      
                 }//while
@@ -153,9 +157,13 @@ public class ConexionVerSalidas {
 
     
     
-    public List<Date> getFecha()
+    public List<Date> getFechaDespacho()
     {
-        return fecha;
+        return fechaDespacho;
+    }
+    public List<Date> getFechaPedido()
+    {
+        return fechaPedido;
     }
     public List<Double> getCantidadArticulos()
     {
@@ -187,7 +195,7 @@ public class ConexionVerSalidas {
     
    public int getResultado()
    {
-       if(fecha.isEmpty())
+       if(fechaDespacho.isEmpty())
        {
            resultado=0;
        }

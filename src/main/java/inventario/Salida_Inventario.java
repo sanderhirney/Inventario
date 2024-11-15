@@ -37,15 +37,20 @@ public class Salida_Inventario extends javax.swing.JDialog {
     //fecha
     Date fecha= new Date();
    
-    java.sql.Date fechasql = new java.sql.Date(fecha.getTime());
+    //java.sql.Date fechasql = new java.sql.Date(fecha.getTime());
+    java.sql.Date fechaDespacho;
+    java.sql.Date fechaPedido;
+    long fechaDespachoConvert;
+    long fechaPedidoConvert;
+    Date fechaDespachoGet;
+    Date fechaPedidoGet;
     int codigo_seccion;
     String nombre_recibido;
     String codigo_recibido;
     String nombre_seccion;
     Double obtenido;
     int existencia_unidad;//aqui guardo la existencia de cada articulo al momento de guardarlo
-   
-   
+       
     int estado_decimal=0;//no se ha presionado el punto; 1 si se presiona el punto para llevar el control del decimal en el campo
     int tope=0;//cantidad de decimales programados
     int cantidad_numero_campo=0; //variable que suma la cantidad de enteros+el punto+cantidad de decimales programadas
@@ -63,6 +68,7 @@ public class Salida_Inventario extends javax.swing.JDialog {
     List<Double> costos_art_rec;
     int numero_documento_rec=0;
     Date fecha_documento_rec;
+    Date fecha_pedido_rec;
     public Dimension resolucion;//variable para leer el ancho y alto de la ventana
     //para darle formato al campo al momento de realizar la multiplicacion de cantidad*costo unitaroio
     int consecutivo=0;
@@ -141,6 +147,10 @@ public class Salida_Inventario extends javax.swing.JDialog {
         Campo_Pedido = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         etiqueta_existencia = new javax.swing.JLabel();
+        Fecha_documento_despacho = new com.toedter.calendar.JDateChooser();
+        Etiq_Fecha_Pedido = new javax.swing.JLabel();
+        Etiq_Fecha_Despacho = new javax.swing.JLabel();
+        Fecha_documento_pedido = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -251,10 +261,22 @@ public class Salida_Inventario extends javax.swing.JDialog {
 
         jLabel2.setText("Existencia: ");
 
+        Fecha_documento_despacho.setDateFormatString("yyyy/MM/dd");
+
+        Etiq_Fecha_Pedido.setText("Fecha Pedido:");
+
+        Etiq_Fecha_Despacho.setText("Fecha Despacho:");
+
+        Fecha_documento_pedido.setDateFormatString("yyyy/MM/dd");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Etiq_Cantidad1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Panel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -300,20 +322,28 @@ public class Salida_Inventario extends javax.swing.JDialog {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(Etiq_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(4, 4, 4)
-                                        .addComponent(Etiq_Articulo)
-                                        .addGap(39, 39, 39)
-                                        .addComponent(Boton_Buscar)))
-                                .addGap(215, 215, 215))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addComponent(Etiq_Fecha_Pedido))
+                                            .addComponent(Etiq_Articulo))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(37, 37, 37)
+                                                .addComponent(Boton_Buscar))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addComponent(Fecha_documento_pedido, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(43, 43, 43)
+                                                .addComponent(Etiq_Fecha_Despacho)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(Fecha_documento_despacho, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(35, 35, 35))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(Etiq_encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(122, 122, 122)
                                 .addComponent(Etiq_Ventana, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Etiq_Cantidad1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,7 +354,13 @@ public class Salida_Inventario extends javax.swing.JDialog {
                     .addComponent(Etiq_Ventana, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(Separador2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Fecha_documento_despacho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Etiq_Fecha_Despacho, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Etiq_Fecha_Pedido)
+                    .addComponent(Fecha_documento_pedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -350,20 +386,20 @@ public class Salida_Inventario extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(etiqueta_existencia, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(3, 3, 3)))
-                .addGap(18, 18, 18)
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Etiq_Concepto)
-                    .addComponent(Combo_Conceptos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Combo_Conceptos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Etiq_Concepto))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Etiq_Servicio)
                     .addComponent(Combo_Servicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(36, 36, 36)
                 .addComponent(Panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
@@ -376,8 +412,12 @@ public class Salida_Inventario extends javax.swing.JDialog {
         // TODO add your handling code here:
     //para guardar los articulos
      int filas=modelo.getRowCount();
-    
-     
+     fechaPedidoGet=Fecha_documento_pedido.getDate();
+     fechaDespachoGet=Fecha_documento_despacho.getDate();//leo los dateChooser
+     fechaPedidoConvert=fechaPedidoGet.getTime();//lo paso a long para convertir java.sql.date
+     fechaDespachoConvert=fechaDespachoGet.getTime();
+    fechaDespacho= new java.sql.Date(fechaDespachoConvert);
+    fechaPedido= new java.sql.Date(fechaPedidoConvert);
     List<Integer> codigo_articulo=new ArrayList<>();
     List<Double> valor_despacho=new ArrayList<>();
     List<Double> valor_pedido=new ArrayList<>();
@@ -421,7 +461,8 @@ public class Salida_Inventario extends javax.swing.JDialog {
                 ConexionCrearSalida salida=new ConexionCrearSalida();
                 ConexionOperacionesSalidas operaciones=new ConexionOperacionesSalidas();
                 salida.setValorDespacho(valor_despacho);
-                salida.setFechaDocumento(fechasql);
+                salida.setFechaDocumentoDespacho(fechaDespacho);
+                salida.setFechaDocumentoPedido(fechaPedido);
                 salida.setServicio(servicio_salida);
                 salida.setCantidad(cantidad_articulos);
                 salida.setValorPedido(valor_pedido);
@@ -459,7 +500,7 @@ public class Salida_Inventario extends javax.swing.JDialog {
                        }//for
                        
                        operaciones.setExistenciaNuevo(existencias_actualizadas);
-                       operaciones.setFecha(fechasql);
+                       operaciones.setFecha(fechaDespacho);
                        operaciones.setCodigoActualizar(codigo_articulo);
                        operaciones.setDocumento("SALIDA");
                        operaciones.Actualizarexistencias();
@@ -691,12 +732,19 @@ public void setFechaDocumentoRec(Date recibido)
 {
     fecha_documento_rec=recibido;
 }
+public void setFechaDocumentoPedidoRec(Date recibido)
+{
+    fecha_pedido_rec=recibido;
+}
 public void setConsecutivo(int recibido){
     consecutivo=recibido;
 }
     public void llenar_formulario()
 {
-   fechasql=(java.sql.Date) fecha_documento_rec;
+   //fechaDespacho=(java.sql.Date) fecha_documento_rec;
+   Fecha_documento_despacho.setDate(fecha_documento_rec);
+   //fechaPedido=(java.sql.Date) fecha_pedido_rec;
+   Fecha_documento_pedido.setDate(fecha_pedido_rec);
    for(int i=0; i<cod_articulos_rec.size(); i++)
         {
          double temporal= cantidad_articulos_rec.get(i)*costos_art_rec.get(i); 
@@ -761,11 +809,15 @@ public void setConsecutivo(int recibido){
     private javax.swing.JLabel Etiq_Cantidad;
     private javax.swing.JLabel Etiq_Cantidad1;
     private javax.swing.JLabel Etiq_Concepto;
+    private javax.swing.JLabel Etiq_Fecha_Despacho;
+    private javax.swing.JLabel Etiq_Fecha_Pedido;
     private javax.swing.JLabel Etiq_Servicio;
     private javax.swing.JLabel Etiq_Ventana;
     private javax.swing.JLabel Etiq_codigo;
     private javax.swing.JLabel Etiq_encabezado;
     private javax.swing.JLabel Etiq_nombre;
+    private com.toedter.calendar.JDateChooser Fecha_documento_despacho;
+    private com.toedter.calendar.JDateChooser Fecha_documento_pedido;
     private javax.swing.JPanel Panel1;
     private javax.swing.JPanel Panel2;
     private javax.swing.JSeparator Separador2;

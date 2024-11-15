@@ -24,7 +24,8 @@ import javax.swing.table.TableRowSorter;
 public class Consultar_Salidas extends javax.swing.JDialog {
 List<Double> cantidad_articulos=new ArrayList<>();
 List<String> documento=new ArrayList<>();
-List<Date> fecha=new ArrayList<>();
+List<Date> fechaDespacho=new ArrayList<>();
+List<Date> fechaPedido=new ArrayList<>();
 List<String> nombre_concepto=new ArrayList<>();
 List<String> nombre_servicio=new ArrayList<>();
 List<Integer> codigo_concepto=new ArrayList<>();
@@ -80,7 +81,8 @@ JFrame ventanaPrincipal;
          {
                 cod_servicio=salidas.getServicio();
                 nombre_servicio=salidas.getNombreServicio();
-                fecha=salidas.getFecha();
+                fechaDespacho=salidas.getFechaDespacho();
+                fechaPedido=salidas.getFechaPedido();
                 documento=salidas.getDocumento();
                 nombre_concepto=salidas.getNombreConcepto();
                 codigo_concepto=salidas.getCodConcepto();
@@ -101,7 +103,7 @@ JFrame ventanaPrincipal;
                   }//for
                     try
                     {
-                        lista1=fecha.iterator();
+                        lista1=fechaDespacho.iterator();
                         lista2=documento.iterator();
                         lista3=nombre_servicio.iterator();
                         lista4=cantidad_articulos.iterator();
@@ -252,7 +254,8 @@ JFrame ventanaPrincipal;
         else
         {
             fila_seleccionada=tabla_salidas.getSelectedRow();
-            Date fecha_temporal=fecha.get(fila_seleccionada);
+            Date fecha_temporal_despacho=fechaDespacho.get(fila_seleccionada);
+            Date fecha_temporal_pedido=fechaPedido.get(fila_seleccionada);
             //aqui leo los datos del documento seleccionado para realizar todas las operaciones 
             //1 .- calculo el costo total de cada articulo del documento antes de reversar 
             //2.- luego del paso 1, le resto el costo total del articulo al costo del que estoy reversando
@@ -278,8 +281,8 @@ JFrame ventanaPrincipal;
                     ConexionModifSalidas salida= new ConexionModifSalidas();
                     salida.setSeccion(codigo_seccion);
                     salida.setDocumento(documento_seleccionado);
-                    System.out.println("Fecha temporal es::::::::::"+fecha_temporal);
-                    salida.setFechaDoc(fecha_temporal);
+               
+                    salida.setFechaDoc(fecha_temporal_despacho);
                     salida.setCodigoArticulo(buscar.getCodigoArticulos());
                     salida.costo_unitario();
                     salida.existencia_unitaria();
@@ -316,7 +319,8 @@ JFrame ventanaPrincipal;
                     ConexionGuardarTemporal temp=new ConexionGuardarTemporal(yo_llamo);
                     temp.setDocumentoSalida(documento_seleccionado);
                     temp.setSeccion(codigo_seccion);
-                    temp.setFechaDoc((Date)(modelo.getValueAt(tabla_salidas.getSelectedRow(), 0)));
+                    temp.setFechaDocDespacho((Date)(modelo.getValueAt(tabla_salidas.getSelectedRow(), 0)));
+                    temp.setFechaDocPedido(fecha_temporal_despacho);
                     temp.setServicio(cod_servicio.get(fila_seleccionada));
                     temp.setConcepto(codigo_concepto.get(fila_seleccionada));
                     temp.setSumaArticulos((Double)modelo.getValueAt(tabla_salidas.getSelectedRow(), 3));
@@ -343,7 +347,8 @@ JFrame ventanaPrincipal;
                     ventana.setCostosDoc(buscar.getCostosDoc());
                     ////ventana.setCodServicioRec(salida.getConceptoSalida());
                     ventana.setCodConceptoRec(salida.getConceptoSalida());
-                    ventana.setFechaDocumentoRec(fecha_temporal);
+                    ventana.setFechaDocumentoRec(fecha_temporal_despacho);
+                    ventana.setFechaDocumentoPedidoRec(fecha_temporal_pedido);
                     //una vez que llego aqu procedo a borrar en bd para mostrar
                     ventana.setDocumentoRec(documento_seleccionado);
                     salida.borrarDocumento();//borro porque ya se guardo en el historial
@@ -379,12 +384,13 @@ JFrame ventanaPrincipal;
                 temp.nombre_articulos();
                 Salida_Inventario ventana=new Salida_Inventario(null, true);
                 ventana.setCantidadArticuloRec(temp.getCantidadArtDoc());
-                ventana.setValorDespachoRec(temp.getCantidadArtDoc());
+                ventana.setValorDespachoRec(temp.getValorPedidoArtDoc());
                 ventana.setCodigoArticuloRec(temp.getCodArticulos());
                 ventana.setNombreArticuloRec(temp.getNombreArticulos());
                 ventana.setCodServicioRec(temp.getServicio());
                 ventana.setCostosDoc(temp.getCostosArtDoc());
-                ventana.setFechaDocumentoRec(fecha_temporal);
+                ventana.setFechaDocumentoRec(fecha_temporal_despacho);
+                ventana.setFechaDocumentoPedidoRec(fecha_temporal_pedido);
                 ventana.setCodConceptoRec(temp.getCodConcepto());
                 ventana.setDocumentoRec(documento_seleccionado);
                 this.dispose();//cierro la ventana donde aparece el listado de documentos

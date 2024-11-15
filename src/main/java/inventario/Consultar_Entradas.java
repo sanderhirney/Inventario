@@ -296,7 +296,7 @@ JFrame ventanaPrincipal;
                
                 temp.setDocumentoEntrada(documento_seleccionado);
                 temp.setSeccion(codigo_seccion);
-                temp.setFechaDoc((Date)(modelo.getValueAt(tabla_entradas.getSelectedRow(), 0)));
+                temp.setFechaDocDespacho((Date)(modelo.getValueAt(tabla_entradas.getSelectedRow(), 0)));
                 temp.setProveedores(entrada.getCodProveedor());
                 temp.setConcepto(entrada.getConceptoEntrada());
                 temp.setSumaArticulos(Double.valueOf(modelo.getValueAt(tabla_entradas.getSelectedRow(), 3).toString()));

@@ -18,7 +18,8 @@ public class ConexionCrearSalida {
     int resultado;//recoge el valor de resultado de ingresar a BD tabla doc_entradas
     int resultado_sig;//recoge el valor de resultado de ingresar a BD tabla historiales
     String id_documento;
-    java.sql.Date fecha_documento;
+    java.sql.Date fecha_documento_despacho;
+    java.sql.Date fecha_documento_pedido;
     String proveedor;
     int seccion;
     int cantidad;
@@ -76,9 +77,9 @@ public class ConexionCrearSalida {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("insert into doc_salidas values (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?)");
+        consulta= conex.prepareStatement("insert into doc_salidas values (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         
-        consulta.setDate(1, fecha_documento);
+        consulta.setDate(1, fecha_documento_despacho);
         consulta.setInt(2, servicio);
         consulta.setInt(3, cantidad);
         consulta.setInt(4, concepto_salida);
@@ -86,6 +87,7 @@ public class ConexionCrearSalida {
         consulta.setInt(6, consecutivo);
         consulta.setDouble(7, total_operacion);
         consulta.setInt(8, 1);
+        consulta.setDate(9, fecha_documento_pedido);
         
         ejecutar=consulta.executeUpdate();
         if( ejecutar> 0 )
@@ -108,7 +110,7 @@ public class ConexionCrearSalida {
             //en asentado se guardara un 1 indicando que esta bien guardado
             //es decir; que no esta abierto para modificacion
     {
-        LocalDate fecha_temporal=fecha_documento.toLocalDate();
+        LocalDate fecha_temporal=fecha_documento_despacho.toLocalDate();
         int mes=fecha_temporal.getMonthValue();
         try
     {
@@ -158,7 +160,7 @@ public class ConexionCrearSalida {
                    {
                     
                    consulta= conex.prepareStatement("insert into historiales values (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?)");
-                   consulta.setDate(1, fecha_documento);
+                   consulta.setDate(1, fecha_documento_despacho);
                    consulta.setInt(2, codigo_articulo.get(i));
                    consulta.setInt(3, valor_entrada);
                    consulta.setDouble(4, cantidad_articulo.get(i));
@@ -195,7 +197,7 @@ public class ConexionCrearSalida {
                    {
                   
                    consulta= conex.prepareStatement("insert into historiales values (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?)");
-                   consulta.setDate(1, fecha_documento);
+                   consulta.setDate(1, fecha_documento_despacho);
                    consulta.setInt(2, codigo_articulo.get(i));
                    consulta.setInt(3, valor_entrada);
                    consulta.setDouble(4, cantidad_articulo.get(i));
@@ -235,9 +237,13 @@ public class ConexionCrearSalida {
     
     
    
-    public void setFechaDocumento(java.sql.Date recibido)
+    public void setFechaDocumentoDespacho(java.sql.Date recibido)
     {
-        fecha_documento=recibido;
+        fecha_documento_despacho=recibido;
+    }
+    public void setFechaDocumentoPedido(java.sql.Date recibido)
+    {
+        fecha_documento_pedido=recibido;
     }
    
    

@@ -31,7 +31,8 @@ public class ConexionGuardarTemporal {
     ResultSet ejecutar;
     String documento_entrada;
     int documento_salida;
-    java.sql.Date fecha_doc;
+    java.sql.Date fecha_doc_despacho;
+    java.sql.Date fecha_doc_pedido;
     int consecutivo;
     int seccion;
     int servicio;
@@ -63,7 +64,7 @@ public class ConexionGuardarTemporal {
                 conectar.Conectar();
                 conex= conectar.getConexion();
                 consulta= conex.prepareStatement("insert into temporal_doc_entrada values (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                consulta.setDate(1, fecha_doc);
+                consulta.setDate(1, fecha_doc_despacho);
                 consulta.setDate(2, fechaoper);
                 consulta.setInt(3, seccion);
                 consulta.setString(4, proveedor);
@@ -93,15 +94,15 @@ public class ConexionGuardarTemporal {
         {
             proveedor="N/A";
             documento_entrada="N/A";
-            fecha_doc=fechaoper;
+         
             
               try{
                 conectar.Conectar();
                 conex= conectar.getConexion();
                 consulta= conex.prepareStatement("insert into temporal_doc_salida values (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                 consulta.setInt(1, documento_salida);
-                consulta.setDate(2, fecha_doc);
-                consulta.setDate(3, fechaoper);
+                consulta.setDate(2, fecha_doc_despacho);
+                consulta.setDate(3, fecha_doc_pedido);
                 consulta.setInt(4, seccion);
                 consulta.setInt(5, servicio);
                 consulta.setInt(6, concepto);
@@ -219,9 +220,13 @@ public class ConexionGuardarTemporal {
     {
         documento_salida=recibido;
     }
-    public void setFechaDoc(Date recibido)
+    public void setFechaDocDespacho(Date recibido)
     {
-       fecha_doc=(java.sql.Date) recibido;
+       fecha_doc_despacho=(java.sql.Date) recibido;
+    }
+     public void setFechaDocPedido(Date recibido)
+    {
+       fecha_doc_pedido=(java.sql.Date) recibido;
     }
     public void setServicio(int recibido)
     {
