@@ -281,7 +281,6 @@ JFrame ventanaPrincipal;
                     ConexionModifSalidas salida= new ConexionModifSalidas();
                     salida.setSeccion(codigo_seccion);
                     salida.setDocumento(documento_seleccionado);
-               
                     salida.setFechaDoc(fecha_temporal_despacho);
                     salida.setCodigoArticulo(buscar.getCodigoArticulos());
                     salida.costo_unitario();
@@ -291,22 +290,10 @@ JFrame ventanaPrincipal;
                     salida.setCantidadDoc(buscar.getCantidadesDoc());
                     salida.setDespachoDoc(buscar.getValorPedidoDoc());
                     salida.setCostosDoc(buscar.getCostosDoc());
-                    salida.EstadoExistencias();
                     salida.actualizar();
-                    if(salida.getEstadoExistencia()==0)
-                    {
-                        //hubo error porque al reversar quedaria negativo
-                        lista7=salida.getArtCodError().iterator();
-                        StringBuilder s=new StringBuilder();
-                        while(lista7.hasNext())
-                        {
-                        s.append(lista7.next());
-                        }
-
-                        JOptionPane.showMessageDialog(null, "Error: no se puede modificar el documento seleccionado\n el o los articulos: "+s+"\n"+"poseen movimientos", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                    if(salida.getEstadoExistencia()==1)
-                    {
+                    //salida.EstadoExistencias();
+                  
+                 
                         //no hubo error
                         //procedo a borrar los movimientos de la base de datos y a guardarloa en la tabla temporal
                         //ya que se va a modificar
@@ -320,7 +307,7 @@ JFrame ventanaPrincipal;
                     temp.setDocumentoSalida(documento_seleccionado);
                     temp.setSeccion(codigo_seccion);
                     temp.setFechaDocDespacho((Date)(modelo.getValueAt(tabla_salidas.getSelectedRow(), 0)));
-                    temp.setFechaDocPedido(fecha_temporal_despacho);
+                    temp.setFechaDocPedido(fecha_temporal_pedido);
                     temp.setServicio(cod_servicio.get(fila_seleccionada));
                     temp.setConcepto(codigo_concepto.get(fila_seleccionada));
                     temp.setSumaArticulos((Double)modelo.getValueAt(tabla_salidas.getSelectedRow(), 3));
@@ -369,7 +356,7 @@ JFrame ventanaPrincipal;
                     }
 
                     }//if temp
-            }// if de que la existencia si funciona
+           
             }//IF DE QUE SI ESTA GUARDADO
             if( modelo.getValueAt(tabla_salidas.getSelectedRow(), 5).toString().equals("No Guardado") )
             {

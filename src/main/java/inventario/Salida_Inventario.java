@@ -517,6 +517,7 @@ public class Salida_Inventario extends javax.swing.JDialog {
                                if(temp.resultado()>0 || operaciones.getResultadoOperacion()>0)
                                {
                                      modelo.setRowCount(0);
+                                     
                                    
                                     JOptionPane.showMessageDialog(null,"Informacion Ingresada Satisfactoriamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
                                    
@@ -667,6 +668,7 @@ public class Salida_Inventario extends javax.swing.JDialog {
                 etiqueta_existencia.setText("");
                 Combo_Conceptos.setEnabled(false);
                 Combo_Servicio.setEnabled(false);
+                System.out.println("Condigo"+codigo_recibido);
                 }//else
         }//else
     }//GEN-LAST:event_Boton_GuardarActionPerformed

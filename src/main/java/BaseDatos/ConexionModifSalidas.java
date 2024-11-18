@@ -248,10 +248,10 @@ public class ConexionModifSalidas {
      }
           
       public void actualizar(){
-        if(estado_existencia==1){
+       
             
             ActualizarExistencia();
-        }
+        
     }
      
     public void setCodigoArticulo(List<Integer> recibido)
