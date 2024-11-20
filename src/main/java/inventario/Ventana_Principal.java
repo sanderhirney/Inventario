@@ -78,6 +78,12 @@ public class Ventana_Principal extends javax.swing.JFrame {
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Consultar");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Almacenes");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Crear");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Consultar");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Articulos");
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Crear");
         treeNode2.add(treeNode3);
@@ -134,7 +140,7 @@ public class Ventana_Principal extends javax.swing.JFrame {
         });
         PanelLayout.add(botonSalir);
 
-        etiquetaVersion.setText("Ver1.0");
+        etiquetaVersion.setText("Ver1.1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -264,6 +270,22 @@ public class Ventana_Principal extends javax.swing.JFrame {
               consultar_serv.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
               consultar_serv.setVisible(true);
           }
+          if( ((nodo.getParent().toString()).equals("Almacenes")) && ((nodeInfo.toString()).equals("Crear")) )
+          {
+              Crear_Almacenes crear_almacen= new Crear_Almacenes(this, true);
+                crear_almacen.setResizable(false);
+                crear_almacen.setLocationRelativeTo(null);
+                crear_almacen.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+                crear_almacen.setVisible(true);
+          }
+          if( ((nodo.getParent().toString()).equals("Almacenes")) && ((nodeInfo.toString()).equals("Consultar")) )
+          {
+              Consultar_Almacenes consultar_almacenes= new Consultar_Almacenes(this, true);
+              consultar_almacenes.setResizable(false);
+              consultar_almacenes.setLocationRelativeTo(null);
+              consultar_almacenes.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+              consultar_almacenes.setVisible(true);
+          }
           if( ((nodo.getParent().toString()).equals("Articulos")) && ((nodeInfo.toString()).equals("Crear")) )
           {
               Crear_Articulos crear_art= new Crear_Articulos(this, true);
@@ -288,22 +310,7 @@ public class Ventana_Principal extends javax.swing.JFrame {
               asignar.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
               asignar.setVisible(true);
           }
-          if( ((nodo.getParent().toString()).equals("Almacenes")) && ((nodeInfo.toString()).equals("Crear")) )
-          {
-              Crear_Almacenes crear_almac= new Crear_Almacenes(this, true);
-              crear_almac.setResizable(false);
-              crear_almac.setLocationRelativeTo(null);
-              crear_almac.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              crear_almac.setVisible(true);
-          }
-          if( ((nodo.getParent().toString()).equals("Almacenes")) && ((nodeInfo.toString()).equals("Consultar")) )
-          {
-              Consultar_Almacenes consultar_almac= new Consultar_Almacenes(this, true);
-              consultar_almac.setResizable(false);
-              consultar_almac.setLocationRelativeTo(null);
-              consultar_almac.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              consultar_almac.setVisible(true);
-          }
+         
         
           if( ((nodo.getParent().toString()).equals("Reportes")) && ((nodeInfo.toString()).equals("Reportes")) )
           {

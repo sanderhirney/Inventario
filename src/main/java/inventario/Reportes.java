@@ -261,15 +261,20 @@ ConexionEmpresas secciones=new ConexionEmpresas();
          JOptionPane.showMessageDialog(null, "Este campo solo se admiten numeros", "Revisar", JOptionPane.ERROR_MESSAGE);
          evt.consume();
       }
+         if(Campo_Anio.getText().length()>=4)
+            {
+               JOptionPane.showMessageDialog(null, "Este campo debe tener 4 digitos", "Revisar", JOptionPane.ERROR_MESSAGE);
+               evt.consume();
+            }//if
        
     }//GEN-LAST:event_Campo_AnioKeyTyped
 
     private void Campo_AnioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Campo_AnioFocusLost
         // TODO add your handling code here:
-         if(Campo_Anio.getText().length()< 4)
+         if(Campo_Anio.getText().length()<4)
             {
                JOptionPane.showMessageDialog(null, "Este campo debe tener 4 digitos", "Revisar", JOptionPane.ERROR_MESSAGE);
-              
+               
             }//if
     }//GEN-LAST:event_Campo_AnioFocusLost
 

@@ -5,6 +5,10 @@
  */
 package inventario;
 
+import BaseDatos.ConexionCrearAlmacen;
+import BaseDatos.ConexionEmpresas;
+import java.sql.Date;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,12 +17,17 @@ import javax.swing.JOptionPane;
  */
 public class Crear_Almacenes extends javax.swing.JDialog {
 
-    /**
-     * Creates new form Crear_Almacenes
-     */
+LocalDate fecha=LocalDate.now();
+Date fecha_creacion=Date.valueOf(fecha);
+int seccion_actual;
     public Crear_Almacenes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        radio_despacho.setSelected(true);
+        ConexionEmpresas seccion=new ConexionEmpresas();
+        seccion.consulta();
+        seccion_actual=seccion.codigo_empresa();
+        
     }
 
     /**
@@ -30,15 +39,48 @@ public class Crear_Almacenes extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        grupoTipo = new javax.swing.ButtonGroup();
         Etiq_encabezado = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        Separador1 = new javax.swing.JSeparator();
+        etiqueta_codigo = new javax.swing.JLabel();
+        etiqueta_denominacion = new javax.swing.JLabel();
+        etiqueta_ubicacion = new javax.swing.JLabel();
+        etiqueta_tipo = new javax.swing.JLabel();
+        etiqueta_alias = new javax.swing.JLabel();
+        panel_boton = new javax.swing.JPanel();
+        Boton_Guardar = new javax.swing.JButton();
         Boton_Salir = new javax.swing.JButton();
+        campo_codigo = new javax.swing.JTextField();
+        campo_denominacion = new javax.swing.JTextField();
+        campo_ubicacion = new javax.swing.JTextField();
+        radio_recibe = new javax.swing.JRadioButton();
+        radio_despacho = new javax.swing.JRadioButton();
+        campo_alias = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        Etiq_encabezado.setText("<html><body><br><center>Sistema Administrativo de Farmacia <br>HOSPITAL DR. SAMUEL DARIO MALDONADO</body></html>");
+        Etiq_encabezado.setText("<html><body><br><center>Sistema Administrativo de Inventario <br>HOSPITAL DR. SAMUEL DARIO MALDONADO</body></html>");
 
         jLabel1.setText("                 Crear Almacenes");
+
+        etiqueta_codigo.setText("Codigo de Almacen");
+
+        etiqueta_denominacion.setText("Denominaciòn de Almacen");
+
+        etiqueta_ubicacion.setText("Ubiaciòn de Almacen");
+
+        etiqueta_tipo.setText("Tipo de Almacen");
+
+        etiqueta_alias.setText("Alias de Almacen");
+
+        Boton_Guardar.setText("Guardar");
+        Boton_Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Boton_GuardarActionPerformed(evt);
+            }
+        });
+        panel_boton.add(Boton_Guardar);
 
         Boton_Salir.setText("Salir");
         Boton_Salir.addActionListener(new java.awt.event.ActionListener() {
@@ -46,21 +88,70 @@ public class Crear_Almacenes extends javax.swing.JDialog {
                 Boton_SalirActionPerformed(evt);
             }
         });
+        panel_boton.add(Boton_Salir);
+
+        campo_codigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campo_codigoKeyTyped(evt);
+            }
+        });
+
+        campo_denominacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campo_denominacionKeyTyped(evt);
+            }
+        });
+
+        campo_ubicacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campo_ubicacionKeyTyped(evt);
+            }
+        });
+
+        grupoTipo.add(radio_recibe);
+        radio_recibe.setText("Recibe");
+
+        grupoTipo.add(radio_despacho);
+        radio_despacho.setText("Despacho");
+
+        campo_alias.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campo_aliasKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Etiq_encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Boton_Salir)
-                .addGap(71, 71, 71))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panel_boton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Separador1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(Etiq_encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(etiqueta_codigo)
+                            .addComponent(etiqueta_denominacion)
+                            .addComponent(etiqueta_ubicacion)
+                            .addComponent(etiqueta_tipo)
+                            .addComponent(etiqueta_alias))
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(radio_despacho)
+                                .addGap(18, 18, 18)
+                                .addComponent(radio_recibe)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(campo_alias, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(campo_codigo)
+                            .addComponent(campo_denominacion)
+                            .addComponent(campo_ubicacion))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -69,9 +160,32 @@ public class Crear_Almacenes extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Etiq_encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 196, Short.MAX_VALUE)
-                .addComponent(Boton_Salir)
-                .addGap(28, 28, 28))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Separador1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(etiqueta_codigo)
+                    .addComponent(campo_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(etiqueta_denominacion)
+                    .addComponent(campo_denominacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(etiqueta_ubicacion)
+                    .addComponent(campo_ubicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(etiqueta_tipo)
+                    .addComponent(radio_recibe)
+                    .addComponent(radio_despacho))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(etiqueta_alias)
+                    .addComponent(campo_alias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addComponent(panel_boton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 4, Short.MAX_VALUE))
         );
 
         pack();
@@ -86,6 +200,91 @@ public class Crear_Almacenes extends javax.swing.JDialog {
              this.dispose();
          }//if
     }//GEN-LAST:event_Boton_SalirActionPerformed
+
+    private void Boton_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_GuardarActionPerformed
+        // TODO add your handling code here:
+        String temp_codigo=campo_codigo.getText().trim();
+        String temp_denominacion=campo_denominacion.getText().trim();
+        String temp_ubicacion=campo_ubicacion.getText().trim();
+        
+        int temp_tipo=0;
+        if(radio_recibe.isSelected()){
+            temp_tipo=0;//1 para despacho
+        }
+        if(radio_despacho.isSelected()){
+            temp_tipo=1;
+        }
+        String temp_alias=campo_alias.getText().trim();
+        
+        if(temp_codigo.isEmpty() || temp_denominacion.isEmpty() || temp_ubicacion.isEmpty() || temp_alias.isEmpty())
+            {
+             JOptionPane.showMessageDialog(null, "Debe completar todos los campos", "Revisar", JOptionPane.ERROR_MESSAGE);
+ 
+            }else
+            {
+                ConexionCrearAlmacen crear=new ConexionCrearAlmacen();
+                crear.setCodigoAlmacen(temp_codigo);
+                crear.setDenominacionAlmacen(temp_denominacion);
+                crear.setUbicacionAlmacen(temp_ubicacion);
+                crear.setAliasAlmacen(temp_alias);
+                crear.setTFechaCreacionAlmacen(fecha_creacion);
+                crear.setTipoAlmacen(temp_tipo);
+                crear.setSeccionAlmacen(seccion_actual);
+                crear.crear();
+                if(crear.getRespuesta()>0){
+                    JOptionPane.showMessageDialog(null, "almacen creado Exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                     campo_codigo.setText("");
+                     campo_denominacion.setText("");
+                     campo_denominacion.setText("");
+                     campo_ubicacion.setText("");
+                     campo_alias.setText("");
+                }else
+                    {
+                        JOptionPane.showMessageDialog(null, "Ocurrio un error al crear el almacen", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+            }
+            
+        
+    }//GEN-LAST:event_Boton_GuardarActionPerformed
+
+    private void campo_codigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campo_codigoKeyTyped
+      char caracter=evt.getKeyChar();
+         if(campo_codigo.getText().length()>= 19)
+            {
+               JOptionPane.showMessageDialog(null, "Este campo admite un maximo de 20 caracteres", "Revisar", JOptionPane.ERROR_MESSAGE);
+              evt.consume();
+            }//if
+    }//GEN-LAST:event_campo_codigoKeyTyped
+
+    private void campo_denominacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campo_denominacionKeyTyped
+        // TODO add your handling code here:
+        char caracter=evt.getKeyChar();
+        if(campo_denominacion.getText().length()>=69)
+            {
+               JOptionPane.showMessageDialog(null, "Este campo admite un maximo de 70 caracteres", "Revisar", JOptionPane.ERROR_MESSAGE);
+              evt.consume();
+            }//if
+    }//GEN-LAST:event_campo_denominacionKeyTyped
+
+    private void campo_ubicacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campo_ubicacionKeyTyped
+        // TODO add your handling code here:
+        char caracter=evt.getKeyChar();
+        if(campo_ubicacion.getText().length()>=99)
+            {
+               JOptionPane.showMessageDialog(null, "Este campo admite un maximo de 100 caracteres", "Revisar", JOptionPane.ERROR_MESSAGE);
+              evt.consume();
+            }//if
+    }//GEN-LAST:event_campo_ubicacionKeyTyped
+
+    private void campo_aliasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campo_aliasKeyTyped
+        // TODO add your handling code here:
+        char caracter=evt.getKeyChar();
+        if(campo_alias.getText().length()>=9)
+            {
+               JOptionPane.showMessageDialog(null, "Este campo admite un maximo de 10 caracteres", "Revisar", JOptionPane.ERROR_MESSAGE);
+              evt.consume();
+            }//if
+    }//GEN-LAST:event_campo_aliasKeyTyped
 
     /**
      * @param args the command line arguments
@@ -130,8 +329,23 @@ public class Crear_Almacenes extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Boton_Guardar;
     private javax.swing.JButton Boton_Salir;
     private javax.swing.JLabel Etiq_encabezado;
+    private javax.swing.JSeparator Separador1;
+    private javax.swing.JTextField campo_alias;
+    private javax.swing.JTextField campo_codigo;
+    private javax.swing.JTextField campo_denominacion;
+    private javax.swing.JTextField campo_ubicacion;
+    private javax.swing.JLabel etiqueta_alias;
+    private javax.swing.JLabel etiqueta_codigo;
+    private javax.swing.JLabel etiqueta_denominacion;
+    private javax.swing.JLabel etiqueta_tipo;
+    private javax.swing.JLabel etiqueta_ubicacion;
+    private javax.swing.ButtonGroup grupoTipo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel panel_boton;
+    private javax.swing.JRadioButton radio_despacho;
+    private javax.swing.JRadioButton radio_recibe;
     // End of variables declaration//GEN-END:variables
 }
