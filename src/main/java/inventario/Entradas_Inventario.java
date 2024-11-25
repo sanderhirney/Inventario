@@ -72,6 +72,8 @@ List<Double> precio_articulo_rec=new ArrayList<>();
 List<Double> cantidad_articulo_rec=new ArrayList<>();
 List<String> nombre_articulos_rec=new ArrayList<>();
 String cod_proveedor_rec;
+String observaciones_rec;
+String codigo_almacen_rec;
 List<Double> costo_doc_rec=new ArrayList<>();//variable para recibir los costos        
 int codigo_concepto_rec;
 java.sql.Date fecha_doc_rec;
@@ -922,6 +924,14 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
      public void setConsecutivo(int recibido){
          consecutivo=recibido;
      }
+     public void setObservacionesRec(String recibido)
+     {
+         observaciones_rec=recibido;
+     }
+     public void setAlmacenRec(String recibido)
+     {
+         codigo_almacen_rec=recibido;
+     }
     
     public void llenar_formulario()
     {
@@ -930,6 +940,7 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
             String mascara_total="#.";//para la mascara
             String formato_campo="";//para escribir el numero en base a la mascara
             String formato_total="";
+            campo_observaciones.setText(observaciones_rec);
             for(int i=0; i<decimalPrecioUnitario; i++)
             {
                 mascara_campo=mascara_campo+("0");
@@ -972,6 +983,13 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
             if(codigo.get(b).equals(codigo_concepto_rec))
             {
                 Combo_Concepto.setSelectedIndex(b);
+            }
+        }//for
+        for(int c=0; c<codigo_almacenes.size(); c++)
+        {
+            if(codigo_almacenes.get(c).equals(codigo_almacen_rec))
+            {
+                Combo_Almacen.setSelectedIndex(c);
             }
         }//for
         

@@ -316,6 +316,9 @@ JFrame ventanaPrincipal;
                     temp.setCostosArticulos(buscar.getCostosDoc());
                     temp.setArticulosIndividual(buscar.getCantidadesDoc());
                     temp.setValorPedidoIndividual(buscar.getValorPedidoDoc());
+                    temp.setObservaciones(salida.getObservaciones());
+                    temp.setAlmacenDespacho(salida.getAlmacenDespacho());
+                    temp.setAlmacenDestino(salida.getAlmacenDestino());
                     temp.temp_doc();
                     temp.temp_articulo();
                     if(temp.resultado()==0)

@@ -34,7 +34,7 @@ public class ConexionCrearAlmacen {
         consulta.setString(2, denominacion_almacen);
         consulta.setString(3, ubicacion_almacen);
         consulta.setInt(4, seccion);
-        consulta.setInt(5, tipo);
+        consulta.setInt(5, tipo);//1 para despacho y 0 para destino
         consulta.setString(6, alias_almacen);
         consulta.setDate(7, fecha_creacion);
         ejecutar=consulta.executeUpdate();

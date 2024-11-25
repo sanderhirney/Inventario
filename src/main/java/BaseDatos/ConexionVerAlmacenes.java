@@ -16,6 +16,10 @@ public class ConexionVerAlmacenes {
     
     List<String> nombres_almacenes=new ArrayList<>();
     List<String> codigos_almacenes=new ArrayList<>();
+     List<String> nombres_almacenes_despacho=new ArrayList<>();
+    List<String> codigos_almacenes_despacho=new ArrayList<>(); 
+    List<String> nombres_almacenes_destino=new ArrayList<>();
+    List<String> codigos_almacenes_destino=new ArrayList<>();
     public void consulta()
     {
           try
@@ -35,7 +39,51 @@ public class ConexionVerAlmacenes {
     }//consulta
            catch(SQLException ex)
     {
-        JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de las secciones.\n Ventana Ver Secciones \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de los Almacene.\n Ventana Ver Alamcenes\n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+    }
+    }//consulta
+    public void consultaDespacho()//1 para despacho y 0 para dstino
+    {
+          try
+    {
+        conectar.Conectar();
+        conex= conectar.getConexion();
+        consulta= conex.prepareStatement("select codigo_almacen, denominacion from almacenes where tipo=01");
+        ejecutar=consulta.executeQuery();
+        while( ejecutar.next() )
+        {
+                     nombres_almacenes_despacho.add(ejecutar.getString("denominacion"));
+                     codigos_almacenes_despacho.add(ejecutar.getString("codigo_almacen"));
+                  
+                     
+        }//if
+          conectar.Cerrar();
+    }//consulta
+           catch(SQLException ex)
+    {
+        JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de los almacenes de Despacho.\n Ventana Ver Almacenes \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+    }
+    }//consulta
+    public void consultaDestino()//1 para despacho y 0 para dstino
+    {
+          try
+    {
+        conectar.Conectar();
+        conex= conectar.getConexion();
+        consulta= conex.prepareStatement("select codigo_almacen, denominacion from almacenes where tipo=0");
+        ejecutar=consulta.executeQuery();
+        while( ejecutar.next() )
+        {
+                     nombres_almacenes_destino.add(ejecutar.getString("denominacion"));
+                     codigos_almacenes_destino.add(ejecutar.getString("codigo_almacen"));
+                  
+                     
+        }//if
+          conectar.Cerrar();
+    }//consulta
+           catch(SQLException ex)
+    {
+        JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de los almacenes de destino.\n Ventana Ver Almacenes \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
     }
     }//consulta
     
@@ -48,4 +96,23 @@ public class ConexionVerAlmacenes {
     {
         return nombres_almacenes;
     }
+      public List<String> getCodigoAlmacenesDespacho()
+    {
+        return codigos_almacenes_despacho;
+    }
+    
+    public List<String> getDenominacionAlmacenesDespacho()
+    {
+        return nombres_almacenes_despacho;
+    }
+      public List<String> getCodigoAlmacenesDestino()
+    {
+        return codigos_almacenes_destino;
+    }
+    
+    public List<String> getDenominacionAlmacenesDestino()
+    {
+        return nombres_almacenes_destino;
+    }
+    
 }//clase

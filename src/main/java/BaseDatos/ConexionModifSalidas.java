@@ -32,7 +32,9 @@ public class ConexionModifSalidas {
     int cod_concepto;
     int cod_servicio;
     Date fecha_documento;
-    
+    String observacion;
+    String almacen_despacho;
+    String almacen_destino;
     //
     int estado_existencia;//variable que verifica que no queden existencias negativas luego de reversar //0 no queda en negativo 1 si queda en negativo
     public void costo_unitario()
@@ -105,7 +107,7 @@ public class ConexionModifSalidas {
                 int mes_documento=fecha_temporal.getMonthValue();
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select concepto_salidas, servicio from doc_salidas where consecutivo=? and secciones=? and extract(month from fecha_documento)=?");
+        consulta= conex.prepareStatement("select concepto_salidas, servicio, observaciones, codigo_almacen_despacho, codigo_almacen_destino from doc_salidas where consecutivo=? and secciones=? and extract(month from fecha_documento)=?");
         consulta.setInt(1, numero_documento);
         consulta.setInt(2, seccion);
         consulta.setInt(3, mes_documento);
@@ -117,7 +119,9 @@ public class ConexionModifSalidas {
                      
                      cod_concepto=ejecutar.getInt("concepto_salidas");
                      cod_servicio=ejecutar.getInt("servicio");
-                     
+                     observacion=ejecutar.getString("observaciones");
+                     almacen_despacho=ejecutar.getString("codigo_almacen_despacho");
+                     almacen_destino=ejecutar.getString("codigo_almacen_destino");
 
                      resultado=1;
                      
@@ -313,7 +317,19 @@ public class ConexionModifSalidas {
     {
         return cod_concepto;
     }
-   
+    public String getObservaciones()
+    {
+        return observacion;
+    }
+    public String getAlmacenDespacho()
+    {
+        return almacen_despacho;
+    }
+    public String getAlmacenDestino()
+    {
+        return almacen_destino;
+    }
+
     
     
 

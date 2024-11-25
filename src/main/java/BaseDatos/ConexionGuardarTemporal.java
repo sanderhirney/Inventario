@@ -52,7 +52,9 @@ public class ConexionGuardarTemporal {
     int total;
     int respuesta;
     String observaciones;
-    String codigo_almacen;
+    String codigo_almacen;//para la entrada
+    String almacen_despacho;//para la salida
+    String almacen_destino;//para la salida
     public void temp_doc()
     {
         
@@ -102,7 +104,7 @@ public class ConexionGuardarTemporal {
               try{
                 conectar.Conectar();
                 conex= conectar.getConexion();
-                consulta= conex.prepareStatement("insert into temporal_doc_salida values (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                consulta= conex.prepareStatement("insert into temporal_doc_salida values (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                 consulta.setInt(1, documento_salida);
                 consulta.setDate(2, fecha_doc_despacho);
                 consulta.setDate(3, fecha_doc_pedido);
@@ -112,7 +114,9 @@ public class ConexionGuardarTemporal {
                 consulta.setDouble(7, suma_articulos);
                 consulta.setDouble(8, total_oper);
                 consulta.setInt(9, consecutivo);
-                
+                consulta.setString(10, observaciones);
+                consulta.setString(11, almacen_despacho);
+                consulta.setString(12, almacen_destino);
                 respuesta=consulta.executeUpdate();
                 conectar.Cerrar();
                }
@@ -282,4 +286,13 @@ public class ConexionGuardarTemporal {
     {
        codigo_almacen=recibido;
     }
+    public void setAlmacenDespacho(String recibido)
+    {
+       almacen_despacho=recibido;
+    }
+    public void setAlmacenDestino(String recibido)
+    {
+       almacen_destino=recibido;
+    }
+    
 }//clase

@@ -26,7 +26,10 @@ public class ConexionCrearSalida {
    ResultSet ResultadoConsulta;
     int concepto_salida;
     int valor_entrada=0;//en este caso es 0 porque es salida
-   
+    String observacion;
+    String almacen_despacho;
+    String almacen_destino;
+            
     int servicio;
     Double total_operacion;//variable que recoge el total de valor monetario por concepto
     int consecutivo=0;//para guardar el consecutivo del documento
@@ -77,7 +80,7 @@ public class ConexionCrearSalida {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("insert into doc_salidas values (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        consulta= conex.prepareStatement("insert into doc_salidas values (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         
         consulta.setDate(1, fecha_documento_despacho);
         consulta.setInt(2, servicio);
@@ -88,6 +91,9 @@ public class ConexionCrearSalida {
         consulta.setDouble(7, total_operacion);
         consulta.setInt(8, 1);
         consulta.setDate(9, fecha_documento_pedido);
+        consulta.setString(10, observacion);
+        consulta.setString(11, almacen_despacho);
+        consulta.setString(12, almacen_destino);
         
         ejecutar=consulta.executeUpdate();
         if( ejecutar> 0 )
@@ -298,5 +304,17 @@ public class ConexionCrearSalida {
     public void setNumeroDocumento(int recibido)
     {
         numero_documento=recibido;
+    }
+    public void setObservacion(String recibido)
+    {
+        observacion=recibido;
+    }
+    public void setAlmacenDespacho(String recibido)
+    {
+        almacen_despacho=recibido;
+    }
+    public void setAlmacenDestino(String recibido)
+    {
+        almacen_destino=recibido;
     }
 }//clase

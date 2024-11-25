@@ -317,6 +317,8 @@ JFrame ventanaPrincipal;
                     ventana.setCostosDoc(buscar.getCostosDoc());
                     ventana.setCodConceptoRec(entrada.getConceptoEntrada());
                     ventana.setFechaDocRec(entrada.getFechaDoc());
+                    ventana.setAlmacenRec(entrada.getCodigoAlmacen());
+                    ventana.setObservacionesRec(entrada.getObservaciones());
                     //una vez que llego aqu procedo a borrar en bd para mostrar
                     ventana.setDocumentoRec(documento_seleccionado);
                     entrada.borrarDocumento();
