@@ -4,24 +4,20 @@ package inventario;
 import BaseDatos.ConexionActualizarTempEntrada;
 import BaseDatos.ConexionConsultarDecimales;
 import BaseDatos.ConexionCrearEntrada;
-import BaseDatos.ConexionDeshacerDocEntradas;
 import BaseDatos.ConexionEmpresas;
 import BaseDatos.ConexionOperacionesEntrada;
+import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerConceptos;
 import BaseDatos.ConexionVerProveedores;
 import BaseDatos.ConexionVerificarDocumentoEntrada;
 import Reportes.ReporteEntrada;
-
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,74 +27,63 @@ List<String> descripcion=new ArrayList<>();
 List<Integer> codigo=new ArrayList<>();  
 List<String> nombre_proveedor=new ArrayList<>();
 List<String> rif_proveedor=new ArrayList<>();
-
- int consecutivoDocumento=0;
- String convertir;
- String nombre_recibido;
- String codigo_recibido;
- Date fecha= new Date();
- 
- java.sql.Date sql = new java.sql.Date(fecha.getTime());
- java.sql.Date fecha_doc;
- long fechalong;
- 
- 
- List<Double> CostosActuales=new ArrayList<>();
- 
- List<Double> existencia_promedio=new ArrayList<>();
+List<String> codigo_almacenes=new ArrayList<>();
+List<String> nombre_almacenes=new ArrayList<>();
+int consecutivoDocumento=0;
+String convertir;
+String nombre_recibido;
+String codigo_recibido;
+Date fecha= new Date();
+java.sql.Date sql = new java.sql.Date(fecha.getTime());
+java.sql.Date fecha_doc;
+long fechalong;
+List<Double> CostosActuales=new ArrayList<>();
+List<Double> existencia_promedio=new ArrayList<>();
  //tabla
 DefaultTableModel modelo;
-
- 
- ConexionVerConceptos conceptos= new ConexionVerConceptos();
- ConexionVerProveedores proveedor= new ConexionVerProveedores();
- ConexionEmpresas secciones=new ConexionEmpresas();
- 
- ConexionConsultarDecimales decimales=new ConexionConsultarDecimales();
- 
-
- Iterator lista1;
- Iterator lista2;
- Iterator lista3;
- 
- //variables que seran usadas para enviar datos
- String id_documento;
- 
- String nombre_seccion;
- int codigo_seccion;
- int numero_art;
- 
- //Variable de tipo de documento
- //1=Entrada
- //0= Salida
- int tipo=1;
- //sql sera la variable que de la fecha de la operacion
- 
- //variables para la cantidad de decimales
- int decimalPrecioUnitario=0;
- int decimalCalculoTotal=0;
- int estado_decimal=0;
- int cantidad_numero_campo=0; //variable que suma la cantidad de enteros+el punto+cantidad de decimales programadas
- //variables para recibir datos cuando se va a llenar el formulario
- int consecutivo=0;
- List<Integer> codigo_articulo_rec=new ArrayList<>();
- List<Double> precio_articulo_rec=new ArrayList<>();
- List<Double> cantidad_articulo_rec=new ArrayList<>();
- List<String> nombre_articulos_rec=new ArrayList<>();
- String cod_proveedor_rec;
- List<Double> costo_doc_rec=new ArrayList<>();//variable para recibir los costos        
- int codigo_concepto_rec;
- java.sql.Date fecha_doc_rec;
- String documento_rec;
- public Dimension resolucion;//variable para leer el ancho y alto de la ventana
- //para darle formato al campo al momento de realizar la multiplicacion de cantidad*costo unitaroio
+ConexionVerConceptos conceptos= new ConexionVerConceptos();
+ConexionVerProveedores proveedor= new ConexionVerProveedores();
+ConexionEmpresas secciones=new ConexionEmpresas();
+ConexionConsultarDecimales decimales=new ConexionConsultarDecimales();
+ConexionVerAlmacenes almacenes=new ConexionVerAlmacenes();
+Iterator lista1;
+Iterator lista2;
+Iterator lista3;
+Iterator lista4;
+Iterator lista5;
+//variables que seran usadas para enviar datos
+String id_documento;
+String nombre_seccion;
+int codigo_seccion;
+int numero_art;
+//Variable de tipo de documento
+//1=Entrada
+//0= Salida
+int tipo=1;
+//variables para la cantidad de decimales
+int decimalPrecioUnitario=0;
+int decimalCalculoTotal=0;
+int estado_decimal=0;
+int cantidad_numero_campo=0; //variable que suma la cantidad de enteros+el punto+cantidad de decimales programadas
+//variables para recibir datos cuando se va a llenar el formulario
+int consecutivo=0;
+List<Integer> codigo_articulo_rec=new ArrayList<>();
+List<Double> precio_articulo_rec=new ArrayList<>();
+List<Double> cantidad_articulo_rec=new ArrayList<>();
+List<String> nombre_articulos_rec=new ArrayList<>();
+String cod_proveedor_rec;
+List<Double> costo_doc_rec=new ArrayList<>();//variable para recibir los costos        
+int codigo_concepto_rec;
+java.sql.Date fecha_doc_rec;
+String documento_rec;
+public Dimension resolucion;//variable para leer el ancho y alto de la ventana
+//para darle formato al campo al momento de realizar la multiplicacion de cantidad*costo unitaroio
  
  public Entradas_Inventario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-       resolucion=super.getToolkit().getScreenSize();
+        resolucion=super.getToolkit().getScreenSize();
         this.setSize(resolucion);
-        
         modelo= (DefaultTableModel)Tabla_datos.getModel();//para poder manipular la tabla
         Etiq_Fecha_Oper.setText(sql.toString());
         conceptos.setTipo(1);
@@ -108,9 +93,13 @@ DefaultTableModel modelo;
         codigo=conceptos.codigo();
         nombre_proveedor=proveedor.nombres();
         rif_proveedor=proveedor.rif_proveedor();
-        
         lista1=descripcion.iterator();
         lista3=codigo.iterator();
+        almacenes.consulta();
+        codigo_almacenes=almacenes.getCodigoAlmacenes();
+        nombre_almacenes=almacenes.getDenominacionAlmacenes();
+        lista4=codigo_almacenes.iterator();
+        lista5=nombre_almacenes.iterator();
         while(lista1.hasNext())
         {
         Combo_Concepto.addItem(lista3.next()+"-"+lista1.next());
@@ -120,6 +109,9 @@ DefaultTableModel modelo;
         {
         Combo_Proveedor.addItem(lista2.next());
         }//while
+        while(lista4.hasNext()){
+            Combo_Almacen.addItem(lista4.next() + "-" + lista5.next());
+        }
         secciones.consulta();
         codigo_seccion=secciones.codigo_empresa();
         nombre_seccion=secciones.nombre_empresa();
@@ -173,6 +165,11 @@ DefaultTableModel modelo;
         Panel2 = new javax.swing.JPanel();
         Boton_Guardar = new javax.swing.JButton();
         Boton_Limpiar = new javax.swing.JButton();
+        Etiq_Almacen = new javax.swing.JLabel();
+        Combo_Almacen = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        campo_observaciones = new javax.swing.JTextArea();
+        Etiq_Observaciones = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -208,6 +205,11 @@ DefaultTableModel modelo;
 
         Etiq_Codigo.setText("Codigo Articulo:");
 
+        Campo_Cantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Campo_CantidadActionPerformed(evt);
+            }
+        });
         Campo_Cantidad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 Campo_CantidadKeyTyped(evt);
@@ -318,70 +320,89 @@ DefaultTableModel modelo;
         });
         Panel2.add(Boton_Limpiar);
 
+        Etiq_Almacen.setText("Almacen Despachador:");
+
+        campo_observaciones.setColumns(20);
+        campo_observaciones.setRows(5);
+        campo_observaciones.setText("N/A");
+        jScrollPane1.setViewportView(campo_observaciones);
+
+        Etiq_Observaciones.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Etiq_Observaciones.setText("Observaciones");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 897, Short.MAX_VALUE)
+                    .addComponent(Separador2)
+                    .addComponent(Separador1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(59, 59, 59)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Etiq_Codigo)
+                                .addGap(23, 23, 23)
+                                .addComponent(Boton_Buscar)
+                                .addGap(429, 429, 429))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Etiq_Cantidad)
+                                    .addComponent(Etiq_Conceptos))
+                                .addGap(37, 37, 37)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Combo_Concepto, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(Campo_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(12, 12, 12)
+                                        .addComponent(Etiq_Precio)
+                                        .addGap(30, 30, 30)
+                                        .addComponent(Campo_Precio))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(Etiq_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(Etiq_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Etiq_Codigo)
-                                    .addComponent(Etiq_Cantidad)
-                                    .addComponent(Etiq_Conceptos))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Boton_Buscar)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(Combo_Concepto, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(Campo_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(5, 5, 5)
-                                            .addComponent(Etiq_Precio)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(Campo_Precio, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addGap(0, 118, Short.MAX_VALUE))
+                                .addComponent(Etiq_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Panel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator2)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addComponent(Etiq_encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Etiq_Ventana)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Panel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(52, 52, 52)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(Etiq_Num_Doc)
-                                            .addComponent(Etiq_proveedor))
-                                        .addComponent(Etiq_Fecha_Fac))
-                                    .addComponent(Etiq_Fecha_Op))
-                                .addGap(28, 28, 28)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(Fecha_documento, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                                    .addComponent(Etiq_Fecha_Oper, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(Campo_factura)
-                                    .addComponent(Combo_Proveedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(Etiq_Num_Doc)
+                                    .addComponent(Etiq_proveedor)
+                                    .addComponent(Etiq_Almacen))
+                                .addComponent(Etiq_Fecha_Fac))
+                            .addComponent(Etiq_Fecha_Op))
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Fecha_documento, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addComponent(Etiq_Fecha_Oper, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Campo_factura)
+                            .addComponent(Combo_Proveedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Combo_Almacen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(Etiq_fecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Etiq_Fecha2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Etiq_encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Etiq_Ventana))
-                            .addComponent(Separador1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Separador2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2)
-                            .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
+                            .addComponent(Etiq_Observaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -399,7 +420,14 @@ DefaultTableModel modelo;
                         .addComponent(Etiq_Fecha_Oper, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(Etiq_fecha1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Etiq_Fecha2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Etiq_Observaciones)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Etiq_Fecha_Fac)
@@ -411,29 +439,32 @@ DefaultTableModel modelo;
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Etiq_proveedor)
-                            .addComponent(Combo_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(Etiq_Fecha2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                            .addComponent(Combo_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(4, 4, 4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Etiq_Almacen)
+                            .addComponent(Combo_Almacen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(9, 9, 9)))
                 .addComponent(Separador2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Etiq_Codigo)
-                    .addComponent(Boton_Buscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Etiq_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Etiq_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                    .addComponent(Boton_Buscar)
+                    .addComponent(Etiq_Codigo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Etiq_Cantidad)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Campo_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Campo_Precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Etiq_Precio)))
-                .addGap(18, 18, 18)
+                    .addComponent(Etiq_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Etiq_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Campo_Precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Etiq_Precio)
+                    .addComponent(Campo_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Etiq_Cantidad))
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Combo_Concepto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Etiq_Conceptos))
-                .addGap(37, 37, 37)
+                .addGap(18, 18, 18)
                 .addComponent(Panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -441,37 +472,36 @@ DefaultTableModel modelo;
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void Boton_RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_RegistrarActionPerformed
-  ConexionOperacionesEntrada operaciones=new ConexionOperacionesEntrada();
-  ConexionCrearEntrada entrada= new ConexionCrearEntrada();  
-  List<Integer> codigo_art = new ArrayList<>();
-     List<String> nombre_art= new ArrayList<>();
+    ConexionOperacionesEntrada operaciones=new ConexionOperacionesEntrada();
+    ConexionCrearEntrada entrada= new ConexionCrearEntrada();  
+    List<Integer> codigo_art = new ArrayList<>();
+    List<String> nombre_art= new ArrayList<>();
     List<Double> cantidad_art=new ArrayList<>();
     List<Double> valor_pedido=new ArrayList<>();
-
     List<Double> precio_art=new ArrayList<>();
     List<Double> total_linea=new ArrayList<>(); 
     int cod_concepto_entrada;
+    String codigo_almacen;
+    String observacion;
     String documento;
     String codigo_proveedor;
     Date fecha_documento;
     Double total_operacion=0.0;//variable usada para guardar el total del valor movido por concepto
     //////***para hacer los calculos****//
- 
- List<Double> costo_total= new ArrayList<>();
- List<Double> existencia_total=new ArrayList<>();
- List<Double> costo_promedio=new ArrayList<>();
- int cantidad_articulos=0;
- 
- //actualizar costos y existencias
- List<Double> ExistenciasNuevas=new ArrayList<>();
- List<Double> CostosNuevos=new ArrayList<>();
+    List<Double> costo_total= new ArrayList<>();
+    List<Double> existencia_total=new ArrayList<>();
+    List<Double> costo_promedio=new ArrayList<>();
+    int cantidad_articulos=0;  
+    //actualizar costos y existencias
+    List<Double> ExistenciasNuevas=new ArrayList<>();
+    List<Double> CostosNuevos=new ArrayList<>();   
     try
    {
         
@@ -481,11 +511,10 @@ DefaultTableModel modelo;
         //la variable a enviar para la fecha de operacion es la que se llama sql
         documento=Campo_factura.getText().trim();
         int filas= modelo.getRowCount();
-        
-      
         cod_concepto_entrada=codigo.get(Combo_Concepto.getSelectedIndex());
         codigo_proveedor=(rif_proveedor.get(Combo_Proveedor.getSelectedIndex()));
-        
+        codigo_almacen=codigo_almacenes.get(Combo_Almacen.getSelectedIndex());
+        observacion=campo_observaciones.getText().trim();
         for(int i=0; i<filas; i++)
         {
             codigo_art.add(Integer.valueOf ((modelo.getValueAt(i, 0)).toString() ));
@@ -522,6 +551,8 @@ DefaultTableModel modelo;
         entrada.setPrecioArticulo(precio_art);
         entrada.setTotalOperacion(total_operacion);
         entrada.setConsecutivo(consecutivo);
+        entrada.setCodigoAlmacen(codigo_almacen);
+        entrada.setObservaciones(observacion);
         entrada.documento();
         
         
@@ -851,6 +882,10 @@ DefaultTableModel modelo;
     private void Campo_facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Campo_facturaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Campo_facturaActionPerformed
+
+    private void Campo_CantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Campo_CantidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Campo_CantidadActionPerformed
     
      public void setCodigoArticuloRec(List<Integer> recibido)
      {
@@ -998,8 +1033,10 @@ DefaultTableModel modelo;
     private javax.swing.JTextField Campo_Cantidad;
     private javax.swing.JTextField Campo_Precio;
     private javax.swing.JTextField Campo_factura;
+    private javax.swing.JComboBox<String> Combo_Almacen;
     private javax.swing.JComboBox Combo_Concepto;
     private javax.swing.JComboBox Combo_Proveedor;
+    private javax.swing.JLabel Etiq_Almacen;
     private javax.swing.JLabel Etiq_Cantidad;
     private javax.swing.JLabel Etiq_Codigo;
     private javax.swing.JLabel Etiq_Conceptos;
@@ -1008,6 +1045,7 @@ DefaultTableModel modelo;
     private javax.swing.JLabel Etiq_Fecha_Op;
     private javax.swing.JLabel Etiq_Fecha_Oper;
     private javax.swing.JLabel Etiq_Num_Doc;
+    private javax.swing.JLabel Etiq_Observaciones;
     private javax.swing.JLabel Etiq_Precio;
     private javax.swing.JLabel Etiq_Ventana;
     private javax.swing.JLabel Etiq_codigo;
@@ -1020,7 +1058,9 @@ DefaultTableModel modelo;
     private javax.swing.JSeparator Separador1;
     private javax.swing.JSeparator Separador2;
     private javax.swing.JTable Tabla_datos;
+    private javax.swing.JTextArea campo_observaciones;
     private javax.swing.JDialog jDialog1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPanel panel1;

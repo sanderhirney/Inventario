@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 public class ConexionCrearEntrada {
     Connection conex;
     PreparedStatement consulta;
-   
     Conexion conectar= new Conexion();
     ResultSet ResultadoConsulta;
     int ejecutar;
@@ -26,6 +25,8 @@ public class ConexionCrearEntrada {
     java.sql.Date fecha_operacion;
     java.sql.Date fecha_documento;
     String proveedor;
+    String observaciones;
+    String codigo_almacen;
     int seccion;
     int cantidad;
     int concepto_entrada;
@@ -128,7 +129,7 @@ public class ConexionCrearEntrada {
         {
         conectar.Conectar();
         conex=conectar.getConexion();
-        consulta= conex.prepareStatement("insert into doc_entradas values (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        consulta= conex.prepareStatement("insert into doc_entradas values (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         consulta.setDate(1, fecha_documento);
         consulta.setDate(2, fecha_operacion);
         consulta.setString(3, id_documento);
@@ -138,6 +139,9 @@ public class ConexionCrearEntrada {
         consulta.setInt(7, consecutivo);
         consulta.setString(8, proveedor);
         consulta.setDouble(9, total_operacion);
+        consulta.setString(10, observaciones);
+        consulta.setString(11, codigo_almacen);//en la entrada el almancen destino No Aplica por lo tanto coloco el mismo en ambos
+        consulta.setString(12, codigo_almacen);
         ejecutar=consulta.executeUpdate();
         if( ejecutar>0 )
         {
@@ -213,9 +217,9 @@ public class ConexionCrearEntrada {
         cantidad_articulo=recibido;
     }
     public void setPedidoArticulo(List<Double> recibido)
-            {
+   {
                 valor_pedido=recibido;
-            }
+   }
     public void setPrecioArticulo(List<Double> recibido)
     {
         precio_articulo=recibido;
@@ -224,5 +228,13 @@ public class ConexionCrearEntrada {
     public void setTotalOperacion(Double recibido)
     {
         total_operacion=recibido;
+    }
+    public void setCodigoAlmacen(String recibido)
+    {
+        codigo_almacen=recibido;
+    }
+    public void setObservaciones(String recibido)
+    {
+        observaciones=recibido;
     }
 }//clase

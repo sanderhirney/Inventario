@@ -31,6 +31,8 @@ public class ConexionModifEntradas {
     Date fecha_operacion;
     int cod_concepto;
     String cod_proveedor;
+    String codigo_almacen;
+    String observacion;
     //
     int estado_existencia;//variable que verifica que no queden existencias negativas luego de reversar //0 no queda en negativo 1 si queda en negativo
     public void costo_unitario()
@@ -101,7 +103,7 @@ public class ConexionModifEntradas {
             {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select fecha_operacion,fecha_documento, concepto_entrada, cod_proveedor from doc_entradas where numero_doc=? and seccion=?");
+        consulta= conex.prepareStatement("select fecha_operacion,fecha_documento, concepto_entrada, cod_proveedor, codigo_almacen_despacho, observaciones from doc_entradas where numero_doc=? and seccion=?");
         consulta.setString(1, numero_documento);
         consulta.setInt(2, seccion);
         ejecutar=consulta.executeQuery();
@@ -111,7 +113,8 @@ public class ConexionModifEntradas {
                      fecha_documento=ejecutar.getDate("fecha_documento");
                      cod_concepto=ejecutar.getInt("concepto_entrada");
                      cod_proveedor=ejecutar.getString("cod_proveedor");
-
+                     codigo_almacen=ejecutar.getString("codigo_almacen_despacho");
+                     observacion=ejecutar.getString("observaciones");
                      resultado=1;
                      
         }//while
@@ -313,6 +316,19 @@ public class ConexionModifEntradas {
         return cod_proveedor;
         
     }
+    public String getCodigoAlmacen()
+    {
+        
+        return codigo_almacen;
+        
+    }
+    public String getObservaciones()
+    {
+        
+        return observacion;
+        
+    }
+    
     public List<Integer> getArtCodError()
     {
         return articulos_error;

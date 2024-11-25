@@ -301,6 +301,8 @@ JFrame ventanaPrincipal;
                 temp.setConcepto(entrada.getConceptoEntrada());
                 temp.setSumaArticulos(Double.valueOf(modelo.getValueAt(tabla_entradas.getSelectedRow(), 3).toString()));
                 temp.settotaloperacion(Double.valueOf(modelo.getValueAt(tabla_entradas.getSelectedRow(),4 ).toString()));
+                temp.setCodigoAlmacen(entrada.getCodigoAlmacen());
+                temp.setObservaciones(entrada.getObservaciones());
                 temp.setCodArticulos(buscar.getCodigoArticulos());
                 temp.setCostosArticulos(buscar.getCostosDoc());
                 temp.setArticulosIndividual(buscar.getCantidadesDoc());

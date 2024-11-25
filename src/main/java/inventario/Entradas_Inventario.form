@@ -40,84 +40,95 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jScrollPane2" alignment="1" pref="897" max="32767" attributes="0"/>
+                  <Component id="Separador2" alignment="1" max="32767" attributes="0"/>
+                  <Component id="Separador1" alignment="1" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="Etiq_codigo" min="-2" pref="187" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="Etiq_nombre" min="-2" pref="216" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="Etiq_Codigo" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                              <Component id="Boton_Buscar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="429" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="Etiq_Codigo" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="Etiq_Cantidad" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="Etiq_Conceptos" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="Boton_Buscar" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="Combo_Concepto" alignment="0" max="32767" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="Campo_Cantidad" min="-2" pref="79" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                                          <Component id="Etiq_Precio" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="Campo_Precio" min="-2" pref="79" max="-2" attributes="0"/>
-                                      </Group>
+                                  <Component id="Combo_Concepto" alignment="0" min="-2" pref="517" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="Campo_Cantidad" min="-2" pref="145" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                      <Component id="Etiq_Precio" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="Campo_Precio" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
-                      </Group>
-                      <EmptySpace min="0" pref="118" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jSeparator2" alignment="1" max="32767" attributes="0"/>
-                          <Component id="Panel2" alignment="1" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="Etiq_Num_Doc" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="Etiq_proveedor" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="Etiq_Fecha_Fac" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="Etiq_Fecha_Op" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="Fecha_documento" pref="180" max="32767" attributes="0"/>
-                                  <Component id="Etiq_Fecha_Oper" max="32767" attributes="0"/>
-                                  <Component id="Campo_factura" max="32767" attributes="0"/>
-                                  <Component id="Combo_Proveedor" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="Etiq_fecha1" min="-2" pref="92" max="-2" attributes="0"/>
-                                  <Component id="Etiq_Fecha2" min="-2" pref="92" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="Etiq_codigo" min="-2" pref="187" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="Etiq_nombre" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="Etiq_encabezado" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="Etiq_Ventana" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="Separador1" alignment="1" max="32767" attributes="0"/>
-                          <Component id="Separador2" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
-                          <Component id="panel1" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="Panel2" alignment="1" max="32767" attributes="0"/>
+                  <Component id="panel1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="Etiq_encabezado" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="Etiq_Ventana" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="Etiq_Num_Doc" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Etiq_proveedor" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Etiq_Almacen" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="Etiq_Fecha_Fac" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="Etiq_Fecha_Op" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="Fecha_documento" pref="180" max="32767" attributes="0"/>
+                          <Component id="Etiq_Fecha_Oper" max="32767" attributes="0"/>
+                          <Component id="Campo_factura" max="32767" attributes="0"/>
+                          <Component id="Combo_Proveedor" max="32767" attributes="0"/>
+                          <Component id="Combo_Almacen" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="Etiq_fecha1" min="-2" pref="92" max="-2" attributes="0"/>
+                                  <Component id="Etiq_Fecha2" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="Etiq_Observaciones" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -140,7 +151,15 @@
                   <Component id="Etiq_fecha1" alignment="1" min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="Etiq_Fecha2" min="-2" pref="20" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="Etiq_Observaciones" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="Etiq_Fecha_Fac" min="-2" max="-2" attributes="0"/>
@@ -156,35 +175,38 @@
                           <Component id="Etiq_proveedor" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Combo_Proveedor" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="Etiq_Almacen" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="Combo_Almacen" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="Etiq_Fecha2" min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="Separador2" min="-2" pref="17" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="Etiq_Codigo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Boton_Buscar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Etiq_Codigo" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="Etiq_nombre" min="-2" pref="19" max="-2" attributes="0"/>
+                  <Component id="Etiq_codigo" min="-2" pref="19" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="Etiq_codigo" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
-                  <Component id="Etiq_nombre" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                  <Component id="Campo_Precio" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Etiq_Precio" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Campo_Cantidad" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Etiq_Cantidad" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="Etiq_Cantidad" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="Campo_Cantidad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="Campo_Precio" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="Etiq_Precio" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="Combo_Concepto" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Etiq_Conceptos" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="Panel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
@@ -192,7 +214,7 @@
               <Component id="jScrollPane2" min="-2" pref="93" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="panel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="64" max="32767" attributes="0"/>
+              <EmptySpace pref="68" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -261,6 +283,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="Campo_Cantidad">
       <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Campo_CantidadActionPerformed"/>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="Campo_CantidadKeyTyped"/>
       </Events>
     </Component>
@@ -528,5 +551,42 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="Etiq_Almacen">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Almacen Despachador:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="Combo_Almacen">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="campo_observaciones">
+          <Properties>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+            <Property name="text" type="java.lang.String" value="N/A"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="Etiq_Observaciones">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="Observaciones"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>
