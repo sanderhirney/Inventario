@@ -150,7 +150,7 @@
                           <Component id="Boton_Buscar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="Etiq_codigo" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
                           <Component id="Etiq_nombre" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>

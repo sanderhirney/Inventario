@@ -426,7 +426,7 @@ public class Salida_Inventario extends javax.swing.JDialog {
                             .addComponent(Etiq_Articulo)
                             .addComponent(Boton_Buscar))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Etiq_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Etiq_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -482,11 +482,11 @@ public class Salida_Inventario extends javax.swing.JDialog {
     private void Boton_RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_RegistrarActionPerformed
         // TODO add your handling code here:
     //para guardar los articulos
-     int filas=modelo.getRowCount();
-     fechaPedidoGet=Fecha_documento_pedido.getDate();
-     fechaDespachoGet=Fecha_documento_despacho.getDate();//leo los dateChooser
-     fechaPedidoConvert=fechaPedidoGet.getTime();//lo paso a long para convertir java.sql.date
-     fechaDespachoConvert=fechaDespachoGet.getTime();
+    int filas=modelo.getRowCount();
+    fechaPedidoGet=Fecha_documento_pedido.getDate();
+    fechaDespachoGet=Fecha_documento_despacho.getDate();//leo los dateChooser
+    fechaPedidoConvert=fechaPedidoGet.getTime();//lo paso a long para convertir java.sql.date
+    fechaDespachoConvert=fechaDespachoGet.getTime();
     fechaDespacho= new java.sql.Date(fechaDespachoConvert);
     fechaPedido= new java.sql.Date(fechaPedidoConvert);
     String observacion;
@@ -517,7 +517,7 @@ public class Salida_Inventario extends javax.swing.JDialog {
                     cantidad_articulos++;
                     
                 }
-                 for(int i=0; i<filas; i++)
+        for(int i=0; i<filas; i++)
         {
            
         total_operacion = total_operacion + total_articulo.get(i);
@@ -674,10 +674,10 @@ public class Salida_Inventario extends javax.swing.JDialog {
        consulta.precios();
       // consulta.existencias();//existencias
        consulta.existenciasUnidad();
-      obtenido=consulta.obtenerPrecioUnidad();
-      existencia_unidad=consulta.existenciaUnidad();
-      etiqueta_costo.setText(obtenido.toString());//convierto a String para poder mostrar en la eqtiqueta
-      etiqueta_existencia.setText(String.valueOf(existencia_unidad));
+       obtenido=consulta.obtenerPrecioUnidad();
+       existencia_unidad=consulta.existenciaUnidad();
+       etiqueta_costo.setText(obtenido.toString());//convierto a String para poder mostrar en la eqtiqueta
+       etiqueta_existencia.setText(String.valueOf(existencia_unidad));
     }//GEN-LAST:event_Boton_BuscarActionPerformed
 
     private void Campo_DespachoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Campo_DespachoKeyTyped
