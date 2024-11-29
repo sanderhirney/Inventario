@@ -103,7 +103,7 @@ public class ConexionReporteSalidas {
             JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Consulta de Documento.\n Ventana Crear Reporte Salidas Documento \n Contacte al Desarrollador \n "+e ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
         }
     }
-   
+    //como es el reporte de salida busco el concepto de salida
     private  void consultarHistorial(){
         try{
             LocalDate fecha_temporal=fecha.toLocalDate();
@@ -111,9 +111,10 @@ public class ConexionReporteSalidas {
             
             conectar.Conectar();
             conex= conectar.getConexion();
-            consulta= conex.prepareStatement("select cod_articulo, valor_salida, precio from historiales where numero_doc=? and extract(month from fecha)=?");
+            consulta= conex.prepareStatement("select cod_articulo, valor_salida, precio from historiales where numero_doc=? and extract(month from fecha)=? and concepto_salida=?");
             consulta.setString(1, String.valueOf(codigoDocumento));//convertir codigoDocumento a string
             consulta.setInt(2, mes);
+            consulta.setInt(3, codigoConcepto);
             ejecutar=consulta.executeQuery();
             
             while(ejecutar.next()){

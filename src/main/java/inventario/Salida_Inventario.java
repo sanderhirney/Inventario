@@ -725,9 +725,9 @@ public class Salida_Inventario extends javax.swing.JDialog {
     private void Boton_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_GuardarActionPerformed
         // TODO add your handling code here:
         
-        if(Campo_Despacho.getText().trim().isEmpty())
+        if(Campo_Despacho.getText().trim().isEmpty() || Fecha_documento_pedido.getDate()==null || Fecha_documento_despacho.getDate()==null)
         {
-            JOptionPane.showMessageDialog(null, "Recuerde Indicar la cantidad","Revise", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debes completar todos los campos","Revise", JOptionPane.ERROR_MESSAGE);
         }
         else
         {
