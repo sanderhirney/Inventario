@@ -610,6 +610,7 @@ public class Salida_Inventario extends javax.swing.JDialog {
                                     //genero el reporte
                                         
                                         ReporteSalida reporte=new ReporteSalida();
+                                        reporte.setCodigoConcepto(concepto_salida);
                                         reporte.llamarReporte();
                                         
                                        

@@ -16,7 +16,7 @@ public class ConexionReporteSalidas {
     Conexion conectar= new Conexion();
     ResultSet ejecutar;
     int resultado;
-   
+    String nombreServicioDestinatario;
     List<Integer> codigoArticulos= new ArrayList<>();
     List<String> subgrupo=new ArrayList<>();
     List<Integer> grupo=new ArrayList<>();
@@ -24,11 +24,17 @@ public class ConexionReporteSalidas {
     List<String> descripcion_medida=new ArrayList<>();
     List<String> nombre_art=new ArrayList<>();
     List<Double> precioArticulos=new ArrayList<>();
-    List<Double> cantidadArticulos=new ArrayList<>();
+    List<Double> cantidadArticulosDespacho=new ArrayList<>();
+    List<Double> cantidadArticulosPedido=new ArrayList<>();
+    
     int codigoDocumento;
-    Date fecha;
+    Date fechaDespacho;
+    Date fechaPedido;
+    int codigoServicioDestinatario;
+    String codigoAlmacenDespachador;
     int codigoConcepto=0;
     String descripcionConcepto;
+    String nombreAlmacenDespachador;
     int consecutivo=0;
     private void consultaGrupos()
     {
@@ -88,13 +94,17 @@ public class ConexionReporteSalidas {
         try{
             conectar.Conectar();
             conex= conectar.getConexion();
-            consulta= conex.prepareStatement("select fecha_documento, id, concepto_salidas, consecutivo from doc_salidas where id=(select MAX(id) from doc_salidas)");
+            consulta= conex.prepareStatement("select fecha_documento, fecha_pedido, codigo_almacen_despacho, id, concepto_salidas, consecutivo, servicio from doc_salidas where id=(select MAX(id) from doc_salidas)");
             ejecutar=consulta.executeQuery();
             if(ejecutar.next()){
                 codigoDocumento=ejecutar.getInt("consecutivo");
-                fecha=ejecutar.getDate("fecha_documento");
+                fechaDespacho=ejecutar.getDate("fecha_documento");
+                fechaPedido=ejecutar.getDate("fecha_pedido");
                 codigoConcepto=ejecutar.getInt("concepto_salidas");
                 consecutivo=ejecutar.getInt("consecutivo");
+                codigoServicioDestinatario=ejecutar.getInt("servicio");
+                codigoAlmacenDespachador=ejecutar.getString("codigo_almacen_despacho");
+                
             }
             
             conectar.Cerrar();
@@ -106,12 +116,12 @@ public class ConexionReporteSalidas {
     //como es el reporte de salida busco el concepto de salida
     private  void consultarHistorial(){
         try{
-            LocalDate fecha_temporal=fecha.toLocalDate();
+            LocalDate fecha_temporal=fechaDespacho.toLocalDate();
             int mes=fecha_temporal.getMonthValue();
             
             conectar.Conectar();
             conex= conectar.getConexion();
-            consulta= conex.prepareStatement("select cod_articulo, valor_salida, precio from historiales where numero_doc=? and extract(month from fecha)=? and concepto_salida=?");
+            consulta= conex.prepareStatement("select cod_articulo, valor_salida, valor_pedido, precio from historiales where numero_doc=? and extract(month from fecha)=? and concepto_salida=?");
             consulta.setString(1, String.valueOf(codigoDocumento));//convertir codigoDocumento a string
             consulta.setInt(2, mes);
             consulta.setInt(3, codigoConcepto);
@@ -120,7 +130,8 @@ public class ConexionReporteSalidas {
             while(ejecutar.next()){
               
               codigoArticulos.add(ejecutar.getInt("cod_articulo"));  
-              cantidadArticulos.add(ejecutar.getDouble("valor_salida"));
+              cantidadArticulosDespacho.add(ejecutar.getDouble("valor_salida"));
+              cantidadArticulosPedido.add(ejecutar.getDouble("valor_pedido"));
               precioArticulos.add(ejecutar.getDouble("precio"));  
             }
             
@@ -148,12 +159,50 @@ public class ConexionReporteSalidas {
             JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Consulta de Concepto.\n Ventana Crear Reporte Salidas Documento \n Contacte al Desarrollador \n "+e ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
         }
     }
+     private void consultarServicio(){
+        try{
+            conectar.Conectar();
+            conex= conectar.getConexion();
+            consulta= conex.prepareStatement("select nombre_servicio from servicios where cod_servicio=?");
+            consulta.setInt(1, codigoServicioDestinatario);
+            ejecutar=consulta.executeQuery();
+            if(ejecutar.next()){
+                nombreServicioDestinatario=ejecutar.getString("nombre_servicio");
+                
+            }
+            
+            conectar.Cerrar();
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Consulta de Servicio.\n Ventana Crear Reporte Salidas Documento \n Contacte al Desarrollador \n "+e ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+      private void consultarAlmacen(){
+        try{
+            conectar.Conectar();
+            conex= conectar.getConexion();
+            consulta= conex.prepareStatement("select alias from almacenes where codigo_almacen=?");
+            consulta.setString(1, codigoAlmacenDespachador);
+            ejecutar=consulta.executeQuery();
+            if(ejecutar.next()){
+                nombreAlmacenDespachador=ejecutar.getString("alias");
+                
+            }
+            
+            conectar.Cerrar();
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Consulta de Almacen.\n Ventana Crear Reporte Salidas Documento \n Contacte al Desarrollador \n "+e ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     public void consultas(){
         consultarUltimoIngreso();
         consultarHistorial();
         consultaGrupos();
         consultaMedida();
         consultarConcepto();
+        consultarServicio();
+        consultarAlmacen();
         
     }
     
@@ -184,13 +233,19 @@ public class ConexionReporteSalidas {
         return nombre_art;
     }
      public List<Double> getCantidades(){
-         return cantidadArticulos;
+         return cantidadArticulosDespacho;
+     }
+     public List<Double> getCantidadesPedido(){
+         return cantidadArticulosPedido;
      }
      public List<Double> getPrecios(){
          return precioArticulos;
      }
      public Date getFecha(){
-            return fecha;
+            return fechaDespacho;
+     }
+     public Date getFechaPedido(){
+            return fechaPedido;
      }
      public String getDescripcionConcepto(){
          return descripcionConcepto;
@@ -203,6 +258,12 @@ public class ConexionReporteSalidas {
      }
      public int getConsecutivo(){
          return consecutivo;
+     }
+     public String getNombreServicioDestinatario(){
+         return nombreServicioDestinatario;
+     }
+     public String getNombreAlmacenDespachador(){
+         return nombreAlmacenDespachador;
      }
    
    

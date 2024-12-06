@@ -204,7 +204,7 @@ public class ConexionCrearSalida {
                    for (int i=0; i<=codigo_articulo.size()-1; i++)
                    {
                   
-                   consulta= conex.prepareStatement("insert into historiales values (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?)");
+                   consulta= conex.prepareStatement("insert into historiales values (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                    consulta.setDate(1, fecha_documento_despacho);
                    consulta.setInt(2, codigo_articulo.get(i));
                    consulta.setInt(3, valor_entrada);
@@ -213,6 +213,8 @@ public class ConexionCrearSalida {
                    consulta.setDouble(6, precio_articulo.get(i));
                    consulta.setInt(7, numero_documento);
                    consulta.setDouble(8, valor_pedido.get(i));
+                   consulta.setInt(9, 0);//al ser una salida el concepto de entrada es 0
+                   consulta.setInt(10, concepto_salida);
                    consulta.addBatch();
                    consulta.executeBatch();
                    }

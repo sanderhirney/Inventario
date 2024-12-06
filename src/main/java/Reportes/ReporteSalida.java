@@ -18,19 +18,24 @@ import net.sf.jasperreports.view.JasperViewer;
 
 
 public class ReporteSalida {
-    
+    int codigo_concepto=0;
     public void llamarReporte(){
         
-         
+         JasperPrint jprint;
         
       
        
         try {
-             InputStream report = ReporteSalida.class.getResourceAsStream("/Salidas.jasper");
-            //URL url=(this.getClass().getResource("/Salidas.jasper"));
-            //File fichero=new File(url.getFile());
-            JasperReport reporte = (JasperReport) JRLoader.loadObject(report);
-            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, DatosdeGenerarSalida.getDataSource());
+            if(codigo_concepto==53 || codigo_concepto==54){
+                InputStream report = ReporteSalida.class.getResourceAsStream("/SalidasConcepto53y54.jasper");
+                JasperReport reporte = (JasperReport) JRLoader.loadObject(report);
+                jprint = JasperFillManager.fillReport(reporte, null, DatosdeGenerarSalida53y54.getDataSource());
+            }
+            else{
+                InputStream report = ReporteSalida.class.getResourceAsStream("/Salidas.jasper");
+                JasperReport reporte = (JasperReport) JRLoader.loadObject(report);
+                jprint = JasperFillManager.fillReport(reporte, null, DatosdeGenerarSalida.getDataSource());
+            }
             JasperViewer view = new JasperViewer(jprint, false);
             view.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             view.setAlwaysOnTop(false);
@@ -46,7 +51,9 @@ public class ReporteSalida {
         }
   
            
-  
+  public void setCodigoConcepto(int recibido){
+      codigo_concepto=recibido;
+  }
            
         
     
