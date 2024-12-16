@@ -47,6 +47,10 @@
 	<field name="denominacionAlmacenDestino" class="java.lang.String"/>
 	<field name="ubicacionAlmacenDespacho" class="java.lang.String"/>
 	<field name="ubicacionAlmacenDestino" class="java.lang.String"/>
+	<field name="Grupo" class="java.lang.String"/>
+	<field name="subGrupo" class="java.lang.String"/>
+	<field name="seccion" class="java.lang.String"/>
+	<field name="articulo" class="java.lang.String"/>
 	<title>
 		<band height="216" splitType="Stretch">
 			<staticText>
@@ -442,28 +446,21 @@ Medida]]></text>
 			<frame>
 				<reportElement style="Detail" mode="Opaque" x="20" y="0" width="771" height="18" forecolor="#030303" uuid="3404d223-90b8-4cd7-aa03-7162b573a9d1"/>
 				<textField>
-					<reportElement x="120" y="3" width="308" height="12" uuid="977f1bfc-7b85-4400-9317-4e1ae47859fd"/>
+					<reportElement x="125" y="3" width="274" height="12" uuid="977f1bfc-7b85-4400-9317-4e1ae47859fd"/>
 					<textElement textAlignment="Center">
 						<font size="9"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{Descripcion}]]></textFieldExpression>
 				</textField>
-				<textField isBlankWhenNull="false">
-					<reportElement x="1" y="3" width="56" height="12" uuid="fcb6ab7a-1939-4af7-9647-ad38d96d3d57"/>
-					<textElement textAlignment="Center">
-						<font size="9"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{CodigoAlmacenDespachador}]]></textFieldExpression>
-				</textField>
 				<textField>
-					<reportElement x="439" y="3" width="50" height="12" uuid="e3c1f507-5aa0-4229-a3b2-16bf17f08618"/>
+					<reportElement x="411" y="3" width="50" height="12" uuid="e3c1f507-5aa0-4229-a3b2-16bf17f08618"/>
 					<textElement textAlignment="Right">
 						<font size="9"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{Medida}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="499" y="2" width="60" height="13" uuid="e1fa424c-6799-4974-8d2d-741c87aac7aa"/>
+					<reportElement x="490" y="2" width="60" height="13" uuid="e1fa424c-6799-4974-8d2d-741c87aac7aa"/>
 					<textElement textAlignment="Right">
 						<font size="9"/>
 					</textElement>
@@ -482,6 +479,24 @@ Medida]]></text>
 						<font size="9"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{ValorTotal}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="2" width="30" height="14" uuid="29fe0cdd-5ca8-4d9f-ab49-2cf466a26147">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="122c6a0a-8e96-4e93-9ffc-22ca4d7e8cec"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{Grupo}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="33" y="2" width="26" height="13" uuid="ab21b546-37f2-486b-83e3-aa2090bb88c1">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f608817c-fbdb-4950-9489-9dfb333884bd"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{subGrupo}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="60" y="3" width="31" height="11" uuid="d09c7fe7-69bd-4107-8e70-5cea8a37cc2e">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="60fd7721-410a-4bd9-93bc-a628bc9854c7"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{seccion}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
