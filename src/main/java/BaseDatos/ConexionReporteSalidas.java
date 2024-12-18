@@ -15,7 +15,6 @@ public class ConexionReporteSalidas {
     PreparedStatement consulta;
     Conexion conectar= new Conexion();
     ResultSet ejecutar;
-    int resultado;
     String nombreServicioDestinatario;
     List<Integer> codigoArticulos= new ArrayList<>();
     List<String> subgrupo=new ArrayList<>();
@@ -35,6 +34,13 @@ public class ConexionReporteSalidas {
     int codigoConcepto=0;
     String descripcionConcepto;
     String nombreAlmacenDespachador;
+   
+    String denominacionAlmacenDespacho;
+    String ubicacionAlmacenDespacho;
+    String codigoAlmacenDestino;
+    String denominacionAlmacenDestino;
+    String ubicacionAlmacenDestino;
+    String observaciones;
     int consecutivo=0;
     private void consultaGrupos()
     {
@@ -94,7 +100,7 @@ public class ConexionReporteSalidas {
         try{
             conectar.Conectar();
             conex= conectar.getConexion();
-            consulta= conex.prepareStatement("select fecha_documento, fecha_pedido, codigo_almacen_despacho, id, concepto_salidas, consecutivo, servicio from doc_salidas where id=(select MAX(id) from doc_salidas)");
+            consulta= conex.prepareStatement("select fecha_documento, fecha_pedido, codigo_almacen_despacho, id, concepto_salidas, consecutivo, servicio, observaciones from doc_salidas where id=(select MAX(id) from doc_salidas)");
             ejecutar=consulta.executeQuery();
             if(ejecutar.next()){
                 codigoDocumento=ejecutar.getInt("consecutivo");
@@ -104,6 +110,7 @@ public class ConexionReporteSalidas {
                 consecutivo=ejecutar.getInt("consecutivo");
                 codigoServicioDestinatario=ejecutar.getInt("servicio");
                 codigoAlmacenDespachador=ejecutar.getString("codigo_almacen_despacho");
+                observaciones=ejecutar.getString("observaciones");
                 
             }
             
@@ -177,7 +184,7 @@ public class ConexionReporteSalidas {
             JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Consulta de Servicio.\n Ventana Crear Reporte Salidas Documento \n Contacte al Desarrollador \n "+e ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
         }
     }
-      private void consultarAlmacen(){
+      private void consultarAlmacenSeleccionado(){
         try{
             conectar.Conectar();
             conex= conectar.getConexion();
@@ -195,6 +202,44 @@ public class ConexionReporteSalidas {
             JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Consulta de Almacen.\n Ventana Crear Reporte Salidas Documento \n Contacte al Desarrollador \n "+e ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
         }
     }
+      private void consultarAlmacenDespacho(){
+        try{
+            conectar.Conectar();
+            conex= conectar.getConexion();
+            consulta= conex.prepareStatement("select codigo_almacen, denominacion, ubicacion from almacenes where tipo=1");//1 para despacho y 0 para destino
+            ejecutar=consulta.executeQuery();
+            if(ejecutar.next()){
+                codigoAlmacenDespachador=ejecutar.getString("codigo_almacen");
+                ubicacionAlmacenDespacho=ejecutar.getString("ubicacion");
+                denominacionAlmacenDespacho=ejecutar.getString("denominacion");
+                
+            }
+            
+            conectar.Cerrar();
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Consulta de Almacen Despacho.\n Ventana Crear Reporte Salidas Documento \n Contacte al Desarrollador \n "+e ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+      private void consultarAlmacenDestino(){
+        try{
+            conectar.Conectar();
+            conex= conectar.getConexion();
+            consulta= conex.prepareStatement("select codigo_almacen, denominacion, ubicacion from almacenes where tipo=0");//1 para despacho y 0 para destino
+            ejecutar=consulta.executeQuery();
+            if(ejecutar.next()){
+                codigoAlmacenDespachador=ejecutar.getString("codigo_almacen");
+                ubicacionAlmacenDespacho=ejecutar.getString("ubicacion");
+                denominacionAlmacenDespacho=ejecutar.getString("denominacion");
+                
+            }
+            
+            conectar.Cerrar();
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Consulta de Almacen Despacho.\n Ventana Crear Reporte Salidas Documento \n Contacte al Desarrollador \n "+e ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     public void consultas(){
         consultarUltimoIngreso();
         consultarHistorial();
@@ -202,7 +247,9 @@ public class ConexionReporteSalidas {
         consultaMedida();
         consultarConcepto();
         consultarServicio();
-        consultarAlmacen();
+        consultarAlmacenSeleccionado();
+        consultarAlmacenDespacho();
+        consultarAlmacenDestino();
         
     }
     
@@ -264,6 +311,27 @@ public class ConexionReporteSalidas {
      }
      public String getNombreAlmacenDespachador(){
          return nombreAlmacenDespachador;
+     }
+     public String getcodigoAlmacenDespacho(){
+         return codigoAlmacenDespachador;
+     }
+      public String getdenominacionAlmacenDespacho(){
+         return denominacionAlmacenDespacho;
+     }
+       public String getubicacionAlmacenDespacho(){
+         return ubicacionAlmacenDespacho;
+     }
+        public String getcodigoAlmacenDestino(){
+         return codigoAlmacenDestino;
+     }
+         public String getdenominacionAlmacenDestino(){
+         return denominacionAlmacenDestino;
+     }
+          public String getubicacionAlmacenDestino(){
+         return ubicacionAlmacenDestino;
+     }
+            public String getuObservaciones(){
+         return observaciones;
      }
    
    

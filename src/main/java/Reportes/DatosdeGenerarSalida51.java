@@ -40,13 +40,16 @@ public class DatosdeGenerarSalida51 implements JRDataSource{
         int decimalesCalculoTotal;
         int codigoConcepto=0;
         String descripcionConcepto;
-        String almacenDespachador;
+       
         String servicioDestinatario;
         int consecutivo=0;
-        String codigoAlmacenDespachador;
+        String codigoAlmacenDespacho;
         String codigoAlmacenDestino;
-        String denominacionAlmacenDespachador;
+        String denominacionAlmacenDespacho;
         String denominacionAlmacenDestino;
+        String ubicacionAlmacenDespacho;
+        String ubicacionAlmacenDestino;
+        String observaciones;
         ConexionReporteSalidas reporte=new ConexionReporteSalidas();
         ConexionConsultarDecimales decimales=new ConexionConsultarDecimales();
         ConexionVerSeccionActiva seccionActiva=new ConexionVerSeccionActiva();
@@ -57,7 +60,13 @@ public class DatosdeGenerarSalida51 implements JRDataSource{
         descripcionArticulo=reporte.getDescripcionArticulos();
         cantidadDespacho=reporte.getCantidades();
         cantidadPedido=reporte.getCantidadesPedido();
-        almacenDespachador=reporte.getNombreAlmacenDespachador();
+        codigoAlmacenDespacho=reporte.getcodigoAlmacenDespacho();
+        codigoAlmacenDestino=reporte.getcodigoAlmacenDestino();
+        ubicacionAlmacenDespacho=reporte.getubicacionAlmacenDespacho();
+        ubicacionAlmacenDestino=reporte.getubicacionAlmacenDestino();
+        denominacionAlmacenDespacho=reporte.getdenominacionAlmacenDespacho();
+        denominacionAlmacenDestino=reporte.getdenominacionAlmacenDestino();
+        observaciones=reporte.getuObservaciones();
         servicioDestinatario=reporte.getNombreServicioDestinatario();
         precioUnitario=reporte.getPrecios();
         descripcionUnidad=reporte.getMedida();
@@ -94,14 +103,19 @@ public class DatosdeGenerarSalida51 implements JRDataSource{
         String campo=jrf.getName();
         switch(campo)
         {
-            case "CodigoAlmacenDespachador" : valor=codigoAlmacenDespachador;
+            case "CodigoAlmacenDespachador" : valor=codigoAlmacenDespacho;
             break;
             case "CodigoAlmacenDestino" : valor=codigoAlmacenDestino;
             break;
-            case "denominacionAlmacenDespachador" : valor=denominacionAlmacenDespachador;
+            case "denominacionAlmacenDespachador" : valor=denominacionAlmacenDespacho;
             break;
             case "denominacionAlmacenDestino" : valor=denominacionAlmacenDestino;
             break;
+            case "ubicacionAlmacenDespachador" : valor=ubicacionAlmacenDespacho;
+            break;
+            case "ubicacionAlmacenDestino" : valor=ubicacionAlmacenDestino;
+            break;
+            
             case "Codigos" : valor=grupo.get(index).toString()+"-"+subgrupo.get(index);
             break;
             case "Descripcion" : valor=descripcionArticulo.get(index);
@@ -129,6 +143,8 @@ public class DatosdeGenerarSalida51 implements JRDataSource{
             case "numeroComprobante" : valor=consecutivo;
             break;
             case "TotalSalida" : valor=decimalesTotalSalida();
+            break;
+             case "observaciones" : valor=observaciones;
             break;
 
                        

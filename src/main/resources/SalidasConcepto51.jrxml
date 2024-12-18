@@ -51,6 +51,9 @@
 	<field name="subGrupo" class="java.lang.String"/>
 	<field name="seccion" class="java.lang.String"/>
 	<field name="articulo" class="java.lang.String"/>
+	<field name="Field_1" class="java.lang.String"/>
+	<field name="Field_2" class="java.lang.String"/>
+	<field name="observaciones" class="java.lang.String"/>
 	<title>
 		<band height="216" splitType="Stretch">
 			<staticText>
@@ -644,6 +647,10 @@ Nº:]]></text>
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{numeroComprobante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="4" width="641" height="16" uuid="811eae91-7a97-46d2-ac3d-addce973f5de"/>
+				<textFieldExpression><![CDATA[$F{observaciones}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
