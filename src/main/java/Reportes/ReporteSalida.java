@@ -34,13 +34,13 @@ public class ReporteSalida {
             }
             else{
                 if(codigo_concepto==51){
-                    System.out.println("Concepto Pasado aqui _________________ : "+codigo_concepto);
+                    
                                
                 InputStream report = ReporteSalida.class.getResourceAsStream("/SalidasConcepto51.jasper");
                 JasperReport reporte = (JasperReport) JRLoader.loadObject(report);
                 jprint = JasperFillManager.fillReport(reporte, null, DatosdeGenerarSalida51.getDataSource());
                 }else{
-                    System.out.println("elseee");
+                    
                 InputStream report = ReporteSalida.class.getResourceAsStream("/Salidas.jasper");
                 JasperReport reporte = (JasperReport) JRLoader.loadObject(report);
                 jprint = JasperFillManager.fillReport(reporte, null, DatosdeGenerarSalida.getDataSource());

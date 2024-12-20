@@ -228,9 +228,9 @@ public class ConexionReporteSalidas {
             consulta= conex.prepareStatement("select codigo_almacen, denominacion, ubicacion from almacenes where tipo=0");//1 para despacho y 0 para destino
             ejecutar=consulta.executeQuery();
             if(ejecutar.next()){
-                codigoAlmacenDespachador=ejecutar.getString("codigo_almacen");
-                ubicacionAlmacenDespacho=ejecutar.getString("ubicacion");
-                denominacionAlmacenDespacho=ejecutar.getString("denominacion");
+                codigoAlmacenDestino=ejecutar.getString("codigo_almacen");
+                ubicacionAlmacenDestino=ejecutar.getString("ubicacion");
+                denominacionAlmacenDestino=ejecutar.getString("denominacion");
                 
             }
             

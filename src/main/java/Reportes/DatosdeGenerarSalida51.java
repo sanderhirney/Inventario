@@ -122,9 +122,7 @@ public class DatosdeGenerarSalida51 implements JRDataSource{
             break;
             case "Medida" : valor=descripcionUnidad.get(index);
             break;
-            case "cantidad_pedido" : valor=cantidadPedido.get(index);
-            break;
-            case "cantidad_despacho" : valor=cantidadDespacho.get(index);
+            case "cantidad" : valor=cantidadDespacho.get(index);
             break;
             case "ValorUnitario": valor=decimalesPrecioUnitario(index);
             break;
