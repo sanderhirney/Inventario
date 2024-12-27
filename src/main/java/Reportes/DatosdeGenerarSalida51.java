@@ -111,7 +111,7 @@ public class DatosdeGenerarSalida51 implements JRDataSource{
             break;
             case "denominacionAlmacenDestino" : valor=denominacionAlmacenDestino;
             break;
-            case "ubicacionAlmacenDespachador" : valor=ubicacionAlmacenDespacho;
+            case "ubicacionAlmacenDespacho" : valor=ubicacionAlmacenDespacho;
             break;
             case "ubicacionAlmacenDestino" : valor=ubicacionAlmacenDestino;
             break;
@@ -122,7 +122,7 @@ public class DatosdeGenerarSalida51 implements JRDataSource{
             break;
             case "Medida" : valor=descripcionUnidad.get(index);
             break;
-            case "cantidad" : valor=cantidadDespacho.get(index);
+            case "Cantidad" : valor=cantidadDespacho.get(index);
             break;
             case "ValorUnitario": valor=decimalesPrecioUnitario(index);
             break;
