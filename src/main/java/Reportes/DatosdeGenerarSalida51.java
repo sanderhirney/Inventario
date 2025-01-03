@@ -115,7 +115,6 @@ public class DatosdeGenerarSalida51 implements JRDataSource{
             break;
             case "ubicacionAlmacenDestino" : valor=ubicacionAlmacenDestino;
             break;
-            
             case "Codigos" : valor=grupo.get(index).toString()+"-"+subgrupo.get(index);
             break;
             case "Descripcion" : valor=descripcionArticulo.get(index);

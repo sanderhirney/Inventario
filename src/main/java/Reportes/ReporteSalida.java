@@ -24,7 +24,7 @@ public class ReporteSalida {
          JasperPrint jprint;
         
         
-              
+             
        
         try {
             if(codigo_concepto==53 || codigo_concepto==54){
@@ -46,12 +46,13 @@ public class ReporteSalida {
                 jprint = JasperFillManager.fillReport(reporte, null, DatosdeGenerarSalida.getDataSource());
                 }    
 
+            }
+            
                 JasperViewer view = new JasperViewer(jprint, false);
                 view.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 view.setAlwaysOnTop(false);
                 view.setTitle("Salida");
                 view.setVisible(true);
-            }
              } catch (JRException ex) {
             Logger.getLogger(ReporteSalida.class.getName()).log(Level.SEVERE, "Mensaje de log", ex);
             JOptionPane.showMessageDialog(null, "Se ha producido un error al cargar el reporte" + "\n" + ex , "Error", JOptionPane.ERROR_MESSAGE);
