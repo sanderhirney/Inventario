@@ -207,5 +207,20 @@ public class DatosdeGenerarSalida51 implements JRDataSource{
            calculoTotalSalida=(formatoTotalSalida.format(total));
         return calculoTotalSalida;
     }
+    private void dividirSubGrupo(int index){
+        String[] subCadena=subgrupo.get(index).split("-");
+        String subGrupo=subCadena[0];
+        
+    }
+    private void dividirSeccion(int index){
+        String[] subCadena=subgrupo.get(index).split("-");
+        String seccion=subCadena[1];
+        
+    }
+    private void dividirArticulo(int index){
+        String[] subCadena=subgrupo.get(index).split("-");
+        String articulo=subCadena[2];
+    }
+    
     
 }
