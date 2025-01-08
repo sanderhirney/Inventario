@@ -47,12 +47,12 @@
 	<field name="denominacionAlmacenDestino" class="java.lang.String"/>
 	<field name="ubicacionAlmacenDespacho" class="java.lang.String"/>
 	<field name="ubicacionAlmacenDestino" class="java.lang.String"/>
-	<field name="Grupo" class="java.lang.String"/>
+	<field name="Grupo" class="java.lang.Integer"/>
 	<field name="subGrupo" class="java.lang.String"/>
 	<field name="seccion" class="java.lang.String"/>
 	<field name="articulo" class="java.lang.String"/>
-	<field name="Field_1" class="java.lang.String"/>
-	<field name="Field_2" class="java.lang.String"/>
+	<field name="Fecha_Pedido" class="java.util.Date"/>
+	<field name="Fecha_Despacho" class="java.util.Date"/>
 	<field name="observaciones" class="java.lang.String"/>
 	<title>
 		<band height="216" splitType="Stretch">
@@ -140,13 +140,6 @@
 				<reportElement x="20" y="0" width="280" height="31" uuid="618a7800-925f-42bb-b3ce-c24ddb194fad"/>
 				<imageExpression><![CDATA["/home/sander/Inventario/Inventario/src/main/resources/mpps.jpeg"]]></imageExpression>
 			</image>
-			<textField>
-				<reportElement x="584" y="115" width="205" height="10" uuid="98b5b946-9eba-497b-bad4-62cba33aabc1"/>
-				<textElement>
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{Fecha}]]></textFieldExpression>
-			</textField>
 			<textField>
 				<reportElement x="584" y="84" width="205" height="12" uuid="616576b4-f41a-41b8-af56-2f666dd4ded8"/>
 				<textElement>
@@ -275,13 +268,6 @@
 				</textElement>
 				<text><![CDATA[Fecha de Operación]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="580" y="199" width="205" height="10" uuid="f6ef09f4-4de2-409c-9291-182109c0d573"/>
-				<textElement>
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{Fecha}]]></textFieldExpression>
-			</textField>
 			<line>
 				<reportElement x="20" y="49" width="1" height="167" uuid="eec66038-e380-40fc-beeb-6a6e60273b67"/>
 			</line>
@@ -321,6 +307,14 @@
 				</textElement>
 				<text><![CDATA[Ubicaciòn]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="593" y="114" width="148" height="12" uuid="891a43b6-e8b5-4969-9d96-daed302021d5"/>
+				<textFieldExpression><![CDATA[$F{Fecha_Pedido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="580" y="193" width="205" height="15" uuid="3aa012f0-d827-4be2-8736-de45cf701231"/>
+				<textFieldExpression><![CDATA[$F{Fecha_Despacho}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<columnHeader>
@@ -442,6 +436,12 @@ Medida]]></text>
 			<line>
 				<reportElement x="21" y="45" width="770" height="1" uuid="c757bb53-6fff-4a87-af99-e44831bb47b8"/>
 			</line>
+			<staticText>
+				<reportElement x="94" y="0" width="100" height="30" uuid="26f7e932-1663-46d7-a2e1-a9580add9cdc">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7e478e4b-838f-4184-87e0-4543ca5e8aae"/>
+				</reportElement>
+				<text><![CDATA[articulo]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -484,7 +484,7 @@ Medida]]></text>
 					<textFieldExpression><![CDATA[$F{ValorTotal}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="0" y="2" width="30" height="14" uuid="29fe0cdd-5ca8-4d9f-ab49-2cf466a26147">
+					<reportElement x="0" y="2" width="30" height="13" uuid="29fe0cdd-5ca8-4d9f-ab49-2cf466a26147">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="122c6a0a-8e96-4e93-9ffc-22ca4d7e8cec"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[$F{Grupo}]]></textFieldExpression>
@@ -496,10 +496,16 @@ Medida]]></text>
 					<textFieldExpression><![CDATA[$F{subGrupo}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="60" y="3" width="31" height="11" uuid="d09c7fe7-69bd-4107-8e70-5cea8a37cc2e">
+					<reportElement x="60" y="3" width="31" height="12" uuid="d09c7fe7-69bd-4107-8e70-5cea8a37cc2e">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="60fd7721-410a-4bd9-93bc-a628bc9854c7"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[$F{seccion}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="94" y="2" width="24" height="13" uuid="c702de87-20e8-441a-9a62-d3f0b1e68fa5">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7e478e4b-838f-4184-87e0-4543ca5e8aae"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{articulo}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

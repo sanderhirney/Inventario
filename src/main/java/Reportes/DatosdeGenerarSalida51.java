@@ -131,6 +131,14 @@ public class DatosdeGenerarSalida51 implements JRDataSource{
             break;
             case "Fecha_Despacho" : valor=fechaDespacho;
             break;
+            case "Grupo" : valor=grupo.get(index);
+            break;
+            case "subGrupo" : valor=dividirSubGrupo(index);
+            break;
+            case "seccion" : valor=dividirSeccion(index);
+            break;
+            case "articulo" : valor=dividirArticulo(index);
+            break;
             case "servicio_destino" : valor=servicioDestinatario;
             break;
             case "codigoConcepto" : valor=codigoConcepto;
@@ -207,19 +215,36 @@ public class DatosdeGenerarSalida51 implements JRDataSource{
            calculoTotalSalida=(formatoTotalSalida.format(total));
         return calculoTotalSalida;
     }
-    private void dividirSubGrupo(int index){
+    private String dividirSubGrupo(int index){
         String[] subCadena=subgrupo.get(index).split("-");
         String subGrupo=subCadena[0];
         
-    }
-    private void dividirSeccion(int index){
-        String[] subCadena=subgrupo.get(index).split("-");
-        String seccion=subCadena[1];
+        return subGrupo;
         
     }
-    private void dividirArticulo(int index){
+    private String dividirSeccion(int index){
         String[] subCadena=subgrupo.get(index).split("-");
-        String articulo=subCadena[2];
+        
+        try{
+            String seccion=subCadena[1];
+            return seccion;
+        }catch(Exception e){
+            return " ";
+        }
+      
+        
+        
+    }
+    private String dividirArticulo(int index){
+        String[] subCadena=subgrupo.get(index).split("-");
+        try{
+              String articulo=subCadena[1];
+            return articulo;
+        }catch(Exception e){
+            return " ";
+        }
+      
+       
     }
     
     
