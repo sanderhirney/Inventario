@@ -2,6 +2,7 @@
 package Reportes;
 
 import BaseDatos.ConexionConsultarDecimales;
+import BaseDatos.ConexionReporteExistencias;
 import BaseDatos.ConexionReporteSalidas;
 import BaseDatos.ConexionVerSeccionActiva;
 import java.text.DecimalFormat;
@@ -14,66 +15,40 @@ import net.sf.jasperreports.engine.JRField;
 
 
 
-public class DatosdeGenerarSalida51 implements JRDataSource{
+public class DatosdeGenerarExistencia implements JRDataSource{
         private int index;
         List<String> subgrupo=new ArrayList<>();
         List<Integer> grupo=new ArrayList<>();
-        List<Integer> codigoCargos=new ArrayList<>();
-        List<Integer> codigoArticulos=new ArrayList<>();
-        List<Integer> cargosFirmantes=new ArrayList<>();
-        List<String> nombresFirmantes=new ArrayList<>();
-        List<String> apellidosFirmantes=new ArrayList<>();
-        List<String> cedulaFirmantes=new ArrayList<>();
+        List<Double> cantidadesArticulos=new ArrayList<>();
+        List<Double> costoArticulos=new ArrayList<>();
         List<String> descripcionArticulo=new ArrayList<>();
-        List<String> descripcionCargos=new ArrayList<>();
+        List<Integer> codigoArticulos=new ArrayList<>();
         List<String> descripcionUnidad=new ArrayList<>();
-        List<Double> precioUnitario=new ArrayList<>();
-        List<Double> cantidadPedido=new ArrayList<>();
-        List<Double> cantidadDespacho=new ArrayList<>();
+  
         String nombreSeccion;
         int codigoSeccion;
         String proveedor;
-        Date fechaDespacho;
-        Date fechaPedido;
+        Date fechaDocumento;
         String documento;
         int decimalesPrecioUnitario;
         int decimalesCalculoTotal;
         int codigoConcepto=0;
         String descripcionConcepto;
-       
-        String servicioDestinatario;
         int consecutivo=0;
-        String codigoAlmacenDespacho;
-        String codigoAlmacenDestino;
-        String denominacionAlmacenDespacho;
-        String denominacionAlmacenDestino;
-        String ubicacionAlmacenDespacho;
-        String ubicacionAlmacenDestino;
-        String observaciones;
-        ConexionReporteSalidas reporte=new ConexionReporteSalidas();
+        ConexionReporteExistencias reporte=new ConexionReporteExistencias();
         ConexionConsultarDecimales decimales=new ConexionConsultarDecimales();
         ConexionVerSeccionActiva seccionActiva=new ConexionVerSeccionActiva();
         
-    public DatosdeGenerarSalida51(){
+    public DatosdeGenerarExistencia(){
         reporte.consultas();
         codigoArticulos=reporte.getCodigosArticulos();
         descripcionArticulo=reporte.getDescripcionArticulos();
-        cantidadDespacho=reporte.getCantidades();
-        cantidadPedido=reporte.getCantidadesPedido();
-        codigoAlmacenDespacho=reporte.getcodigoAlmacenDespacho();
-        codigoAlmacenDestino=reporte.getcodigoAlmacenDestino();
-        ubicacionAlmacenDespacho=reporte.getubicacionAlmacenDespacho();
-        ubicacionAlmacenDestino=reporte.getubicacionAlmacenDestino();
-        denominacionAlmacenDespacho=reporte.getdenominacionAlmacenDespacho();
-        denominacionAlmacenDestino=reporte.getdenominacionAlmacenDestino();
-        observaciones=reporte.getuObservaciones();
-        servicioDestinatario=reporte.getNombreServicioDestinatario();
-        precioUnitario=reporte.getPrecios();
+        cantidadesArticulos=reporte.getCantidadesArticulos();
+        costoArticulos=reporte.getCostosArticulos();
         descripcionUnidad=reporte.getMedida();
         grupo=reporte.getGrupo();
         subgrupo=reporte.getSubgrupo();
-        fechaDespacho=reporte.getFecha();
-        fechaPedido=reporte.getFechaPedido();
+        fechaDocumento=reporte.getFecha();
         codigoConcepto=reporte.getCodigoConcepto();
         descripcionConcepto=reporte.getDescripcionConcepto();
         consecutivo=reporte.getConsecutivo();
@@ -103,43 +78,19 @@ public class DatosdeGenerarSalida51 implements JRDataSource{
         String campo=jrf.getName();
         switch(campo)
         {
-            case "CodigoAlmacenDespachador" : valor=codigoAlmacenDespacho;
-            break;
-            case "CodigoAlmacenDestino" : valor=codigoAlmacenDestino;
-            break;
-            case "denominacionAlmacenDespachador" : valor=denominacionAlmacenDespacho;
-            break;
-            case "denominacionAlmacenDestino" : valor=denominacionAlmacenDestino;
-            break;
-            case "ubicacionAlmacenDespacho" : valor=ubicacionAlmacenDespacho;
-            break;
-            case "ubicacionAlmacenDestino" : valor=ubicacionAlmacenDestino;
-            break;
             case "Codigos" : valor=grupo.get(index).toString()+"-"+subgrupo.get(index);
             break;
             case "Descripcion" : valor=descripcionArticulo.get(index);
             break;
             case "Medida" : valor=descripcionUnidad.get(index);
             break;
-            case "Cantidad" : valor=cantidadDespacho.get(index);
+            case "Cantidad" : valor=cantidadesArticulos.get(index);
             break;
             case "ValorUnitario": valor=decimalesPrecioUnitario(index);
             break;
             case "ValorTotal" : valor=decimalesCalculoTotal(index);
             break;
-            case "Fecha_Pedido" : valor=fechaPedido;
-            break;
-            case "Fecha_Despacho" : valor=fechaDespacho;
-            break;
-            case "Grupo" : valor=grupo.get(index);
-            break;
-            case "subGrupo" : valor=dividirSubGrupo(index);
-            break;
-            case "seccion" : valor=dividirSeccion(index);
-            break;
-            case "articulo" : valor=dividirArticulo(index);
-            break;
-            case "servicio_destino" : valor=servicioDestinatario;
+            case "Fecha" : valor=fechaDocumento;
             break;
             case "codigoConcepto" : valor=codigoConcepto;
             break;
@@ -148,8 +99,6 @@ public class DatosdeGenerarSalida51 implements JRDataSource{
             case "numeroComprobante" : valor=consecutivo;
             break;
             case "TotalSalida" : valor=decimalesTotalSalida();
-            break;
-             case "observaciones" : valor=observaciones;
             break;
 
                        
@@ -161,7 +110,7 @@ public class DatosdeGenerarSalida51 implements JRDataSource{
     
      
     public static JRDataSource getDataSource(){
-        return new DatosdeGenerarSalida51();
+        return new DatosdeGenerarExistencia();
     }
     
     private String decimalesPrecioUnitario(int index){
@@ -176,7 +125,7 @@ public class DatosdeGenerarSalida51 implements JRDataSource{
             }
             DecimalFormat formatoPrecioUnitario=new DecimalFormat(mascaraPrecioUnitario);
             //precioUnitarioFinal=(formatoPrecioUnitario.format(precioUnitario.get(index)).replace(',','.'));
-            precioUnitarioFinal=(formatoPrecioUnitario.format(precioUnitario.get(index)));
+            precioUnitarioFinal=(formatoPrecioUnitario.format(costoArticulos.get(index)));
         return precioUnitarioFinal;
     }
     private String decimalesCalculoTotal(int index){
@@ -184,7 +133,7 @@ public class DatosdeGenerarSalida51 implements JRDataSource{
         String mascaraCalculoTotal="###,###.";//para la mascara
         Double temporal;
         
-            temporal=precioUnitario.get(index)*cantidadDespacho.get(index);
+            temporal=costoArticulos.get(index)*cantidadesArticulos.get(index);
             for(int i=0; i<decimalesCalculoTotal; i++)
             {
                 mascaraCalculoTotal=mascaraCalculoTotal+("0");
@@ -200,8 +149,8 @@ public class DatosdeGenerarSalida51 implements JRDataSource{
         String mascaraCalculoTotal="###,###.";//para la mascara
         Double temporal;
         Double total=0.0;
-            for(int i=0; i<precioUnitario.size(); i++){
-                temporal=precioUnitario.get(i)*cantidadDespacho.get(i);
+            for(int i=0; i<costoArticulos.size(); i++){
+                temporal=costoArticulos.get(i)*cantidadesArticulos.get(i);
                 total+=temporal;
             }
             
@@ -215,41 +164,5 @@ public class DatosdeGenerarSalida51 implements JRDataSource{
            calculoTotalSalida=(formatoTotalSalida.format(total));
         return calculoTotalSalida;
     }
-    private String dividirSubGrupo(int index){
-        String[] subCadena=subgrupo.get(index).split("-");
-          try{
-             String subGrupo=subCadena[0];
-             return subGrupo;
-        }catch(Exception e){
-            return " ";
-        }
-       
-        
-    }
-    private String dividirSeccion(int index){
-        String[] subCadena=subgrupo.get(index).split("-");
-        
-        try{
-            String seccion=subCadena[1];
-            return seccion;
-        }catch(Exception e){
-            return " ";
-        }
-      
-        
-        
-    }
-    private String dividirArticulo(int index){
-        String[] subCadena=subgrupo.get(index).split("-");
-        try{
-              String articulo=subCadena[1];
-            return articulo;
-        }catch(Exception e){
-            return " ";
-        }
-      
-       
-    }
-    
     
 }
