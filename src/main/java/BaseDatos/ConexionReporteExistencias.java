@@ -30,7 +30,7 @@ public class ConexionReporteExistencias {
     int codigoDocumento;
     Date fechaDespacho;
     Date fechaPedido;
-    int codigoServicioDestinatario;
+    int codigoSeccion;
     String codigoAlmacenDespachador;
     int codigoConcepto=0;
     String descripcionConcepto;
@@ -43,32 +43,34 @@ public class ConexionReporteExistencias {
     String ubicacionAlmacenDestino;
     String observaciones;
     int consecutivo=0;
-    private void consultaGrupos()
+    private void consultaArticulos()
     {
         
           try
     {
-        for(int i=0; i<codigoArticulos.size(); i++)
-        {
+       
         conectar.Conectar();
         conex= conectar.getConexion();
+        for(int i=0; i<codigoArticulos.size(); i++)
+        {
         consulta= conex.prepareStatement("select codigo, id_grupo, id_subgrupo,nombre, unidad_medida from articulos where codigo=?");
         consulta.setInt(1, codigoArticulos.get(i));
         ejecutar=consulta.executeQuery();
         while( ejecutar.next())
-        {      codigoArticulos.add(ejecutar.getInt("codigo"));
+        {      
                subgrupo.add(ejecutar.getString("id_subgrupo"));
                grupo.add(ejecutar.getInt("id_grupo"));
                codigo_medida.add(ejecutar.getInt("unidad_medida"));
                nombreArticulos.add(ejecutar.getString("nombre"));
                
         }//if
+        }
       
-        }//for
+    
     }//consulta
            catch(SQLException ex)
     {
-        JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Grupos y Subgrupos de Articulos.\n Ventana Crear Reporte Salida \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Grupos y Subgrupos de Articulos.\n Ventana Crear Reporte de existencias \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
     }
     }//consulta
     private void consultaMedida()
@@ -103,24 +105,24 @@ public class ConexionReporteExistencias {
         try{
             conectar.Conectar();
             conex= conectar.getConexion();
-            for(int i=0; i<codigoArticulos.size(); i++)
-        {   
-            consulta= conex.prepareStatement("select existencias from existencias where codigo = ? and existencias > 0");
-            consulta.setInt(1,codigoArticulos.get(i) );
+            
+            consulta= conex.prepareStatement("select codigo, existencias from existencias where  seccion=? and existencias > 0");
+            consulta.setInt(1, codigoSeccion);
             ejecutar=consulta.executeQuery();
-             if(ejecutar.next()){
+             while(ejecutar.next()){
+                 codigoArticulos.add(ejecutar.getInt("codigo"));
                 cantidadArticulos.add(ejecutar.getDouble("existencias"));
                 
             }
             
-        }
+      
             
            
             
             conectar.Cerrar();
         }
         catch(SQLException e){
-            JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Consulta de Existencias.\n Ventana Crear Reporte Salidas Documento \n Contacte al Desarrollador \n "+e ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Consulta de Existencias.\n Ventana Crear Reporte de Existencias \n Contacte al Desarrollador \n "+e ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
         }
     }
    
@@ -130,8 +132,9 @@ public class ConexionReporteExistencias {
             conex= conectar.getConexion();
             for(int i=0; i<codigoArticulos.size(); i++)
         {   
-            consulta= conex.prepareStatement("select costo from costos where codigo_articulo = ? and costos > 0");
+            consulta= conex.prepareStatement("select costo from costos where codigo_articulo = ? and seccion=? and costo > 0");
             consulta.setInt(1,codigoArticulos.get(i) );
+            consulta.setInt(2, codigoSeccion);
             ejecutar=consulta.executeQuery();
              if(ejecutar.next()){
                 costoArticulos.add(ejecutar.getDouble("costo"));
@@ -145,7 +148,7 @@ public class ConexionReporteExistencias {
             conectar.Cerrar();
         }
         catch(SQLException e){
-            JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Consulta de Costos.\n Ventana Crear Reporte Salidas Documento \n Contacte al Desarrollador \n "+e ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Consulta de Costos.\n Ventana Crear Reporte de Existencias \n Contacte al Desarrollador \n "+e ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
         }
     }
      private void consultarConcepto(){
@@ -168,9 +171,9 @@ public class ConexionReporteExistencias {
     }
      
     public void consultas(){
+        consultarExistencias();//este es el primero pues es el que da los codigos con existencias
+        consultaArticulos();
         consultarCostos();
-        consultarExistencias();
-        consultaGrupos();
         consultaMedida();
         consultarConcepto();
        
@@ -250,6 +253,10 @@ public class ConexionReporteExistencias {
             public String getuObservaciones(){
          return observaciones;
      }
+     public void setSeccion(int recibido){
+         codigoSeccion=recibido;
+     }       
+           
    
    
 }//clase

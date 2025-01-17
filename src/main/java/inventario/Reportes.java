@@ -5,6 +5,7 @@ import BaseDatos.ConexionDatosdeReporte;
 import BaseDatos.ConexionEmpresas;
 import Reportes.GenerarExceF4;
 import Reportes.GenerarExistGeneral;
+import Reportes.ReporteExistencias;
 import Reportes.ReporteF157;
 
 import javax.swing.JOptionPane;
@@ -44,6 +45,7 @@ ConexionEmpresas secciones=new ConexionEmpresas();
         Progreso = new javax.swing.JProgressBar();
         Panel_general = new javax.swing.JPanel();
         boton_kardex = new javax.swing.JButton();
+        boton_existencias = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         panel1 = new javax.swing.JPanel();
         Combo_Meses = new javax.swing.JComboBox();
@@ -76,6 +78,14 @@ ConexionEmpresas secciones=new ConexionEmpresas();
             }
         });
         Panel_general.add(boton_kardex);
+
+        boton_existencias.setText("Existencias");
+        boton_existencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_existenciasActionPerformed(evt);
+            }
+        });
+        Panel_general.add(boton_existencias);
 
         jSeparator2.setBorder(javax.swing.BorderFactory.createTitledBorder("Rango de fecha"));
 
@@ -352,6 +362,13 @@ ConexionEmpresas secciones=new ConexionEmpresas();
         kardex.setVisible(true);
     }//GEN-LAST:event_boton_kardexActionPerformed
 
+    private void boton_existenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_existenciasActionPerformed
+        // TODO add your handling code here:
+        ReporteExistencias existencias=new ReporteExistencias();
+        existencias.llamarReporte();
+
+    }//GEN-LAST:event_boton_existenciasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -405,6 +422,7 @@ ConexionEmpresas secciones=new ConexionEmpresas();
     private javax.swing.JPanel Panel_barra;
     private javax.swing.JPanel Panel_general;
     public javax.swing.JProgressBar Progreso;
+    private javax.swing.JButton boton_existencias;
     private javax.swing.JButton boton_kardex;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

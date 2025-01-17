@@ -2,6 +2,7 @@
 package Reportes;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -23,8 +24,8 @@ public class ReporteExistencias {
       
        
         try {
-            File fichero=new File("Existencias.jasper");
-            JasperReport reporte = (JasperReport) JRLoader.loadObject(fichero);
+            InputStream report = ReporteEntrada.class.getResourceAsStream("/Existencias.jasper");
+            JasperReport reporte = (JasperReport) JRLoader.loadObject(report);
             JasperPrint jprint = JasperFillManager.fillReport(reporte, null, DatosdeGenerarExistencia.getDataSource());
             JasperViewer view = new JasperViewer(jprint, false);
             view.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

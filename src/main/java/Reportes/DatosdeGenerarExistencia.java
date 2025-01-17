@@ -40,6 +40,10 @@ public class DatosdeGenerarExistencia implements JRDataSource{
         ConexionVerSeccionActiva seccionActiva=new ConexionVerSeccionActiva();
         
     public DatosdeGenerarExistencia(){
+         
+        seccionActiva.consulta();
+        codigoSeccion=seccionActiva.codigo();
+        reporte.setSeccion(codigoSeccion);
         reporte.consultas();
         codigoArticulos=reporte.getCodigosArticulos();
         descripcionArticulo=reporte.getDescripcionArticulos();
@@ -52,16 +56,16 @@ public class DatosdeGenerarExistencia implements JRDataSource{
         codigoConcepto=reporte.getCodigoConcepto();
         descripcionConcepto=reporte.getDescripcionConcepto();
         consecutivo=reporte.getConsecutivo();
-        documento=String.valueOf(reporte.getCodigoDocumento());
+      
         index=-1;
-        
-        seccionActiva.consulta();
-        codigoSeccion=seccionActiva.codigo();
+       
         
         decimales.setSeccion(codigoSeccion);
         decimales.consulta();
         decimalesPrecioUnitario=decimales.getDecimalCampo();
         decimalesCalculoTotal=decimales.getDecimalTotal();
+        System.out.println("Cantidad de codigoArticulos es________ "+codigoArticulos.size());
+                
         
     }
        
@@ -78,28 +82,12 @@ public class DatosdeGenerarExistencia implements JRDataSource{
         String campo=jrf.getName();
         switch(campo)
         {
-            case "Codigos" : valor=grupo.get(index).toString()+"-"+subgrupo.get(index);
-            break;
-            case "Descripcion" : valor=descripcionArticulo.get(index);
-            break;
-            case "Medida" : valor=descripcionUnidad.get(index);
-            break;
-            case "Cantidad" : valor=cantidadesArticulos.get(index);
-            break;
-            case "ValorUnitario": valor=decimalesPrecioUnitario(index);
-            break;
-            case "ValorTotal" : valor=decimalesCalculoTotal(index);
-            break;
-            case "Fecha" : valor=fechaDocumento;
-            break;
-            case "codigoConcepto" : valor=codigoConcepto;
-            break;
-            case "Concepto" : valor=descripcionConcepto;
-            break;
-            case "numeroComprobante" : valor=consecutivo;
-            break;
-            case "TotalSalida" : valor=decimalesTotalSalida();
-            break;
+            case "Grupo" -> valor=grupo.get(index).toString()+"-"+subgrupo.get(index);
+            case "Descripcion" -> valor=descripcionArticulo.get(index);
+            case "Medida" -> valor=descripcionUnidad.get(index);
+            case "Cantidad" -> valor=cantidadesArticulos.get(index);
+            case "ValorUnitario" -> valor=decimalesPrecioUnitario(index);
+            case "Total" -> valor=decimalesCalculoTotal(index);
 
                        
         }
@@ -139,12 +127,12 @@ public class DatosdeGenerarExistencia implements JRDataSource{
                 mascaraCalculoTotal=mascaraCalculoTotal+("0");
                 
             }
-            DecimalFormat formatoPrecioUnitario=new DecimalFormat(mascaraCalculoTotal);
+            DecimalFormat formatoPrecioTotal=new DecimalFormat(mascaraCalculoTotal);
             //calculoTotalFinal=(formatoPrecioUnitario.format(temporal).replace(',','.'));
-            calculoTotalFinal=(formatoPrecioUnitario.format(temporal));
+            calculoTotalFinal=(formatoPrecioTotal.format(temporal));
         return calculoTotalFinal;
     }
-    private String decimalesTotalSalida(){
+    private String decimalesTotal(){
         String calculoTotalSalida;
         String mascaraCalculoTotal="###,###.";//para la mascara
         Double temporal;
