@@ -86,9 +86,9 @@ public class DatosdeGenerarExistencia implements JRDataSource{
             case "Descripcion" -> valor=descripcionArticulo.get(index);
             case "Medida" -> valor=descripcionUnidad.get(index);
             case "Cantidad" -> valor=cantidadesArticulos.get(index);
-            case "ValorUnitario" -> valor=decimalesPrecioUnitario(index);
             case "Total" -> valor=decimalesCalculoTotal(index);
-
+            case "totalBs" -> valor=decimalesTotal();
+            case "totalArticulos" -> valor=decimalesCantidad();
                        
         }
        
@@ -133,7 +133,7 @@ public class DatosdeGenerarExistencia implements JRDataSource{
         return calculoTotalFinal;
     }
     private String decimalesTotal(){
-        String calculoTotalSalida;
+        String calculoTotalExistencia;
         String mascaraCalculoTotal="###,###.";//para la mascara
         Double temporal;
         Double total=0.0;
@@ -149,8 +149,27 @@ public class DatosdeGenerarExistencia implements JRDataSource{
             }
             DecimalFormat formatoTotalSalida=new DecimalFormat(mascaraCalculoTotal);
             //calculoTotalSalida=(formatoTotalSalida.format(total).replace(',','.'));
-           calculoTotalSalida=(formatoTotalSalida.format(total));
-        return calculoTotalSalida;
+           calculoTotalExistencia=(formatoTotalSalida.format(total));
+        return calculoTotalExistencia;
+    }
+    private String decimalesCantidad(){
+        String calculoCantidadExistencia;
+        String mascaraCalculoTotal="###,###.";//para la mascara
+        Double total=0.0;
+            for(int i=0; i<cantidadesArticulos.size(); i++){
+                total+=cantidadesArticulos.get(i);
+                
+            }
+            
+            for(int i=0; i<decimalesCalculoTotal; i++)
+            {
+                mascaraCalculoTotal=mascaraCalculoTotal+("0");
+                
+            }
+            DecimalFormat formatoTotalSalida=new DecimalFormat(mascaraCalculoTotal);
+            //calculoTotalSalida=(formatoTotalSalida.format(total).replace(',','.'));
+           calculoCantidadExistencia=(formatoTotalSalida.format(total));
+        return calculoCantidadExistencia;
     }
     
 }
