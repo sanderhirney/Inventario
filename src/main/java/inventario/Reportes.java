@@ -7,6 +7,7 @@ import Reportes.GenerarExceF4;
 import Reportes.GenerarExistGeneral;
 import Reportes.ReporteExistencias;
 import Reportes.ReporteF157;
+import Reportes.ReporteModelo4;
 
 import javax.swing.JOptionPane;
 
@@ -253,12 +254,14 @@ ConexionEmpresas secciones=new ConexionEmpresas();
         }
         
        
-        GenerarExceF4 progress=new GenerarExceF4();
+      /*  GenerarExceF4 progress=new GenerarExceF4();
         Progreso.setVisible(true);
         progress.setFechaReporte(mes_reporte, anio_reporte);
         progress.setProgreso(Progreso);//paso la barra como parametro a la ventana de SwingWorker para que la actualice
         progress.setSeccion(seccion);
-        progress.execute();
+        progress.execute();*/
+      ReporteModelo4 modelo4=new ReporteModelo4();
+      modelo4.llamarReporte();
     
         }//else
     }//GEN-LAST:event_Boton_Modelo4ActionPerformed

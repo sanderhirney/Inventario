@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.20.6  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Modelo4" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6de4da5c-b7d3-48bd-a056-06b0c9198cca">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="Grupo" class="java.lang.String"/>
+	<field name="Descripcion" class="java.lang.String"/>
+	<field name="Cantidad" class="java.lang.Double"/>
+	<field name="Total" class="java.lang.String"/>
+	<field name="totalArticulos" class="java.lang.String"/>
+	<field name="totalBs" class="java.lang.String"/>
+	<group name="Grupo">
+		<groupExpression><![CDATA[$F{Grupo}]]></groupExpression>
+		<groupHeader>
+			<band height="50"/>
+		</groupHeader>
+		<groupFooter>
+			<band height="50"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="f92c73b7-40b6-477c-815b-d0d8b77a17f0"/>
+				<staticText>
+					<reportElement x="20" y="20" width="320" height="43" forecolor="#FFFFFF" uuid="08ab45f0-7425-4b94-b88c-fe50112b0f4a"/>
+					<textElement>
+						<font size="24" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Sistema de Inventario]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF" uuid="0688f1f6-fe8b-4f03-ac1e-4a80c9104b8d"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Existencias]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="27">
+			<staticText>
+				<reportElement x="0" y="2" width="70" height="20" uuid="ea4d8653-b1bd-4d72-85c6-cb5abcc2c6c1"/>
+				<text><![CDATA[Grupo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="78" y="2" width="270" height="20" uuid="f0198195-103c-454d-9b64-dc1bb5069673"/>
+				<text><![CDATA[Descripcion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="2" width="90" height="20" uuid="df38593f-b4b6-42d0-979a-45edddd72829"/>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="2" width="100" height="20" uuid="55f3c5ae-a294-44b9-bb30-5d59822f5ef6"/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28">
+			<frame>
+				<reportElement x="0" y="2" width="555" height="26" uuid="bcb901fd-bf74-41a3-8833-7c50735ac3bc"/>
+				<textField>
+					<reportElement x="8" y="3" width="70" height="18" uuid="0fb00d4d-9d12-4666-b7eb-5a8e478d2ddc">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7ef4a481-3c54-4bb9-9469-756f8d458d7a"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{Grupo}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="78" y="4" width="270" height="16" uuid="dff072c9-45a5-42a0-bb35-b5ef9b4deb6b">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="15a2952f-626b-4874-b014-67c500cc2b7d"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{Descripcion}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="360" y="5" width="87" height="14" uuid="c27617d6-ed8c-40db-95fe-8667af007dcf">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e304217d-b0f7-4425-a599-93fd2c0ac1c3"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{Cantidad}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="455" y="5" width="95" height="15" uuid="f64c25cc-df4b-41f1-822a-68a23ecd7711">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d63a87c1-1c0e-4627-b4f1-6f4b56db3206"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{Total}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="f0a76d0d-ec4d-4beb-9007-860c4d4d08e7"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="70115146-b77c-4b09-92f3-7050386b1ee0"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="ab13ae55-14ff-43e7-b0a8-b090ff47b944"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="43">
+			<staticText>
+				<reportElement x="8" y="20" width="100" height="15" uuid="eb164107-15ac-402a-8e65-53c2f8389956"/>
+				<text><![CDATA[Total Items:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="15" width="100" height="15" uuid="6232986e-f9b8-46b2-a9ce-022324c6832d"/>
+				<text><![CDATA[Total Bs:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="116" y="15" width="54" height="20" uuid="c76006fb-2110-4b71-88ca-ce7d24b603a0"/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="170" y="18" width="100" height="15" uuid="afa6f8c4-b929-4ac4-8f3e-eed3bb1a5cf0"/>
+				<text><![CDATA[Total Articulos:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="260" y="14" width="100" height="22" uuid="7f3c5c72-464a-4168-be63-9c21f2c07390"/>
+				<textFieldExpression><![CDATA[$F{totalArticulos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="471" y="15" width="100" height="15" uuid="857dbf0a-2d66-4fc3-a80b-083e51db141e"/>
+				<textFieldExpression><![CDATA[$F{totalBs}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
