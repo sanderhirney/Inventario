@@ -14,11 +14,20 @@ public class ConexionReporteModelo4 {
     Conexion conectar= new Conexion();
     ResultSet ejecutar;
     int resultado;
-   
+    int mesActualConsulta=0;
+    int mesInicio=1;
+    int seccion=0;
     List<String> codigo_subgrupo= new ArrayList<>();
     List<String> descripcion=new ArrayList<>();
     List<Integer> codigo_grupo=new ArrayList<>();
-    public void consulta()
+    List<Integer> codigoArticuloActual=new ArrayList<>();
+    List<Double> entradasMes=new ArrayList<>();
+    List<Double> salidasMes=new ArrayList<>();
+    List<Integer> codigoArticuloAnterior=new ArrayList<>();
+    List<Integer> codigoArticulosConsulta=new ArrayList<>();
+    List<Double> entradasAnterior=new ArrayList<>();
+    List<Double> salidasAnterior=new ArrayList<>();
+    private void consultaGrupos()
     {
           try
     {
@@ -41,6 +50,97 @@ public class ConexionReporteModelo4 {
         JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Grupos.\n Ventana Crear Reporte Grupos \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
     }
     }//consulta
+    private void consultaArticulos()
+    {
+          try
+    {
+        conectar.Conectar();
+        conex= conectar.getConexion();
+        consulta= conex.prepareStatement("""
+                                         select codigo, id_grupo, id_subgrupo from articulos order by 
+                                         id_grupo, id_subgrupo""");
+        ejecutar=consulta.executeQuery();
+        while( ejecutar.next())
+        {
+               codigoArticulosConsulta.add(ejecutar.getInt("codigo"));
+             
+               
+        }//if
+      
+       
+    }//consulta
+           catch(SQLException ex)
+    {
+        JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Grupos.\n Ventana Crear Reporte Grupos \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+    }
+    }//consulta
+    private void consultaHistorialesFechaActual()
+    {
+          try
+    {
+        conectar.Conectar();
+        conex= conectar.getConexion();
+        consulta= conex.prepareStatement("""
+                                         select cod_articulo, sum(valor_entrada) as ENTRADA, sum(valor_salida) as SALIDA
+                                         from historiales
+                                         where
+                                         extract(month from fecha)=?
+                                         and seccion=?
+                                         group by cod_articulo"""); 
+        consulta.setInt(1, mesActualConsulta );
+        consulta.setInt(2, seccion );
+        ejecutar=consulta.executeQuery();
+        while( ejecutar.next())
+        {
+               codigoArticuloActual.add(ejecutar.getInt("cod_articulo"));
+               entradasMes.add(ejecutar.getDouble("ENTRADA"));
+               salidasMes.add(ejecutar.getDouble("SALIDA"));
+               
+        }//if
+      
+       
+    }//consulta
+           catch(SQLException ex)
+    {
+        JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Grupos en el mes.\n Ventana Crear Reporte Grupos \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+    }
+    }//consulta
+     private void consultaHistorialesAnterior()
+    {
+          try
+    {
+        conectar.Conectar();
+        conex= conectar.getConexion();
+        consulta= conex.prepareStatement("""
+                                         select cod_articulo, sum(valor_entrada) as ENTRADA, sum(valor_salida) as SALIDA
+                                         from historiales
+                                         where
+                                         extract(month from fecha)between ? and ?
+                                         and seccion=?
+                                         group by cod_articulo
+                                         """); 
+        consulta.setInt(1, mesInicio );
+        consulta.setInt(1, mesActualConsulta - 1 );
+        consulta.setInt(2, seccion );
+        ejecutar=consulta.executeQuery();
+        while( ejecutar.next())
+        {
+               codigoArticuloAnterior.add(ejecutar.getInt("cod_articulo"));
+               entradasAnterior.add(ejecutar.getDouble("ENTRADA"));
+               salidasAnterior.add(ejecutar.getDouble("SALIDA"));
+               
+        }//if
+      
+       
+    }//consulta
+           catch(SQLException ex)
+    {
+        JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Grupos en el mes.\n Ventana Crear Reporte Grupos \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+    }
+    }//consulta
+     
+     //ya tengo los grupos, los articulos que pertenecen a cada grupo
+     //ahora me queda filtrar llois resultados por grupo de acuerdo al arituclo al que pertenezcan
     
     public int respuesta()
     {
