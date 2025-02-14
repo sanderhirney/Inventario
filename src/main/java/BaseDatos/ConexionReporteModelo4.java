@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 import javax.swing.JOptionPane;
 public class ConexionReporteModelo4 {
     Connection conex;
@@ -14,9 +15,9 @@ public class ConexionReporteModelo4 {
     Conexion conectar= new Conexion();
     ResultSet ejecutar;
     int resultado;
-    int mesActualConsulta=0;
+    int mesActualConsulta=11;
     int mesInicio=1;
-    int seccion=0;
+    int seccion=2;
     List<String> codigo_subgrupo= new ArrayList<>();
     List<String> descripcion=new ArrayList<>();
     List<Integer> codigo_grupo=new ArrayList<>();
@@ -27,6 +28,9 @@ public class ConexionReporteModelo4 {
     List<Integer> codigoArticulosConsulta=new ArrayList<>();
     List<Double> entradasAnterior=new ArrayList<>();
     List<Double> salidasAnterior=new ArrayList<>();
+    List<Integer> codigoGrupoArticulo=new ArrayList<>();
+    List<String> codigoSubGrupoArticulo=new ArrayList<>();
+    List<Double> totalEntradasMes=new ArrayList<>();
     private void consultaGrupos()
     {
           try
@@ -63,6 +67,8 @@ public class ConexionReporteModelo4 {
         while( ejecutar.next())
         {
                codigoArticulosConsulta.add(ejecutar.getInt("codigo"));
+               codigoGrupoArticulo.add(ejecutar.getInt("id_grupo"));
+               codigoSubGrupoArticulo.add(ejecutar.getString("id_subgrupo"));
              
                
         }//if
@@ -105,7 +111,7 @@ public class ConexionReporteModelo4 {
         JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Grupos en el mes.\n Ventana Crear Reporte Grupos \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
     }
     }//consulta
-     private void consultaHistorialesAnterior()
+     private void consultaHistorialesFechaAnterior()
     {
           try
     {
@@ -120,8 +126,8 @@ public class ConexionReporteModelo4 {
                                          group by cod_articulo
                                          """); 
         consulta.setInt(1, mesInicio );
-        consulta.setInt(1, mesActualConsulta - 1 );
-        consulta.setInt(2, seccion );
+        consulta.setInt(2, mesActualConsulta - 1 );
+        consulta.setInt(3, seccion );
         ejecutar=consulta.executeQuery();
         while( ejecutar.next())
         {
@@ -133,11 +139,38 @@ public class ConexionReporteModelo4 {
       
        
     }//consulta
+          
            catch(SQLException ex)
     {
         JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Grupos en el mes.\n Ventana Crear Reporte Grupos \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
     }
     }//consulta
+     
+     private void sumatorias(){
+         for(int i=0; i<codigo_grupo.size(); i++){
+             int temporal=0;
+             for(int j=0; j<codigoGrupoArticulo.size()-1; j++){
+                 if((codigo_grupo.get(i)==codigoGrupoArticulo.get(j)) && (codigo_subgrupo.get(i).equals(codigoSubGrupoArticulo.get(j)))){
+                 temporal+=1;
+             }
+                
+             }
+              totalEntradasMes.add(Double.valueOf(temporal));
+         }
+     }
+     
+    public void procesos() {
+        consultaGrupos();
+        consultaArticulos();
+        consultaHistorialesFechaActual();
+        consultaHistorialesFechaAnterior();
+        sumatorias();
+           
+            for(int x=0; x<totalEntradasMes.size(); x++){
+            System.out.println(codigo_grupo.get(x)+" - "+codigo_subgrupo.get(x)+" - > "+totalEntradasMes.get(x));
+}
+    }
+         
      
      //ya tengo los grupos, los articulos que pertenecen a cada grupo
      //ahora me queda filtrar llois resultados por grupo de acuerdo al arituclo al que pertenezcan

@@ -2,6 +2,7 @@ package inventario;
 
 import BaseDatos.ConexionControlDeInicio;
 import BaseDatos.ConexionEmpresas;
+import BaseDatos.ConexionReporteModelo4;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.io.File;
@@ -37,7 +38,9 @@ public class Ventana_Principal extends javax.swing.JFrame {
        Etiq_titulo.setText(nombre);
         }
              
-              
+       
+       ConexionReporteModelo4 modelo4=new ConexionReporteModelo4();
+                modelo4.procesos();
     }
 
     /**
