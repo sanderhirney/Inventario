@@ -151,7 +151,10 @@ public class ConexionReporteModelo4 {
              int temporal=0;
              for(int j=0; j<codigoGrupoArticulo.size()-1; j++){
                  if((codigo_grupo.get(i)==codigoGrupoArticulo.get(j)) && (codigo_subgrupo.get(i).equals(codigoSubGrupoArticulo.get(j)))){
-                 temporal+=1;
+                 
+                       temporal+=entradasMes.get(i);
+                 //ojo voy aqui debo serguir buscando la forma que sume por grupos
+                     
              }
                 
              }
