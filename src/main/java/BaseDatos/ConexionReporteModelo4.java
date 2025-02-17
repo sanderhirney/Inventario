@@ -153,11 +153,11 @@ public class ConexionReporteModelo4 {
                  if((codigo_grupo.get(i)==codigoGrupoArticulo.get(j)) && (codigo_subgrupo.get(i).equals(codigoSubGrupoArticulo.get(j)))){
                  
                        temporal+=entradasMes.get(i);
-                 //ojo voy aqui debo serguir buscando la forma que sume por grupos
+                 //ojo voy aqui debo serguir buscando la forma que sume por grupos pero debo buscar es por 
+                     System.out.println("J VALE -> "+j + "PARA I QUE VALE -> "+i);
                      
              }
-                
-             }
+            }
               totalEntradasMes.add(Double.valueOf(temporal));
          }
      }
