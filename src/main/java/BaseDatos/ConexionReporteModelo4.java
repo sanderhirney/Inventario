@@ -31,6 +31,16 @@ public class ConexionReporteModelo4 {
     List<Integer> codigoGrupoArticulo=new ArrayList<>();
     List<String> codigoSubGrupoArticulo=new ArrayList<>();
     List<Double> totalEntradasMes=new ArrayList<>();
+    String consulta_mes="""
+                        select gr.descripcion as DESCRIPCION, gr.codigo_grupo, gr.codigo_sub, SUM(h.valor_entrada) as ENTRADAS from grupos gr
+                        inner join articulos b on b.id_grupo=gr.codigo_grupo and b.id_subgrupo=gr.codigo_sub
+                        inner join historiales h on h.cod_articulo=b.codigo
+                        group by gr.descripcion, gr.codigo_grupo, gr.codigo_sub
+                        order by gr.codigo_grupo, gr.codigo_sub
+                        """;
+    
+    
+    
     private void consultaGrupos()
     {
           try
@@ -152,7 +162,7 @@ public class ConexionReporteModelo4 {
              for(int j=0; j<codigoGrupoArticulo.size()-1; j++){
                  if((codigo_grupo.get(i)==codigoGrupoArticulo.get(j)) && (codigo_subgrupo.get(i).equals(codigoSubGrupoArticulo.get(j)))){
                  
-                       temporal+=entradasMes.get(i);
+                       temporal+=1;
                  //ojo voy aqui debo serguir buscando la forma que sume por grupos pero debo buscar es por 
                      System.out.println("J VALE -> "+j + "PARA I QUE VALE -> "+i);
                      
@@ -171,7 +181,9 @@ public class ConexionReporteModelo4 {
            
             for(int x=0; x<totalEntradasMes.size(); x++){
             System.out.println(codigo_grupo.get(x)+" - "+codigo_subgrupo.get(x)+" - > "+totalEntradasMes.get(x));
-}
+
+            }
+            
     }
          
      
