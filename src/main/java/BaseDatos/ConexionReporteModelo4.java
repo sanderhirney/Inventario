@@ -31,78 +31,29 @@ public class ConexionReporteModelo4 {
     List<Integer> codigoGrupoArticulo=new ArrayList<>();
     List<String> codigoSubGrupoArticulo=new ArrayList<>();
     List<Double> totalEntradasMes=new ArrayList<>();
-    String consulta_mes="""
-                        select gr.descripcion as DESCRIPCION, gr.codigo_grupo, gr.codigo_sub, SUM(h.valor_entrada) as ENTRADAS from grupos gr
-                        inner join articulos b on b.id_grupo=gr.codigo_grupo and b.id_subgrupo=gr.codigo_sub
-                        inner join historiales h on h.cod_articulo=b.codigo
-                        group by gr.descripcion, gr.codigo_grupo, gr.codigo_sub
-                        order by gr.codigo_grupo, gr.codigo_sub
+    String consultaFechaActual="""
+                      select gr.descripcion as DESCRIPCION, gr.codigo_grupo, gr.codigo_sub, SUM(h.valor_entrada) as ENTRADAS from grupos gr
+                      inner join articulos b on b.id_grupo=gr.codigo_grupo and b.id_subgrupo=gr.codigo_sub
+                      inner join historiales h on h.cod_articulo=b.codigo
+                      and h.seccion='2'
+                      and extract(month from fecha)=02
+                      group by gr.descripcion, gr.codigo_grupo, gr.codigo_sub
+                      order by gr.codigo_grupo, gr.codigo_sub
                         """;
     
     
-    
-    private void consultaGrupos()
-    {
-          try
-    {
-        conectar.Conectar();
-        conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select codigo_grupo, codigo_sub, descripcion from grupos");
-        ejecutar=consulta.executeQuery();
-        while( ejecutar.next())
-        {
-               codigo_subgrupo.add(ejecutar.getString("codigo_sub"));
-               codigo_grupo.add(ejecutar.getInt("codigo_grupo"));
-               descripcion.add(ejecutar.getString("descripcion"));
-               
-        }//if
-      
-       
-    }//consulta
-           catch(SQLException ex)
-    {
-        JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Grupos.\n Ventana Crear Reporte Grupos \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
-    }
-    }//consulta
-    private void consultaArticulos()
-    {
-          try
-    {
-        conectar.Conectar();
-        conex= conectar.getConexion();
-        consulta= conex.prepareStatement("""
-                                         select codigo, id_grupo, id_subgrupo from articulos order by 
-                                         id_grupo, id_subgrupo""");
-        ejecutar=consulta.executeQuery();
-        while( ejecutar.next())
-        {
-               codigoArticulosConsulta.add(ejecutar.getInt("codigo"));
-               codigoGrupoArticulo.add(ejecutar.getInt("id_grupo"));
-               codigoSubGrupoArticulo.add(ejecutar.getString("id_subgrupo"));
-             
-               
-        }//if
-      
-       
-    }//consulta
-           catch(SQLException ex)
-    {
-        JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Grupos.\n Ventana Crear Reporte Grupos \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
-    }
-    }//consulta
     private void consultaHistorialesFechaActual()
     {
           try
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("""
-                                         select cod_articulo, sum(valor_entrada) as ENTRADA, sum(valor_salida) as SALIDA
-                                         from historiales
-                                         where
-                                         extract(month from fecha)=?
-                                         and seccion=?
-                                         group by cod_articulo"""); 
+        consulta= conex.prepareStatement(consultaFechaActual
+        
+        
+        
+        
+        ); 
         consulta.setInt(1, mesActualConsulta );
         consulta.setInt(2, seccion );
         ejecutar=consulta.executeQuery();
@@ -173,8 +124,7 @@ public class ConexionReporteModelo4 {
      }
      
     public void procesos() {
-        consultaGrupos();
-        consultaArticulos();
+        
         consultaHistorialesFechaActual();
         consultaHistorialesFechaAnterior();
         sumatorias();
