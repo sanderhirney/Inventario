@@ -35,11 +35,21 @@ public class ConexionReporteModelo4 {
                       select gr.descripcion as DESCRIPCION, gr.codigo_grupo, gr.codigo_sub, SUM(h.valor_entrada) as ENTRADAS from grupos gr
                       inner join articulos b on b.id_grupo=gr.codigo_grupo and b.id_subgrupo=gr.codigo_sub
                       inner join historiales h on h.cod_articulo=b.codigo
-                      and h.seccion='2'
-                      and extract(month from fecha)=02
+                      and h.seccion=?
+                      and extract(month from fecha)=?
                       group by gr.descripcion, gr.codigo_grupo, gr.codigo_sub
                       order by gr.codigo_grupo, gr.codigo_sub
                         """;
+    
+    String consultaFechaAnterior="""
+                                 select gr.descripcion as DESCRIPCION, gr.codigo_grupo, gr.codigo_sub, SUM(h.valor_entrada) as ENTRADAS from grupos gr
+                                 inner join articulos b on b.id_grupo=gr.codigo_grupo and b.id_subgrupo=gr.codigo_sub
+                                 inner join historiales h on h.cod_articulo=b.codigo
+                                 and h.seccion=?
+                                 and extract(month from fecha) between ? and ?
+                                 group by gr.descripcion, gr.codigo_grupo, gr.codigo_sub
+                                 order by gr.codigo_grupo, gr.codigo_sub
+                                 """;
     
     
     private void consultaHistorialesFechaActual()
@@ -48,12 +58,7 @@ public class ConexionReporteModelo4 {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement(consultaFechaActual
-        
-        
-        
-        
-        ); 
+        consulta= conex.prepareStatement(consultaFechaActual); 
         consulta.setInt(1, mesActualConsulta );
         consulta.setInt(2, seccion );
         ejecutar=consulta.executeQuery();
