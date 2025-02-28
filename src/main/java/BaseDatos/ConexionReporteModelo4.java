@@ -32,7 +32,7 @@ public class ConexionReporteModelo4 {
     List<String> codigoSubGrupoArticulo=new ArrayList<>();
     List<Double> totalEntradasMes=new ArrayList<>();
     String consultaFechaActual="""
-                      select gr.descripcion as DESCRIPCION, gr.codigo_grupo, gr.codigo_sub, SUM(h.valor_entrada) as ENTRADAS from grupos gr
+                      select gr.descripcion as DESCRIPCION, gr.codigo_grupo, gr.codigo_sub, SUM(h.valor_entrada) as ENTRADAS, SUM(h.valor_salida) as SALIDAS from grupos gr
                       inner join articulos b on b.id_grupo=gr.codigo_grupo and b.id_subgrupo=gr.codigo_sub
                       inner join historiales h on h.cod_articulo=b.codigo
                       and h.seccion=?
@@ -42,7 +42,7 @@ public class ConexionReporteModelo4 {
                         """;
     
     String consultaFechaAnterior="""
-                                 select gr.descripcion as DESCRIPCION, gr.codigo_grupo, gr.codigo_sub, SUM(h.valor_entrada) as ENTRADAS from grupos gr
+                                 select gr.descripcion as DESCRIPCION, gr.codigo_grupo, gr.codigo_sub, SUM(h.valor_entrada) as ENTRADAS, sum(h.valor_salida) as SALIDAS from grupos gr
                                  inner join articulos b on b.id_grupo=gr.codigo_grupo and b.id_subgrupo=gr.codigo_sub
                                  inner join historiales h on h.cod_articulo=b.codigo
                                  and h.seccion=?
@@ -52,21 +52,32 @@ public class ConexionReporteModelo4 {
                                  """;
     
     
-    private void consultaHistorialesFechaActual()
+    private void consultaHistorialesEntradaFechaActual()
     {
           try
     {
         conectar.Conectar();
         conex= conectar.getConexion();
         consulta= conex.prepareStatement(consultaFechaActual); 
-        consulta.setInt(1, mesActualConsulta );
-        consulta.setInt(2, seccion );
+        consulta.setInt(1, seccion );
+        if(mesActualConsulta==mesInicio){
+             consulta.setInt(2, mesActualConsulta );
+             consulta.setInt(3, mesInicio);
+        }else{
+            consulta.setInt(2, mesActualConsulta-1 );
+             consulta.setInt(3, mesInicio);
+        }         
+               
         ejecutar=consulta.executeQuery();
         while( ejecutar.next())
         {
-               codigoArticuloActual.add(ejecutar.getInt("cod_articulo"));
-               entradasMes.add(ejecutar.getDouble("ENTRADA"));
-               salidasMes.add(ejecutar.getDouble("SALIDA"));
+            
+               descripcion.add(ejecutar.getString("descripcion"));
+               codigo_grupo.add(ejecutar.getInt("codigo_grupo"));
+               codigo_subgrupo.add(ejecutar.getString("codigo_subgrupo"));
+               entradasMes.add(ejecutar.getDouble("entradas"));
+               salidasMes.add(ejecutar.getDouble("salidas"));
+              
                
         }//if
       
@@ -77,29 +88,24 @@ public class ConexionReporteModelo4 {
         JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Grupos en el mes.\n Ventana Crear Reporte Grupos \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
     }
     }//consulta
-     private void consultaHistorialesFechaAnterior()
+     private void consultaHistorialesEntradaFechaAnterior()
     {
           try
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("""
-                                         select cod_articulo, sum(valor_entrada) as ENTRADA, sum(valor_salida) as SALIDA
-                                         from historiales
-                                         where
-                                         extract(month from fecha)between ? and ?
-                                         and seccion=?
-                                         group by cod_articulo
-                                         """); 
+        consulta= conex.prepareStatement(consultaFechaAnterior); 
         consulta.setInt(1, mesInicio );
         consulta.setInt(2, mesActualConsulta - 1 );
         consulta.setInt(3, seccion );
         ejecutar=consulta.executeQuery();
         while( ejecutar.next())
         {
-               codigoArticuloAnterior.add(ejecutar.getInt("cod_articulo"));
-               entradasAnterior.add(ejecutar.getDouble("ENTRADA"));
-               salidasAnterior.add(ejecutar.getDouble("SALIDA"));
+               descripcion.add(ejecutar.getString("descripcion"));
+               codigo_grupo.add(ejecutar.getInt("codigo_grupo"));
+               codigo_subgrupo.add(ejecutar.getString("codigo_subgrupo"));
+               entradasAnterior.add(ejecutar.getDouble("entradas"));
+               salidasAnterior.add(ejecutar.getDouble("salidas"));
                
         }//if
       
@@ -130,8 +136,8 @@ public class ConexionReporteModelo4 {
      
     public void procesos() {
         
-        consultaHistorialesFechaActual();
-        consultaHistorialesFechaAnterior();
+        consultaHistorialesEntradaFechaActual();
+        consultaHistorialesEntradaFechaAnterior();
         sumatorias();
            
             for(int x=0; x<totalEntradasMes.size(); x++){
