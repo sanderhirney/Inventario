@@ -35,6 +35,8 @@ public class ConexionReporteModelo4 {
                       select gr.descripcion as DESCRIPCION, gr.codigo_grupo, gr.codigo_sub, SUM(h.valor_entrada) as ENTRADAS, SUM(h.valor_salida) as SALIDAS from grupos gr
                       inner join articulos b on b.id_grupo=gr.codigo_grupo and b.id_subgrupo=gr.codigo_sub
                       inner join historiales h on h.cod_articulo=b.codigo
+                      and gr.codigo_grupo=?
+                      and gr.codigo_sub=?
                       and h.seccion=?
                       and extract(month from fecha)=?
                       group by gr.descripcion, gr.codigo_grupo, gr.codigo_sub
@@ -45,47 +47,74 @@ public class ConexionReporteModelo4 {
                                  select gr.descripcion as DESCRIPCION, gr.codigo_grupo, gr.codigo_sub, SUM(h.valor_entrada) as ENTRADAS, sum(h.valor_salida) as SALIDAS from grupos gr
                                  inner join articulos b on b.id_grupo=gr.codigo_grupo and b.id_subgrupo=gr.codigo_sub
                                  inner join historiales h on h.cod_articulo=b.codigo
+                                 and gr.codigo_grupo=?
+                                 and gr.codigo_sub=?
                                  and h.seccion=?
                                  and extract(month from fecha) between ? and ?
                                  group by gr.descripcion, gr.codigo_grupo, gr.codigo_sub
                                  order by gr.codigo_grupo, gr.codigo_sub
                                  """;
     
-    
+    public void consultaGruposySubGrupos()
+    {
+          try
+    {
+        conectar.Conectar();
+        conex= conectar.getConexion();
+        consulta= conex.prepareStatement("select codigo_grupo, codigo_sub, descripcion from grupos");
+        ejecutar=consulta.executeQuery();
+        while( ejecutar.next())
+        {
+               codigo_subgrupo.add(ejecutar.getString("codigo_sub"));
+               codigo_grupo.add(ejecutar.getInt("codigo_grupo"));
+               descripcion.add(ejecutar.getString("descripcion"));
+              
+        }//if
+      
+       
+    }//consulta
+             catch(Exception e)
+    {
+           JOptionPane.showMessageDialog(null, "Error general.\n Ventana Crear Reporte Modelo 4- Consulta Grupos  \n Contacte al Desarrollador \n "+e ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);  
+    }
+    }
     private void consultaHistorialesEntradaFechaActual()
     {
           try
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement(consultaFechaActual); 
-        consulta.setInt(1, seccion );
-        if(mesActualConsulta==mesInicio){
-             consulta.setInt(2, mesActualConsulta );
-             consulta.setInt(3, mesInicio);
-        }else{
-            consulta.setInt(2, mesActualConsulta-1 );
-             consulta.setInt(3, mesInicio);
-        }         
+        for(int i=0; i<codigo_grupo.size(); i++){
                
-        ejecutar=consulta.executeQuery();
-        while( ejecutar.next())
-        {
+            consulta= conex.prepareStatement(consultaFechaActual); 
+            consulta.setInt(1, seccion );
+            if(mesActualConsulta==mesInicio){
+                 consulta.setInt(2, mesActualConsulta );
+                 consulta.setInt(3, mesInicio);
+            }else{
+                consulta.setInt(2, mesActualConsulta-1 );
+                 consulta.setInt(3, mesInicio);
+            }         
+
+            ejecutar=consulta.executeQuery();
+            if( ejecutar.next())
+            {
+
+
+                   entradasMes.add(ejecutar.getDouble("entradas"));
+                   salidasMes.add(ejecutar.getDouble("salidas"));
+
+
+            }else {
+                entradasMes.add(0.0);
+                salidasMes.add(0.0);
+            }
             
-               descripcion.add(ejecutar.getString("descripcion"));
-               codigo_grupo.add(ejecutar.getInt("codigo_grupo"));
-               codigo_subgrupo.add(ejecutar.getString("codigo_subgrupo"));
-               entradasMes.add(ejecutar.getDouble("entradas"));
-               salidasMes.add(ejecutar.getDouble("salidas"));
-              
-               
-        }//if
-      
-       
+        }//for
     }//consulta
            catch(SQLException ex)
     {
-        JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Grupos en el mes.\n Ventana Crear Reporte Grupos \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de consultas en el mes.\n Ventana Crear Reporte Modelo 4 \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
     }
     }//consulta
      private void consultaHistorialesEntradaFechaAnterior()
@@ -94,27 +123,30 @@ public class ConexionReporteModelo4 {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement(consultaFechaAnterior); 
-        consulta.setInt(1, mesInicio );
-        consulta.setInt(2, mesActualConsulta - 1 );
-        consulta.setInt(3, seccion );
-        ejecutar=consulta.executeQuery();
-        while( ejecutar.next())
-        {
-               descripcion.add(ejecutar.getString("descripcion"));
-               codigo_grupo.add(ejecutar.getInt("codigo_grupo"));
-               codigo_subgrupo.add(ejecutar.getString("codigo_subgrupo"));
-               entradasAnterior.add(ejecutar.getDouble("entradas"));
-               salidasAnterior.add(ejecutar.getDouble("salidas"));
-               
-        }//if
+        for(int i=0;i<codigo_grupo.size(); i++){
+            consulta= conex.prepareStatement(consultaFechaAnterior); 
+            consulta.setInt(1, mesInicio );
+            consulta.setInt(2, mesActualConsulta - 1 );
+            consulta.setInt(3, seccion );
+            ejecutar=consulta.executeQuery();
+            if( ejecutar.next())
+            {  
+                   entradasAnterior.add(ejecutar.getDouble("entradas"));
+                   salidasAnterior.add(ejecutar.getDouble("salidas"));
+
+            }else{
+                entradasAnterior.add(0.0);
+                salidasAnterior.add(0.0);
+            }
+        }
+       
       
        
     }//consulta
           
            catch(SQLException ex)
     {
-        JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Grupos en el mes.\n Ventana Crear Reporte Grupos \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de consulta en meses anteriores.\n Ventana Crear Reporte Modelo 4 \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
     }
     }//consulta
      
