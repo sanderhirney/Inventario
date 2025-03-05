@@ -167,7 +167,7 @@ public class ConexionReporteModelo4 {
      }
      
     public void procesos() {
-        
+        consultaGruposySubGrupos();       
         consultaHistorialesEntradaFechaActual();
         consultaHistorialesEntradaFechaAnterior();
         sumatorias();
@@ -182,7 +182,12 @@ public class ConexionReporteModelo4 {
      
      //ya tengo los grupos, los articulos que pertenecen a cada grupo
      //ahora me queda filtrar llois resultados por grupo de acuerdo al arituclo al que pertenezcan
-    
+    public void getMesConsulta(int mesRecibido) {
+        mesActualConsulta=mesRecibido;
+    }
+    public void getSeccion(int seccionRecibida){
+        seccion=seccionRecibida;
+    }
     public int respuesta()
     {
         return resultado;
