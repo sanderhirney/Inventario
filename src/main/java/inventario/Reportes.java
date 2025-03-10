@@ -260,6 +260,13 @@ ConexionEmpresas secciones=new ConexionEmpresas();
         progress.setProgreso(Progreso);//paso la barra como parametro a la ventana de SwingWorker para que la actualice
         progress.setSeccion(seccion);
         progress.execute();*/
+       ConexionDatosdeReporte datosReporte=new ConexionDatosdeReporte();
+       datosReporte.limpiar();
+       datosReporte.setAnio(anio_reporte);
+       datosReporte.setMesInicio(1);
+       datosReporte.setMesFin(mes_reporte);
+       datosReporte.setSeccion(seccion);
+       datosReporte.guardar();
       ReporteModelo4 modelo4=new ReporteModelo4();
       modelo4.llamarReporte();
     

@@ -26,7 +26,7 @@ public class ReporteModelo4 {
         try {
             InputStream report = ReporteEntrada.class.getResourceAsStream("/Existencias.jasper");
             JasperReport reporte = (JasperReport) JRLoader.loadObject(report);
-            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, DatosdeGenerarExistencia.getDataSource());
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, DatosdeGenerarModelo4.getDataSource());
             JasperViewer view = new JasperViewer(jprint, false);
             view.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             view.setAlwaysOnTop(true);

@@ -3,6 +3,7 @@ package Reportes;
 
 import BaseDatos.ConexionConsultarDecimales;
 import BaseDatos.ConexionReporteExistencias;
+import BaseDatos.ConexionReporteModelo4;
 import BaseDatos.ConexionReporteSalidas;
 import BaseDatos.ConexionVerSeccionActiva;
 import java.text.DecimalFormat;
@@ -35,7 +36,7 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         int codigoConcepto=0;
         String descripcionConcepto;
         int consecutivo=0;
-        ConexionReporteExistencias reporte=new ConexionReporteExistencias();
+        ConexionReporteModelo4 reporte=new ConexionReporteModelo4();
         ConexionConsultarDecimales decimales=new ConexionConsultarDecimales();
         ConexionVerSeccionActiva seccionActiva=new ConexionVerSeccionActiva();
         
@@ -44,18 +45,7 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         seccionActiva.consulta();
         codigoSeccion=seccionActiva.codigo();
         reporte.setSeccion(codigoSeccion);
-        reporte.consultas();
-        codigoArticulos=reporte.getCodigosArticulos();
-        descripcionArticulo=reporte.getDescripcionArticulos();
-        cantidadesArticulos=reporte.getCantidadesArticulos();
-        costoArticulos=reporte.getCostosArticulos();
-        descripcionUnidad=reporte.getMedida();
-        grupo=reporte.getGrupo();
-        subgrupo=reporte.getSubgrupo();
-        fechaDocumento=reporte.getFecha();
-        codigoConcepto=reporte.getCodigoConcepto();
-        descripcionConcepto=reporte.getDescripcionConcepto();
-        consecutivo=reporte.getConsecutivo();
+        
       
         index=-1;
        
@@ -64,7 +54,7 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         decimales.consulta();
         decimalesPrecioUnitario=decimales.getDecimalCampo();
         decimalesCalculoTotal=decimales.getDecimalTotal();
-        System.out.println("Cantidad de codigoArticulos es________ "+codigoArticulos.size());
+        
                 
         
     }
