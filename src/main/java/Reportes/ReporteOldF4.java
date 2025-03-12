@@ -14,7 +14,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
 
-public class ReporteF4 {
+public class ReporteOldF4 {
     
     public void llamarReporte(){
         
@@ -31,7 +31,7 @@ public class ReporteF4 {
             view.setAlwaysOnTop(true);
             view.setVisible(true);
              } catch (JRException ex) {
-            Logger.getLogger(ReporteF4.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReporteOldF4.class.getName()).log(Level.SEVERE, null, ex);
             }
         catch(Exception e){
             JOptionPane.showMessageDialog(null, "Se ha producido un error al cargar el reporte" + "\n" + e , "Error", JOptionPane.ERROR_MESSAGE);

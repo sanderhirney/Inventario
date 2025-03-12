@@ -15,9 +15,11 @@ public class ConexionReporteModelo4 {
     Conexion conectar= new Conexion();
     ResultSet ejecutar;
     int resultado;
-    int mesActualConsulta=11;
-    int mesInicio=1;
-    int seccion=2;
+    int mesActualConsulta=0;
+    int mesInicio=0;
+    int seccion=0;
+    int anioConsulta=0;
+    int codigoAlmacen=0;
     List<String> codigo_subgrupo= new ArrayList<>();
     List<String> descripcion=new ArrayList<>();
     List<Integer> codigo_grupo=new ArrayList<>();
@@ -39,6 +41,7 @@ public class ConexionReporteModelo4 {
                       and gr.codigo_sub=?
                       and h.seccion=?
                       and extract(month from fecha)=?
+                      and extract(year from fecha)=?
                       group by gr.descripcion, gr.codigo_grupo, gr.codigo_sub
                       order by gr.codigo_grupo, gr.codigo_sub
                         """;
@@ -51,6 +54,7 @@ public class ConexionReporteModelo4 {
                                  and gr.codigo_sub=?
                                  and h.seccion=?
                                  and extract(month from fecha) between ? and ?
+                                 and extract(year from fecha)=?
                                  group by gr.descripcion, gr.codigo_grupo, gr.codigo_sub
                                  order by gr.codigo_grupo, gr.codigo_sub
                                  """;
@@ -87,13 +91,17 @@ public class ConexionReporteModelo4 {
         for(int i=0; i<codigo_grupo.size(); i++){
                
             consulta= conex.prepareStatement(consultaFechaActual); 
-            consulta.setInt(1, seccion );
+            consulta.setInt(1, codigo_grupo.get(i));
+            consulta.setString(2, codigo_subgrupo.get(i));
+            consulta.setInt(3, seccion );
             if(mesActualConsulta==mesInicio){
-                 consulta.setInt(2, mesActualConsulta );
-                 consulta.setInt(3, mesInicio);
+                 consulta.setInt(4, mesActualConsulta );
+                 consulta.setInt(5, mesInicio);
+                 consulta.setInt(6, anioConsulta);
             }else{
-                consulta.setInt(2, mesActualConsulta-1 );
-                 consulta.setInt(3, mesInicio);
+                consulta.setInt(4, mesActualConsulta-1 );
+                 consulta.setInt(5, mesInicio);
+                 consulta.setInt(6,anioConsulta);
             }         
 
             ejecutar=consulta.executeQuery();
@@ -125,9 +133,12 @@ public class ConexionReporteModelo4 {
         conex= conectar.getConexion();
         for(int i=0;i<codigo_grupo.size(); i++){
             consulta= conex.prepareStatement(consultaFechaAnterior); 
-            consulta.setInt(1, mesInicio );
-            consulta.setInt(2, mesActualConsulta - 1 );
-            consulta.setInt(3, seccion );
+             consulta.setInt(1, codigo_grupo.get(i));
+            consulta.setString(2, codigo_subgrupo.get(i));
+            consulta.setInt(3, mesInicio );
+            consulta.setInt(4, mesActualConsulta - 1 );
+            consulta.setInt(5, seccion );
+            consulta.setInt(6, anioConsulta);
             ejecutar=consulta.executeQuery();
             if( ejecutar.next())
             {  
@@ -150,27 +161,50 @@ public class ConexionReporteModelo4 {
     }
     }//consulta
      
-     private void sumatorias(){
-         for(int i=0; i<codigo_grupo.size(); i++){
-             int temporal=0;
-             for(int j=0; j<codigoGrupoArticulo.size()-1; j++){
-                 if((codigo_grupo.get(i)==codigoGrupoArticulo.get(j)) && (codigo_subgrupo.get(i).equals(codigoSubGrupoArticulo.get(j)))){
-                 
-                       temporal+=1;
-                 //ojo voy aqui debo serguir buscando la forma que sume por grupos pero debo buscar es por 
-                     System.out.println("J VALE -> "+j + "PARA I QUE VALE -> "+i);
-                     
-             }
+     private  void consultarDatosReporte(){
+        try{
+            conectar.Conectar();
+            conex= conectar.getConexion();
+            consulta= conex.prepareStatement("select seccion, mesinicio, mesfin, anio from datosreportes");
+            ejecutar=consulta.executeQuery();
+            while(ejecutar.next()){
+              seccion=ejecutar.getInt("seccion");
+              mesInicio=ejecutar.getInt("mesinicio");
+              mesActualConsulta=ejecutar.getInt("mesfin");
+              anioConsulta=ejecutar.getInt("anio");
             }
-              totalEntradasMes.add(Double.valueOf(temporal));
-         }
-     }
+            
+            conectar.Cerrar();
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Consulta de Datos del reporte.\n Ventana Crear Reporte Modelo 04 \n Contacte al Desarrollador \n "+e ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+     
+    private void codigoAlmacen(){
+          try{
+            conectar.Conectar();
+            conex= conectar.getConexion();
+            consulta= conex.prepareStatement("select codigo_almacen where tipo=1");//tipo 1 es el almacen de despacho osea el actual
+            ejecutar=consulta.executeQuery();
+            while(ejecutar.next()){
+              codigoAlmacen=ejecutar.getInt("codigo_almacen");
+           
+            }
+            
+            conectar.Cerrar();
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Consulta de Datos del reporte.\n Ventana Crear Reporte Modelo 04 \n Contacte al Desarrollador \n "+e ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+        }
+    }
      
     public void procesos() {
-        consultaGruposySubGrupos();       
+        consultaGruposySubGrupos();     
+        consultarDatosReporte();
         consultaHistorialesEntradaFechaActual();
         consultaHistorialesEntradaFechaAnterior();
-        sumatorias();
+    
            
             for(int x=0; x<totalEntradasMes.size(); x++){
             System.out.println(codigo_grupo.get(x)+" - "+codigo_subgrupo.get(x)+" - > "+totalEntradasMes.get(x));
@@ -184,6 +218,9 @@ public class ConexionReporteModelo4 {
      //ahora me queda filtrar llois resultados por grupo de acuerdo al arituclo al que pertenezcan
     public void setMesConsulta(int mesRecibido) {
         mesActualConsulta=mesRecibido;
+    }
+    public void setAnioConsulta(int anioRecibido){
+        anioConsulta=anioRecibido;
     }
     public void setSeccion(int seccionRecibida){
         seccion=seccionRecibida;

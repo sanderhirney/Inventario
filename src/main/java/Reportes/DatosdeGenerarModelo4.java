@@ -2,9 +2,7 @@
 package Reportes;
 
 import BaseDatos.ConexionConsultarDecimales;
-import BaseDatos.ConexionReporteExistencias;
 import BaseDatos.ConexionReporteModelo4;
-import BaseDatos.ConexionReporteSalidas;
 import BaseDatos.ConexionVerSeccionActiva;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -28,14 +26,15 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
   
         String nombreSeccion;
         int codigoSeccion;
-        String proveedor;
+        String codigoGrupos;
+        String codigoAlmacen;
         Date fechaDocumento;
-        String documento;
+        String nombreMes;
         int decimalesPrecioUnitario;
         int decimalesCalculoTotal;
-        int codigoConcepto=0;
-        String descripcionConcepto;
-        int consecutivo=0;
+        int mesDelReporte=0;
+        String denominacion;
+      
         ConexionReporteModelo4 reporte=new ConexionReporteModelo4();
         ConexionConsultarDecimales decimales=new ConexionConsultarDecimales();
         ConexionVerSeccionActiva seccionActiva=new ConexionVerSeccionActiva();
@@ -160,6 +159,29 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
             //calculoTotalSalida=(formatoTotalSalida.format(total).replace(',','.'));
            calculoCantidadExistencia=(formatoTotalSalida.format(total));
         return calculoCantidadExistencia;
+    }
+    
+    private String mesReporte(int mesDelReporte ){
+        String nombreMes="";
+        switch(mesDelReporte)
+        {
+            case 1 -> nombreMes="Enero";
+            case 2 -> nombreMes="Febrero";
+            case 3 -> nombreMes="Marzo";
+            case 4 -> nombreMes="Abril";
+            case 5 -> nombreMes="Mayo";
+            case 6 -> nombreMes="Junio";
+            case 7 -> nombreMes="Julio";
+            case 8 -> nombreMes="Agosto";
+            case 9 -> nombreMes="Septiembre";
+            case 10 -> nombreMes="Octubre";
+            case 11 -> nombreMes="Noviembre";
+            case 12 -> nombreMes="Diciembre";
+                 
+        }
+        
+        return nombreMes;
+        
     }
     
 }
