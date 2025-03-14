@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 import javax.swing.JOptionPane;
 public class ConexionReporteModelo4 {
     Connection conex;
@@ -19,7 +18,7 @@ public class ConexionReporteModelo4 {
     int mesInicio=0;
     int seccion=0;
     int anioConsulta=0;
-    int codigoAlmacen=0;
+    String codigoAlmacen;
     List<String> codigo_subgrupo= new ArrayList<>();
     List<String> descripcion=new ArrayList<>();
     List<Integer> codigo_grupo=new ArrayList<>();
@@ -188,7 +187,7 @@ public class ConexionReporteModelo4 {
             consulta= conex.prepareStatement("select codigo_almacen where tipo=1");//tipo 1 es el almacen de despacho osea el actual
             ejecutar=consulta.executeQuery();
             while(ejecutar.next()){
-              codigoAlmacen=ejecutar.getInt("codigo_almacen");
+              codigoAlmacen=ejecutar.getString("codigo_almacen");
            
             }
             
@@ -216,32 +215,39 @@ public class ConexionReporteModelo4 {
      
      //ya tengo los grupos, los articulos que pertenecen a cada grupo
      //ahora me queda filtrar llois resultados por grupo de acuerdo al arituclo al que pertenezcan
-    public void setMesConsulta(int mesRecibido) {
-        mesActualConsulta=mesRecibido;
-    }
-    public void setAnioConsulta(int anioRecibido){
-        anioConsulta=anioRecibido;
-    }
-    public void setSeccion(int seccionRecibida){
-        seccion=seccionRecibida;
-    }
-    public int respuesta()
+  
+    
+    public int getRespuesta()
     {
         return resultado;
     }
-    public List<String> subgrupo()
+    public List<String> getSubgrupo()
     {
         return codigo_subgrupo;
     }
-    public List<Integer> grupo()
+    public List<Integer> getGrupo()
     {
         return codigo_grupo;
     }
-    public List<String> descripcion()
+    public List<String> getDescripcion()
     {
         return descripcion;
     }
-    
+    public List<Double> getEntradasAnterior(){
+        return entradasAnterior;
+    }
+    public List<Double> getSalidasAnterior(){
+        return salidasAnterior;
+    } 
+    public List<Double> getEntradasMes(){
+        return entradasMes;
+    }
+    public List<Double> getSalidasMes(){
+        return salidasMes;
+    } 
+    public String getCodigoAlmacen(){
+        return codigoAlmacen;
+    }
    
    
 }//clase

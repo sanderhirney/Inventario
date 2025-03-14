@@ -16,17 +16,22 @@ import net.sf.jasperreports.engine.JRField;
 
 public class DatosdeGenerarModelo4 implements JRDataSource{
         private int index;
-        List<String> subgrupo=new ArrayList<>();
-        List<Integer> grupo=new ArrayList<>();
+        List<String> codigoSubgrupos=new ArrayList<>();
+        List<Integer> codigoGrupos=new ArrayList<>();
         List<Double> cantidadesArticulos=new ArrayList<>();
         List<Double> costoArticulos=new ArrayList<>();
         List<String> descripcionArticulo=new ArrayList<>();
         List<Integer> codigoArticulos=new ArrayList<>();
         List<String> descripcionUnidad=new ArrayList<>();
+        
+        List<Double> entradasMes=new ArrayList<>();
+        List<Double> entradasAnterior=new ArrayList<>();
+        List<Double> salidasMes=new ArrayList<>();
+        List<Double> salidasAnterior=new ArrayList<>();
   
         String nombreSeccion;
         int codigoSeccion;
-        String codigoGrupos;
+        
         String codigoAlmacen;
         Date fechaDocumento;
         String nombreMes;
@@ -43,17 +48,20 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
          
         seccionActiva.consulta();
         codigoSeccion=seccionActiva.codigo();
-        reporte.setSeccion(codigoSeccion);
-        
-      
-        index=-1;
        
-        
+        index=-1;
+      
         decimales.setSeccion(codigoSeccion);
         decimales.consulta();
         decimalesPrecioUnitario=decimales.getDecimalCampo();
         decimalesCalculoTotal=decimales.getDecimalTotal();
         
+        codigoGrupos=reporte.getGrupo();
+        codigoSubgrupos=reporte.getSubgrupo();
+        entradasMes=reporte.getEntradasMes();
+        entradasAnterior=reporte.getEntradasAnterior();
+        salidasMes=reporte.getSalidasMes();
+        salidasAnterior=reporte.getSalidasAnterior();
                 
         
     }
@@ -71,7 +79,7 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         String campo=jrf.getName();
         switch(campo)
         {
-            case "Grupo" -> valor=grupo.get(index).toString()+"-"+subgrupo.get(index);
+            case "Grupo" -> valor=codigoGrupos.get(index).toString()+"-"+codigoSubgrupos.get(index);
             case "Descripcion" -> valor=descripcionArticulo.get(index);
             case "Medida" -> valor=descripcionUnidad.get(index);
             case "Cantidad" -> valor=cantidadesArticulos.get(index);
