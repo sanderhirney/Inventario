@@ -267,8 +267,8 @@ ConexionEmpresas secciones=new ConexionEmpresas();
        datosReporte.setMesFin(mes_reporte);
        datosReporte.setSeccion(seccion);
        datosReporte.guardar();
-      ReporteModelo4 modelo4=new ReporteModelo4();
-      modelo4.llamarReporte();
+       ReporteModelo4 modelo4=new ReporteModelo4();
+       modelo4.llamarReporte();
     
         }//else
     }//GEN-LAST:event_Boton_Modelo4ActionPerformed

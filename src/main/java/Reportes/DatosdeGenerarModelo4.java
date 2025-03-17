@@ -28,6 +28,7 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         List<Double> entradasAnterior=new ArrayList<>();
         List<Double> salidasMes=new ArrayList<>();
         List<Double> salidasAnterior=new ArrayList<>();
+        List<String> descripcionGrupo=new ArrayList<>();
   
         String nombreSeccion;
         int codigoSeccion;
@@ -58,10 +59,12 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         
         codigoGrupos=reporte.getGrupo();
         codigoSubgrupos=reporte.getSubgrupo();
+        descripcionGrupo=reporte.getDescripcion();
         entradasMes=reporte.getEntradasMes();
         entradasAnterior=reporte.getEntradasAnterior();
         salidasMes=reporte.getSalidasMes();
         salidasAnterior=reporte.getSalidasAnterior();
+        codigoAlmacen=reporte.getCodigoAlmacen();
                 
         
     }
@@ -80,7 +83,7 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         switch(campo)
         {
             case "Grupo" -> valor=codigoGrupos.get(index).toString()+"-"+codigoSubgrupos.get(index);
-            case "Descripcion" -> valor=descripcionArticulo.get(index);
+            case "Descripcion" -> valor=descripcionGrupo.get(index);
             case "Medida" -> valor=descripcionUnidad.get(index);
             case "Cantidad" -> valor=cantidadesArticulos.get(index);
             case "Total" -> valor=decimalesCalculoTotal(index);
