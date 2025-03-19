@@ -41,7 +41,7 @@
 	<columnHeader>
 		<band height="27">
 			<staticText>
-				<reportElement x="0" y="2" width="70" height="20" uuid="ea4d8653-b1bd-4d72-85c6-cb5abcc2c6c1"/>
+				<reportElement x="0" y="0" width="70" height="22" uuid="ea4d8653-b1bd-4d72-85c6-cb5abcc2c6c1"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
@@ -49,39 +49,40 @@
 Grupos]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="70" y="3" width="162" height="20" uuid="f0198195-103c-454d-9b64-dc1bb5069673"/>
+				<reportElement x="70" y="0" width="162" height="22" uuid="f0198195-103c-454d-9b64-dc1bb5069673"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Denominaciòn]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="370" y="2" width="90" height="20" uuid="df38593f-b4b6-42d0-979a-45edddd72829"/>
+				<reportElement x="390" y="2" width="90" height="20" uuid="df38593f-b4b6-42d0-979a-45edddd72829"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
-				<text><![CDATA[Cantidad]]></text>
+				<text><![CDATA[Consumidos en el mes]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="455" y="2" width="100" height="20" uuid="55f3c5ae-a294-44b9-bb30-5d59822f5ef6"/>
+				<reportElement x="480" y="2" width="74" height="20" uuid="55f3c5ae-a294-44b9-bb30-5d59822f5ef6"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Existencia a fin de Mes]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="230" y="0" width="90" height="20" uuid="d2985780-d0d2-4f0b-b217-1dc935d590a9"/>
+				<reportElement x="232" y="0" width="88" height="22" uuid="d2985780-d0d2-4f0b-b217-1dc935d590a9"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Existencia Anterior]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="320" y="3" width="90" height="20" uuid="44ee862a-b878-4ce3-b875-ecc54e3a4856"/>
+				<reportElement x="320" y="0" width="70" height="22" uuid="44ee862a-b878-4ce3-b875-ecc54e3a4856"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
-				<text><![CDATA[Entradas al desposito]]></text>
+				<text><![CDATA[Entradas al 
+deposito]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
