@@ -7,10 +7,11 @@
 	</queryString>
 	<field name="Grupo" class="java.lang.String"/>
 	<field name="Descripcion" class="java.lang.String"/>
-	<field name="Cantidad" class="java.lang.Double"/>
-	<field name="Total" class="java.lang.String"/>
+	<field name="ConsumidosMes" class="java.lang.Double"/>
+	<field name="TotalExistencias" class="java.lang.String"/>
 	<field name="totalArticulos" class="java.lang.String"/>
-	<field name="totalBs" class="java.lang.String"/>
+	<field name="ExistenciaAnterior" class="java.lang.String"/>
+	<field name="EntradasDeposito" class="java.lang.String"/>
 	<background>
 		<band/>
 	</background>
@@ -42,7 +43,7 @@
 		<band height="27">
 			<staticText>
 				<reportElement x="0" y="0" width="70" height="22" uuid="ea4d8653-b1bd-4d72-85c6-cb5abcc2c6c1"/>
-				<textElement>
+				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Codigo 
@@ -50,35 +51,35 @@ Grupos]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="70" y="0" width="162" height="22" uuid="f0198195-103c-454d-9b64-dc1bb5069673"/>
-				<textElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Denominaciòn]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="390" y="2" width="90" height="20" uuid="df38593f-b4b6-42d0-979a-45edddd72829"/>
-				<textElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Consumidos en el mes]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="480" y="2" width="74" height="20" uuid="55f3c5ae-a294-44b9-bb30-5d59822f5ef6"/>
-				<textElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Existencia a fin de Mes]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="232" y="0" width="88" height="22" uuid="d2985780-d0d2-4f0b-b217-1dc935d590a9"/>
-				<textElement>
+				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Existencia Anterior]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="320" y="0" width="70" height="22" uuid="44ee862a-b878-4ce3-b875-ecc54e3a4856"/>
-				<textElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Entradas al 
@@ -91,28 +92,46 @@ deposito]]></text>
 			<frame>
 				<reportElement x="0" y="2" width="555" height="26" uuid="bcb901fd-bf74-41a3-8833-7c50735ac3bc"/>
 				<textField>
-					<reportElement x="8" y="3" width="70" height="18" uuid="0fb00d4d-9d12-4666-b7eb-5a8e478d2ddc">
+					<reportElement x="0" y="3" width="70" height="18" uuid="0fb00d4d-9d12-4666-b7eb-5a8e478d2ddc">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7ef4a481-3c54-4bb9-9469-756f8d458d7a"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[$F{Grupo}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="78" y="4" width="270" height="16" uuid="dff072c9-45a5-42a0-bb35-b5ef9b4deb6b">
+					<reportElement x="70" y="4" width="162" height="16" uuid="dff072c9-45a5-42a0-bb35-b5ef9b4deb6b">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="15a2952f-626b-4874-b014-67c500cc2b7d"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[$F{Descripcion}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="360" y="5" width="87" height="14" uuid="c27617d6-ed8c-40db-95fe-8667af007dcf">
+					<reportElement x="392" y="5" width="87" height="14" uuid="c27617d6-ed8c-40db-95fe-8667af007dcf">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e304217d-b0f7-4425-a599-93fd2c0ac1c3"/>
 					</reportElement>
-					<textFieldExpression><![CDATA[$F{Cantidad}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{ConsumidosMes}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="455" y="5" width="95" height="15" uuid="f64c25cc-df4b-41f1-822a-68a23ecd7711">
+					<reportElement x="484" y="5" width="70" height="15" uuid="f64c25cc-df4b-41f1-822a-68a23ecd7711">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d63a87c1-1c0e-4627-b4f1-6f4b56db3206"/>
 					</reportElement>
-					<textFieldExpression><![CDATA[$F{Total}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{TotalExistencias}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="232" y="3" width="88" height="17" uuid="80b2e04f-dbf8-4dbd-afd3-d87bf328c08d">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="20044db3-dfa2-41a3-a5ef-f0912190ba5a"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{ExistenciaAnterior}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="340" y="141" width="100" height="30" uuid="9814e7e8-13d2-4269-b8cc-4ee7b346df2e">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="499007eb-3f90-4770-aff8-8c9747fb67e9"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{EntradasDeposito}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="320" y="3" width="72" height="16" uuid="2c8977fd-7070-4929-87a5-832a6fdc4552">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b65ae7a3-6e17-403a-9207-08017046078e"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{EntradasDeposito}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
@@ -161,7 +180,7 @@ deposito]]></text>
 			</textField>
 			<textField>
 				<reportElement x="471" y="15" width="100" height="15" uuid="857dbf0a-2d66-4fc3-a80b-083e51db141e"/>
-				<textFieldExpression><![CDATA[$F{totalBs}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{ExistenciaAnterior}]]></textFieldExpression>
 			</textField>
 		</band>
 	</lastPageFooter>

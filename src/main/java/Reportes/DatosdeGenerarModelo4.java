@@ -84,11 +84,10 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         {
             case "Grupo" -> valor=codigoGrupos.get(index).toString()+"-"+codigoSubgrupos.get(index);
             case "Descripcion" -> valor=descripcionGrupo.get(index);
-            case "Medida" -> valor=descripcionUnidad.get(index);
-            case "Cantidad" -> valor=cantidadesArticulos.get(index);
-            case "Total" -> valor=decimalesCalculoTotal(index);
-            case "totalBs" -> valor=decimalesTotal();
-            case "totalArticulos" -> valor=decimalesCantidad();
+            case "ExistenciaAnterior" -> valor=entradasAnterior.get(index)-salidasAnterior.get(index);
+            case "EntradasDeposito" -> valor=entradasMes.get(index);
+            case "ConsumidosMes" -> valor=salidasMes.get(index);
+            
                        
         }
        

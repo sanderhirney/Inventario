@@ -39,8 +39,7 @@ public class Ventana_Principal extends javax.swing.JFrame {
         }
              
        
-       ConexionReporteModelo4 modelo4=new ConexionReporteModelo4();
-                modelo4.procesos();
+      
     }
 
     /**
