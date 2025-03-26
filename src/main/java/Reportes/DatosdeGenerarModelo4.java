@@ -56,7 +56,7 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         decimales.consulta();
         decimalesPrecioUnitario=decimales.getDecimalCampo();
         decimalesCalculoTotal=decimales.getDecimalTotal();
-        
+        reporte.procesos();
         codigoGrupos=reporte.getGrupo();
         codigoSubgrupos=reporte.getSubgrupo();
         descripcionGrupo=reporte.getDescripcion();

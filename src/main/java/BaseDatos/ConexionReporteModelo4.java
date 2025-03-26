@@ -81,7 +81,7 @@ public class ConexionReporteModelo4 {
            JOptionPane.showMessageDialog(null, "Error general.\n Ventana Crear Reporte Modelo 4- Consulta Grupos  \n Contacte al Desarrollador \n "+e ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);  
     }
     }
-    private void consultaHistorialesEntradaFechaActual()
+    private void consultaHistorialesFechaActual()
     {
           try
     {
@@ -95,12 +95,10 @@ public class ConexionReporteModelo4 {
             consulta.setInt(3, seccion );
             if(mesActualConsulta==mesInicio){
                  consulta.setInt(4, mesActualConsulta );
-                 consulta.setInt(5, mesInicio);
-                 consulta.setInt(6, anioConsulta);
+                 consulta.setInt(5, anioConsulta);
             }else{
                 consulta.setInt(4, mesActualConsulta-1 );
-                 consulta.setInt(5, mesInicio);
-                 consulta.setInt(6,anioConsulta);
+                consulta.setInt(5,anioConsulta);
             }         
 
             ejecutar=consulta.executeQuery();
@@ -124,7 +122,7 @@ public class ConexionReporteModelo4 {
         JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de consultas en el mes.\n Ventana Crear Reporte Modelo 4 \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
     }
     }//consulta
-     private void consultaHistorialesEntradaFechaAnterior()
+     private void consultaHistorialesFechaAnterior()
     {
           try
     {
@@ -184,7 +182,7 @@ public class ConexionReporteModelo4 {
           try{
             conectar.Conectar();
             conex= conectar.getConexion();
-            consulta= conex.prepareStatement("select codigo_almacen where tipo=1");//tipo 1 es el almacen de despacho osea el actual
+            consulta= conex.prepareStatement("select codigo_almacen from almacenes where tipo=1");//tipo 1 es el almacen de despacho osea el actual
             ejecutar=consulta.executeQuery();
             while(ejecutar.next()){
               codigoAlmacen=ejecutar.getString("codigo_almacen");
@@ -194,19 +192,20 @@ public class ConexionReporteModelo4 {
             conectar.Cerrar();
         }
         catch(SQLException e){
-            JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Consulta de Datos del reporte.\n Ventana Crear Reporte Modelo 04 \n Contacte al Desarrollador \n "+e ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Consulta de Datos del almacen.\n Ventana Crear Reporte Modelo 04 \n Contacte al Desarrollador \n "+e ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
         }
     }
      
     public void procesos() {
         consultaGruposySubGrupos();     
         consultarDatosReporte();
-        consultaHistorialesEntradaFechaActual();
-        consultaHistorialesEntradaFechaAnterior();
+        consultaHistorialesFechaActual();
+        consultaHistorialesFechaAnterior();
+        codigoAlmacen();
     
            
-            for(int x=0; x<totalEntradasMes.size(); x++){
-            System.out.println(codigo_grupo.get(x)+" - "+codigo_subgrupo.get(x)+" - > "+totalEntradasMes.get(x));
+            for(int x=0; x<entradasMes.size(); x++){
+            System.out.println(codigo_grupo.get(x)+" - "+codigo_subgrupo.get(x)+" - > "+entradasMes.get(x));
 
             }
             

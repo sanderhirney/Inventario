@@ -122,12 +122,6 @@ deposito]]></text>
 					<textFieldExpression><![CDATA[$F{ExistenciaAnterior}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="340" y="141" width="100" height="30" uuid="9814e7e8-13d2-4269-b8cc-4ee7b346df2e">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="499007eb-3f90-4770-aff8-8c9747fb67e9"/>
-					</reportElement>
-					<textFieldExpression><![CDATA[$F{EntradasDeposito}]]></textFieldExpression>
-				</textField>
-				<textField>
 					<reportElement x="320" y="3" width="72" height="16" uuid="2c8977fd-7070-4929-87a5-832a6fdc4552">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b65ae7a3-6e17-403a-9207-08017046078e"/>
 					</reportElement>
