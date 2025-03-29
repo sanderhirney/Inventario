@@ -13,7 +13,7 @@ public class ConexionReporteModelo4 {
     PreparedStatement consulta;
     Conexion conectar= new Conexion();
     ResultSet ejecutar;
-    int resultado;
+   
     int mesActualConsulta=0;
     int mesInicio=0;
     int seccion=0;
@@ -195,6 +195,20 @@ public class ConexionReporteModelo4 {
             JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Reporte de Consulta de Datos del almacen.\n Ventana Crear Reporte Modelo 04 \n Contacte al Desarrollador \n "+e ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
         }
     }
+    private void limpiarDatosReporte(){
+        try{
+            conectar.Conectar();
+            conex= conectar.getConexion();
+            consulta= conex.prepareStatement("delete from datosreportes");
+            consulta.executeUpdate();
+            
+            conectar.Cerrar();
+           
+            }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de limpieza de Datos del reporte.\n Ventana Crear Reporte Modelo 04 \n Contacte al Desarrollador \n "+e ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+        }
+    }
      
     public void procesos() {
         consultaGruposySubGrupos();     
@@ -202,6 +216,7 @@ public class ConexionReporteModelo4 {
         consultaHistorialesFechaActual();
         consultaHistorialesFechaAnterior();
         codigoAlmacen();
+        limpiarDatosReporte();
     
            
             for(int x=0; x<entradasMes.size(); x++){
@@ -215,11 +230,7 @@ public class ConexionReporteModelo4 {
      //ya tengo los grupos, los articulos que pertenecen a cada grupo
      //ahora me queda filtrar llois resultados por grupo de acuerdo al arituclo al que pertenezcan
   
-    
-    public int getRespuesta()
-    {
-        return resultado;
-    }
+   
     public List<String> getSubgrupo()
     {
         return codigo_subgrupo;

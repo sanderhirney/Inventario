@@ -23,7 +23,7 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         List<String> descripcionArticulo=new ArrayList<>();
         List<Integer> codigoArticulos=new ArrayList<>();
         List<String> descripcionUnidad=new ArrayList<>();
-        
+        String mascaraCantidades="###,###.";//para la mascara
         List<Double> entradasMes=new ArrayList<>();
         List<Double> entradasAnterior=new ArrayList<>();
         List<Double> salidasMes=new ArrayList<>();
@@ -72,7 +72,7 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
     @Override
     public boolean next() throws JRException {
         index++;
-        return(index<codigoArticulos.size());
+        return(index<codigoGrupos.size());
     }
 
     @Override
@@ -84,9 +84,9 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         {
             case "Grupo" -> valor=codigoGrupos.get(index).toString()+"-"+codigoSubgrupos.get(index);
             case "Descripcion" -> valor=descripcionGrupo.get(index);
-            case "ExistenciaAnterior" -> valor=entradasAnterior.get(index)-salidasAnterior.get(index);
-            case "EntradasDeposito" -> valor=entradasMes.get(index);
-            case "ConsumidosMes" -> valor=salidasMes.get(index);
+            case "ExistenciaAnterior" -> valor=decimalesExistenciaAnterior(index);
+            case "EntradasDeposito" -> valor=decimalesEntradasDeposito(index);
+            case "ConsumidosMes" -> valor=decimalesConsumidosMes(index);
             
                        
         }
@@ -100,21 +100,49 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         return new DatosdeGenerarModelo4();
     }
     
-    private String decimalesPrecioUnitario(int index){
-        String precioUnitarioFinal;
-        String mascaraPrecioUnitario="###,###.";//para la mascara
-               
+    private String decimalesExistenciaAnterior(int index){
+        String existenciaAnterior;
+                     
             
-            for(int i=0; i<decimalesPrecioUnitario; i++)
+            for(int i=0; i<decimalesCalculoTotal; i++)
             {
-                mascaraPrecioUnitario=mascaraPrecioUnitario+("0");
+                mascaraCantidades=mascaraCantidades+("0");
                 
             }
-            DecimalFormat formatoPrecioUnitario=new DecimalFormat(mascaraPrecioUnitario);
+            DecimalFormat decimales=new DecimalFormat(mascaraCantidades);
             //precioUnitarioFinal=(formatoPrecioUnitario.format(precioUnitario.get(index)).replace(',','.'));
-            precioUnitarioFinal=(formatoPrecioUnitario.format(costoArticulos.get(index)));
-        return precioUnitarioFinal;
+            existenciaAnterior=(decimales.format((entradasAnterior.get(index)-salidasAnterior.get(index))));
+        return existenciaAnterior;
     }
+    private String decimalesEntradasDeposito(int index){
+        String entradasDeposito;
+                     
+            
+            for(int i=0; i<decimalesCalculoTotal; i++)
+            {
+                mascaraCantidades=mascaraCantidades+("0");
+                
+            }
+            DecimalFormat decimales=new DecimalFormat(mascaraCantidades);
+            //precioUnitarioFinal=(formatoPrecioUnitario.format(precioUnitario.get(index)).replace(',','.'));
+            entradasDeposito=(decimales.format((entradasMes.get(index))));
+        return entradasDeposito;
+    }
+    private String decimalesConsumidosMes(int index){
+        String consumidosMes;
+                     
+            
+            for(int i=0; i<decimalesCalculoTotal; i++)
+            {
+                mascaraCantidades=mascaraCantidades+("0");
+                
+            }
+            DecimalFormat decimales=new DecimalFormat(mascaraCantidades);
+            //precioUnitarioFinal=(formatoPrecioUnitario.format(precioUnitario.get(index)).replace(',','.'));
+            consumidosMes=(decimales.format((salidasMes.get(index))));
+        return consumidosMes;
+    }
+    
     private String decimalesCalculoTotal(int index){
         String calculoTotalFinal;
         String mascaraCalculoTotal="###,###.";//para la mascara
