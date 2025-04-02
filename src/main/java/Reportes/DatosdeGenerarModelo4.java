@@ -87,6 +87,7 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
             case "ExistenciaAnterior" -> valor=decimalesExistenciaAnterior(index);
             case "EntradasDeposito" -> valor=decimalesEntradasDeposito(index);
             case "ConsumidosMes" -> valor=decimalesConsumidosMes(index);
+            case "TotalExistencias" ->valor=decimalesTotalExistencias(index);
             
                        
         }
@@ -128,48 +129,66 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
     private String decimalesEntradasDeposito(int index){
         String entradasDeposito;
          String mascaraCantidades="###,###.";//para la mascara y debe reiniciarse con cada llamada
-            
+         String vacio="0.";
+         double temporal=((entradasMes.get(index)));
             for(int i=0; i<decimalesCalculoTotal; i++)
             {
                 mascaraCantidades=mascaraCantidades+("0");
+                vacio+=("0");
                 
             }
             DecimalFormat decimales=new DecimalFormat(mascaraCantidades);
             //precioUnitarioFinal=(formatoPrecioUnitario.format(precioUnitario.get(index)).replace(',','.'));
-            entradasDeposito=(decimales.format((entradasMes.get(index))));
+            if(temporal==0.0){
+                entradasDeposito=vacio;
+            }else{
+                entradasDeposito=(decimales.format(temporal));
+            }
+            
         return entradasDeposito;
     }
     private String decimalesConsumidosMes(int index){
         String consumidosMes;
-         String mascaraCantidades="###,###.";//para la mascara//debe reiniciarse con cada llamada    
-            
+        String mascaraCantidades="###,###.";//para la mascara//debe reiniciarse con cada llamada    
+        double temporal=salidasMes.get(index);
+        String vacio="0.";
             for(int i=0; i<decimalesCalculoTotal; i++)
             {
                 mascaraCantidades=mascaraCantidades+("0");
-                
+                vacio+="0";
             }
            
             DecimalFormat decimales=new DecimalFormat(mascaraCantidades);
             
             //precioUnitarioFinal=(formatoPrecioUnitario.format(precioUnitario.get(index)).replace(',','.'));
-            consumidosMes=(decimales.format((salidasMes.get(index))));
+           if(temporal==0.0){
+               consumidosMes=vacio;
+           }else{
+               consumidosMes=(decimales.format(temporal));
+           }
+            
         return consumidosMes;
     }
     
-    private String decimalesCalculoTotal(int index){
+    private String decimalesTotalExistencias(int index){
         String calculoTotalFinal;
         String mascaraCalculoTotal="###,###.";//para la mascara
         Double temporal;
-        
-            temporal=costoArticulos.get(index)*cantidadesArticulos.get(index);
+        String vacio="0.";
+            temporal=((entradasAnterior.get(index)-salidasAnterior.get(index))+entradasMes.get(index))-salidasMes.get(index);
             for(int i=0; i<decimalesCalculoTotal; i++)
             {
                 mascaraCalculoTotal=mascaraCalculoTotal+("0");
-                
+                vacio+="0";
             }
             DecimalFormat formatoPrecioTotal=new DecimalFormat(mascaraCalculoTotal);
             //calculoTotalFinal=(formatoPrecioUnitario.format(temporal).replace(',','.'));
-            calculoTotalFinal=(formatoPrecioTotal.format(temporal));
+            if(temporal==0.0){
+                calculoTotalFinal=vacio;
+            }else{
+                 calculoTotalFinal=(formatoPrecioTotal.format(temporal));
+            }
+           
         return calculoTotalFinal;
     }
     private String decimalesTotal(){
