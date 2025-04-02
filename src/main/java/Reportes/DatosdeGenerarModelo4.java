@@ -23,7 +23,7 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         List<String> descripcionArticulo=new ArrayList<>();
         List<Integer> codigoArticulos=new ArrayList<>();
         List<String> descripcionUnidad=new ArrayList<>();
-        String mascaraCantidades="###,###.";//para la mascara
+       
         List<Double> entradasMes=new ArrayList<>();
         List<Double> entradasAnterior=new ArrayList<>();
         List<Double> salidasMes=new ArrayList<>();
@@ -101,22 +101,33 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
     }
     
     private String decimalesExistenciaAnterior(int index){
-        String existenciaAnterior;
-                     
-            
+        String existenciaAnterior ="";
+         String mascaraCantidades="###,###.";//para la mascara y debe reinicarse con cada llamada
+         String vacio="0.";
+         double temporal=(entradasAnterior.get(index)-salidasAnterior.get(index));
             for(int i=0; i<decimalesCalculoTotal; i++)
             {
                 mascaraCantidades=mascaraCantidades+("0");
+                vacio+=("0");
                 
-            }
+               }
+               
             DecimalFormat decimales=new DecimalFormat(mascaraCantidades);
             //precioUnitarioFinal=(formatoPrecioUnitario.format(precioUnitario.get(index)).replace(',','.'));
-            existenciaAnterior=(decimales.format((entradasAnterior.get(index)-salidasAnterior.get(index))));
-        return existenciaAnterior;
+           
+            
+       
+          if(temporal==0.0){
+              existenciaAnterior=vacio;
+          }else{
+              existenciaAnterior=(decimales.format(temporal));       
+
+          }   
+          return existenciaAnterior;
     }
     private String decimalesEntradasDeposito(int index){
         String entradasDeposito;
-                     
+         String mascaraCantidades="###,###.";//para la mascara y debe reiniciarse con cada llamada
             
             for(int i=0; i<decimalesCalculoTotal; i++)
             {
@@ -130,14 +141,16 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
     }
     private String decimalesConsumidosMes(int index){
         String consumidosMes;
-                     
+         String mascaraCantidades="###,###.";//para la mascara//debe reiniciarse con cada llamada    
             
             for(int i=0; i<decimalesCalculoTotal; i++)
             {
                 mascaraCantidades=mascaraCantidades+("0");
                 
             }
+           
             DecimalFormat decimales=new DecimalFormat(mascaraCantidades);
+            
             //precioUnitarioFinal=(formatoPrecioUnitario.format(precioUnitario.get(index)).replace(',','.'));
             consumidosMes=(decimales.format((salidasMes.get(index))));
         return consumidosMes;
