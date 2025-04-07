@@ -258,6 +258,13 @@ public class ConexionReporteModelo4 {
     public String getCodigoAlmacen(){
         return codigoAlmacen;
     }
+    public int getMesReporte(){
+        return mesActualConsulta;
+        
+    }
+    public int getAnioReporte(){
+        return anioConsulta;
+    }
    
    
 }//clase

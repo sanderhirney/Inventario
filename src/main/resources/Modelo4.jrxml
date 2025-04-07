@@ -5,6 +5,9 @@
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
+	<field name="codigoAlmacen" class="java.lang.String">
+		<fieldDescription><![CDATA[codigo de Almacen]]></fieldDescription>
+	</field>
 	<field name="Grupo" class="java.lang.String"/>
 	<field name="Descripcion" class="java.lang.String"/>
 	<field name="ConsumidosMes" class="java.lang.String"/>
@@ -12,6 +15,9 @@
 	<field name="totalArticulos" class="java.lang.String"/>
 	<field name="ExistenciaAnterior" class="java.lang.String"/>
 	<field name="EntradasDeposito" class="java.lang.String"/>
+	<field name="Fecha" class="java.lang.String">
+		<fieldDescription><![CDATA[Fecha]]></fieldDescription>
+	</field>
 	<background>
 		<band/>
 	</background>
@@ -37,7 +43,37 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="13"/>
+		<band height="54">
+			<staticText>
+				<reportElement x="200" y="0" width="175" height="21" uuid="596c9d95-c6d4-40e6-b988-699dd9d1c4c4"/>
+				<text><![CDATA[Movimiento Mensual de Materias]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-10" y="40" width="30" height="14" uuid="f351ace3-e5d3-43f6-9942-8cdc893284fc"/>
+				<text><![CDATA[Mes:]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="140" y="40" width="200" height="13" backcolor="#E6E6E6" uuid="85c0aa01-70f8-488e-a2d4-711f39ee4a86"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="340" y="40" width="40" height="13" backcolor="#E6E6E6" uuid="16db8807-a6cd-4ee0-8cff-1e01bf502261"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="400" y="40" width="50" height="14" uuid="e5273ee9-75b6-4344-96c6-1374739ef714"/>
+				<text><![CDATA[Codigo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="20" y="41" width="120" height="12" uuid="a9d756f5-837b-49db-a289-191d973cb012"/>
+				<textFieldExpression><![CDATA[$F{Fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="40" width="104" height="12" uuid="0f3f5212-02a0-4c80-967a-f67d38c22a41"/>
+				<textFieldExpression><![CDATA[$F{codigoAlmacen}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="27">
@@ -107,24 +143,28 @@ deposito]]></text>
 					<reportElement x="392" y="0" width="87" height="14" uuid="c27617d6-ed8c-40db-95fe-8667af007dcf">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e304217d-b0f7-4425-a599-93fd2c0ac1c3"/>
 					</reportElement>
+					<textElement textAlignment="Justified"/>
 					<textFieldExpression><![CDATA[$F{ConsumidosMes}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="486" y="0" width="68" height="15" uuid="f64c25cc-df4b-41f1-822a-68a23ecd7711">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d63a87c1-1c0e-4627-b4f1-6f4b56db3206"/>
 					</reportElement>
+					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[$F{TotalExistencias}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="233" y="0" width="87" height="14" uuid="80b2e04f-dbf8-4dbd-afd3-d87bf328c08d">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="20044db3-dfa2-41a3-a5ef-f0912190ba5a"/>
 					</reportElement>
+					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[$F{ExistenciaAnterior}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="319" y="0" width="72" height="14" uuid="2c8977fd-7070-4929-87a5-832a6fdc4552">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b65ae7a3-6e17-403a-9207-08017046078e"/>
 					</reportElement>
+					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[$F{EntradasDeposito}]]></textFieldExpression>
 				</textField>
 			</frame>
@@ -134,7 +174,7 @@ deposito]]></text>
 		<band/>
 	</columnFooter>
 	<pageFooter>
-		<band height="17">
+		<band height="22">
 			<textField>
 				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="f0a76d0d-ec4d-4beb-9007-860c4d4d08e7"/>
 				<textElement textAlignment="Right"/>

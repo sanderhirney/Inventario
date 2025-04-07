@@ -18,11 +18,11 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         private int index;
         List<String> codigoSubgrupos=new ArrayList<>();
         List<Integer> codigoGrupos=new ArrayList<>();
-        List<Double> cantidadesArticulos=new ArrayList<>();
+   
         List<Double> costoArticulos=new ArrayList<>();
-        List<String> descripcionArticulo=new ArrayList<>();
-        List<Integer> codigoArticulos=new ArrayList<>();
-        List<String> descripcionUnidad=new ArrayList<>();
+        
+     
+      
        
         List<Double> entradasMes=new ArrayList<>();
         List<Double> entradasAnterior=new ArrayList<>();
@@ -39,6 +39,7 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         int decimalesPrecioUnitario;
         int decimalesCalculoTotal;
         int mesDelReporte=0;
+        int anioDelReporte=0;
         String denominacion;
       
         ConexionReporteModelo4 reporte=new ConexionReporteModelo4();
@@ -65,7 +66,8 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         salidasMes=reporte.getSalidasMes();
         salidasAnterior=reporte.getSalidasAnterior();
         codigoAlmacen=reporte.getCodigoAlmacen();
-                
+        mesDelReporte=reporte.getMesReporte();
+        anioDelReporte=reporte.getAnioReporte();
         
     }
        
@@ -81,7 +83,8 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         Object valor=null;
         String campo=jrf.getName();
         switch(campo)
-        {
+       {    case "codigoAlmacen"->valor=codigoAlmacen;
+            case "Fecha" -> valor=mesReporte(mesDelReporte)+" del año "+anioDelReporte;
             case "Grupo" -> valor=codigoGrupos.get(index).toString()+"-"+codigoSubgrupos.get(index);
             case "Descripcion" -> valor=descripcionGrupo.get(index);
             case "ExistenciaAnterior" -> valor=decimalesExistenciaAnterior(index);
@@ -190,45 +193,6 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
             }
            
         return calculoTotalFinal;
-    }
-    private String decimalesTotal(){
-        String calculoTotalExistencia;
-        String mascaraCalculoTotal="###,###.";//para la mascara
-        Double temporal;
-        Double total=0.0;
-            for(int i=0; i<costoArticulos.size(); i++){
-                temporal=costoArticulos.get(i)*cantidadesArticulos.get(i);
-                total+=temporal;
-            }
-            
-            for(int i=0; i<decimalesCalculoTotal; i++)
-            {
-                mascaraCalculoTotal=mascaraCalculoTotal+("0");
-                
-            }
-            DecimalFormat formatoTotalSalida=new DecimalFormat(mascaraCalculoTotal);
-            //calculoTotalSalida=(formatoTotalSalida.format(total).replace(',','.'));
-           calculoTotalExistencia=(formatoTotalSalida.format(total));
-        return calculoTotalExistencia;
-    }
-    private String decimalesCantidad(){
-        String calculoCantidadExistencia;
-        String mascaraCalculoTotal="###,###.";//para la mascara
-        Double total=0.0;
-            for(int i=0; i<cantidadesArticulos.size(); i++){
-                total+=cantidadesArticulos.get(i);
-                
-            }
-            
-            for(int i=0; i<decimalesCalculoTotal; i++)
-            {
-                mascaraCalculoTotal=mascaraCalculoTotal+("0");
-                
-            }
-            DecimalFormat formatoTotalSalida=new DecimalFormat(mascaraCalculoTotal);
-            //calculoTotalSalida=(formatoTotalSalida.format(total).replace(',','.'));
-           calculoCantidadExistencia=(formatoTotalSalida.format(total));
-        return calculoCantidadExistencia;
     }
     
     private String mesReporte(int mesDelReporte ){
