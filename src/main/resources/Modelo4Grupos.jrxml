@@ -11,28 +11,42 @@
 	<field name="Grupo" class="java.lang.String"/>
 	<field name="Descripcion" class="java.lang.String"/>
 	<field name="ConsumidosMes" class="java.lang.String"/>
-	<field name="TotalExistencias" class="java.lang.String"/>
+	<field name="ExistenciasFinMes" class="java.lang.String"/>
 	<field name="totalArticulos" class="java.lang.String"/>
 	<field name="ExistenciaAnterior" class="java.lang.String"/>
 	<field name="EntradasDeposito" class="java.lang.String"/>
 	<field name="Fecha" class="java.lang.String">
 		<fieldDescription><![CDATA[Fecha]]></fieldDescription>
 	</field>
+	<field name="TotalExistenciaAnterior" class="java.lang.String"/>
+	<field name="TotalConsumidosMes" class="java.lang.String"/>
+	<field name="TotalEntradasDeposito" class="java.lang.String"/>
+	<field name="TotalExistenciaFinMes" class="java.lang.String"/>
 	<group name="Grupos">
 		<groupExpression><![CDATA[$F{Grupo}]]></groupExpression>
-		<groupHeader>
-			<band height="50"/>
-		</groupHeader>
 		<groupFooter>
 			<band height="40">
-				<staticText>
-					<reportElement x="191" y="10" width="100" height="15" uuid="b5acb4ed-9309-432f-97a1-37f33d63cb2b"/>
-					<text><![CDATA[Total Articulos:]]></text>
-				</staticText>
 				<textField>
-					<reportElement x="291" y="10" width="100" height="22" uuid="e40cb9ee-74f4-4390-91ea-3e678c490e2c"/>
-					<textFieldExpression><![CDATA[$F{totalArticulos}]]></textFieldExpression>
+					<reportElement x="233" y="0" width="86" height="20" uuid="a7668c5f-adaa-4aac-877e-67851113551c"/>
+					<textFieldExpression><![CDATA[$F{TotalExistenciaAnterior}]]></textFieldExpression>
 				</textField>
+				<textField>
+					<reportElement x="319" y="0" width="72" height="20" uuid="792592b3-f586-4eb6-ba3d-aa18581d90b5"/>
+					<textFieldExpression><![CDATA[$F{TotalEntradasDeposito}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="392" y="0" width="88" height="20" uuid="ea306c7e-8dba-4c97-8890-2ff0357d8eed"/>
+					<textFieldExpression><![CDATA[$F{TotalConsumidosMes}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="480" y="0" width="74" height="20" uuid="895fae34-0da2-4735-ae25-81064eeeff23"/>
+					<textFieldExpression><![CDATA[$F{TotalExistenciaFinMes}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="108" y="0" width="102" height="14" uuid="29a832cb-482a-48b2-b824-adcf918fb097"/>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[SUB-TOTAL]]></text>
+				</staticText>
 			</band>
 		</groupFooter>
 	</group>
@@ -61,7 +75,7 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="54">
+		<band height="59">
 			<staticText>
 				<reportElement x="200" y="0" width="175" height="21" uuid="596c9d95-c6d4-40e6-b988-699dd9d1c4c4"/>
 				<text><![CDATA[Movimiento Mensual de Materias]]></text>
@@ -142,7 +156,7 @@ deposito]]></text>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="28">
+		<band height="21">
 			<frame>
 				<reportElement x="0" y="0" width="555" height="17" uuid="bcb901fd-bf74-41a3-8833-7c50735ac3bc"/>
 				<textField>
@@ -158,18 +172,11 @@ deposito]]></text>
 					<textFieldExpression><![CDATA[$F{Descripcion}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="392" y="0" width="87" height="14" uuid="c27617d6-ed8c-40db-95fe-8667af007dcf">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e304217d-b0f7-4425-a599-93fd2c0ac1c3"/>
-					</reportElement>
-					<textElement textAlignment="Justified"/>
-					<textFieldExpression><![CDATA[$F{ConsumidosMes}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="486" y="0" width="68" height="15" uuid="f64c25cc-df4b-41f1-822a-68a23ecd7711">
+					<reportElement x="480" y="0" width="74" height="15" uuid="f64c25cc-df4b-41f1-822a-68a23ecd7711">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d63a87c1-1c0e-4627-b4f1-6f4b56db3206"/>
 					</reportElement>
 					<textElement textAlignment="Right" markup="none"/>
-					<textFieldExpression><![CDATA[$F{TotalExistencias}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{ExistenciasFinMes}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="233" y="0" width="87" height="14" uuid="80b2e04f-dbf8-4dbd-afd3-d87bf328c08d">
@@ -179,11 +186,18 @@ deposito]]></text>
 					<textFieldExpression><![CDATA[$F{ExistenciaAnterior}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="319" y="0" width="72" height="14" uuid="2c8977fd-7070-4929-87a5-832a6fdc4552">
+					<reportElement x="320" y="0" width="70" height="14" uuid="2c8977fd-7070-4929-87a5-832a6fdc4552">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b65ae7a3-6e17-403a-9207-08017046078e"/>
 					</reportElement>
 					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[$F{EntradasDeposito}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="391" y="1" width="88" height="13" uuid="c488263c-f07e-4910-b394-741642b8274a">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="72a79903-4511-425e-963c-fec9288c851b"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{ConsumidosMes}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

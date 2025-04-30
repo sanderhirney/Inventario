@@ -123,13 +123,9 @@ public class ConexionReporteModelo4 {
             consulta.setInt(1, codigo_grupo.get(i));
             consulta.setString(2, codigo_subgrupo.get(i));
             consulta.setInt(3, seccion );
-            if(mesActualConsulta==mesInicio){
-                 consulta.setInt(4, mesActualConsulta );
-                 consulta.setInt(5, anioConsulta);
-            }else{
-                consulta.setInt(4, mesActualConsulta-1 );
-                consulta.setInt(5,anioConsulta);
-            }         
+            consulta.setInt(4, mesActualConsulta );
+            consulta.setInt(5, anioConsulta);
+                
 
             ejecutar=consulta.executeQuery();
             if( ejecutar.next())
@@ -160,12 +156,19 @@ public class ConexionReporteModelo4 {
         conex= conectar.getConexion();
         for(int i=0;i<codigo_grupo.size(); i++){
             consulta= conex.prepareStatement(consultaFechaAnterior); 
-             consulta.setInt(1, codigo_grupo.get(i));
+            consulta.setInt(1, codigo_grupo.get(i));
             consulta.setString(2, codigo_subgrupo.get(i));
-            consulta.setInt(3, mesInicio );
-            consulta.setInt(4, mesActualConsulta - 1 );
-            consulta.setInt(5, seccion );
-            consulta.setInt(6, anioConsulta);
+            consulta.setInt(3, seccion );
+            consulta.setInt(4, mesInicio );
+            
+             if(mesActualConsulta==mesInicio){
+                 consulta.setInt(5, mesActualConsulta );
+                 consulta.setInt(6, anioConsulta);
+            }else{
+                consulta.setInt(5, mesActualConsulta-1 );
+                consulta.setInt(6,anioConsulta);
+            } 
+            
             ejecutar=consulta.executeQuery();
             if( ejecutar.next())
             {  
@@ -267,6 +270,8 @@ public class ConexionReporteModelo4 {
               mesActualConsulta=ejecutar.getInt("mesfin");
               anioConsulta=ejecutar.getInt("anio");
             }
+            
+            
             
             conectar.Cerrar();
         }

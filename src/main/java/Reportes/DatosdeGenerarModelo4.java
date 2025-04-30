@@ -73,8 +73,8 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         mesDelReporte=reporte.getMesReporte();
         anioDelReporte=reporte.getAnioReporte();
         entradasTotalesMes=reporte.getEntradasTotalesMes();
-        entradasAnteriorTotales=reporte.getSalidasTotalesMes();
-        salidasTotalesMes=reporte.getSalidasAnteriorTotalesMes();
+        entradasAnteriorTotales=reporte.getEntradasAnteriorTotalesMes();
+        salidasTotalesMes=reporte.getSalidasTotalesMes();
         salidasAnteriorTotales=reporte.getSalidasAnteriorTotalesMes();
         
         
@@ -100,7 +100,13 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
             case "ExistenciaAnterior" -> valor=decimalesExistenciaAnterior(index);
             case "EntradasDeposito" -> valor=decimalesEntradasDeposito(index);
             case "ConsumidosMes" -> valor=decimalesConsumidosMes(index);
-            case "TotalExistencias" ->valor=decimalesTotalExistencias(index);
+            case "ExistenciasFinMes" -> valor=decimalesExistenciasFinMes(index);
+            case "TotalExistenciaFinMes" ->valor=decimalesTotalExistencias(index);
+            case "TotalExistenciaAnterior" ->valor=decimalesTotalesExistenciasAnteriores(index);
+            case "TotalEntradasDeposito" ->valor=decimalesTotalesEntradasDeposito(index);
+            case "TotalConsumidosMes" ->valor=decimalesTotalesConsumidosMes(index);
+            
+
             
                        
         }
@@ -188,6 +194,27 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         String mascaraCalculoTotal="###,###.";//para la mascara
         Double temporal;
         String vacio="0.";
+            temporal=((entradasAnteriorTotales.get(index)-salidasAnteriorTotales.get(index))+entradasTotalesMes.get(index))-salidasTotalesMes.get(index);
+            for(int i=0; i<decimalesCalculoTotal; i++)
+            {
+                mascaraCalculoTotal=mascaraCalculoTotal+("0");
+                vacio+="0";
+            }
+            DecimalFormat formatoPrecioTotal=new DecimalFormat(mascaraCalculoTotal);
+            //calculoTotalFinal=(formatoPrecioUnitario.format(temporal).replace(',','.'));
+            if(temporal==0.0){
+                calculoTotalFinal=vacio;
+            }else{
+                 calculoTotalFinal=(formatoPrecioTotal.format(temporal));
+            }
+           
+        return calculoTotalFinal;
+    }
+    private String decimalesExistenciasFinMes(int index){
+        String calculoTotalFinal;
+        String mascaraCalculoTotal="###,###.";//para la mascara
+        Double temporal;
+        String vacio="0.";
             temporal=((entradasAnterior.get(index)-salidasAnterior.get(index))+entradasMes.get(index))-salidasMes.get(index);
             for(int i=0; i<decimalesCalculoTotal; i++)
             {
@@ -204,27 +231,7 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
            
         return calculoTotalFinal;
     }
-    private String decimalesTotalesFinMes(int index){
-        String calculoTotalFinal;
-        String mascaraCalculoTotal="###,###.";//para la mascara
-        Double temporal;
-        String vacio="0.";
-            temporal=entradasTotalesMes.get(index);
-            for(int i=0; i<decimalesCalculoTotal; i++)
-            {
-                mascaraCalculoTotal=mascaraCalculoTotal+("0");
-                vacio+="0";
-            }
-            DecimalFormat formatoTotal=new DecimalFormat(mascaraCalculoTotal);
-            //calculoTotalFinal=(formatoPrecioUnitario.format(temporal).replace(',','.'));
-            if(temporal==0.0){
-                calculoTotalFinal=vacio;
-            }else{
-                 calculoTotalFinal=(formatoTotal.format(temporal));
-            }
-           
-        return calculoTotalFinal;
-    }
+    
     private String decimalesTotalesConsumidosMes(int index){
         String calculoTotalFinal;
         String mascaraCalculoTotal="###,###.";//para la mascara
@@ -272,7 +279,7 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         String mascaraCalculoTotal="###,###.";//para la mascara
         Double temporal;
         String vacio="0.";
-            temporal=((entradasAnteriorTotales.get(index)-salidasAnteriorTotales.get(index))+entradasTotalesMes.get(index))-salidasTotalesMes.get(index);
+            temporal=((entradasAnteriorTotales.get(index)-salidasAnteriorTotales.get(index)));
             for(int i=0; i<decimalesCalculoTotal; i++)
             {
                 mascaraCalculoTotal=mascaraCalculoTotal+("0");
