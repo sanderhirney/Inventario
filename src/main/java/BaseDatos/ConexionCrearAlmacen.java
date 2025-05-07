@@ -20,6 +20,7 @@ public class ConexionCrearAlmacen {
     String denominacion_almacen;
     String ubicacion_almacen;
     String alias_almacen;
+    int principal=0;//el almacen siempre se crea en 0 osea no se crea principal. PAra crearlo principal se debe ir a la configuracion
     java.sql.Date fecha_creacion;
     
     public void crear()
@@ -28,7 +29,7 @@ public class ConexionCrearAlmacen {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("insert into almacenes values (?, ?, ?, ?, ?, ?, ?)");
+        consulta= conex.prepareStatement("insert into almacenes values (?, ?, ?, ?, ?, ?, ?, ?)");
         
         consulta.setString(1, codigo_almacen);
         consulta.setString(2, denominacion_almacen);

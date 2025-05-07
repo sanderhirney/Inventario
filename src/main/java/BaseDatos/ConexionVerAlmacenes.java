@@ -16,22 +16,28 @@ public class ConexionVerAlmacenes {
     
     List<String> nombres_almacenes=new ArrayList<>();
     List<String> codigos_almacenes=new ArrayList<>();
-     List<String> nombres_almacenes_despacho=new ArrayList<>();
+    List<String> nombres_almacenes_despacho=new ArrayList<>();
     List<String> codigos_almacenes_despacho=new ArrayList<>(); 
     List<String> nombres_almacenes_destino=new ArrayList<>();
     List<String> codigos_almacenes_destino=new ArrayList<>();
+    List<Integer> tipo_almacenes=new ArrayList<>();
+    List<Integer> principal=new ArrayList<>();
+    String denominacionAlmacenPrincipal;
     public void consulta()
     {
           try
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select codigo_almacen, denominacion from almacenes");
+        consulta= conex.prepareStatement("select codigo_almacen, denominacion, tipo, principal from almacenes");
         ejecutar=consulta.executeQuery();
         while( ejecutar.next() )
         {
                      nombres_almacenes.add(ejecutar.getString("denominacion"));
                      codigos_almacenes.add(ejecutar.getString("codigo_almacen"));
+                     tipo_almacenes.add(ejecutar.getInt(("tipo")));
+                     principal.add(ejecutar.getInt("principal"));
+                     
                   
                      
         }//if
@@ -86,6 +92,28 @@ public class ConexionVerAlmacenes {
         JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de los almacenes de destino.\n Ventana Ver Almacenes \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
     }
     }//consulta
+    public void consultaAlmacenPrincipal()//1 para despacho y 0 para dstino
+    {
+          try
+    {
+        conectar.Conectar();
+        conex= conectar.getConexion();
+        consulta= conex.prepareStatement("select denominacion from almacenes where principal=1");
+        ejecutar=consulta.executeQuery();
+        while( ejecutar.next() )
+        {
+                    denominacionAlmacenPrincipal=(ejecutar.getString("denominacion"));
+                     
+                  
+                     
+        }//if
+          conectar.Cerrar();
+    }//consulta
+           catch(SQLException ex)
+    {
+        JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion del almacen principal.\n Ventana Ver Almacenes \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+    }
+    }//consulta
     
     public List<String> getCodigoAlmacenes()
     {
@@ -114,5 +142,19 @@ public class ConexionVerAlmacenes {
     {
         return nombres_almacenes_destino;
     }
+    public List<Integer> getTipoAlmacenes()
+    {
+        return tipo_almacenes;
+    }
+    public List<Integer> getprincipal()
+    {
+        return principal;
+    }
+    
+    public String getDenominacionprincipal()
+    {
+        return denominacionAlmacenPrincipal;
+    }
+    
     
 }//clase

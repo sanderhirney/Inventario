@@ -28,18 +28,22 @@
 			<band height="40">
 				<textField>
 					<reportElement x="233" y="0" width="86" height="20" uuid="a7668c5f-adaa-4aac-877e-67851113551c"/>
+					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[$F{TotalExistenciaAnterior}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="319" y="0" width="72" height="20" uuid="792592b3-f586-4eb6-ba3d-aa18581d90b5"/>
+					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[$F{TotalEntradasDeposito}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="392" y="0" width="88" height="20" uuid="ea306c7e-8dba-4c97-8890-2ff0357d8eed"/>
+					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[$F{TotalConsumidosMes}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="480" y="0" width="74" height="20" uuid="895fae34-0da2-4735-ae25-81064eeeff23"/>
+					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[$F{TotalExistenciaFinMes}]]></textFieldExpression>
 				</textField>
 				<staticText>
@@ -206,7 +210,7 @@ deposito]]></text>
 		<band/>
 	</columnFooter>
 	<pageFooter>
-		<band height="22">
+		<band height="17">
 			<textField>
 				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="f0a76d0d-ec4d-4beb-9007-860c4d4d08e7"/>
 				<textElement textAlignment="Right"/>

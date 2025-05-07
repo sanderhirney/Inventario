@@ -7,6 +7,7 @@ import BaseDatos.ConexionEmpresas;
 import BaseDatos.ConexionGuardarTemporal;
 import BaseDatos.ConexionModifEntradas;
 import BaseDatos.ConexionValidadorErroresRegistro;
+import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerEntradas;
 import BaseDatos.ConexionVerTempEntradas;
 import java.math.BigDecimal;
@@ -42,6 +43,7 @@ String codigo_seleccion;
 int codigo_seccion;
 String nombre_seccion;
 String documento_seleccionado;
+String almacenActivoMostrar;
 TableRowSorter filtro;
 List<BigDecimal>formateado=new ArrayList<>();
 int decimal_unitario;
@@ -110,7 +112,10 @@ JFrame ventanaPrincipal;
              JOptionPane.showMessageDialog(null, "No se puede desplegar informacion por: "+e+"\n Consulte al desarrollador", "Error Grave", JOptionPane.ERROR_MESSAGE);
          }
          
-         
+         ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
+         almacenPrincipal.consultaAlmacenPrincipal();
+         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
+         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
          
     }
 
@@ -129,12 +134,13 @@ JFrame ventanaPrincipal;
         boton_nuevo = new javax.swing.JButton();
         boton_edit = new javax.swing.JButton();
         boton_salir = new javax.swing.JButton();
+        etiquetaAlmacenActivo = new javax.swing.JLabel();
 
         jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        Etiq_encabezado.setText("<html><body><br><center>Sistema Administrativo de Inventario <br>HOSPITAL DR. SAMUEL DARIO MALDONADO</body></html>");
+        Etiq_encabezado.setText("<html><body><br><center>Sistema Administrativo de Inventario</body></html>");
 
         jLabel1.setText("Entradas");
 
@@ -195,6 +201,7 @@ JFrame ventanaPrincipal;
                         .addGap(63, 63, 63))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(etiquetaAlmacenActivo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(PanelLayout, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE))
                         .addContainerGap())))
@@ -208,11 +215,13 @@ JFrame ventanaPrincipal;
                     .addComponent(Etiq_encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Separador1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(etiquetaAlmacenActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(PanelLayout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         pack();
@@ -436,6 +445,7 @@ public void PrincipalFrame(JFrame ventana){
     private javax.swing.JButton boton_edit;
     private javax.swing.JButton boton_nuevo;
     private javax.swing.JButton boton_salir;
+    private javax.swing.JLabel etiquetaAlmacenActivo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

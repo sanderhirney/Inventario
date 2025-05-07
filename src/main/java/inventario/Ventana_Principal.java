@@ -85,6 +85,8 @@ public class Ventana_Principal extends javax.swing.JFrame {
         treeNode2.add(treeNode3);
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Consultar");
         treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Configurar");
+        treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Articulos");
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Crear");
@@ -287,6 +289,14 @@ public class Ventana_Principal extends javax.swing.JFrame {
               consultar_almacenes.setLocationRelativeTo(null);
               consultar_almacenes.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
               consultar_almacenes.setVisible(true);
+          }
+          if( ((nodo.getParent().toString()).equals("Almacenes")) && ((nodeInfo.toString()).equals("Configurar")) )
+          {
+              ConfigurarAlmacenes configurar_almacenes= new ConfigurarAlmacenes(this, true);
+              configurar_almacenes.setResizable(false);
+              configurar_almacenes.setLocationRelativeTo(null);
+              configurar_almacenes.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+              configurar_almacenes.setVisible(true);
           }
           if( ((nodo.getParent().toString()).equals("Articulos")) && ((nodeInfo.toString()).equals("Crear")) )
           {

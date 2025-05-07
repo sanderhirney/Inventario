@@ -20,22 +20,50 @@ public class Consultar_Almacenes extends javax.swing.JDialog {
 
     List<String> codigos_almacenes=new ArrayList<>();
     List<String> denominacion_almacenes=new ArrayList<>();
+    List<Integer> tipo_almacenes=new ArrayList<>();
+    List<Integer> principal= new ArrayList<>();
+    List<String> denominacionesTipo=new ArrayList<>();
+    List<String> denominacionesPrincipal=new ArrayList<>();
     DefaultTableModel modelo;
     Iterator lista1;
     Iterator lista2;
+    Iterator lista3;
+    Iterator lista4;
     public Consultar_Almacenes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
         modelo=(DefaultTableModel)Tabla_almacenes.getModel();
         ConexionVerAlmacenes almacenes=new ConexionVerAlmacenes();
         almacenes.consulta();
         codigos_almacenes=almacenes.getCodigoAlmacenes();
         denominacion_almacenes=almacenes.getDenominacionAlmacenes();
+        tipo_almacenes=almacenes.getTipoAlmacenes();
+        principal=almacenes.getprincipal();
+        
+        for(int i=0; i<tipo_almacenes.size(); i++){
+            if(tipo_almacenes.get(i)==0){
+                denominacionesTipo.add("DESTINO");
+            }
+            if(tipo_almacenes.get(i)==1){
+                denominacionesTipo.add("DESPACHO");
+            }
+        }
+        for(int i=0; i<principal.size(); i++){
+            if(principal.get(i)==0){
+                denominacionesPrincipal.add("NO");
+            }
+            if(principal.get(i)==1){
+                denominacionesPrincipal.add("SI");
+            }
+        }
         lista1=codigos_almacenes.iterator();
         lista2=denominacion_almacenes.iterator();
+        lista3=denominacionesTipo.iterator();
+        lista4=denominacionesPrincipal.iterator();
         while(lista1.hasNext())
         {
-            modelo.addRow(new Object[]{lista1.next(), lista2.next()});
+            modelo.addRow(new Object[]{lista1.next(), lista2.next(), lista3.next(), lista4.next()});
         }
     }
 
@@ -67,11 +95,11 @@ public class Consultar_Almacenes extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Codigo", "Denominacion"
+                "Codigo", "Denominacion", "Tipo", "Principal"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -97,14 +125,13 @@ public class Consultar_Almacenes extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(Etiq_encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(PanelBoton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE)
                             .addComponent(jSeparator1))))
                 .addContainerGap())
         );
