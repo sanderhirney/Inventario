@@ -4,6 +4,7 @@ package Reportes;
 import BaseDatos.ConexionConsultarDecimales;
 import BaseDatos.ConexionReporteExistencias;
 import BaseDatos.ConexionReporteSalidas;
+import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerSeccionActiva;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -35,10 +36,12 @@ public class DatosdeGenerarExistencia implements JRDataSource{
         int codigoConcepto=0;
         String descripcionConcepto;
         int consecutivo=0;
+        String denominacionAlmacenPrincipal;
+        String ubicacionAlmacenPrincipal;
         ConexionReporteExistencias reporte=new ConexionReporteExistencias();
         ConexionConsultarDecimales decimales=new ConexionConsultarDecimales();
         ConexionVerSeccionActiva seccionActiva=new ConexionVerSeccionActiva();
-        
+        ConexionVerAlmacenes almacen=new ConexionVerAlmacenes();
     public DatosdeGenerarExistencia(){
          
         seccionActiva.consulta();
@@ -64,7 +67,10 @@ public class DatosdeGenerarExistencia implements JRDataSource{
         decimales.consulta();
         decimalesPrecioUnitario=decimales.getDecimalCampo();
         decimalesCalculoTotal=decimales.getDecimalTotal();
-        System.out.println("Cantidad de codigoArticulos es________ "+codigoArticulos.size());
+        
+        almacen.consultaAlmacenPrincipal();
+        denominacionAlmacenPrincipal=almacen.getDenominacionprincipal();
+        ubicacionAlmacenPrincipal=almacen.getUbicacionprincipal();
                 
         
     }
@@ -82,6 +88,8 @@ public class DatosdeGenerarExistencia implements JRDataSource{
         String campo=jrf.getName();
         switch(campo)
         {
+            case "nombreAlmacenPrincipal" -> valor=denominacionAlmacenPrincipal;
+            case "direccionAlmacenPrincipal" -> valor=ubicacionAlmacenPrincipal;
             case "Grupo" -> valor=grupo.get(index).toString()+"-"+subgrupo.get(index);
             case "Descripcion" -> valor=descripcionArticulo.get(index);
             case "Medida" -> valor=descripcionUnidad.get(index);

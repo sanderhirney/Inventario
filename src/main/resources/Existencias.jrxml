@@ -11,27 +11,41 @@
 	<field name="Total" class="java.lang.String"/>
 	<field name="totalArticulos" class="java.lang.String"/>
 	<field name="totalBs" class="java.lang.String"/>
+	<field name="nombreAlmacenPrincipal" class="java.lang.String"/>
+	<field name="direccionAlmacenPrincipal" class="java.lang.String"/>
 	<background>
 		<band/>
 	</background>
 	<title>
 		<band height="72">
 			<frame>
-				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="f92c73b7-40b6-477c-815b-d0d8b77a17f0"/>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#FFFFFF" uuid="f92c73b7-40b6-477c-815b-d0d8b77a17f0"/>
+				<image>
+					<reportElement x="20" y="10" width="210" height="40" uuid="53964d8d-cbbc-461c-9874-d8da1e69629e"/>
+					<imageExpression><![CDATA["mpps.jpeg"]]></imageExpression>
+				</image>
 				<staticText>
-					<reportElement x="20" y="20" width="320" height="43" forecolor="#FFFFFF" uuid="08ab45f0-7425-4b94-b88c-fe50112b0f4a"/>
+					<reportElement x="380" y="20" width="100" height="30" uuid="0b561f90-1bae-4a3d-99e5-8dbb607dd932"/>
+					<textElement markup="styled">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Existencias a:]]></text>
+				</staticText>
+				<textField pattern="MMMMM dd, yyyy">
+					<reportElement x="480" y="20" width="100" height="30" uuid="69c7a463-3798-4311-8680-2c3dc1b10652"/>
 					<textElement>
-						<font size="24" isBold="true"/>
+						<font size="12" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Sistema de Inventario]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF" uuid="0688f1f6-fe8b-4f03-ac1e-4a80c9104b8d"/>
-					<textElement textAlignment="Right">
-						<font size="14" isBold="false"/>
-					</textElement>
-					<text><![CDATA[Existencias]]></text>
-				</staticText>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="20" y="52" width="560" height="18" uuid="1a9f4103-2129-4526-99cc-3813cff619f2"/>
+					<textFieldExpression><![CDATA[$F{nombreAlmacenPrincipal}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="23" y="70" width="556" height="20" uuid="b2038e88-03bf-4487-bc3e-6bf2ea78a86d"/>
+					<textFieldExpression><![CDATA[$F{direccionAlmacenPrincipal}]]></textFieldExpression>
+				</textField>
 			</frame>
 		</band>
 	</title>
