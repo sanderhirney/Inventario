@@ -6,6 +6,7 @@ import BaseDatos.ConexionConsultarUnidades;
 import BaseDatos.ConexionCrearArticulo;
 import BaseDatos.ConexionDeshacerArt;
 import BaseDatos.ConexionEmpresas;
+import BaseDatos.ConexionVerAlmacenes;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -26,7 +27,8 @@ public class Crear_Articulos extends javax.swing.JDialog {
     Iterator lista3;
     Iterator lista4;
     Date fecha= new Date();
- int codigo_seccion;
+    int codigo_seccion;
+    String almacenActivoMostrar;
  java.sql.Date sqlFecha = new java.sql.Date(fecha.getTime());
     public Crear_Articulos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -56,6 +58,10 @@ public class Crear_Articulos extends javax.swing.JDialog {
         ConexionEmpresas secciones=new ConexionEmpresas();
         secciones.consulta();
         codigo_seccion=secciones.codigo_empresa();
+        ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
+         almacenPrincipal.consultaAlmacenPrincipal();
+         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
+         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
     }
 
     
@@ -76,14 +82,15 @@ public class Crear_Articulos extends javax.swing.JDialog {
         Panel1 = new javax.swing.JPanel();
         Boton_Guardar = new javax.swing.JButton();
         Boton_Salir = new javax.swing.JButton();
+        etiquetaAlmacenActivo = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        Etiq_encabezado.setText("<html><body><br><center>Sistema Administrativo de Farmacia <br>HOSPITAL DR. SAMUEL DARIO MALDONADO</body></html>");
+        Etiq_encabezado.setText("<html><body><center>Sistema Administrativo de Inventario </body></html>");
 
-        jLabel1.setText("                 Crear Articulo");
+        jLabel1.setText("Crear Articulo");
 
         Etiq_nombre.setText("Nombre del Articulo:");
 
@@ -114,12 +121,13 @@ public class Crear_Articulos extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(etiquetaAlmacenActivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Etiq_encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Etiq_nombre)
@@ -136,13 +144,15 @@ public class Crear_Articulos extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Etiq_encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Etiq_encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(etiquetaAlmacenActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Etiq_nombre)
                     .addComponent(Campo_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -156,7 +166,7 @@ public class Crear_Articulos extends javax.swing.JDialog {
                     .addComponent(Combo_Grupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(Panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
@@ -271,6 +281,7 @@ public class Crear_Articulos extends javax.swing.JDialog {
     private javax.swing.JLabel Etiq_encabezado;
     private javax.swing.JLabel Etiq_nombre;
     private javax.swing.JPanel Panel1;
+    private javax.swing.JLabel etiquetaAlmacenActivo;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;

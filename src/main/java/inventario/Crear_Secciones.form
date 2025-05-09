@@ -23,19 +23,23 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="Separador1" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="Etiq_encabezado" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
-                      <Component id="jLabel1" pref="137" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jLabel1" min="-2" pref="114" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="Separador1" alignment="0" max="32767" attributes="0"/>
-                  <Component id="Panel1" alignment="0" max="32767" attributes="0"/>
-                  <Component id="Panel2" alignment="0" max="32767" attributes="0"/>
+                  <Component id="Panel1" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="Panel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="etiquetaAlmacenActivo" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -43,16 +47,15 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" pref="35" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="Etiq_encabezado" min="-2" pref="52" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Etiq_encabezado" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="Separador1" min="-2" pref="10" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+              <Component id="etiquetaAlmacenActivo" min="-2" pref="23" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="Separador1" min="-2" pref="10" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="Panel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="Panel1" min="-2" max="-2" attributes="0"/>
@@ -64,14 +67,14 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="Etiq_encabezado">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;body&gt;&lt;br&gt;&lt;center&gt;Sistema Administrativo de Inventario &lt;br&gt;HOSPITAL DR. SAMUEL DARIO MALDONADO&lt;/body&gt;&lt;/html&gt;"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;body&gt;&lt;center&gt;Sistema Administrativo de Inventario &lt;/body&gt;&lt;/html&gt;"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSeparator" name="Separador1">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="        Crear Secciones"/>
+        <Property name="text" type="java.lang.String" value="Crear Secciones"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="Panel1">
@@ -105,7 +108,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="Etiq_nombre" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="Campo_nombre" min="-2" pref="343" max="-2" attributes="0"/>
+                  <Component id="Campo_nombre" min="-2" pref="451" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -132,5 +135,7 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="etiquetaAlmacenActivo">
+    </Component>
   </SubComponents>
 </Form>

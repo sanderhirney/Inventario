@@ -76,6 +76,7 @@ public class Salida_Inventario extends javax.swing.JDialog {
     public Dimension resolucion;//variable para leer el ancho y alto de la ventana
     //para darle formato al campo al momento de realizar la multiplicacion de cantidad*costo unitaroio
     int consecutivo=0;
+    String almacenActivoMostrar;
  public Salida_Inventario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -121,7 +122,10 @@ public class Salida_Inventario extends javax.swing.JDialog {
         {
             Combo_almacen_destino.addItem((String) lista5.next());
         }
-        
+        ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
+         almacenPrincipal.consultaAlmacenPrincipal();
+         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
+         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
         
         decimales.setSeccion(codigo_seccion);
         decimales.consulta();
@@ -182,10 +186,11 @@ public class Salida_Inventario extends javax.swing.JDialog {
         Etiq_observaciones = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         campo_observaciones = new javax.swing.JTextArea();
+        etiquetaAlmacenActivo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        Etiq_encabezado.setText("<html><body><br><center>Sistema Administrativo de Inventario <br>HOSPITAL DR. SAMUEL DARIO MALDONADO</body></html>");
+        Etiq_encabezado.setText("<html><body><center>Sistema Administrativo de Inventario </body></html>");
 
         Etiq_Ventana.setText("Salidas de Inventario");
 
@@ -323,6 +328,8 @@ public class Salida_Inventario extends javax.swing.JDialog {
         campo_observaciones.setText("N/A");
         jScrollPane2.setViewportView(campo_observaciones);
 
+        etiquetaAlmacenActivo.setText("jLabel3");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -338,8 +345,10 @@ public class Salida_Inventario extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 792, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 21, Short.MAX_VALUE))))
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(etiquetaAlmacenActivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(Etiq_Cantidad)
@@ -401,16 +410,17 @@ public class Salida_Inventario extends javax.swing.JDialog {
                                     .addComponent(Etiq_encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(Etiq_Ventana))))
-                        .addContainerGap())
-                    .addComponent(jScrollPane1)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Etiq_encabezado, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                    .addComponent(Etiq_encabezado)
                     .addComponent(Etiq_Ventana, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(etiquetaAlmacenActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Separador2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -929,6 +939,7 @@ public void setConsecutivo(int recibido){
     private javax.swing.JTable Tabla_datos;
     private javax.swing.JTextArea campo_observaciones;
     private javax.swing.JLabel etiq_almacenDespacho;
+    private javax.swing.JLabel etiquetaAlmacenActivo;
     private javax.swing.JLabel etiqueta_costo;
     private javax.swing.JLabel etiqueta_existencia;
     private javax.swing.JLabel jLabel1;
