@@ -328,8 +328,6 @@ public class Salida_Inventario extends javax.swing.JDialog {
         campo_observaciones.setText("N/A");
         jScrollPane2.setViewportView(campo_observaciones);
 
-        etiquetaAlmacenActivo.setText("jLabel3");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(

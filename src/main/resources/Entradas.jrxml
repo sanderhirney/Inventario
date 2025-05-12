@@ -42,15 +42,11 @@
 	<field name="Concepto" class="java.lang.String"/>
 	<field name="numeroComprobante" class="java.lang.Integer"/>
 	<field name="TotalEntrada" class="java.lang.String"/>
+	<field name="ubicacionAlmacenPrincipal" class="java.lang.String"/>
+	<field name="denominacionAlmacenPrincipal" class="java.lang.String"/>
+	<field name="codigoAlmacenPrincipal" class="java.lang.String"/>
 	<title>
 		<band height="149" splitType="Stretch">
-			<staticText>
-				<reportElement x="300" y="10" width="390" height="30" uuid="695dfae3-4342-4169-b4fb-4b9bbfe4a99b"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[HOSPITAL GENERAL TIPO II DR. SAMUEL DARIO MALDONADO]]></text>
-			</staticText>
 			<line>
 				<reportElement x="20" y="60" width="771" height="1" uuid="577ff423-6fb6-426b-8d88-b2b227185242"/>
 			</line>
@@ -138,9 +134,9 @@
 				<reportElement x="20" y="0" width="1" height="149" uuid="432d9bb0-dcb6-453b-a6e1-ca9dd21f5495"/>
 			</line>
 			<staticText>
-				<reportElement x="29" y="131" width="158" height="14" uuid="3792c9f0-f943-4272-b63f-54b03395440f"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Código de almacen: 306.59B ]]></text>
+				<reportElement x="29" y="131" width="171" height="14" uuid="3792c9f0-f943-4272-b63f-54b03395440f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Código de almacen:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="581" y="130" width="210" height="18" uuid="2bcdd5b2-aa4a-4157-becb-4be554495968"/>
@@ -181,6 +177,18 @@
 			<line>
 				<reportElement x="20" y="148" width="771" height="1" uuid="84f6b143-1bb5-4195-b7bb-d475bff0fde2"/>
 			</line>
+			<textField>
+				<reportElement x="297" y="4" width="492" height="16" uuid="b6246ce0-48a6-4b72-a3c8-1e1223042cd4"/>
+				<textFieldExpression><![CDATA[$F{denominacionAlmacenPrincipal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="297" y="30" width="491" height="20" uuid="d9785664-8913-4eb7-9550-74670d6d3a25"/>
+				<textFieldExpression><![CDATA[$F{ubicacionAlmacenPrincipal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="131" width="205" height="16" uuid="f184895d-e346-4652-be11-017355d4ba31"/>
+				<textFieldExpression><![CDATA[$F{codigoAlmacenPrincipal}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<columnHeader>

@@ -505,9 +505,6 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JLabel" name="etiquetaAlmacenActivo">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel3"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

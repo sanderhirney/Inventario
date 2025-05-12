@@ -43,7 +43,7 @@ public class ConexionReporteKardex {
               respuesta=1;
         }//while
       
-       
+       conectar.Cerrar();
     }//consulta
            catch(SQLException ex)
     {
@@ -85,7 +85,7 @@ public class ConexionReporteKardex {
            respuesta=1;
                
         }//while
-      
+      conectar.Cerrar();
     
     }//consulta
            catch(SQLException ex)

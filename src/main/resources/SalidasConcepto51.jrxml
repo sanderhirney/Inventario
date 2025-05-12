@@ -54,15 +54,10 @@
 	<field name="Fecha_Pedido" class="java.util.Date"/>
 	<field name="Fecha_Despacho" class="java.util.Date"/>
 	<field name="observaciones" class="java.lang.String"/>
+	<field name="denominacionAlmacenPrincipal" class="java.lang.String"/>
+	<field name="ubicacionAlmacenPrincipal" class="java.lang.String"/>
 	<title>
 		<band height="216" splitType="Stretch">
-			<staticText>
-				<reportElement x="310" y="9" width="441" height="22" uuid="695dfae3-4342-4169-b4fb-4b9bbfe4a99b"/>
-				<textElement>
-					<font size="14"/>
-				</textElement>
-				<text><![CDATA[HOSPITAL GENERAL TIPO II DR. SAMUEL DARIO MALDONADO]]></text>
-			</staticText>
 			<line>
 				<reportElement x="20" y="60" width="771" height="1" uuid="577ff423-6fb6-426b-8d88-b2b227185242"/>
 			</line>
@@ -314,6 +309,14 @@
 			<textField>
 				<reportElement x="580" y="193" width="205" height="15" uuid="3aa012f0-d827-4be2-8736-de45cf701231"/>
 				<textFieldExpression><![CDATA[$F{Fecha_Despacho}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="308" y="8" width="483" height="12" uuid="b6ac245e-5016-4a42-b918-25e661fcd213"/>
+				<textFieldExpression><![CDATA[$F{denominacionAlmacenPrincipal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="309" y="26" width="480" height="14" uuid="b71e017f-5dbd-4224-a238-092d57253dbf"/>
+				<textFieldExpression><![CDATA[$F{ubicacionAlmacenPrincipal}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>

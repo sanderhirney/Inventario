@@ -3,6 +3,7 @@ package Reportes;
 
 import BaseDatos.ConexionConsultarDecimales;
 import BaseDatos.ConexionReporteEntradas;
+import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerSeccionActiva;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -39,11 +40,13 @@ public class DatosdeGenerarEntrada implements JRDataSource{
         String descripcionConcepto;
         int codigoConcepto;
         int consecutivo=0;
-        
+        String denominacionAlmacenPrincipal;
+        String ubicacionAlmacenPrincipal;
+        String codigoAlmacenPrincipal;
         ConexionReporteEntradas reporte=new ConexionReporteEntradas();
         ConexionConsultarDecimales decimales=new ConexionConsultarDecimales();
         ConexionVerSeccionActiva seccionActiva=new ConexionVerSeccionActiva();
-        
+        ConexionVerAlmacenes almacen=new ConexionVerAlmacenes();
     public DatosdeGenerarEntrada(){
         reporte.consultas();
         codigoArticulos=reporte.getCodigosArticulos();
@@ -68,7 +71,10 @@ public class DatosdeGenerarEntrada implements JRDataSource{
         decimalesPrecioUnitario=decimales.getDecimalCampo();
         decimalesCalculoTotal=decimales.getDecimalTotal();
         
-        
+        almacen.consultaAlmacenPrincipal();
+        denominacionAlmacenPrincipal=almacen.getDenominacionprincipal();
+        ubicacionAlmacenPrincipal=almacen.getUbicacionprincipal();
+        codigoAlmacenPrincipal=almacen.getCodigoPrincipal();
         
         
     }
@@ -86,6 +92,12 @@ public class DatosdeGenerarEntrada implements JRDataSource{
         String campo=jrf.getName();
         switch(campo)
         {
+            case "denominacionAlmacenPrincipal" : valor=denominacionAlmacenPrincipal;
+            break;
+            case "ubicacionAlmacenPrincipal" : valor=ubicacionAlmacenPrincipal;
+            break;
+            case "codigoAlmacenPrincipal" : valor=codigoAlmacenPrincipal;
+            break;
             case "Codigos" : valor=grupo.get(index).toString()+"-"+subgrupo.get(index);
             break;
             case "Descripcion" : valor=descripcionArticulo.get(index);

@@ -3,6 +3,7 @@ package Reportes;
 
 import BaseDatos.ConexionConsultarDecimales;
 import BaseDatos.ConexionReporteSalidas;
+import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerSeccionActiva;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -43,10 +44,13 @@ public class DatosdeGenerarSalida53y54 implements JRDataSource{
         String almacenDespachador;
         String servicioDestinatario;
         int consecutivo=0;
+        String denominacionAlmacenPrincipal;
+        String ubicacionAlmacenPrincipal;
+        String codigoAlmacenPrincipal;
         ConexionReporteSalidas reporte=new ConexionReporteSalidas();
         ConexionConsultarDecimales decimales=new ConexionConsultarDecimales();
         ConexionVerSeccionActiva seccionActiva=new ConexionVerSeccionActiva();
-        
+        ConexionVerAlmacenes almacen=new ConexionVerAlmacenes();
     public DatosdeGenerarSalida53y54(){
         reporte.consultas();
         codigoArticulos=reporte.getCodigosArticulos();
@@ -75,6 +79,10 @@ public class DatosdeGenerarSalida53y54 implements JRDataSource{
         decimalesPrecioUnitario=decimales.getDecimalCampo();
         decimalesCalculoTotal=decimales.getDecimalTotal();
         
+        almacen.consultaAlmacenPrincipal();
+        denominacionAlmacenPrincipal=almacen.getDenominacionprincipal();
+        ubicacionAlmacenPrincipal=almacen.getUbicacionprincipal();
+        codigoAlmacenPrincipal=almacen.getCodigoPrincipal();
     }
        
     @Override
@@ -90,6 +98,12 @@ public class DatosdeGenerarSalida53y54 implements JRDataSource{
         String campo=jrf.getName();
         switch(campo)
         {
+             case "denominacionAlmacenPrincipal" : valor=denominacionAlmacenPrincipal;
+            break;
+            case "ubicacionAlmacenPrincipal" : valor=ubicacionAlmacenPrincipal;
+            break;
+            case "codigoAlmacenPrincipal" : valor=codigoAlmacenPrincipal;
+            break;
             case "almacen_despachador" : valor=almacenDespachador;
             break;
             case "Codigos" : valor=grupo.get(index).toString()+"-"+subgrupo.get(index);

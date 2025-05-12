@@ -4,6 +4,7 @@ package Reportes;
 import BaseDatos.ConexionConsultarDecimales;
 import BaseDatos.ConexionReporteF157;
 import BaseDatos.ConexionReporteSalidas;
+import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerSeccionActiva;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -45,10 +46,13 @@ public class DatosdeGenerarF157 implements JRDataSource{
         Double existenciaAnterior=0.0;
         Double existenciaFinal=0.0;
         Double existenciaAnteriorDecimales=0.0;
+        String denominacionAlmacenPrincipal;
+        String ubicacionAlmacenPrincipal;
+        String codigoAlmacenPrincipal;
         ConexionReporteF157 reporte=new ConexionReporteF157();
         ConexionConsultarDecimales decimales=new ConexionConsultarDecimales();
         ConexionVerSeccionActiva seccionActiva=new ConexionVerSeccionActiva();
-        
+        ConexionVerAlmacenes almacen = new ConexionVerAlmacenes();
     public DatosdeGenerarF157(){
         reporte.consultas();
         index=-1;
@@ -68,6 +72,11 @@ public class DatosdeGenerarF157 implements JRDataSource{
         egresosBolivares=reporte.getEgresosBsMes();
         existenciaAnterior=reporte.getExistenciasAnteriores();
         
+        
+         almacen.consultaAlmacenPrincipal();
+        denominacionAlmacenPrincipal=almacen.getDenominacionprincipal();
+        ubicacionAlmacenPrincipal=almacen.getUbicacionprincipal();
+        codigoAlmacenPrincipal=almacen.getCodigoPrincipal();
     }
        
     @Override
@@ -83,6 +92,12 @@ public class DatosdeGenerarF157 implements JRDataSource{
         String campo=jrf.getName();
         switch(campo)
         {
+            case "descripcionAlmacenPrincipal" : valor=denominacionAlmacenPrincipal;
+            break;
+            case "ubicacionAlmacenPrincipal" : valor=ubicacionAlmacenPrincipal;
+            break;
+            case "codigoAlmacenPrincipal" : valor=codigoAlmacenPrincipal;
+            break;
             case "Codigos" : valor=codigoConcepto.get(index).toString();
             break;
             case "Descripcion" : valor=descripcionConcepto.get(index);

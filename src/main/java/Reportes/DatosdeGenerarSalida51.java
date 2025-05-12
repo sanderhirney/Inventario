@@ -3,6 +3,7 @@ package Reportes;
 
 import BaseDatos.ConexionConsultarDecimales;
 import BaseDatos.ConexionReporteSalidas;
+import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerSeccionActiva;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -50,10 +51,13 @@ public class DatosdeGenerarSalida51 implements JRDataSource{
         String ubicacionAlmacenDespacho;
         String ubicacionAlmacenDestino;
         String observaciones;
+        String denominacionAlmacenPrincipal;
+        String ubicacionAlmacenPrincipal;
+        
         ConexionReporteSalidas reporte=new ConexionReporteSalidas();
         ConexionConsultarDecimales decimales=new ConexionConsultarDecimales();
         ConexionVerSeccionActiva seccionActiva=new ConexionVerSeccionActiva();
-        
+        ConexionVerAlmacenes almacen=new ConexionVerAlmacenes();
     public DatosdeGenerarSalida51(){
         reporte.consultas();
         codigoArticulos=reporte.getCodigosArticulos();
@@ -88,6 +92,11 @@ public class DatosdeGenerarSalida51 implements JRDataSource{
         decimalesPrecioUnitario=decimales.getDecimalCampo();
         decimalesCalculoTotal=decimales.getDecimalTotal();
         
+        almacen.consultaAlmacenPrincipal();
+        denominacionAlmacenPrincipal=almacen.getDenominacionprincipal();
+        ubicacionAlmacenPrincipal=almacen.getUbicacionprincipal();
+        
+        
     }
        
     @Override
@@ -103,6 +112,10 @@ public class DatosdeGenerarSalida51 implements JRDataSource{
         String campo=jrf.getName();
         switch(campo)
         {
+            case "ubicacionAlmacenPrincipal" : valor=ubicacionAlmacenPrincipal;
+            break;
+            case "denominacionAlmacenPrincipal" : valor=denominacionAlmacenPrincipal;
+            break;
             case "CodigoAlmacenDespachador" : valor=codigoAlmacenDespacho;
             break;
             case "CodigoAlmacenDestino" : valor=codigoAlmacenDestino;

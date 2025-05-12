@@ -22,6 +22,8 @@
 	<field name="TotalConsumidosMes" class="java.lang.String"/>
 	<field name="TotalEntradasDeposito" class="java.lang.String"/>
 	<field name="TotalExistenciaFinMes" class="java.lang.String"/>
+	<field name="ubicacionAlmacenPrincipal" class="java.lang.String"/>
+	<field name="denominacionAlmacenPrincipal" class="java.lang.String"/>
 	<group name="Grupos">
 		<groupExpression><![CDATA[$F{Grupo}]]></groupExpression>
 		<groupFooter>
@@ -60,21 +62,19 @@
 	<title>
 		<band height="72">
 			<frame>
-				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="f92c73b7-40b6-477c-815b-d0d8b77a17f0"/>
-				<staticText>
-					<reportElement x="20" y="20" width="320" height="43" forecolor="#FFFFFF" uuid="08ab45f0-7425-4b94-b88c-fe50112b0f4a"/>
-					<textElement>
-						<font size="24" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Sistema de Inventario]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF" uuid="0688f1f6-fe8b-4f03-ac1e-4a80c9104b8d"/>
-					<textElement textAlignment="Right">
-						<font size="14" isBold="false"/>
-					</textElement>
-					<text><![CDATA[Modelo 4]]></text>
-				</staticText>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#FFFFFF" uuid="f92c73b7-40b6-477c-815b-d0d8b77a17f0"/>
+				<image>
+					<reportElement x="20" y="25" width="200" height="45" uuid="98ac89bf-7ff6-4f7b-9daf-afb016371dc2"/>
+					<imageExpression><![CDATA["mpps.jpeg"]]></imageExpression>
+				</image>
+				<textField>
+					<reportElement x="246" y="20" width="329" height="20" uuid="f354989c-c281-4be1-b0e6-79bce330734a"/>
+					<textFieldExpression><![CDATA[$F{denominacionAlmacenPrincipal}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="242" y="43" width="332" height="17" uuid="d084d0c2-7624-4649-b795-6127ecfcbf8a"/>
+					<textFieldExpression><![CDATA[$F{ubicacionAlmacenPrincipal}]]></textFieldExpression>
+				</textField>
 			</frame>
 		</band>
 	</title>

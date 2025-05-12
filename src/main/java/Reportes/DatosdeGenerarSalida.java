@@ -3,6 +3,7 @@ package Reportes;
 
 import BaseDatos.ConexionConsultarDecimales;
 import BaseDatos.ConexionReporteSalidas;
+import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerSeccionActiva;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -39,10 +40,13 @@ public class DatosdeGenerarSalida implements JRDataSource{
         int codigoConcepto=0;
         String descripcionConcepto;
         int consecutivo=0;
+        String denominacionAlmacenPrincipal;
+        String ubicacionAlmacenPrincipal;
+        String codigoAlmacenPrincipal;
         ConexionReporteSalidas reporte=new ConexionReporteSalidas();
         ConexionConsultarDecimales decimales=new ConexionConsultarDecimales();
         ConexionVerSeccionActiva seccionActiva=new ConexionVerSeccionActiva();
-        
+        ConexionVerAlmacenes almacen=new ConexionVerAlmacenes();
     public DatosdeGenerarSalida(){
         reporte.consultas();
         codigoArticulos=reporte.getCodigosArticulos();
@@ -66,6 +70,10 @@ public class DatosdeGenerarSalida implements JRDataSource{
         decimales.consulta();
         decimalesPrecioUnitario=decimales.getDecimalCampo();
         decimalesCalculoTotal=decimales.getDecimalTotal();
+        almacen.consultaAlmacenPrincipal();
+        denominacionAlmacenPrincipal=almacen.getDenominacionprincipal();
+        ubicacionAlmacenPrincipal=almacen.getUbicacionprincipal();
+        codigoAlmacenPrincipal=almacen.getCodigoPrincipal();
         
     }
        

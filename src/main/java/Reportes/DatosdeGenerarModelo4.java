@@ -3,6 +3,7 @@ package Reportes;
 
 import BaseDatos.ConexionConsultarDecimales;
 import BaseDatos.ConexionReporteModelo4;
+import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerSeccionActiva;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -37,19 +38,20 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         String nombreSeccion;
         int codigoSeccion;
         
-        String codigoAlmacen;
+        String codigoAlmacenPrincipal;
         Date fechaDocumento;
         String nombreMes;
         int decimalesPrecioUnitario;
         int decimalesCalculoTotal;
         int mesDelReporte=0;
         int anioDelReporte=0;
-        String denominacion;
-      
+        String denominacionAlmacenPrincipal;
+        String ubicacionAlmacenPrincipal;
+       
         ConexionReporteModelo4 reporte=new ConexionReporteModelo4();
         ConexionConsultarDecimales decimales=new ConexionConsultarDecimales();
         ConexionVerSeccionActiva seccionActiva=new ConexionVerSeccionActiva();
-        
+        ConexionVerAlmacenes almacen=new ConexionVerAlmacenes();
     public DatosdeGenerarModelo4(){
          
         seccionActiva.consulta();
@@ -69,7 +71,7 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         entradasAnterior=reporte.getEntradasAnterior();
         salidasMes=reporte.getSalidasMes();
         salidasAnterior=reporte.getSalidasAnterior();
-        codigoAlmacen=reporte.getCodigoAlmacen();
+       
         mesDelReporte=reporte.getMesReporte();
         anioDelReporte=reporte.getAnioReporte();
         entradasTotalesMes=reporte.getEntradasTotalesMes();
@@ -77,6 +79,10 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         salidasTotalesMes=reporte.getSalidasTotalesMes();
         salidasAnteriorTotales=reporte.getSalidasAnteriorTotalesMes();
         
+        almacen.consultaAlmacenPrincipal();
+        denominacionAlmacenPrincipal=almacen.getDenominacionprincipal();
+        ubicacionAlmacenPrincipal=almacen.getUbicacionprincipal();
+        codigoAlmacenPrincipal=almacen.getCodigoPrincipal();
         
     }
        
@@ -92,7 +98,10 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         Object valor=null;
         String campo=jrf.getName();
         switch(campo)
-       {    case "codigoAlmacen"->valor=codigoAlmacen;
+       {    
+             case "denominacionAlmacenPrincipal"->valor=denominacionAlmacenPrincipal;
+              case "ubicacionAlmacenPrincipal"->valor=ubicacionAlmacenPrincipal;
+            case "codigoAlmacen"->valor=codigoAlmacenPrincipal;
             case "Fecha" -> valor=mesReporte(mesDelReporte)+" del año "+anioDelReporte;
             //case "Grupo" -> valor=codigoGrupos.get(index).toString()+"-"+codigoSubgrupos.get(index);
             case "Grupo" -> valor=codigoGrupos.get(index).toString();

@@ -3,6 +3,7 @@ package inventario;
 
 import BaseDatos.ConexionDatosdeReporte;
 import BaseDatos.ConexionEmpresas;
+import BaseDatos.ConexionVerAlmacenes;
 import Reportes.GenerarExceF4;
 import Reportes.GenerarExistGeneral;
 import Reportes.ReporteExistencias;
@@ -20,12 +21,19 @@ ConexionEmpresas secciones=new ConexionEmpresas();
   int mes_reporte;
   int anio_reporte;
   int seccion;
+  String almacenActivoMostrar;
     public Reportes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         secciones.consulta();
         seccion=secciones.codigo_empresa();
         Progreso.setVisible(false);
+        
+        
+        ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
+         almacenPrincipal.consultaAlmacenPrincipal();
+         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
+         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
     }
 
     /**
@@ -54,10 +62,11 @@ ConexionEmpresas secciones=new ConexionEmpresas();
         Boton_f157 = new javax.swing.JButton();
         Boton_Modelo4 = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
+        etiquetaAlmacenActivo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        Etiq_encabezado.setText("<html><body><br><center>Sistema Administrativo de Inventario <br>HOSPITAL DR. SAMUEL DARIO MALDONADO</body></html>");
+        Etiq_encabezado.setText("<html><body><center>Sistema Administrativo de Inventario </body></html>");
 
         jLabel1.setText("Reportes");
 
@@ -160,7 +169,7 @@ ConexionEmpresas secciones=new ConexionEmpresas();
                             .addComponent(jSeparator1)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(Etiq_encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(Panel_Layout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
@@ -174,7 +183,10 @@ ConexionEmpresas secciones=new ConexionEmpresas();
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator2)
                             .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jSeparator3))))
+                            .addComponent(jSeparator3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(etiquetaAlmacenActivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -184,11 +196,13 @@ ConexionEmpresas secciones=new ConexionEmpresas();
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Etiq_encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(etiquetaAlmacenActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -434,6 +448,7 @@ ConexionEmpresas secciones=new ConexionEmpresas();
     public javax.swing.JProgressBar Progreso;
     private javax.swing.JButton boton_existencias;
     private javax.swing.JButton boton_kardex;
+    private javax.swing.JLabel etiquetaAlmacenActivo;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;

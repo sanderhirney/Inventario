@@ -24,6 +24,7 @@ public class ConexionVerAlmacenes {
     List<Integer> principal=new ArrayList<>();
     String denominacionAlmacenPrincipal;
     String ubicacionAlmacenPrincipal;
+    String codigoAlmacenPrincipal;
     public void consulta()
     {
           try
@@ -99,12 +100,13 @@ public class ConexionVerAlmacenes {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select denominacion, ubicacion from almacenes where principal=1");
+        consulta= conex.prepareStatement("select codigo_almacen, denominacion, ubicacion from almacenes where principal=1");
         ejecutar=consulta.executeQuery();
         while( ejecutar.next() )
         {
                     denominacionAlmacenPrincipal=(ejecutar.getString("denominacion"));
                     ubicacionAlmacenPrincipal=(ejecutar.getString("ubicacion"));
+                    codigoAlmacenPrincipal=(ejecutar.getString("codigo_almacen"));
                   
                      
         }//if
@@ -160,6 +162,9 @@ public class ConexionVerAlmacenes {
     {
         return ubicacionAlmacenPrincipal;
     }
+     public String getCodigoPrincipal(){
+         return codigoAlmacenPrincipal;
+     }
     
     
 }//clase
