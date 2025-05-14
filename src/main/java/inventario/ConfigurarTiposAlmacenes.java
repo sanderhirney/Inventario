@@ -15,21 +15,22 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
-public class ConfigurarAlmacenes extends javax.swing.JDialog {
+public class ConfigurarTiposAlmacenes extends javax.swing.JDialog {
 
  ConexionVerAlmacenes almacenes = new ConexionVerAlmacenes();
  List<String> codigosAlmacenes= new ArrayList<>();
  List<String> descripcionAlmacenes= new ArrayList<>();
+ List<Integer> tipoAlmacenes=new ArrayList<>();
  String almacenActivoMostrar;
  Iterator lista1;
- 
-    public ConfigurarAlmacenes(java.awt.Frame parent, boolean modal) {
+ //TIPO 1 DESPACHO TIPO 0 RECIBE
+    public ConfigurarTiposAlmacenes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         almacenes.consulta();
         codigosAlmacenes=almacenes.getCodigoAlmacenes();
         descripcionAlmacenes=almacenes.getDenominacionAlmacenes();
-        
+        tipoAlmacenes=almacenes.getTipoAlmacenes();
        
         try
         {
@@ -40,6 +41,7 @@ public class ConfigurarAlmacenes extends javax.swing.JDialog {
             {
               comboAlmacenes.addItem((String) lista1.next());
             }//while
+            
         }//try
         catch(Exception e)
         {
@@ -61,22 +63,25 @@ public class ConfigurarAlmacenes extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        grupoBotones = new javax.swing.ButtonGroup();
         Etiq_encabezado = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         Panel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        botonGuardar = new javax.swing.JButton();
+        botonActualizar = new javax.swing.JButton();
         comboAlmacenes = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         etiquetaAlmacenActivo = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        botonDespacho = new javax.swing.JRadioButton();
+        botonRecibe = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Etiq_encabezado.setText("<html><body><br><center>Sistema Administrativo de Inventario</body></html>");
 
-        jLabel1.setText("Configurar Almacenes");
+        jLabel1.setText("Configurar Tipo de Almacen");
 
         jButton1.setText("Salir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -86,17 +91,29 @@ public class ConfigurarAlmacenes extends javax.swing.JDialog {
         });
         Panel1.add(jButton1);
 
-        botonGuardar.setText("Guardar");
-        botonGuardar.addActionListener(new java.awt.event.ActionListener() {
+        botonActualizar.setText("Actualizar");
+        botonActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonGuardarActionPerformed(evt);
+                botonActualizarActionPerformed(evt);
             }
         });
-        Panel1.add(botonGuardar);
+        Panel1.add(botonActualizar);
 
-        jLabel2.setText("Solo se configura un solo almacen como principal.");
+        comboAlmacenes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboAlmacenesActionPerformed(evt);
+            }
+        });
 
-        jLabel3.setText("Esta denominacion sera usada en las ventanas y reportes");
+        jLabel2.setText("Modifique el tipo de almacen solo de ser necesario");
+
+        grupoBotones.add(botonDespacho);
+        botonDespacho.setText("Despacho");
+        jPanel1.add(botonDespacho);
+
+        grupoBotones.add(botonRecibe);
+        botonRecibe.setText("Recibe");
+        jPanel1.add(botonRecibe);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,15 +130,15 @@ public class ConfigurarAlmacenes extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
                     .addComponent(jLabel2)
                     .addComponent(comboAlmacenes, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Panel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(etiquetaAlmacenActivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(etiquetaAlmacenActivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Panel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -139,11 +156,11 @@ public class ConfigurarAlmacenes extends javax.swing.JDialog {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(comboAlmacenes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addComponent(Panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
@@ -156,17 +173,36 @@ public class ConfigurarAlmacenes extends javax.swing.JDialog {
        
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
+    private void botonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarActionPerformed
         int seleccionado=comboAlmacenes.getSelectedIndex();
-        ConexionConfigurarAlmacenes configurar=new ConexionConfigurarAlmacenes();
-        configurar.setCodigoAlmacen(codigosAlmacenes.get(seleccionado));
-        configurar.consulta();
-        if(configurar.getRespuesta()==1){
-            JOptionPane.showMessageDialog(null,"Almacen principal configurado exitosamente" , "Informacion", JOptionPane.INFORMATION_MESSAGE);
-        }else{
-            JOptionPane.showMessageDialog(null,"No se pudo configurar el almacen principal" , "Error", JOptionPane.ERROR_MESSAGE);
+        int tipoSeleccionado=0;
+        if(botonDespacho.isSelected()){
+            tipoSeleccionado=1;
         }
-    }//GEN-LAST:event_botonGuardarActionPerformed
+        if(botonRecibe.isSelected()){
+            tipoSeleccionado=0;
+        }
+        ConexionConfigurarAlmacenes configurar=new ConexionConfigurarAlmacenes();
+         configurar.setCodigoAlmacen(codigosAlmacenes.get(seleccionado));
+        configurar.setTipoActualizar(tipoSeleccionado);
+        configurar.actualizar();
+        if(configurar.getRespuesta()==1){
+            JOptionPane.showMessageDialog(null,"Tipo de almacen actualizado exitosamente" , "Informacion", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null,"No se pudo actualizar el tipo de almacen" , "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_botonActualizarActionPerformed
+
+    private void comboAlmacenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboAlmacenesActionPerformed
+        // TODO add your handling code here:
+        
+            if(tipoAlmacenes.get(comboAlmacenes.getSelectedIndex())==1){
+                botonDespacho.setSelected(true);
+            }
+             if(tipoAlmacenes.get(comboAlmacenes.getSelectedIndex())==0){
+                botonRecibe.setSelected(true);
+            }
+    }//GEN-LAST:event_comboAlmacenesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,21 +221,23 @@ public class ConfigurarAlmacenes extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConfigurarAlmacenes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConfigurarTiposAlmacenes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConfigurarAlmacenes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConfigurarTiposAlmacenes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConfigurarAlmacenes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConfigurarTiposAlmacenes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConfigurarAlmacenes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConfigurarTiposAlmacenes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ConfigurarAlmacenes dialog = new ConfigurarAlmacenes(new javax.swing.JFrame(), true);
+                ConfigurarTiposAlmacenes dialog = new ConfigurarTiposAlmacenes(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -214,13 +252,16 @@ public class ConfigurarAlmacenes extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Etiq_encabezado;
     private javax.swing.JPanel Panel1;
-    private javax.swing.JButton botonGuardar;
+    private javax.swing.JButton botonActualizar;
+    private javax.swing.JRadioButton botonDespacho;
+    private javax.swing.JRadioButton botonRecibe;
     private javax.swing.JComboBox<String> comboAlmacenes;
     private javax.swing.JLabel etiquetaAlmacenActivo;
+    private javax.swing.ButtonGroup grupoBotones;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

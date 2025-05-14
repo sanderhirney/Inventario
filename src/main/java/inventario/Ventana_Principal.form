@@ -85,7 +85,7 @@
         <Component class="javax.swing.JTree" name="Arbol">
           <Properties>
             <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
-              <TreeModel code="Inventario&#xa;   Entradas&#xa;   Salidas&#xa; Proveedores&#xa;    Crear&#xa;    Consultar&#xa; Servicios&#xa;    Crear&#xa;    Consultar&#xa; Almacenes&#xa;    Crear&#xa;    Consultar&#xa;    Configurar        &#xa; Articulos&#xa;   Crear&#xa;   Consultar&#xa;   Asignar&#xa; Reportes&#xa;   Reportes&#xa; Configuracion&#xa;  Firmantes&#xa;  Secciones&#xa;  Unidades&#xa;  Cargos&#xa;  Conceptos&#xa;  Grupos&#xa;  Decimales&#xa;"/>
+              <TreeModel code="Inventario&#xa;   Entradas&#xa;   Salidas&#xa; Proveedores&#xa;    Crear&#xa;    Consultar&#xa; Servicios&#xa;    Crear&#xa;    Consultar&#xa; Almacenes&#xa;    Crear&#xa;    Consultar&#xa;    Principal&#xa;    Tipos        &#xa; Articulos&#xa;   Crear&#xa;   Consultar&#xa;   Asignar&#xa; Reportes&#xa;   Reportes&#xa; Configuracion&#xa;  Firmantes&#xa;  Secciones&#xa;  Unidades&#xa;  Cargos&#xa;  Conceptos&#xa;  Grupos&#xa;  Decimales&#xa;"/>
             </Property>
           </Properties>
           <Events>

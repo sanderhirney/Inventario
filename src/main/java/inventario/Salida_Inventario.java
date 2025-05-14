@@ -798,6 +798,7 @@ public class Salida_Inventario extends javax.swing.JDialog {
         // TODO add your handling code here:
         
         if(codigo_concepto.get(Combo_Conceptos.getSelectedIndex())==51){ 
+            
             Combo_almacen_destino.setEnabled(true);
         }else{ 
             Combo_almacen_destino.setEnabled(false);
