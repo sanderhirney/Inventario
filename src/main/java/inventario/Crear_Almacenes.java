@@ -240,6 +240,7 @@ String almacenActivoMostrar;
                 crear.setTFechaCreacionAlmacen(fecha_creacion);
                 crear.setTipoAlmacen(temp_tipo);
                 crear.setSeccionAlmacen(seccion_actual);
+               
                 crear.crear();
                 if(crear.getRespuesta()>0){
                     JOptionPane.showMessageDialog(null, "almacen creado Exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);

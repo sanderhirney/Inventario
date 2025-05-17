@@ -38,6 +38,7 @@ public class ConexionCrearAlmacen {
         consulta.setInt(5, tipo);//1 para despacho y 0 para destino
         consulta.setString(6, alias_almacen);
         consulta.setDate(7, fecha_creacion);
+        consulta.setInt(8, 0);//se crea un almacen como que no es principal por eso se coloca en 
         ejecutar=consulta.executeUpdate();
         if( ejecutar> 0 )
         {
