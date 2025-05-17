@@ -1,2 +1,2 @@
-may. 14, 2025 9:55:48 A.Â M. shca.inventario.Inventario main
-INFORMACIÃ“N: Ingreso Satisfactorio
+may. 15, 2025 9:55:28 P. M. shca.inventario.Inventario main
+INFORMACIÓN: Ingreso Satisfactorio
