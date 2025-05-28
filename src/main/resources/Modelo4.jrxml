@@ -131,18 +131,36 @@ deposito]]></text>
 					<reportElement x="0" y="0" width="70" height="14" uuid="0fb00d4d-9d12-4666-b7eb-5a8e478d2ddc">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7ef4a481-3c54-4bb9-9469-756f8d458d7a"/>
 					</reportElement>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
 					<textFieldExpression><![CDATA[$F{Grupo}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="70" y="0" width="162" height="14" uuid="dff072c9-45a5-42a0-bb35-b5ef9b4deb6b">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="15a2952f-626b-4874-b014-67c500cc2b7d"/>
 					</reportElement>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
 					<textFieldExpression><![CDATA[$F{Descripcion}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="392" y="0" width="87" height="14" uuid="c27617d6-ed8c-40db-95fe-8667af007dcf">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e304217d-b0f7-4425-a599-93fd2c0ac1c3"/>
 					</reportElement>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
 					<textElement textAlignment="Justified"/>
 					<textFieldExpression><![CDATA[$F{ConsumidosMes}]]></textFieldExpression>
 				</textField>
@@ -150,6 +168,12 @@ deposito]]></text>
 					<reportElement x="486" y="0" width="68" height="15" uuid="f64c25cc-df4b-41f1-822a-68a23ecd7711">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d63a87c1-1c0e-4627-b4f1-6f4b56db3206"/>
 					</reportElement>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
 					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[$F{TotalExistencias}]]></textFieldExpression>
 				</textField>
@@ -157,6 +181,12 @@ deposito]]></text>
 					<reportElement x="233" y="0" width="87" height="14" uuid="80b2e04f-dbf8-4dbd-afd3-d87bf328c08d">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="20044db3-dfa2-41a3-a5ef-f0912190ba5a"/>
 					</reportElement>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
 					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[$F{ExistenciaAnterior}]]></textFieldExpression>
 				</textField>
@@ -164,6 +194,12 @@ deposito]]></text>
 					<reportElement x="319" y="0" width="72" height="14" uuid="2c8977fd-7070-4929-87a5-832a6fdc4552">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b65ae7a3-6e17-403a-9207-08017046078e"/>
 					</reportElement>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
 					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[$F{EntradasDeposito}]]></textFieldExpression>
 				</textField>
