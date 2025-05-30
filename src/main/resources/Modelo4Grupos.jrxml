@@ -162,7 +162,7 @@ deposito]]></text>
 	<detail>
 		<band height="21">
 			<frame>
-				<reportElement x="0" y="0" width="555" height="17" uuid="bcb901fd-bf74-41a3-8833-7c50735ac3bc"/>
+				<reportElement x="0" y="0" width="555" height="14" uuid="bcb901fd-bf74-41a3-8833-7c50735ac3bc"/>
 				<textField>
 					<reportElement x="0" y="0" width="70" height="14" uuid="0fb00d4d-9d12-4666-b7eb-5a8e478d2ddc">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7ef4a481-3c54-4bb9-9469-756f8d458d7a"/>
@@ -188,7 +188,7 @@ deposito]]></text>
 					<textFieldExpression><![CDATA[$F{Descripcion}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="480" y="0" width="74" height="15" uuid="f64c25cc-df4b-41f1-822a-68a23ecd7711">
+					<reportElement x="480" y="0" width="74" height="14" uuid="f64c25cc-df4b-41f1-822a-68a23ecd7711">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d63a87c1-1c0e-4627-b4f1-6f4b56db3206"/>
 					</reportElement>
 					<box>
@@ -227,7 +227,7 @@ deposito]]></text>
 					<textFieldExpression><![CDATA[$F{EntradasDeposito}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="391" y="1" width="88" height="13" uuid="c488263c-f07e-4910-b394-741642b8274a">
+					<reportElement x="391" y="0" width="88" height="14" uuid="c488263c-f07e-4910-b394-741642b8274a">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="72a79903-4511-425e-963c-fec9288c851b"/>
 					</reportElement>
 					<box>

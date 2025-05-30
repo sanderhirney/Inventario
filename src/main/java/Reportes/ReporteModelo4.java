@@ -28,6 +28,7 @@ public class ReporteModelo4 {
             JasperReport reporte = (JasperReport) JRLoader.loadObject(report);
             JasperPrint jprint = JasperFillManager.fillReport(reporte, null, DatosdeGenerarModelo4.getDataSource());
             JasperViewer view = new JasperViewer(jprint, false);
+            view.setTitle("Modelo 4");
             view.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             view.setAlwaysOnTop(false);
             view.setVisible(true);
