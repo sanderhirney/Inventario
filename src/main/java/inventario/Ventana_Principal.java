@@ -95,6 +95,8 @@ public class Ventana_Principal extends javax.swing.JFrame {
         treeNode2.add(treeNode3);
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Consultar");
         treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Modificar");
+        treeNode2.add(treeNode3);
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Asignar");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
@@ -324,13 +326,21 @@ public class Ventana_Principal extends javax.swing.JFrame {
               consultar_serv.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
               consultar_serv.setVisible(true);
           }
-          if( ((nodo.getParent().toString()).equals("Articulos")) && ((nodeInfo.toString()).equals("Asignar")) )
+          if( ((nodo.getParent().toString()).equals("Articulos")) && ((nodeInfo.toString()).equals("Consultar")) )
           {
-              Asignar_seccion_art asignar= new Asignar_seccion_art(this, true);
-              asignar.setResizable(false);
-              asignar.setLocationRelativeTo(null);
-              asignar.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              asignar.setVisible(true);
+              Consultar_Articulos consultar_serv= new Consultar_Articulos(this, true);
+              consultar_serv.setResizable(false);
+              consultar_serv.setLocationRelativeTo(null);
+              consultar_serv.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+              consultar_serv.setVisible(true);
+          }
+          if( ((nodo.getParent().toString()).equals("Articulos")) && ((nodeInfo.toString()).equals("Modificar")) )
+          {
+              Modificar_Articulo modificar= new Modificar_Articulo(this, true);
+              modificar.setResizable(false);
+              modificar.setLocationRelativeTo(null);
+              modificar.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+              modificar.setVisible(true);
           }
          
         

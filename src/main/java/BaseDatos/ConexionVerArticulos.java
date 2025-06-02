@@ -25,7 +25,7 @@ public class ConexionVerArticulos {
         conex= conectar.getConexion();
         consulta= conex.prepareStatement("select * from articulos inner join existencias\n" +
                                           "on articulos.codigo=existencias.codigo\n" +
-                                           "where seccion=?");
+                                           "where seccion=? order by articulos.codigo");
         consulta.setInt(1, seccion);
         ejecutar=consulta.executeQuery();
         while( ejecutar.next() )

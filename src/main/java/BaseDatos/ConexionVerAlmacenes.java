@@ -31,7 +31,7 @@ public class ConexionVerAlmacenes {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select codigo_almacen, denominacion, tipo, principal from almacenes");
+        consulta= conex.prepareStatement("select codigo_almacen, denominacion, tipo, principal from almacenes order by codigo_almacen");
         ejecutar=consulta.executeQuery();
         while( ejecutar.next() )
         {
