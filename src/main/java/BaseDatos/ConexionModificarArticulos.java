@@ -11,6 +11,7 @@ public class ConexionModificarArticulos {
     PreparedStatement consulta;
     Conexion conectar= new Conexion();
     ResultSet ejecutar;
+    int actualizacion=0;
     int seccion;
     int codigoArticulo;
     int unidadMedida;
@@ -18,6 +19,12 @@ public class ConexionModificarArticulos {
     String codigoSubGrupo;
     String descripcionGrupo;
     String nombreUnidad;
+    //variables para recibir los datos a actualizar
+    int codigoArticuloActualizar;
+    int codigoUnidadActualizar;
+    int codigoGrupoActualizar;
+    String codigoSubGrupoActualizar;
+    String nombreActualizar;
     private void consultaArticulo()
     {
       
@@ -101,13 +108,51 @@ public class ConexionModificarArticulos {
         consultaUnidadMedida();
         consultaDescripcionGrupo();
     }
+    public void consultaActualizar(){
+        actualizar();
+    }
+    private void actualizar(){
+           try
+         {
+        conectar.Conectar();
+        conex= conectar.getConexion();
+        consulta= conex.prepareStatement("update articulos set nombre=?, unidad_medida=?, id_grupo=?, id_subgrupo=? where codigo=?");
+        consulta.setString(1, nombreActualizar);
+        consulta.setInt(2, codigoUnidadActualizar);
+        consulta.setInt(3, codigoGrupoActualizar);
+        consulta.setString(4, codigoSubGrupoActualizar);
+        consulta.setInt(5, codigoArticuloActualizar);
+        actualizacion=consulta.executeUpdate();
+        conectar.Cerrar();
+       
+          }//consulta
+           catch(SQLException ex)
+            {
+                JOptionPane.showMessageDialog(null, "No se pudo realizar la operacion de actualizaciòn.\n Ventana Ver Articulos \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+            }
+    }
+        public void setCodigoArticuloActualizar(int recibido){
+            codigoArticuloActualizar=recibido;
+        }
+        public void setCodigoUnidadActualizar(int recibido){
+            codigoUnidadActualizar=recibido;
+        }
+        public void setCodigoGrupoActualizar(int recibido){
+            codigoGrupoActualizar=recibido;
+        }
+        public void setCodigoSubGrupoActualizar(String recibido){
+            codigoSubGrupoActualizar=recibido;
+        }
+        public void setNombreActualizar(String recibido){
+            nombreActualizar=recibido;
+        }
     
         public void setCodigoArticulo(int recibido)
         {
             codigoArticulo=recibido;
         }
 
-        public int getUnidadMedida() {
+        public int getCodigoUnidadMedida() {
             return unidadMedida;
         }
 
@@ -125,5 +170,8 @@ public class ConexionModificarArticulos {
 
         public String getNombreUnidad() {
             return nombreUnidad;
+        }
+        public int getResultadoActualizacion(){
+            return actualizacion;
         }
 }//clase

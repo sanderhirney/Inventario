@@ -37,6 +37,9 @@ Iterator lista3;
 Iterator lista4;
 Iterator lista5;
 String almacenActivoMostrar;
+int codigoGrupoActual;
+String codigoSubGrupoActual;
+int codigoUnidadActual;
  
  
     public Modificar_Articulo(java.awt.Frame parent, boolean modal) {
@@ -225,42 +228,40 @@ String almacenActivoMostrar;
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(Separador1)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(Etiq_encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel1))
-                                    .addComponent(Campo_buscar, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(Etiq_articulo)
-                                        .addGap(476, 476, 476))
-                                    .addComponent(panelBotonEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(jSeparator1))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(6, 6, 6)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel2)
-                                                    .addComponent(etiqNombreArticulo)
-                                                    .addComponent(etiqNuevaUnidad)))
-                                            .addComponent(etiqGrupo))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(campoNombre)
-                                            .addComponent(etiquetaUnidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(ComboUnidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(etiqGrupoActual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(Separador1)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(Etiq_encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel1))
+                                .addComponent(Campo_buscar, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(Etiq_articulo)
+                                    .addGap(476, 476, 476))
+                                .addComponent(panelBotonEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(6, 6, 6)
+                                    .addComponent(jSeparator1))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(6, 6, 6)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel2)
+                                                .addComponent(etiqNombreArticulo)
+                                                .addComponent(etiqNuevaUnidad)))
+                                        .addComponent(etiqGrupo))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(campoNombre)
+                                        .addComponent(etiquetaUnidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(ComboUnidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(etiqGrupoActual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(ComboGrupo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(ComboGrupo, 0, 454, Short.MAX_VALUE)))
                         .addGap(6, 6, 6))))
         );
         layout.setVerticalGroup(
@@ -333,10 +334,31 @@ String almacenActivoMostrar;
 
     private void Boton_procesarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_procesarActionPerformed
         // TODO add your handling code here:
-        modelo2.setRowCount(0);
-        nombre_seleccion=(Tabla_articulos.getValueAt(Tabla_articulos.getSelectedRow(), 1).toString());
-        codigo_seleccion=(Tabla_articulos.getValueAt(Tabla_articulos.getSelectedRow(), 0).toString());
-      
+     String nuevoNombre=campoNombre.getText().trim();
+     if(!ComboUnidad.getSelectedItem().equals("Seleccione")){
+         codigoUnidadActual=codigoUnidad.get(ComboUnidad.getSelectedIndex());
+     }
+     if(!ComboGrupo.getSelectedItem().equals("Seleccione")){
+         codigoGrupoActual=codigoGrupo.get(ComboGrupo.getSelectedIndex());
+         codigoSubGrupoActual=codigoSubGrupo.get(ComboGrupo.getSelectedIndex());
+     }
+     
+      ConexionModificarArticulos modificar=new ConexionModificarArticulos();
+       modificar.setCodigoArticuloActualizar(Integer.parseInt(codigo_seleccion));
+       modificar.setCodigoUnidadActualizar(codigoUnidadActual);
+       modificar.setCodigoGrupoActualizar(codigoGrupoActual);
+       modificar.setCodigoSubGrupoActualizar(codigoSubGrupoActual);
+       modificar.setNombreActualizar(campoNombre.getText().trim());
+       modificar.consultaActualizar();
+       if(modificar.getResultadoActualizacion()>0){
+           JOptionPane.showMessageDialog(null, "Informacion Actualizada Correctamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+           campoNombre.setText("");
+           etiquetaUnidad.setText("");
+           etiqGrupoActual.setText("");
+       }else{
+            JOptionPane.showMessageDialog(null, "Ocurrio un error al actualizar", "Error", JOptionPane.ERROR_MESSAGE);
+
+       }
        
         
     }//GEN-LAST:event_Boton_procesarActionPerformed
@@ -350,8 +372,11 @@ String almacenActivoMostrar;
        modificar.setCodigoArticulo(Integer.parseInt(codigo_seleccion));
        modificar.ejecutarConsultas();
        campoNombre.setText(nombre_seleccion);
+       codigoUnidadActual=modificar.getCodigoUnidadMedida();
+       codigoGrupoActual=modificar.getCodigoGrupo();
+       codigoSubGrupoActual=modificar.getCodigoSubGrupo();
        etiquetaUnidad.setText(modificar.getNombreUnidad());
-       etiqGrupoActual.setText((modificar.getCodigoGrupo())+"-"+modificar.getCodigoGrupo()+" : "+modificar.getDescripcionGrupo());
+       etiqGrupoActual.setText((modificar.getCodigoGrupo())+"-"+modificar.getCodigoSubGrupo()+" : "+modificar.getDescripcionGrupo());
        
     }//GEN-LAST:event_botonSeleccionarActionPerformed
 public String getNombre()
