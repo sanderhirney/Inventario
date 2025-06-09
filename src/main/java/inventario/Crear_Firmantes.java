@@ -302,6 +302,7 @@ public class Crear_Firmantes extends javax.swing.JDialog {
             actualizar.setNombre(Campo_nombre.getText().trim());
             actualizar.setapellido(Campo_apellidos.getText().trim());
             actualizar.setCedula(Campo_cedula.getText().trim());
+            actualizar.setCodigoSeccion(seccion_firmas);
             actualizar.actualizar();
             if(actualizar.resultado()<=0)
             {

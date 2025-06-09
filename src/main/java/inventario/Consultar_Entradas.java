@@ -289,7 +289,7 @@ JFrame ventanaPrincipal;
                     s.append(lista7.next());
                     }
 
-                    JOptionPane.showMessageDialog(null, "Error: no se puede modificar el documento seleccionado\n el o los articulos: "+s+"poseen movimientos", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Error: no se puede modificar el documento seleccionado\n el o los articulos: "+s+"\n"+"poseen movimientos", "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 if(entrada.getEstadoExistencia()==1)
                 {

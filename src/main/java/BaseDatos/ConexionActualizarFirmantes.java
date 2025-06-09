@@ -17,7 +17,7 @@ public class ConexionActualizarFirmantes {
   private String nombre;
   private  String apellido;
   private  int cargo;//cargo a actualizar
-    
+  private int codigoSeccionActual;
     
     
     public void actualizar()
@@ -27,11 +27,12 @@ public class ConexionActualizarFirmantes {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("UPDATE firmas set cedula=?, nombre=?, apellido=? where cargo=?");
+        consulta= conex.prepareStatement("UPDATE firmas set cedula=?, nombre=?, apellido=? where cargo=? and seccion=?");
         consulta.setString(1, cedula);
         consulta.setString(2, nombre);
         consulta.setString(3, apellido);
         consulta.setInt(4, cargo);
+        consulta.setInt(5, codigoSeccionActual);
         ejecutar= consulta.executeUpdate();
         if ( ejecutar<=0)
         {
@@ -71,6 +72,9 @@ public class ConexionActualizarFirmantes {
     public int resultado()
     {
         return resultado;
+    }
+    public void setCodigoSeccion(int recibido){
+        codigoSeccionActual=recibido;
     }
     
     

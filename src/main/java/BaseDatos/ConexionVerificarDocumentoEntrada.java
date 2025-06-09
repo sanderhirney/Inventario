@@ -12,7 +12,7 @@ public class ConexionVerificarDocumentoEntrada {
     Conexion conectar= new Conexion();
     ResultSet ejecutar;
     int resultado=0;//variable que devolvera 1 en caso de ser la consulta positiva
-    
+    int codigoSeccion=0;
     String numero_doc;
     //listas para guardar datos
     
@@ -24,8 +24,9 @@ public class ConexionVerificarDocumentoEntrada {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select numero_doc from doc_entradas where numero_doc=?");
+        consulta= conex.prepareStatement("select numero_doc from doc_entradas where numero_doc=? and seccion=?");
         consulta.setString(1, numero_doc);
+        consulta.setInt(2, codigoSeccion);
         ejecutar=consulta.executeQuery();
         if ( ejecutar.next())
         {
@@ -54,6 +55,8 @@ public class ConexionVerificarDocumentoEntrada {
     {
         return resultado;
     }
-    
+    public void setCodigoSeccion(int recibido){
+        codigoSeccion=recibido;
+    }
     
 }//clase

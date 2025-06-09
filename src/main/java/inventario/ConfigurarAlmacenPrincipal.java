@@ -6,6 +6,7 @@
 package inventario;
 
 import BaseDatos.ConexionConfigurarAlmacenes;
+import BaseDatos.ConexionEmpresas;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerServicios;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class ConfigurarAlmacenPrincipal extends javax.swing.JDialog {
  List<String> descripcionAlmacenes= new ArrayList<>();
  String almacenActivoMostrar;
  Iterator lista1;
+ int codigoSeccionActual=0;
  
     public ConfigurarAlmacenPrincipal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -29,7 +31,9 @@ public class ConfigurarAlmacenPrincipal extends javax.swing.JDialog {
         almacenes.consulta();
         codigosAlmacenes=almacenes.getCodigoAlmacenes();
         descripcionAlmacenes=almacenes.getDenominacionAlmacenes();
-        
+         ConexionEmpresas seccion=new ConexionEmpresas();
+         seccion.consulta();
+         codigoSeccionActual=seccion.codigo_empresa();
        
         try
         {
@@ -47,6 +51,7 @@ public class ConfigurarAlmacenPrincipal extends javax.swing.JDialog {
         }
         
         ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
+        almacenPrincipal.setCodigoSeccion(codigoSeccionActual);
          almacenPrincipal.consultaAlmacenPrincipal();
          almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
          etiquetaAlmacenActivo.setText(almacenActivoMostrar);
@@ -160,6 +165,7 @@ public class ConfigurarAlmacenPrincipal extends javax.swing.JDialog {
         int seleccionado=comboAlmacenes.getSelectedIndex();
         ConexionConfigurarAlmacenes configurar=new ConexionConfigurarAlmacenes();
         configurar.setCodigoAlmacen(codigosAlmacenes.get(seleccionado));
+        configurar.setCodigoSeccion(codigoSeccionActual);
         configurar.consulta();
         if(configurar.getRespuesta()==1){
             JOptionPane.showMessageDialog(null,"Almacen principal configurado exitosamente" , "Informacion", JOptionPane.INFORMATION_MESSAGE);

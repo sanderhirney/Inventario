@@ -869,6 +869,7 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
         // TODO add your handling code here:
         ConexionVerificarDocumentoEntrada numero=new ConexionVerificarDocumentoEntrada();
         numero.setNumeroDoc(Campo_factura.getText().trim());
+        numero.setCodigoSeccion(codigo_seccion);
         numero.consulta();
         if(numero.resultado()==1)
         {

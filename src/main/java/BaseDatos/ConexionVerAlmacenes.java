@@ -25,13 +25,15 @@ public class ConexionVerAlmacenes {
     String denominacionAlmacenPrincipal;
     String ubicacionAlmacenPrincipal;
     String codigoAlmacenPrincipal;
+    int codigoSeccion;
     public void consulta()
     {
           try
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select codigo_almacen, denominacion, tipo, principal from almacenes order by codigo_almacen");
+        consulta= conex.prepareStatement("select codigo_almacen, denominacion, tipo, principal from almacenes order by codigo_almacen where seccion=?");
+        consulta.setInt(1, codigoSeccion);
         ejecutar=consulta.executeQuery();
         while( ejecutar.next() )
         {
@@ -56,7 +58,8 @@ public class ConexionVerAlmacenes {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select codigo_almacen, denominacion from almacenes where tipo=01");
+        consulta= conex.prepareStatement("select codigo_almacen, denominacion from almacenes where tipo=01 and seccion=?");
+        consulta.setInt(1, codigoSeccion);
         ejecutar=consulta.executeQuery();
         while( ejecutar.next() )
         {
@@ -78,7 +81,8 @@ public class ConexionVerAlmacenes {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select codigo_almacen, denominacion from almacenes where tipo=0");
+        consulta= conex.prepareStatement("select codigo_almacen, denominacion from almacenes where tipo=0 and seccion=?");
+        consulta.setInt(1, codigoSeccion);
         ejecutar=consulta.executeQuery();
         while( ejecutar.next() )
         {
@@ -100,7 +104,8 @@ public class ConexionVerAlmacenes {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select codigo_almacen, denominacion, ubicacion from almacenes where principal=1");
+        consulta= conex.prepareStatement("select codigo_almacen, denominacion, ubicacion from almacenes where principal=1 and seccion=?");
+        consulta.setInt(1, codigoSeccion);
         ejecutar=consulta.executeQuery();
         while( ejecutar.next() )
         {
@@ -122,7 +127,9 @@ public class ConexionVerAlmacenes {
     {
         return codigos_almacenes;
     }
-    
+    public void setCodigoSeccion(int recibido){
+        codigoSeccion=recibido;
+    }
     public List<String> getDenominacionAlmacenes()
     {
         return nombres_almacenes;
