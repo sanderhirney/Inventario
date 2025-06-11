@@ -326,13 +326,13 @@ public class Ventana_Principal extends javax.swing.JFrame {
               consultar_serv.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
               consultar_serv.setVisible(true);
           }
-          if( ((nodo.getParent().toString()).equals("Articulos")) && ((nodeInfo.toString()).equals("Consultar")) )
+          if( ((nodo.getParent().toString()).equals("Articulos")) && ((nodeInfo.toString()).equals("Asignar")) )
           {
-              Consultar_Articulos consultar_serv= new Consultar_Articulos(this, true);
-              consultar_serv.setResizable(false);
-              consultar_serv.setLocationRelativeTo(null);
-              consultar_serv.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              consultar_serv.setVisible(true);
+              Asignar_seccion_art asignar= new Asignar_seccion_art(this, true);
+              asignar.setResizable(false);
+              asignar.setLocationRelativeTo(null);
+              asignar.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+              asignar.setVisible(true);
           }
           if( ((nodo.getParent().toString()).equals("Articulos")) && ((nodeInfo.toString()).equals("Modificar")) )
           {

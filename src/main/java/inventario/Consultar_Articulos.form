@@ -40,9 +40,18 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jScrollPane1" pref="562" max="32767" attributes="0"/>
-                  <Component id="Campo_buscar" max="32767" attributes="0"/>
-                  <Component id="campoCodigo" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="562" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="etiq_Codigo" min="-2" pref="108" max="-2" attributes="0"/>
+                          <Component id="etiq_Nombre" alignment="0" min="-2" pref="108" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="Campo_buscar" alignment="1" pref="426" max="32767" attributes="0"/>
+                          <Component id="campoCodigo" alignment="1" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
               <EmptySpace pref="73" max="32767" attributes="0"/>
           </Group>
@@ -63,9 +72,15 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="Separador1" min="-2" pref="10" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-              <Component id="campoCodigo" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="campoCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="etiq_Codigo" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="Campo_buscar" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Campo_buscar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="etiq_Nombre" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="234" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
@@ -132,6 +147,16 @@
       <Events>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campoCodigoKeyPressed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="etiq_Codigo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Codigo:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="etiq_Nombre">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nombre:"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
