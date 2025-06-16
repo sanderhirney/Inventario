@@ -25,7 +25,7 @@ public class ConexionCargos {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select codigo, descripcion from cargos");
+        consulta= conex.prepareStatement("select codigo, descripcion from cargos order by codigo");
         ejecutar=consulta.executeQuery();
         while( ejecutar.next() )
         {

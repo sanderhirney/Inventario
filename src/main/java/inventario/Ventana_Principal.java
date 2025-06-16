@@ -380,7 +380,7 @@ public class Ventana_Principal extends javax.swing.JFrame {
           }
           if( ((nodo.getParent().toString()).equals("Configuracion")) && ((nodeInfo.toString()).equals("Cargos")) )
           {
-              Crear_Cargo cargos= new Crear_Cargo(this, true);
+              VerCargos cargos= new VerCargos(this, true);
               cargos.setResizable(false);
               cargos.setLocationRelativeTo(null);
               cargos.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
