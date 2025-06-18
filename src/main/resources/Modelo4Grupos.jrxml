@@ -24,6 +24,10 @@
 	<field name="TotalExistenciaFinMes" class="java.lang.String"/>
 	<field name="ubicacionAlmacenPrincipal" class="java.lang.String"/>
 	<field name="denominacionAlmacenPrincipal" class="java.lang.String"/>
+	<field name="ExistenciaAnteriorTotalGeneral" class="java.lang.String"/>
+	<field name="EntradasMesTotalGeneral" class="java.lang.String"/>
+	<field name="SalidasMesTotalGeneral" class="java.lang.String"/>
+	<field name="ExistenciasFinMesTotalGeneral" class="java.lang.String"/>
 	<group name="Grupos">
 		<groupExpression><![CDATA[$F{Grupo}]]></groupExpression>
 		<groupFooter>
@@ -264,70 +268,66 @@ deposito]]></text>
 	</pageFooter>
 	<lastPageFooter>
 		<band height="85">
-			<staticText>
-				<reportElement x="0" y="60" width="100" height="15" uuid="eb164107-15ac-402a-8e65-53c2f8389956"/>
-				<text><![CDATA[Total Items:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="352" y="55" width="100" height="15" uuid="6232986e-f9b8-46b2-a9ce-022324c6832d"/>
-				<text><![CDATA[Total Bs:]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="108" y="55" width="54" height="20" uuid="c76006fb-2110-4b71-88ca-ce7d24b603a0"/>
-				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="162" y="58" width="100" height="15" uuid="afa6f8c4-b929-4ac4-8f3e-eed3bb1a5cf0"/>
-				<text><![CDATA[Total Articulos:]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="252" y="54" width="100" height="22" uuid="7f3c5c72-464a-4168-be63-9c21f2c07390"/>
-				<textFieldExpression><![CDATA[$F{totalArticulos}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="432" y="55" width="100" height="15" uuid="857dbf0a-2d66-4fc3-a80b-083e51db141e"/>
-				<textFieldExpression><![CDATA[$F{ExistenciaAnterior}]]></textFieldExpression>
-			</textField>
 			<line>
-				<reportElement x="15" y="19" width="93" height="1" uuid="144e5f45-f21e-4d43-8866-00f026c34a7b"/>
+				<reportElement x="15" y="56" width="93" height="1" uuid="144e5f45-f21e-4d43-8866-00f026c34a7b"/>
 			</line>
 			<line>
-				<reportElement x="130" y="19" width="150" height="1" uuid="a8d64534-4421-4935-8124-7589f3721b5d"/>
+				<reportElement x="130" y="56" width="150" height="1" uuid="a8d64534-4421-4935-8124-7589f3721b5d"/>
 			</line>
 			<line>
-				<reportElement x="300" y="19" width="120" height="1" uuid="0b1ee64e-3336-42f5-b5c7-9f9379b304d4"/>
+				<reportElement x="300" y="56" width="120" height="1" uuid="0b1ee64e-3336-42f5-b5c7-9f9379b304d4"/>
 			</line>
 			<line>
-				<reportElement x="445" y="19" width="99" height="1" uuid="61e00447-5aa4-4408-9ec1-ef3370a04fb9"/>
+				<reportElement x="445" y="56" width="99" height="1" uuid="61e00447-5aa4-4408-9ec1-ef3370a04fb9"/>
 			</line>
 			<staticText>
-				<reportElement x="15" y="23" width="93" height="17" uuid="5af21657-ffb0-4656-8686-97e2c0fc96aa"/>
+				<reportElement x="15" y="60" width="93" height="17" uuid="5af21657-ffb0-4656-8686-97e2c0fc96aa"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Vo. Bo. El/La Director(a)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="130" y="23" width="150" height="17" uuid="57dce138-606a-4280-9dbf-10a79fb8ada9"/>
+				<reportElement x="130" y="60" width="150" height="17" uuid="57dce138-606a-4280-9dbf-10a79fb8ada9"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[El/La Administrador(a) o Intendente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="300" y="20" width="120" height="20" uuid="25ca787d-7db3-44a7-95c4-020538bf7cca"/>
+				<reportElement x="300" y="57" width="120" height="20" uuid="25ca787d-7db3-44a7-95c4-020538bf7cca"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[El/La Contralor de existencia]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="445" y="20" width="100" height="20" uuid="35133da0-e131-41e3-bf0d-d7bc04f02f2d"/>
+				<reportElement x="445" y="57" width="100" height="20" uuid="35133da0-e131-41e3-bf0d-d7bc04f02f2d"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[El/La Jefe de Almacèn]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="120" y="13" width="100" height="15" uuid="d15c8298-e2aa-4835-a772-254e55cc2ee7"/>
+				<text><![CDATA[Total General:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="240" y="11" width="80" height="18" uuid="cf5be3a5-82e2-43fb-9219-b43fe9927d01"/>
+				<textFieldExpression><![CDATA[$F{ExistenciaAnteriorTotalGeneral}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="10" width="80" height="18" uuid="1b98b9d2-bde9-42ae-ab33-f7a3f4796410"/>
+				<textFieldExpression><![CDATA[$F{EntradasMesTotalGeneral}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="10" width="79" height="18" uuid="0eafc191-0bfe-4b78-b6b2-eff56ed29b97"/>
+				<textFieldExpression><![CDATA[$F{SalidasMesTotalGeneral}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="479" y="10" width="76" height="19" uuid="e21f17ce-678d-402b-9d27-fb3fbbfd9dee"/>
+				<textFieldExpression><![CDATA[$F{ExistenciasFinMesTotalGeneral}]]></textFieldExpression>
+			</textField>
 		</band>
 	</lastPageFooter>
 	<summary>

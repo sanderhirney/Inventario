@@ -37,7 +37,7 @@ public class ConexionReporteModelo4 {
     List<String> codigoSubGrupoArticulo=new ArrayList<>();
     List<Double> totalEntradasMes=new ArrayList<>();
     String consultaFechaActual="""
-                      select gr.descripcion as DESCRIPCION, gr.codigo_grupo, gr.codigo_sub, SUM(h.valor_entrada) as ENTRADAS, SUM(h.valor_salida) as SALIDAS from grupos gr
+                      select gr.descripcion as DESCRIPCION, gr.codigo_grupo, gr.codigo_sub, SUM(h.valor_entrada*precio) as ENTRADAS, SUM(h.valor_salida*precio) as SALIDAS from grupos gr
                       inner join articulos b on b.id_grupo=gr.codigo_grupo and b.id_subgrupo=gr.codigo_sub
                       inner join historiales h on h.cod_articulo=b.codigo
                       and gr.codigo_grupo=?
@@ -50,7 +50,7 @@ public class ConexionReporteModelo4 {
                         """;
     
     String consultaFechaAnterior="""
-                                 select gr.descripcion as DESCRIPCION, gr.codigo_grupo, gr.codigo_sub, SUM(h.valor_entrada) as ENTRADAS, sum(h.valor_salida) as SALIDAS from grupos gr
+                                 select gr.descripcion as DESCRIPCION, gr.codigo_grupo, gr.codigo_sub, SUM(h.valor_entrada*precio) as ENTRADAS, sum(h.valor_salida*precio) as SALIDAS from grupos gr
                                  inner join articulos b on b.id_grupo=gr.codigo_grupo and b.id_subgrupo=gr.codigo_sub
                                  inner join historiales h on h.cod_articulo=b.codigo
                                  and gr.codigo_grupo=?
@@ -63,7 +63,7 @@ public class ConexionReporteModelo4 {
                                  """;
     
     String consultaTotalesMes="""
-                              select gr.codigo_grupo, SUM(h.valor_entrada) as ENTRADAS, sum(h.valor_salida) as SALIDAS from grupos gr
+                              select gr.codigo_grupo, SUM(h.valor_entrada*precio) as ENTRADAS, sum(h.valor_salida*precio) as SALIDAS from grupos gr
                               inner join articulos b on b.id_grupo=gr.codigo_grupo and b.id_subgrupo=gr.codigo_sub
                               inner join historiales h on b.codigo=h.cod_articulo
                               where 
@@ -76,7 +76,7 @@ public class ConexionReporteModelo4 {
                               """;
     
     String consultaTotalesAnterior="""
-                              select gr.codigo_grupo, SUM(h.valor_entrada) as ENTRADAS, sum(h.valor_salida) as SALIDAS from grupos gr
+                              select gr.codigo_grupo, SUM(h.valor_entrada*precio) as ENTRADAS, sum(h.valor_salida*precio) as SALIDAS from grupos gr
                               inner join articulos b on b.id_grupo=gr.codigo_grupo and b.id_subgrupo=gr.codigo_sub
                               inner join historiales h on b.codigo=h.cod_articulo
                               where 
@@ -150,6 +150,7 @@ public class ConexionReporteModelo4 {
     }//consulta
      private void consultaHistorialesFechaAnterior()
     {
+        
           try
     {
         conectar.Conectar();
@@ -161,12 +162,12 @@ public class ConexionReporteModelo4 {
             consulta.setInt(3, seccion );
             consulta.setInt(4, mesInicio );
             
-             if(mesActualConsulta==mesInicio){
-                 consulta.setInt(5, mesActualConsulta );
+             if(mesActualConsulta!=mesInicio){
+                 consulta.setInt(5, mesActualConsulta-1 );
                  consulta.setInt(6, anioConsulta);
             }else{
-                consulta.setInt(5, mesActualConsulta-1 );
-                consulta.setInt(6,anioConsulta);
+                consulta.setInt(5, 12);//ya que si es enero equivaldria a Diciembre que es mes doce
+                consulta.setInt(6,anioConsulta-1);
             } 
             
             ejecutar=consulta.executeQuery();
@@ -234,8 +235,14 @@ public class ConexionReporteModelo4 {
              consulta.setInt(1, codigo_grupo.get(i));             
             consulta.setInt(2, seccion );
             consulta.setInt(3, mesInicio );
-            consulta.setInt(4, mesActualConsulta - 1 );
-            consulta.setInt(5, anioConsulta);
+              if(mesActualConsulta!=mesInicio){
+                 consulta.setInt(4, mesActualConsulta - 1 );
+                 consulta.setInt(5, anioConsulta);
+            }else{
+                consulta.setInt(4, 12);//ya que si es enero equivaldria a Diciembre que es mes doce
+                consulta.setInt(5,anioConsulta-1);
+            } 
+           
             ejecutar=consulta.executeQuery();
             if( ejecutar.next())
             {  

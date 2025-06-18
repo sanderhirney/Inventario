@@ -34,7 +34,11 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         List<Double> entradasAnteriorTotales=new ArrayList<>();
         List<Double> salidasTotalesMes=new ArrayList<>();
         List<Double> salidasAnteriorTotales=new ArrayList<>();
-  
+        Double existenciaAnteriorTotalGeneral=0.0;
+        Double entradasMesTotalGeneral=0.0;
+        Double existenciaFinMesTotalGeneral=0.0;
+        Double salidasMesTotalGeneral=0.0;
+            
         String nombreSeccion;
         int codigoSeccion;
         
@@ -114,6 +118,10 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
             case "TotalExistenciaAnterior" ->valor=decimalesTotalesExistenciasAnteriores(index);
             case "TotalEntradasDeposito" ->valor=decimalesTotalesEntradasDeposito(index);
             case "TotalConsumidosMes" ->valor=decimalesTotalesConsumidosMes(index);
+            case "ExistenciaAnteriorTotalGeneral" ->valor=decimalesTotalesExistenciasAnterioresGeneral();
+            case "EntradasMesTotalGeneral" ->valor=decimalesTotalesEntradasTotalGeneral();
+            case "SalidasMesTotalGeneral" ->valor=decimalesTotalesSalidasMesTotalGeneral();
+            case "ExistenciasFinMesTotalGeneral" ->valor=decimalesTotalesExistenciasFinMesTotalGeneral();
             
 
             
@@ -134,6 +142,7 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
          String mascaraCantidades="###,###.";//para la mascara y debe reinicarse con cada llamada
          String vacio="0.";
          double temporal=(entradasAnterior.get(index)-salidasAnterior.get(index));
+         existenciaAnteriorTotalGeneral+=temporal;
             for(int i=0; i<decimalesCalculoTotal; i++)
             {
                 mascaraCantidades=mascaraCantidades+("0");
@@ -159,6 +168,7 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
          String mascaraCantidades="###,###.";//para la mascara y debe reiniciarse con cada llamada
          String vacio="0.";
          double temporal=((entradasMes.get(index)));
+         entradasMesTotalGeneral+=temporal;
             for(int i=0; i<decimalesCalculoTotal; i++)
             {
                 mascaraCantidades=mascaraCantidades+("0");
@@ -179,6 +189,9 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         String consumidosMes;
         String mascaraCantidades="###,###.";//para la mascara//debe reiniciarse con cada llamada    
         double temporal=salidasMes.get(index);
+        salidasMesTotalGeneral+=temporal;
+        
+        
         String vacio="0.";
             for(int i=0; i<decimalesCalculoTotal; i++)
             {
@@ -204,6 +217,7 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         Double temporal;
         String vacio="0.";
             temporal=((entradasAnteriorTotales.get(index)-salidasAnteriorTotales.get(index))+entradasTotalesMes.get(index))-salidasTotalesMes.get(index);
+          
             for(int i=0; i<decimalesCalculoTotal; i++)
             {
                 mascaraCalculoTotal=mascaraCalculoTotal+("0");
@@ -223,8 +237,10 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
         String calculoTotalFinal;
         String mascaraCalculoTotal="###,###.";//para la mascara
         Double temporal;
+        
         String vacio="0.";
             temporal=((entradasAnterior.get(index)-salidasAnterior.get(index))+entradasMes.get(index))-salidasMes.get(index);
+              existenciaFinMesTotalGeneral+=temporal;
             for(int i=0; i<decimalesCalculoTotal; i++)
             {
                 mascaraCalculoTotal=mascaraCalculoTotal+("0");
@@ -300,6 +316,90 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
                 calculoTotalFinal=vacio;
             }else{
                  calculoTotalFinal=(formatoPrecioTotal.format(temporal));
+            }
+           
+        return calculoTotalFinal;
+    }
+    private String decimalesTotalesExistenciasAnterioresGeneral(){
+        String calculoTotalFinal;
+        String mascaraCalculoTotal="###,###.";//para la mascara
+        Double temporal;
+        String vacio="0.";
+         
+            for(int i=0; i<decimalesCalculoTotal; i++)
+            {
+                mascaraCalculoTotal=mascaraCalculoTotal+("0");
+                vacio+="0";
+            }
+            DecimalFormat formatoPrecioTotal=new DecimalFormat(mascaraCalculoTotal);
+            //calculoTotalFinal=(formatoPrecioUnitario.format(temporal).replace(',','.'));
+            if(existenciaAnteriorTotalGeneral==0.0){
+                calculoTotalFinal=vacio;
+            }else{
+                 calculoTotalFinal=(formatoPrecioTotal.format(existenciaAnteriorTotalGeneral));
+            }
+           
+        return calculoTotalFinal;
+    }
+    private String decimalesTotalesEntradasTotalGeneral(){
+        String calculoTotalFinal;
+        String mascaraCalculoTotal="###,###.";//para la mascara
+        Double temporal;
+        String vacio="0.";
+         
+            for(int i=0; i<decimalesCalculoTotal; i++)
+            {
+                mascaraCalculoTotal=mascaraCalculoTotal+("0");
+                vacio+="0";
+            }
+            DecimalFormat formatoPrecioTotal=new DecimalFormat(mascaraCalculoTotal);
+            //calculoTotalFinal=(formatoPrecioUnitario.format(temporal).replace(',','.'));
+            if(entradasMesTotalGeneral==0.0){
+                calculoTotalFinal=vacio;
+            }else{
+                 calculoTotalFinal=(formatoPrecioTotal.format(entradasMesTotalGeneral));
+            }
+           
+        return calculoTotalFinal;
+    }
+    private String decimalesTotalesSalidasMesTotalGeneral(){
+        String calculoTotalFinal;
+        String mascaraCalculoTotal="###,###.";//para la mascara
+       
+        String vacio="0.";
+         
+            for(int i=0; i<decimalesCalculoTotal; i++)
+            {
+                mascaraCalculoTotal=mascaraCalculoTotal+("0");
+                vacio+="0";
+            }
+            DecimalFormat formatoPrecioTotal=new DecimalFormat(mascaraCalculoTotal);
+            //calculoTotalFinal=(formatoPrecioUnitario.format(temporal).replace(',','.'));
+            if(salidasMesTotalGeneral==0.0){
+                calculoTotalFinal=vacio;
+            }else{
+                 calculoTotalFinal=(formatoPrecioTotal.format(salidasMesTotalGeneral));
+            }
+           
+        return calculoTotalFinal;
+    }
+    private String decimalesTotalesExistenciasFinMesTotalGeneral(){
+        String calculoTotalFinal;
+        String mascaraCalculoTotal="###,###.";//para la mascara
+        Double temporal;
+        String vacio="0.";
+         
+            for(int i=0; i<decimalesCalculoTotal; i++)
+            {
+                mascaraCalculoTotal=mascaraCalculoTotal+("0");
+                vacio+="0";
+            }
+            DecimalFormat formatoPrecioTotal=new DecimalFormat(mascaraCalculoTotal);
+            //calculoTotalFinal=(formatoPrecioUnitario.format(temporal).replace(',','.'));
+            if(existenciaFinMesTotalGeneral==0.0){
+                calculoTotalFinal=vacio;
+            }else{
+                 calculoTotalFinal=(formatoPrecioTotal.format(existenciaFinMesTotalGeneral));
             }
            
         return calculoTotalFinal;

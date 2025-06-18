@@ -13,6 +13,7 @@ import BaseDatos.ConexionVerTempEntradas;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Date;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -46,6 +47,7 @@ String documento_seleccionado;
 String almacenActivoMostrar;
 TableRowSorter filtro;
 List<BigDecimal>formateado=new ArrayList<>();
+List<String> calculoFormateado=new ArrayList<>();
 int decimal_unitario;
 int decimal_totales;
 JFrame ventanaPrincipal;
@@ -81,11 +83,8 @@ JFrame ventanaPrincipal;
          decimal_totales=decimales.getDecimalTotal();
          for(int i=0; i<documento.size(); i++)
            {
-              
-               Double temporal; 
-            temporal=((cantidad_articulos.get(i))  * (valor.get(i))) ;
-            BigDecimal formato=new BigDecimal(temporal);
-            formateado.add(formato.setScale(decimal_totales, RoundingMode.FLOOR));
+              calculoFormateado.add(decimalesCalculoTotal(i));
+               
          
            }//for
          //los meto al iterador para poder mostrarlos en la tabla
@@ -97,7 +96,7 @@ JFrame ventanaPrincipal;
          lista2=documento.iterator();
          lista3=concepto.iterator();
          lista4=cantidad_articulos.iterator();
-         lista5=formateado.iterator();
+         lista5=calculoFormateado.iterator();
          lista6=estado.iterator();
          //lista5=valor.iterator();
          //llamo al modelo de la tabla para luego colocar alli la informacion
@@ -226,7 +225,23 @@ JFrame ventanaPrincipal;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private String decimalesCalculoTotal(int index){
+        String calculoTotalFinal;
+        String mascaraCalculoTotal="###,###.";//para la mascara
+        Double temporal;
+        
+            temporal=valor.get(index);
+            for(int i=0; i<decimal_totales; i++)
+            {
+                mascaraCalculoTotal=mascaraCalculoTotal+("0");
+                
+            }
+            DecimalFormat formatoPrecioUnitario=new DecimalFormat(mascaraCalculoTotal);
+            //calculoTotalFinal=(formatoPrecioUnitario.format(temporal).replace(',','.'));
+            calculoTotalFinal=(formatoPrecioUnitario.format(temporal));
+        
+        return calculoTotalFinal;
+    }
     private void boton_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_salirActionPerformed
         // TODO add your handling code here:
            
@@ -328,6 +343,7 @@ JFrame ventanaPrincipal;
                     ventana.setFechaDocRec(entrada.getFechaDoc());
                     ventana.setAlmacenRec(entrada.getCodigoAlmacen());
                     ventana.setObservacionesRec(entrada.getObservaciones());
+                    ventana.setAlmacenRec(entrada.getCodigoAlmacen());
                     //una vez que llego aqu procedo a borrar en bd para mostrar
                     ventana.setDocumentoRec(documento_seleccionado);
                     entrada.borrarDocumento();

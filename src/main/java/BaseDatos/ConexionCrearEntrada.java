@@ -59,7 +59,7 @@ public class ConexionCrearEntrada {
         {
         
         consulta= conex.prepareStatement("insert into historiales values (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        consulta.setDate(1, fecha_operacion);
+        consulta.setDate(1, fecha_documento);
         consulta.setInt(2, codigo_articulo.get(i));
         consulta.setDouble(3, cantidad_articulo.get(i));
         consulta.setInt(4, valor_salida);
