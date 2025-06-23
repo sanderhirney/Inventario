@@ -28,6 +28,7 @@
 	<field name="EntradasMesTotalGeneral" class="java.lang.String"/>
 	<field name="SalidasMesTotalGeneral" class="java.lang.String"/>
 	<field name="ExistenciasFinMesTotalGeneral" class="java.lang.String"/>
+	<field name="SubGrupo" class="java.lang.String"/>
 	<group name="Grupos">
 		<groupExpression><![CDATA[$F{Grupo}]]></groupExpression>
 		<groupFooter>
@@ -118,7 +119,7 @@
 	<columnHeader>
 		<band height="27">
 			<staticText>
-				<reportElement x="0" y="0" width="70" height="22" uuid="ea4d8653-b1bd-4d72-85c6-cb5abcc2c6c1"/>
+				<reportElement x="0" y="0" width="100" height="22" uuid="ea4d8653-b1bd-4d72-85c6-cb5abcc2c6c1"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
@@ -126,7 +127,7 @@
 Grupos]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="70" y="0" width="162" height="22" uuid="f0198195-103c-454d-9b64-dc1bb5069673"/>
+				<reportElement x="100" y="0" width="160" height="22" uuid="f0198195-103c-454d-9b64-dc1bb5069673"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
@@ -147,7 +148,7 @@ Grupos]]></text>
 				<text><![CDATA[Existencia a fin de Mes]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="232" y="0" width="88" height="22" uuid="d2985780-d0d2-4f0b-b217-1dc935d590a9"/>
+				<reportElement x="260" y="0" width="60" height="22" uuid="d2985780-d0d2-4f0b-b217-1dc935d590a9"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
@@ -168,7 +169,7 @@ deposito]]></text>
 			<frame>
 				<reportElement x="0" y="0" width="555" height="14" uuid="bcb901fd-bf74-41a3-8833-7c50735ac3bc"/>
 				<textField>
-					<reportElement x="0" y="0" width="70" height="14" uuid="0fb00d4d-9d12-4666-b7eb-5a8e478d2ddc">
+					<reportElement x="0" y="0" width="40" height="14" uuid="0fb00d4d-9d12-4666-b7eb-5a8e478d2ddc">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7ef4a481-3c54-4bb9-9469-756f8d458d7a"/>
 					</reportElement>
 					<box>
@@ -180,7 +181,7 @@ deposito]]></text>
 					<textFieldExpression><![CDATA[$F{Grupo}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="70" y="0" width="162" height="14" uuid="dff072c9-45a5-42a0-bb35-b5ef9b4deb6b">
+					<reportElement x="100" y="0" width="160" height="14" uuid="dff072c9-45a5-42a0-bb35-b5ef9b4deb6b">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="15a2952f-626b-4874-b014-67c500cc2b7d"/>
 					</reportElement>
 					<box>
@@ -205,7 +206,7 @@ deposito]]></text>
 					<textFieldExpression><![CDATA[$F{ExistenciasFinMes}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="233" y="0" width="87" height="14" uuid="80b2e04f-dbf8-4dbd-afd3-d87bf328c08d">
+					<reportElement x="260" y="0" width="60" height="14" uuid="80b2e04f-dbf8-4dbd-afd3-d87bf328c08d">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="20044db3-dfa2-41a3-a5ef-f0912190ba5a"/>
 					</reportElement>
 					<box>
@@ -242,6 +243,18 @@ deposito]]></text>
 					</box>
 					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[$F{ConsumidosMes}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="40" y="0" width="60" height="14" uuid="f28f7404-69c3-4074-ae42-86387808c4bc">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="00452a4e-cf50-4b2d-af50-3dd4905a9cbb"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{SubGrupo}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

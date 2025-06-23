@@ -109,6 +109,7 @@ public class DatosdeGenerarModelo4 implements JRDataSource{
             case "Fecha" -> valor=mesReporte(mesDelReporte)+" del año "+anioDelReporte;
             //case "Grupo" -> valor=codigoGrupos.get(index).toString()+"-"+codigoSubgrupos.get(index);
             case "Grupo" -> valor=codigoGrupos.get(index).toString();
+            case "SubGrupo"-> valor=" - "+codigoSubgrupos.get(index);
             case "Descripcion" -> valor=descripcionGrupo.get(index);
             case "ExistenciaAnterior" -> valor=decimalesExistenciaAnterior(index);
             case "EntradasDeposito" -> valor=decimalesEntradasDeposito(index);
