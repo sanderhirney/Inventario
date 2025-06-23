@@ -253,7 +253,7 @@ JFrame ventanaPrincipal;
         // TODO add your handling code here:
         if(tabla_entradas.getSelectedRow()== -1)
         {
-                        JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla para borrar la linea", "Revisar", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla", "Revisar", JOptionPane.ERROR_MESSAGE);
 
         }
         else
@@ -304,7 +304,7 @@ JFrame ventanaPrincipal;
                     s.append(lista7.next());
                     }
 
-                    JOptionPane.showMessageDialog(null, "Error: no se puede modificar el documento seleccionado\n el o los articulos: "+s+"\n"+"poseen movimientos", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Error: no se puede modificar el documento seleccionado\n el o los articulos: "+s+"\n"+"\nposeen movimientos", "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 if(entrada.getEstadoExistencia()==1)
                 {
@@ -317,14 +317,15 @@ JFrame ventanaPrincipal;
                 int yo_llamo=1;//porque es una entrada
                 
                 ConexionGuardarTemporal temp=new ConexionGuardarTemporal(yo_llamo);
-               
+               //OJO AQUI ESTA EL ERROR QUE DEBO CORREGIR
+                 int seleccionado=tabla_entradas.getSelectedRow();
                 temp.setDocumentoEntrada(documento_seleccionado);
                 temp.setSeccion(codigo_seccion);
                 temp.setFechaDocDespacho((Date)(modelo.getValueAt(tabla_entradas.getSelectedRow(), 0)));
                 temp.setProveedores(entrada.getCodProveedor());
                 temp.setConcepto(entrada.getConceptoEntrada());
                 temp.setSumaArticulos(Double.valueOf(modelo.getValueAt(tabla_entradas.getSelectedRow(), 3).toString()));
-                temp.settotaloperacion(Double.valueOf(modelo.getValueAt(tabla_entradas.getSelectedRow(),4 ).toString()));
+                temp.settotaloperacion(valor.get(seleccionado) );
                 temp.setCodigoAlmacen(entrada.getCodigoAlmacen());
                 temp.setObservaciones(entrada.getObservaciones());
                 temp.setCodArticulos(buscar.getCodigoArticulos());

@@ -226,43 +226,49 @@ int codigoUnidadActual;
                             .addComponent(Panel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(etiquetaAlmacenActivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(Separador1)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(Etiq_encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel1))
-                                .addComponent(Campo_buscar, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(Etiq_articulo)
-                                    .addGap(476, 476, 476))
-                                .addComponent(panelBotonEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGap(6, 6, 6)
-                                    .addComponent(jSeparator1))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(6, 6, 6)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel2)
-                                                .addComponent(etiqNombreArticulo)
-                                                .addComponent(etiqNuevaUnidad)))
-                                        .addComponent(etiqGrupo))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(campoNombre)
-                                        .addComponent(etiquetaUnidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(ComboUnidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(etiqGrupoActual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                            .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Separador1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(ComboGrupo, 0, 454, Short.MAX_VALUE)))
-                        .addGap(6, 6, 6))))
+                                .addComponent(ComboGrupo, 0, 585, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(etiqNombreArticulo)
+                                            .addComponent(etiqNuevaUnidad)))
+                                    .addComponent(etiqGrupo))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(etiqGrupoActual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(ComboUnidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(campoNombre)
+                                            .addComponent(etiquetaUnidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jSeparator1))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(Etiq_articulo)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(Etiq_encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel1))
+                                    .addComponent(panelBotonEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(Campo_buscar)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(21, 21, 21))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,12 +341,16 @@ int codigoUnidadActual;
     private void Boton_procesarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_procesarActionPerformed
         // TODO add your handling code here:
      String nuevoNombre=campoNombre.getText().trim();
+     //debo restarle una unidad (-1) al indice del combo
+     //ya que las listas empiezan en Cero como es normal
+     //pero los combos al tener el "seleccione" empiezan en uno los grupos seleccionados
      if(!ComboUnidad.getSelectedItem().equals("Seleccione")){
-         codigoUnidadActual=codigoUnidad.get(ComboUnidad.getSelectedIndex());
+         codigoUnidadActual=codigoUnidad.get(ComboUnidad.getSelectedIndex()-1);//porel modelo donde tiene la palabra "seleccione"
      }
      if(!ComboGrupo.getSelectedItem().equals("Seleccione")){
-         codigoGrupoActual=codigoGrupo.get(ComboGrupo.getSelectedIndex());
-         codigoSubGrupoActual=codigoSubGrupo.get(ComboGrupo.getSelectedIndex());
+         System.out.println("INDICE A TOMAR EN CUENTA: "+ComboGrupo.getSelectedIndex());
+         codigoGrupoActual=codigoGrupo.get(ComboGrupo.getSelectedIndex()-1);
+         codigoSubGrupoActual=codigoSubGrupo.get(ComboGrupo.getSelectedIndex()-1);
      }
      
       ConexionModificarArticulos modificar=new ConexionModificarArticulos();
@@ -348,13 +358,16 @@ int codigoUnidadActual;
        modificar.setCodigoUnidadActualizar(codigoUnidadActual);
        modificar.setCodigoGrupoActualizar(codigoGrupoActual);
        modificar.setCodigoSubGrupoActualizar(codigoSubGrupoActual);
-       modificar.setNombreActualizar(campoNombre.getText().trim());
+       modificar.setNombreActualizar(nuevoNombre);
        modificar.consultaActualizar();
        if(modificar.getResultadoActualizacion()>0){
            JOptionPane.showMessageDialog(null, "Informacion Actualizada Correctamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
            campoNombre.setText("");
            etiquetaUnidad.setText("");
            etiqGrupoActual.setText("");
+           ComboUnidad.setSelectedIndex(0);
+           ComboGrupo.setSelectedIndex(0);
+         
        }else{
             JOptionPane.showMessageDialog(null, "Ocurrio un error al actualizar", "Error", JOptionPane.ERROR_MESSAGE);
 
