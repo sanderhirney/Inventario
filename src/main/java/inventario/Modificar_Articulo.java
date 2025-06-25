@@ -340,6 +340,7 @@ int codigoUnidadActual;
 
     private void Boton_procesarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_procesarActionPerformed
         // TODO add your handling code here:
+     
      String nuevoNombre=campoNombre.getText().trim();
      //debo restarle una unidad (-1) al indice del combo
      //ya que las listas empiezan en Cero como es normal
@@ -348,7 +349,7 @@ int codigoUnidadActual;
          codigoUnidadActual=codigoUnidad.get(ComboUnidad.getSelectedIndex()-1);//porel modelo donde tiene la palabra "seleccione"
      }
      if(!ComboGrupo.getSelectedItem().equals("Seleccione")){
-         System.out.println("INDICE A TOMAR EN CUENTA: "+ComboGrupo.getSelectedIndex());
+        
          codigoGrupoActual=codigoGrupo.get(ComboGrupo.getSelectedIndex()-1);
          codigoSubGrupoActual=codigoSubGrupo.get(ComboGrupo.getSelectedIndex()-1);
      }
