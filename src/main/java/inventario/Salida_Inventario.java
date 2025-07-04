@@ -499,7 +499,7 @@ public class Salida_Inventario extends javax.swing.JDialog {
     fechaPedido= new java.sql.Date(fechaPedidoConvert);
     String observacion;
     String almacen_despacho;
-    String almacen_destino;
+    String almacen_destino = null;
     List<Integer> codigo_articulo=new ArrayList<>();
     List<Double> valor_despacho=new ArrayList<>();
     List<Double> valor_pedido=new ArrayList<>();
@@ -541,7 +541,14 @@ public class Salida_Inventario extends javax.swing.JDialog {
             if(cantidad_articulos>0)
             {
                 if(concepto_salida==51){
-                    almacen_destino=codigo_almacenes_destino.get(Combo_almacen_destino.getSelectedIndex());
+                    
+                    try{
+                      almacen_destino=codigo_almacenes_destino.get(Combo_almacen_destino.getSelectedIndex());
+                          
+                }catch(Exception e){
+                    almacen_destino="NO SUMINISTRO";
+                }
+                    
                 }else{
                 almacen_destino="N/A";
             }
