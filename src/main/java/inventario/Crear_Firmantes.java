@@ -171,6 +171,11 @@ public class Crear_Firmantes extends javax.swing.JDialog {
         Panel7.add(etiq_reportes_firmantes);
 
         boton_reportes.setText("Reportes");
+        boton_reportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_reportesActionPerformed(evt);
+            }
+        });
         Panel8.add(boton_reportes);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -333,6 +338,15 @@ public class Crear_Firmantes extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_Boton_ActualizarActionPerformed
+
+    private void boton_reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_reportesActionPerformed
+        // TODO add your handling code here:
+         ConfigurarFirmantes firmas= new ConfigurarFirmantes(null, true);
+              firmas.setResizable(false);
+              firmas.setLocationRelativeTo(null);
+              firmas.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+              firmas.setVisible(true);
+    }//GEN-LAST:event_boton_reportesActionPerformed
 
     /**
      * @param args the command line arguments
