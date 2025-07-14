@@ -133,7 +133,7 @@
 			</staticText>
 			<image>
 				<reportElement x="20" y="0" width="280" height="31" uuid="618a7800-925f-42bb-b3ce-c24ddb194fad"/>
-				<imageExpression><![CDATA["/home/sander/Inventario/Inventario/src/main/resources/mpps.jpeg"]]></imageExpression>
+				<imageExpression><![CDATA["mpps.jpeg"]]></imageExpression>
 			</image>
 			<textField>
 				<reportElement x="584" y="84" width="205" height="12" uuid="616576b4-f41a-41b8-af56-2f666dd4ded8"/>
