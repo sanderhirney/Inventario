@@ -13,6 +13,7 @@ import BaseDatos.ConexionVerTempEntradas;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Date;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -46,6 +47,7 @@ String documento_seleccionado;
 String almacenActivoMostrar;
 TableRowSorter filtro;
 List<BigDecimal>formateado=new ArrayList<>();
+List<String> calculoFormateado=new ArrayList<>();
 int decimal_unitario;
 int decimal_totales;
 JFrame ventanaPrincipal;
@@ -81,11 +83,8 @@ JFrame ventanaPrincipal;
          decimal_totales=decimales.getDecimalTotal();
          for(int i=0; i<documento.size(); i++)
            {
-              
-               Double temporal; 
-            temporal=((cantidad_articulos.get(i))  * (valor.get(i))) ;
-            BigDecimal formato=new BigDecimal(temporal);
-            formateado.add(formato.setScale(decimal_totales, RoundingMode.FLOOR));
+              calculoFormateado.add(decimalesCalculoTotal(i));
+               
          
            }//for
          //los meto al iterador para poder mostrarlos en la tabla
@@ -97,7 +96,7 @@ JFrame ventanaPrincipal;
          lista2=documento.iterator();
          lista3=concepto.iterator();
          lista4=cantidad_articulos.iterator();
-         lista5=formateado.iterator();
+         lista5=calculoFormateado.iterator();
          lista6=estado.iterator();
          //lista5=valor.iterator();
          //llamo al modelo de la tabla para luego colocar alli la informacion
@@ -226,7 +225,23 @@ JFrame ventanaPrincipal;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private String decimalesCalculoTotal(int index){
+        String calculoTotalFinal;
+        String mascaraCalculoTotal="###,###.";//para la mascara
+        Double temporal;
+        
+            temporal=valor.get(index);
+            for(int i=0; i<decimal_totales; i++)
+            {
+                mascaraCalculoTotal=mascaraCalculoTotal+("0");
+                
+            }
+            DecimalFormat formatoPrecioUnitario=new DecimalFormat(mascaraCalculoTotal);
+            //calculoTotalFinal=(formatoPrecioUnitario.format(temporal).replace(',','.'));
+            calculoTotalFinal=(formatoPrecioUnitario.format(temporal));
+        
+        return calculoTotalFinal;
+    }
     private void boton_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_salirActionPerformed
         // TODO add your handling code here:
            
@@ -238,7 +253,7 @@ JFrame ventanaPrincipal;
         // TODO add your handling code here:
         if(tabla_entradas.getSelectedRow()== -1)
         {
-                        JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla para borrar la linea", "Revisar", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla", "Revisar", JOptionPane.ERROR_MESSAGE);
 
         }
         else
@@ -289,7 +304,7 @@ JFrame ventanaPrincipal;
                     s.append(lista7.next());
                     }
 
-                    JOptionPane.showMessageDialog(null, "Error: no se puede modificar el documento seleccionado\n el o los articulos: "+s+"poseen movimientos", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Error: no se puede modificar el documento seleccionado\n el o los articulos: "+s+"\n"+"\nposeen movimientos", "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 if(entrada.getEstadoExistencia()==1)
                 {
@@ -302,14 +317,15 @@ JFrame ventanaPrincipal;
                 int yo_llamo=1;//porque es una entrada
                 
                 ConexionGuardarTemporal temp=new ConexionGuardarTemporal(yo_llamo);
-               
+               //OJO AQUI ESTA EL ERROR QUE DEBO CORREGIR
+                 int seleccionado=tabla_entradas.getSelectedRow();
                 temp.setDocumentoEntrada(documento_seleccionado);
                 temp.setSeccion(codigo_seccion);
                 temp.setFechaDocDespacho((Date)(modelo.getValueAt(tabla_entradas.getSelectedRow(), 0)));
                 temp.setProveedores(entrada.getCodProveedor());
                 temp.setConcepto(entrada.getConceptoEntrada());
                 temp.setSumaArticulos(Double.valueOf(modelo.getValueAt(tabla_entradas.getSelectedRow(), 3).toString()));
-                temp.settotaloperacion(Double.valueOf(modelo.getValueAt(tabla_entradas.getSelectedRow(),4 ).toString()));
+                temp.settotaloperacion(valor.get(seleccionado) );
                 temp.setCodigoAlmacen(entrada.getCodigoAlmacen());
                 temp.setObservaciones(entrada.getObservaciones());
                 temp.setCodArticulos(buscar.getCodigoArticulos());
@@ -328,6 +344,7 @@ JFrame ventanaPrincipal;
                     ventana.setFechaDocRec(entrada.getFechaDoc());
                     ventana.setAlmacenRec(entrada.getCodigoAlmacen());
                     ventana.setObservacionesRec(entrada.getObservaciones());
+                    ventana.setAlmacenRec(entrada.getCodigoAlmacen());
                     //una vez que llego aqu procedo a borrar en bd para mostrar
                     ventana.setDocumentoRec(documento_seleccionado);
                     entrada.borrarDocumento();

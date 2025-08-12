@@ -34,7 +34,7 @@
                                   <Group type="102" attributes="0">
                                       <Component id="Etiq_encabezado" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel1" min="-2" pref="145" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jScrollPane1" alignment="0" min="-2" pref="498" max="-2" attributes="0"/>
                               </Group>
@@ -78,7 +78,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="Etiq_encabezado">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;body&gt;&lt;center&gt;Sistema Administrativo de Farmacia &lt;/body&gt;&lt;/html&gt;"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;body&gt;&lt;center&gt;Sistema Administrativo de Inventario &lt;/body&gt;&lt;/html&gt;"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">

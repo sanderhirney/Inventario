@@ -25,13 +25,23 @@ public class ConexionVerAlmacenes {
     String denominacionAlmacenPrincipal;
     String ubicacionAlmacenPrincipal;
     String codigoAlmacenPrincipal;
+    int codigoSeccion;
+    private void consultarSeccion(){
+        ConexionEmpresas seccion= new ConexionEmpresas();
+        seccion.consulta();
+        codigoSeccion=seccion.codigo_empresa();
+    }
+    
     public void consulta()
     {
+        consultarSeccion();
+        /*************/
           try
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select codigo_almacen, denominacion, tipo, principal from almacenes");
+        consulta= conex.prepareStatement("select codigo_almacen, denominacion, tipo, principal from almacenes where seccion=? order by codigo_almacen");
+        consulta.setInt(1, codigoSeccion);
         ejecutar=consulta.executeQuery();
         while( ejecutar.next() )
         {
@@ -52,11 +62,13 @@ public class ConexionVerAlmacenes {
     }//consulta
     public void consultaDespacho()//1 para despacho y 0 para dstino
     {
+        consultarSeccion();
           try
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select codigo_almacen, denominacion from almacenes where tipo=01");
+        consulta= conex.prepareStatement("select codigo_almacen, denominacion from almacenes where tipo=01 and seccion=?");
+        consulta.setInt(1, codigoSeccion);
         ejecutar=consulta.executeQuery();
         while( ejecutar.next() )
         {
@@ -74,11 +86,13 @@ public class ConexionVerAlmacenes {
     }//consulta
     public void consultaDestino()//1 para despacho y 0 para dstino
     {
+        consultarSeccion();
           try
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select codigo_almacen, denominacion from almacenes where tipo=0");
+        consulta= conex.prepareStatement("select codigo_almacen, denominacion from almacenes where tipo=0 and seccion=?");
+        consulta.setInt(1, codigoSeccion);
         ejecutar=consulta.executeQuery();
         while( ejecutar.next() )
         {
@@ -96,11 +110,13 @@ public class ConexionVerAlmacenes {
     }//consulta
     public void consultaAlmacenPrincipal()//1 para despacho y 0 para dstino
     {
+        consultarSeccion();
           try
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select codigo_almacen, denominacion, ubicacion from almacenes where principal=1");
+        consulta= conex.prepareStatement("select codigo_almacen, denominacion, ubicacion from almacenes where principal=1 and seccion=?");
+        consulta.setInt(1, codigoSeccion);
         ejecutar=consulta.executeQuery();
         while( ejecutar.next() )
         {
@@ -122,7 +138,9 @@ public class ConexionVerAlmacenes {
     {
         return codigos_almacenes;
     }
-    
+    public void setCodigoSeccion(int recibido){
+        codigoSeccion=recibido;
+    }
     public List<String> getDenominacionAlmacenes()
     {
         return nombres_almacenes;

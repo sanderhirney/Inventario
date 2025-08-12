@@ -110,7 +110,7 @@
 			</staticText>
 			<image>
 				<reportElement x="20" y="0" width="280" height="40" uuid="618a7800-925f-42bb-b3ce-c24ddb194fad"/>
-				<imageExpression><![CDATA["/home/sander/Inventario/Inventario/src/main/resources/mpps.jpeg"]]></imageExpression>
+				<imageExpression><![CDATA["mpps.jpeg"]]></imageExpression>
 			</image>
 			<textField>
 				<reportElement x="671" y="79" width="119" height="15" uuid="616576b4-f41a-41b8-af56-2f666dd4ded8"/>
@@ -465,9 +465,6 @@ Cedula Nro.: _______________________]]></text>
 					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 				</textField>
 			</frame>
-			<line>
-				<reportElement x="791" y="21" width="1" height="89" uuid="4c62e78a-eb32-4a9b-a732-2b1552b04f1b"/>
-			</line>
 			<textField>
 				<reportElement x="690" y="2" width="91" height="15" uuid="2575aa6b-586f-4f6e-ba4d-61e3a03b75e2"/>
 				<textFieldExpression><![CDATA[$F{TotalSalida}]]></textFieldExpression>
@@ -491,14 +488,14 @@ Cedula Nro.: _______________________]]></text>
 				<text><![CDATA[Total Items:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="304" y="8" width="200" height="20" uuid="56630555-451c-41ac-b7fd-f96d3637fb20"/>
+				<reportElement x="304" y="19" width="200" height="20" uuid="56630555-451c-41ac-b7fd-f96d3637fb20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<text><![CDATA[Director o Jefe de la dependencia]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="30" y="9" width="234" height="40" uuid="d853ea51-d72a-441a-b413-e6cbcc3fd4c6"/>
+				<reportElement x="30" y="20" width="234" height="40" uuid="d853ea51-d72a-441a-b413-e6cbcc3fd4c6"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
@@ -507,7 +504,7 @@ ____________________________________
 Cedula Nro.: _______________________]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="30" y="57" width="234" height="30" uuid="5695f703-1955-481a-b5a2-6a0829dbcfa6"/>
+				<reportElement x="30" y="68" width="234" height="30" uuid="5695f703-1955-481a-b5a2-6a0829dbcfa6"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
@@ -516,7 +513,7 @@ ____________________________________
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="541" y="47" width="234" height="40" uuid="a5d38650-95cd-4958-b85b-552bb7f2cb05"/>
+				<reportElement x="541" y="58" width="234" height="40" uuid="a5d38650-95cd-4958-b85b-552bb7f2cb05"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
@@ -525,7 +522,7 @@ ____________________________________
 Cedula Nro.: _______________________]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="558" y="8" width="200" height="20" uuid="2e95e551-79dd-4cd9-b4dd-3ce83689fe6e"/>
+				<reportElement x="558" y="19" width="200" height="20" uuid="2e95e551-79dd-4cd9-b4dd-3ce83689fe6e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
@@ -533,7 +530,7 @@ Cedula Nro.: _______________________]]></text>
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="304" y="57" width="200" height="30" uuid="22dcf6a0-7dd8-4ec7-9fef-660fd887cedd"/>
+				<reportElement x="304" y="68" width="200" height="30" uuid="22dcf6a0-7dd8-4ec7-9fef-660fd887cedd"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>

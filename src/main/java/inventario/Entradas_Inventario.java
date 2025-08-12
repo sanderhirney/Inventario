@@ -88,6 +88,9 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
         this.setSize(resolucion);
         modelo= (DefaultTableModel)Tabla_datos.getModel();//para poder manipular la tabla
         Etiq_Fecha_Oper.setText(sql.toString());
+         secciones.consulta();
+        codigo_seccion=secciones.codigo_empresa();
+        nombre_seccion=secciones.nombre_empresa();
         conceptos.setTipo(1);
         conceptos.consulta();//obtengo los conceptos
         proveedor.consulta();//obtengo los proveedores
@@ -97,9 +100,10 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
         rif_proveedor=proveedor.rif_proveedor();
         lista1=descripcion.iterator();
         lista3=codigo.iterator();
-        almacenes.consulta();
-        codigo_almacenes=almacenes.getCodigoAlmacenes();
-        nombre_almacenes=almacenes.getDenominacionAlmacenes();
+        almacenes.setCodigoSeccion(codigo_seccion);
+        almacenes.consultaDespacho();
+        codigo_almacenes=almacenes.getCodigoAlmacenesDespacho();
+        nombre_almacenes=almacenes.getDenominacionAlmacenesDespacho();
         lista4=codigo_almacenes.iterator();
         lista5=nombre_almacenes.iterator();
         while(lista1.hasNext())
@@ -112,11 +116,9 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
         Combo_Proveedor.addItem(lista2.next());
         }//while
         while(lista4.hasNext()){
-            Combo_Almacen.addItem(lista4.next() + "-" + lista5.next());
+         Combo_Almacen.addItem(lista4.next() + "-" + lista5.next());
         }
-        secciones.consulta();
-        codigo_seccion=secciones.codigo_empresa();
-        nombre_seccion=secciones.nombre_empresa();
+       
         decimales.setSeccion(codigo_seccion);
         decimales.consulta();
         decimalPrecioUnitario=decimales.getDecimalCampo();
@@ -869,6 +871,7 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
         // TODO add your handling code here:
         ConexionVerificarDocumentoEntrada numero=new ConexionVerificarDocumentoEntrada();
         numero.setNumeroDoc(Campo_factura.getText().trim());
+        numero.setCodigoSeccion(codigo_seccion);
         numero.consulta();
         if(numero.resultado()==1)
         {

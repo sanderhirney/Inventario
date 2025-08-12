@@ -12,6 +12,7 @@ public class ConexionConfigurarAlmacenes {
     PreparedStatement consulta;
     Conexion conectar= new Conexion();
     int ejecutar;
+    int codigoSeccion=0;
     int tipoAlmacen=0;//TIPO 1 PARA DESPACHO Y TIPO 0 PARA DESTINO
     String codigoAlmacenRecibido;
     private void actualizarTodos()
@@ -20,7 +21,8 @@ public class ConexionConfigurarAlmacenes {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("update almacenes set principal=0");
+        consulta= conex.prepareStatement("update almacenes set principal=0 where seccion=?");
+        consulta.setInt(1, codigoSeccion);
         ejecutar=consulta.executeUpdate();
         conectar.Cerrar();
     }//consulta
@@ -52,9 +54,10 @@ public class ConexionConfigurarAlmacenes {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("update almacenes set tipo=? where codigo_almacen=?");
+        consulta= conex.prepareStatement("update almacenes set tipo=? where codigo_almacen=? and seccion=?");
         consulta.setInt(1, tipoAlmacen);
         consulta.setString(2, codigoAlmacenRecibido);
+        consulta.setInt(3, codigoSeccion);
         ejecutar=consulta.executeUpdate();
         conectar.Cerrar();
     }//consulta
@@ -73,6 +76,9 @@ public class ConexionConfigurarAlmacenes {
     
     public void actualizar(){
         actualizarTipoAlmacen();
+    }
+    public void setCodigoSeccion(int recibido){
+        codigoSeccion=recibido;
     }
     
     

@@ -76,6 +76,10 @@
                     <artifactId>poi-scratchpad</artifactId>
                     <version>5.2.5</version>
                 </dependency>
-
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE260</version>
+        </dependency>
     </dependencies>
 </project>

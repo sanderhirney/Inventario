@@ -31,12 +31,12 @@ public class ConexionVerEntradas {
       {
           conectar.Conectar();
           conex= conectar.getConexion();
-          consulta= conex.prepareStatement("select fecha_operacion, numero_doc, num_articulos, concepto_entrada, valor_operacion, consecutivo from doc_entradas where seccion=?");
+          consulta= conex.prepareStatement("select fecha_documento, numero_doc, num_articulos, concepto_entrada, valor_operacion, consecutivo from doc_entradas where seccion=?");
           consulta.setInt(1, seccion);
           ejecutar=consulta.executeQuery();
           while( ejecutar.next() )
           {
-                       fecha.add(ejecutar.getDate("fecha_operacion"));
+                       fecha.add(ejecutar.getDate("fecha_documento"));
                        documento.add(ejecutar.getString("numero_doc"));
                        articulos.add(ejecutar.getInt("num_articulos"));
                        cod_concepto.add(ejecutar.getInt("concepto_entrada"));

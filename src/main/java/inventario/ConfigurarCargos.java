@@ -5,7 +5,9 @@
  */
 package inventario;
 
+import BaseDatos.ConexionCargos;
 import BaseDatos.ConexionConfigurarAlmacenes;
+import BaseDatos.ConexionConfigurarCargos;
 import BaseDatos.ConexionEmpresas;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerServicios;
@@ -16,21 +18,24 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
-public class ConfigurarAlmacenPrincipal extends javax.swing.JDialog {
+public class ConfigurarCargos extends javax.swing.JDialog {
 
- ConexionVerAlmacenes almacenes = new ConexionVerAlmacenes();
- List<String> codigosAlmacenes= new ArrayList<>();
- List<String> descripcionAlmacenes= new ArrayList<>();
+ List<Integer> codigoCargos= new ArrayList<>();
+ List<String> descripciones= new ArrayList<>();
  String almacenActivoMostrar;
  Iterator lista1;
  int codigoSeccionActual=0;
+ int codigoCargoActualizar=0;
  
-    public ConfigurarAlmacenPrincipal(java.awt.Frame parent, boolean modal) {
+    public ConfigurarCargos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        almacenes.consulta();
-        codigosAlmacenes=almacenes.getCodigoAlmacenes();
-        descripcionAlmacenes=almacenes.getDenominacionAlmacenes();
+         ConexionCargos cargos= new ConexionCargos();
+        cargos.consulta();
+        codigoCargos=cargos.codigo();
+        descripciones=cargos.descripcion();
+        
+      
          ConexionEmpresas seccion=new ConexionEmpresas();
          seccion.consulta();
          codigoSeccionActual=seccion.codigo_empresa();
@@ -38,16 +43,16 @@ public class ConfigurarAlmacenPrincipal extends javax.swing.JDialog {
         try
         {
             
-            lista1=descripcionAlmacenes.iterator();
+            lista1=descripciones.iterator();
 
             while(lista1.hasNext())
             {
-              comboAlmacenes.addItem((String) lista1.next());
+              comboCargos.addItem((String) lista1.next());
             }//while
         }//try
         catch(Exception e)
         {
-            JOptionPane.showMessageDialog(null, "No se han podido obtener datos de los almacenes debido a: \n "+e, "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se han podido obtener datos de los cargos debido a: \n "+e, "Error", JOptionPane.ERROR_MESSAGE);
         }
         
         ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
@@ -70,18 +75,27 @@ public class ConfigurarAlmacenPrincipal extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         Panel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         botonGuardar = new javax.swing.JButton();
-        comboAlmacenes = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        comboCargos = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         etiquetaAlmacenActivo = new javax.swing.JLabel();
+        campoCargo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Etiq_encabezado.setText("<html><body><br><center>Sistema Administrativo de Inventario</body></html>");
 
         jLabel1.setText("Configurar Almacen Principal");
+
+        botonGuardar.setText("Actualizar");
+        botonGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGuardarActionPerformed(evt);
+            }
+        });
+        Panel1.add(botonGuardar);
 
         jButton1.setText("Salir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -91,17 +105,15 @@ public class ConfigurarAlmacenPrincipal extends javax.swing.JDialog {
         });
         Panel1.add(jButton1);
 
-        botonGuardar.setText("Guardar");
-        botonGuardar.addActionListener(new java.awt.event.ActionListener() {
+        comboCargos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonGuardarActionPerformed(evt);
+                comboCargosActionPerformed(evt);
             }
         });
-        Panel1.add(botonGuardar);
 
         jLabel2.setText("Solo se configura un solo almacen como principal.");
 
-        jLabel3.setText("Esta denominacion sera usada en las ventanas y reportes");
+        jLabel3.setText("Seleccione el cargo que desea actualizar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,18 +128,19 @@ public class ConfigurarAlmacenPrincipal extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jSeparator1))
             .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(comboAlmacenes, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Panel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(etiquetaAlmacenActivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2)
+                    .addComponent(comboCargos, 0, 490, Short.MAX_VALUE)
+                    .addComponent(campoCargo))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,12 +156,14 @@ public class ConfigurarAlmacenPrincipal extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(comboAlmacenes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(comboCargos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(1, 1, 1)
+                .addComponent(campoCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -162,17 +177,26 @@ public class ConfigurarAlmacenPrincipal extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
-        int seleccionado=comboAlmacenes.getSelectedIndex();
-        ConexionConfigurarAlmacenes configurar=new ConexionConfigurarAlmacenes();
-        configurar.setCodigoAlmacen(codigosAlmacenes.get(seleccionado));
-        configurar.setCodigoSeccion(codigoSeccionActual);
-        configurar.consulta();
+       
+        ConexionConfigurarCargos configurar=new ConexionConfigurarCargos();
+      //  configurar.setCodigoAlmacen(codigosAlmacenes.get(seleccionado));
+        configurar.setCodigoCargo(codigoCargoActualizar+1);//el index del combo empieza en cero
+        configurar.setDescripcion(campoCargo.getText().trim());
+        configurar.actualizar();
         if(configurar.getRespuesta()==1){
-            JOptionPane.showMessageDialog(null,"Almacen principal configurado exitosamente" , "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Cargo actualizado exitosamente" , "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            campoCargo.setText("");
         }else{
-            JOptionPane.showMessageDialog(null,"No se pudo configurar el almacen principal" , "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,"No se pudo actualizar el cargo" , "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_botonGuardarActionPerformed
+
+    private void comboCargosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCargosActionPerformed
+        // TODO add your handling code here:
+        
+        campoCargo.setText(comboCargos.getSelectedItem().toString());
+        codigoCargoActualizar=comboCargos.getSelectedIndex();
+    }//GEN-LAST:event_comboCargosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,14 +215,18 @@ public class ConfigurarAlmacenPrincipal extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConfigurarAlmacenPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConfigurarCargos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConfigurarAlmacenPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConfigurarCargos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConfigurarAlmacenPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConfigurarCargos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConfigurarAlmacenPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConfigurarCargos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -207,7 +235,7 @@ public class ConfigurarAlmacenPrincipal extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ConfigurarAlmacenPrincipal dialog = new ConfigurarAlmacenPrincipal(new javax.swing.JFrame(), true);
+                ConfigurarCargos dialog = new ConfigurarCargos(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -223,7 +251,8 @@ public class ConfigurarAlmacenPrincipal extends javax.swing.JDialog {
     private javax.swing.JLabel Etiq_encabezado;
     private javax.swing.JPanel Panel1;
     private javax.swing.JButton botonGuardar;
-    private javax.swing.JComboBox<String> comboAlmacenes;
+    private javax.swing.JTextField campoCargo;
+    private javax.swing.JComboBox<String> comboCargos;
     private javax.swing.JLabel etiquetaAlmacenActivo;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

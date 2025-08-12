@@ -95,6 +95,8 @@ public class Ventana_Principal extends javax.swing.JFrame {
         treeNode2.add(treeNode3);
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Consultar");
         treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Modificar");
+        treeNode2.add(treeNode3);
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Asignar");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
@@ -332,6 +334,14 @@ public class Ventana_Principal extends javax.swing.JFrame {
               asignar.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
               asignar.setVisible(true);
           }
+          if( ((nodo.getParent().toString()).equals("Articulos")) && ((nodeInfo.toString()).equals("Modificar")) )
+          {
+              Modificar_Articulo modificar= new Modificar_Articulo(this, true);
+              modificar.setResizable(false);
+              modificar.setLocationRelativeTo(null);
+              modificar.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+              modificar.setVisible(true);
+          }
          
         
           if( ((nodo.getParent().toString()).equals("Reportes")) && ((nodeInfo.toString()).equals("Reportes")) )
@@ -370,7 +380,7 @@ public class Ventana_Principal extends javax.swing.JFrame {
           }
           if( ((nodo.getParent().toString()).equals("Configuracion")) && ((nodeInfo.toString()).equals("Cargos")) )
           {
-              Crear_Cargo cargos= new Crear_Cargo(this, true);
+              VerCargos cargos= new VerCargos(this, true);
               cargos.setResizable(false);
               cargos.setLocationRelativeTo(null);
               cargos.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
