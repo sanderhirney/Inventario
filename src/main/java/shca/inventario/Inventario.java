@@ -2,12 +2,7 @@ package shca.inventario;
 
 import BaseDatos.ConexionControlDeInicio;
 import inventario.Ventana_Principal;
-import java.io.File;
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.URL;
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
