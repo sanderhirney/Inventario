@@ -14,42 +14,38 @@ public class ConexionConsultarFirmas {
     PreparedStatement consulta;
     Conexion conectar= new Conexion();
     ResultSet ejecutar;
-    
+    int codigo_seccion;
+    //OJO CORREGIR QUE EN LAS TABLAS
+    //DE SERVICIOS Y CARGOS FALTAN DEFINIR LAS SECCIONES
+    String query_firmas_cargos="""
+                         select a.cedula, a.nombre, a.apellido, b.codigo, b.descripcion from firmas a
+                         inner join cargos b
+                         on 
+                         b.cedula_firmante=a.cedula
+                         where seccion=?
+                         """;
+    String query_firmas_servicios="""
+                                  select a.cedula, a.nombre, a.apellido, b.cod_servicio, b.nombre_servicio from firmas a
+                                  inner join SERVICIOS b
+                                  on 
+                                  b.cedula_firmante=a.cedula
+                                  where seccion=?
+                                  """;
     List<Integer> codigo_cargos=new ArrayList<>();
     List<Integer> cargos_firmantes=new ArrayList<>();
     List<String> nombres_firmantes=new ArrayList<>();
     List<String> apellidos_firmantes=new ArrayList<>();
     List<String> cedula_firmantes=new ArrayList<>();
     List<String> descripcion_cargos=new ArrayList<>();
-    public void Cargos()
-    {
-          try
-    {
-        conectar.Conectar();
-        conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select * from cargos");
-        ejecutar=consulta.executeQuery();
-        while( ejecutar.next() )
-        {
-              descripcion_cargos.add(ejecutar.getString("descripcion"));
-              codigo_cargos.add(ejecutar.getInt("codigo"));      
-               
-        }//if
-       conectar.Cerrar();
-    }//consulta
-           catch(SQLException ex)
-    {
-        JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de la seccion en la cual trabajar.\n Ventana Conexion Seccion \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
-    }
-    }//consulta
-    
-    public void firmantes()
+   
+    private void firmantes_cargos()
     {
              try
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select * from firmas");
+        consulta= conex.prepareStatement(query_firmas_cargos);
+        consulta.setInt(1, codigo_seccion);
         ejecutar=consulta.executeQuery();
         while( ejecutar.next() )
         {
@@ -67,6 +63,10 @@ public class ConexionConsultarFirmas {
         JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de la seccion en la cual trabajar.\n Ventana Conexion Seccion \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
     }
     }//consulta
+    
+    public void consulta(){
+        firmantes_cargos();
+    }
     
     
     public List<String> nombre_firmas()

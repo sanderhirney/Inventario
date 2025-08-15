@@ -104,6 +104,12 @@ public class Ventana_Principal extends javax.swing.JFrame {
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Reportes");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Firmantes");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Nuevo");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Configurar");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Configuracion");
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Firmantes");
         treeNode2.add(treeNode3);
@@ -353,6 +359,13 @@ public class Ventana_Principal extends javax.swing.JFrame {
               reportes.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
               reportes.setVisible(true);
           }
+           if( ((nodo.getParent().toString()).equals("Firmantes")) && ((nodeInfo.toString()).equals("Nuevo")) ){
+               Crear_Firmantes firmas= new Crear_Firmantes(this, true);
+              firmas.setResizable(false);
+              firmas.setLocationRelativeTo(null);
+              firmas.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+              firmas.setVisible(true);
+           }
           
           if( ((nodo.getParent().toString()).equals("Configuracion")) && ((nodeInfo.toString()).equals("Secciones")) )
           {

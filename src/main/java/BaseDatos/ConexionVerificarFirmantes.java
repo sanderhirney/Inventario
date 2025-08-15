@@ -44,31 +44,7 @@ public class ConexionVerificarFirmantes {
         JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de los firmantes .\n Ventana Conexion Verificar Firmantes \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
     }
     }//consulta
-    public void consulta_cargo()
-    {
-          try
-    {
-        conectar.Conectar();
-        conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select nombre from firmas where cargo=?");
-        consulta.setInt(1, cargo);
-        ejecutar=consulta.executeQuery();
-        if ( ejecutar.next())
-        {
-                    conectar.Cerrar();
-                    resultado=1;
-        }//if
-        else
-        {
-            resultado=0;
-        }
-        
-    }//consulta
-           catch(SQLException ex)
-    {
-        JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de los firmantes .\n Ventana Conexion Verificar Firmantes \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
-    }
-    }//consulta
+  
     
     
     public void setCedula(String ced)

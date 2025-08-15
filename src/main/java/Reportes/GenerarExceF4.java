@@ -85,8 +85,8 @@ int cantidad_filas=0;
       salidas_mes_actual=grupos.suma_salida_actual();
       descripcion=grupos.descripcion();
    //firmantes
-      firmantes.firmantes();
-      firmantes.Cargos();
+     // firmantes.firmantes();
+     // firmantes.Cargos();
       codigo_cargos=firmantes.codigos_cargos();
       cargos_firmantes=firmantes.cargos_firmas();
       nombres_firmantes=firmantes.nombre_firmas();

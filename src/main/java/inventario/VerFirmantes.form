@@ -123,9 +123,8 @@
         <Component class="javax.swing.JTable" name="TablaCargos">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="3" rowCount="0">
-                <Column editable="false" title="Campo Reporte" type="java.lang.Object"/>
-                <Column editable="false" title="Cargo Sistema" type="java.lang.Object"/>
+              <Table columnCount="2" rowCount="0">
+                <Column editable="false" title="Cargo / Servicio" type="java.lang.Object"/>
                 <Column editable="false" title="Firmante" type="java.lang.Object"/>
               </Table>
             </Property>

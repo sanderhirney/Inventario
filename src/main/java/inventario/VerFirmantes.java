@@ -3,6 +3,7 @@ package inventario;
 
 import BaseDatos.ConexionActualizarSeccion;
 import BaseDatos.ConexionCargos;
+import BaseDatos.ConexionConsultarFirmas;
 import BaseDatos.ConexionEmpresas;
 import BaseDatos.ConexionVerAlmacenes;
 import java.util.ArrayList;
@@ -34,6 +35,9 @@ EL SERVICIO EN LA FIRMA POR LA CEDULA
     public VerFirmantes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        ConexionConsultarFirmas firmas=new ConexionConsultarFirmas();
+        
        
          ConexionCargos cargos= new ConexionCargos();
         cargos.consulta();
@@ -97,11 +101,11 @@ EL SERVICIO EN LA FIRMA POR LA CEDULA
 
             },
             new String [] {
-                "Campo Reporte", "Cargo Sistema", "Firmante"
+                "Cargo / Servicio", "Firmante"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

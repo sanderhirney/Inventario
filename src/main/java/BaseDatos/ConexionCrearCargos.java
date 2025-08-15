@@ -11,7 +11,7 @@ public class ConexionCrearCargos {
     Conexion conectar= new Conexion();
     int ejecutar;
     int resultado;
-  
+    String cedula_firmante_defecto="123";
     String descripcion;
     
     
@@ -22,7 +22,7 @@ public class ConexionCrearCargos {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("insert into cargos values (DEFAULT, ?)");
+        consulta= conex.prepareStatement("insert into cargos values (DEFAULT, ?, cedula_firmante_defecto)");
         consulta.setString(1, descripcion);
         
         

@@ -15,7 +15,7 @@ public class ConexionCrearFirmantes {
     String cedula;
     String nombre;
     String apellido;
-    int cargo;
+   
     int seccion;
     
     public void crear()
@@ -24,13 +24,12 @@ public class ConexionCrearFirmantes {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("insert into firmas values (?, ?, ?, ?, ?)");
+        consulta= conex.prepareStatement("insert into firmas values (?, ?, ?, ?)");
         
         consulta.setString(1, cedula);
         consulta.setString(2, nombre);
         consulta.setString(3, apellido);
-        consulta.setInt(4, cargo);
-        consulta.setInt(5, seccion);
+        consulta.setInt(4, seccion);
         
         ejecutar=consulta.executeUpdate();
         if( ejecutar> 0 )
@@ -67,10 +66,7 @@ public class ConexionCrearFirmantes {
     {
         apellido=apellid;
     }
-    public void setCargo(int carg)
-    {
-        cargo=carg;
-    }
+   
     public void setSeccion(int recibido)
     {
         seccion=recibido;
