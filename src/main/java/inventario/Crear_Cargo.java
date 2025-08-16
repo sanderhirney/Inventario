@@ -7,6 +7,7 @@ package inventario;
 
 import BaseDatos.ConexionCargos;
 import BaseDatos.ConexionCrearCargos;
+import BaseDatos.ConexionEmpresas;
 import BaseDatos.ConexionVerAlmacenes;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -22,17 +23,20 @@ public class Crear_Cargo extends javax.swing.JDialog {
    List<String> descripciones=new ArrayList<>();
    Iterator lista1;
    String almacenActivoMostrar;
+   int codigo_seccion;
     public Crear_Cargo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+        ConexionEmpresas secciones=new ConexionEmpresas();
+        secciones.consulta();
+        codigo_seccion=secciones.codigo_empresa();
         ConexionCargos cargos= new ConexionCargos();
         cargos.consulta();
         descripciones=cargos.descripcion();
         ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-         almacenPrincipal.consultaAlmacenPrincipal();
-         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+        almacenPrincipal.consultaAlmacenPrincipal();
+        almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
+        etiquetaAlmacenActivo.setText(almacenActivoMostrar);
     }
 
     /**
@@ -200,6 +204,7 @@ public class Crear_Cargo extends javax.swing.JDialog {
         {
             ConexionCrearCargos crear = new ConexionCrearCargos();
             crear.setDescripcion(Campo_descripcion.getText().trim().toUpperCase());
+            crear.setSeccion(codigo_seccion);
             crear.crear();
             if(crear.respuesta()==1)
             {

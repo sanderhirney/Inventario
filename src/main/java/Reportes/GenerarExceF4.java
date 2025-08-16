@@ -87,6 +87,7 @@ int cantidad_filas=0;
    //firmantes
      // firmantes.firmantes();
      // firmantes.Cargos();
+     /*
       codigo_cargos=firmantes.codigos_cargos();
       cargos_firmantes=firmantes.cargos_firmas();
       nombres_firmantes=firmantes.nombre_firmas();

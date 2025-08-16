@@ -12,7 +12,7 @@ public class ConexionCrearServicios {
     int ejecutar;
     int resultado;
     String cedula_firmante_defecto="123";
-
+    int codigo_seccion;
    
     String nombre;
     
@@ -22,9 +22,11 @@ public class ConexionCrearServicios {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("insert into servicios values (DEFAULT, ?, cedula_firmante_defecto )");
+        consulta= conex.prepareStatement("insert into servicios values (DEFAULT, ?, ?, ? )");
         
         consulta.setString(1, nombre);
+        consulta.setString(2, cedula_firmante_defecto);
+        consulta.setInt(3, codigo_seccion);
         
         ejecutar=consulta.executeUpdate();
         if( ejecutar> 0 )
@@ -52,6 +54,9 @@ public class ConexionCrearServicios {
     public void setNombre(String nomb)
     {
          nombre=nomb;
+    }
+    public void setSeccion(int recibido){
+        codigo_seccion=recibido;
     }
    
 }//clase

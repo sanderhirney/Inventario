@@ -19,6 +19,10 @@ public class ConexionCrearEmpresas {
     String firma2;
     String firma3;
     String firma4;
+    String cedula_firmante="123";
+    String nombre_firmante="NO ASIGNADO";
+    String apellido_firmante="NO ASIGNADO";
+    
     public void crear()
     {
           try
@@ -85,6 +89,27 @@ public class ConexionCrearEmpresas {
            catch(SQLException ex)
     {
         JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de guardar la seccion.\n Ventana Crear Decimales \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+    }
+    }//crear_decimales
+     public void crear_firmante_inicial()
+    {
+          try
+    {
+        conectar.Conectar();
+        conex= conectar.getConexion();
+        consulta= conex.prepareStatement("insert into firmas values(?, ?, ?, ?)");//6 para el campo y 2 para el total por defecto
+        consulta.setString(1, cedula_firmante);
+        consulta.setString(2, apellido_firmante);
+        consulta.setString(3, nombre_firmante);
+        consulta.setInt(4, codigo_empresa);
+        consulta.executeUpdate();
+        
+       
+    }//consulta
+    
+           catch(SQLException ex)
+    {
+        JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de guardar el firmante en la seccion.\n Ventana Crear Decimales \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
     }
     }//crear_decimales
     public int respuesta()

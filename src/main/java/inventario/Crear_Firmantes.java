@@ -1,7 +1,6 @@
 
 package inventario;
 
-import BaseDatos.ConexionCargos;
 import BaseDatos.ConexionCrearFirmantes;
 import BaseDatos.ConexionEmpresas;
 import BaseDatos.ConexionVerAlmacenes;

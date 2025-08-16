@@ -114,13 +114,15 @@ public void ejecutar()
                                         {
                                       //      firmantes.firmantes();
                                         //    firmantes.Cargos();
+                                            /*
                                             codigo_cargos=firmantes.codigos_cargos();
                                             cargos_firmantes=firmantes.cargos_firmas();
                                             nombres_firmantes=firmantes.nombre_firmas();
                                             apellidos_firmantes=firmantes.apellido_firmas();
                                             cedula_firmantes=firmantes.cedula_firmas();
                                             descripcion_cargos=firmantes.nombres_cargos();
-                                            decimales.setSeccion(codigo_seccion);
+*/                                           
+decimales.setSeccion(codigo_seccion);
                                             decimales.consulta();
                                             decimales.setMascara();
                                             mascara_decimales=decimales.getMascara();

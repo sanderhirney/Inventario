@@ -15,49 +15,74 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 public class VerFirmantes extends javax.swing.JDialog {
-List<String> descripciones=new ArrayList<>();
-List<Integer> codigoCargos=new ArrayList<>();
 DefaultTableModel modelo;
 Iterator lista1;
 Iterator lista2;
+Iterator lista3;
+Iterator lista4;
+Iterator lista5;
+Iterator lista6;
 String nombre_seleccion;
 int estado=0;
 int codigo_seleccion;
 TableRowSorter filtro;
 String almacenActivoMostrar;
-/*LA IDEA QUE TENGO ES :
-EN SERVICIOS AGREGAR EL FIRMANTE
-EN CARGOS AGREGAR EL FIRMANTE
-Y EN FIRMAS SOLO AGREGR LOS DATOS DE ELLOS
-SE CRUZARIAN TANTO EL CARGO EN LA FIRMA COMO 
-EL SERVICIO EN LA FIRMA POR LA CEDULA
-*/
+int codigo_seccion;
+List<Integer> codigo_cargos=new ArrayList<>();
+List<String> nombres_firmantes_cargos=new ArrayList<>();
+List<String> apellidos_firmantes_cargos=new ArrayList<>();
+List<String> cedula_firmantes_cargos=new ArrayList<>();
+List<String> descripcion_cargos=new ArrayList<>();
+List<Integer> codigo_servicios=new ArrayList<>();
+List<String> nombres_firmantes_servicios=new ArrayList<>();
+List<String> apellidos_firmantes_servicios=new ArrayList<>();
+List<String> cedula_firmantes_servicios=new ArrayList<>();
+List<String> descripcion_servicios=new ArrayList<>();
     public VerFirmantes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        ConexionEmpresas secciones=new ConexionEmpresas();
+        secciones.consulta();
+        codigo_seccion=secciones.codigo_empresa();
         
         ConexionConsultarFirmas firmas=new ConexionConsultarFirmas();
+        firmas.setCodigo_seccion(codigo_seccion);
+        firmas.consulta();
+        codigo_cargos=firmas.getCodigo_cargos();
+        codigo_servicios=firmas.getCodigo_servicios();
+        descripcion_cargos=firmas.getDescripcion_cargos();
+        descripcion_servicios=firmas.getDescripcion_servicios();
+        nombres_firmantes_cargos=firmas.getNombres_firmantes_cargos();
+        nombres_firmantes_servicios=firmas.getNombres_firmantes_servicios();
+        apellidos_firmantes_cargos=firmas.getApellidos_firmantes_cargos();
+        apellidos_firmantes_servicios=firmas.getApellidos_firmantes_servicios();
+        cedula_firmantes_cargos=firmas.getCedula_firmantes_cargos();
+        cedula_firmantes_servicios=firmas.getCedula_firmantes_servicios();
         
-       
-         ConexionCargos cargos= new ConexionCargos();
-        cargos.consulta();
-        codigoCargos=cargos.codigo();
-        descripciones=cargos.descripcion();
+        lista1=descripcion_cargos.iterator();
+        lista2=descripcion_servicios.iterator();
+        lista3=nombres_firmantes_cargos.iterator();
+        lista4=nombres_firmantes_servicios.iterator();
+        lista5=apellidos_firmantes_cargos.iterator();
+        lista6=apellidos_firmantes_servicios.iterator();
         modelo=(DefaultTableModel)TablaCargos.getModel();
         filtro=new TableRowSorter(TablaCargos.getModel());
         try{
-        lista1=codigoCargos.iterator();
-        lista2=descripciones.iterator();
+        
         while(lista1.hasNext())
         {
-            modelo.addRow(new Object[]{lista1.next(), lista2.next()});
+            modelo.addRow(new Object[]{lista1.next(), lista3.next(), lista5.next()});
+        }
+        while(lista2.hasNext())
+        {
+            modelo.addRow(new Object[]{lista2.next(), lista4.next(), lista6.next()});
         }
         }
         catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, "Error: "+e, "Error Grave", JOptionPane.ERROR_MESSAGE);
         }
-        ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
+         ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
          almacenPrincipal.consultaAlmacenPrincipal();
          almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
          etiquetaAlmacenActivo.setText(almacenActivoMostrar);

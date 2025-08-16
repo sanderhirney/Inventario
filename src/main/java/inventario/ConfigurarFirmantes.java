@@ -21,8 +21,8 @@ public class ConfigurarFirmantes extends javax.swing.JDialog {
         initComponents();
         
        // ver.Cargos();
-        codigoCargo=ver.codigos_cargos();
-        nombreCargo=ver.nombres_cargos();
+        codigoCargo=ver.getCodigo_cargos();
+        nombreCargo=ver.getDescripcion_cargos();
        
         try
         {

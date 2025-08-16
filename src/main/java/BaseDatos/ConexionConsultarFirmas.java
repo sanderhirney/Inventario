@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.swing.JOptionPane;
 public class ConexionConsultarFirmas {
@@ -18,25 +17,31 @@ public class ConexionConsultarFirmas {
     //OJO CORREGIR QUE EN LAS TABLAS
     //DE SERVICIOS Y CARGOS FALTAN DEFINIR LAS SECCIONES
     String query_firmas_cargos="""
-                         select a.cedula, a.nombre, a.apellido, b.codigo, b.descripcion from firmas a
-                         inner join cargos b
-                         on 
-                         b.cedula_firmante=a.cedula
-                         where seccion=?
+                        select a.cedula, a.nombre, a.apellido, b.codigo, b.descripcion from firmas a
+                        inner join cargos b
+                        on 
+                        b.cedula_firmante=a.cedula
+                        where a.seccion=?
+                        and b.seccion=?
                          """;
     String query_firmas_servicios="""
-                                  select a.cedula, a.nombre, a.apellido, b.cod_servicio, b.nombre_servicio from firmas a
-                                  inner join SERVICIOS b
-                                  on 
-                                  b.cedula_firmante=a.cedula
-                                  where seccion=?
+                        select a.cedula, a.nombre, a.apellido, b.cod_servicio, b.nombre_servicio from firmas a
+                        inner join SERVICIOS b
+                        on 
+                        b.cedula_firmante=a.cedula
+                        where a.seccion=? and
+                        b.seccion=?
                                   """;
     List<Integer> codigo_cargos=new ArrayList<>();
-    List<Integer> cargos_firmantes=new ArrayList<>();
-    List<String> nombres_firmantes=new ArrayList<>();
-    List<String> apellidos_firmantes=new ArrayList<>();
-    List<String> cedula_firmantes=new ArrayList<>();
+    List<String> nombres_firmantes_cargos=new ArrayList<>();
+    List<String> apellidos_firmantes_cargos=new ArrayList<>();
+    List<String> cedula_firmantes_cargos=new ArrayList<>();
     List<String> descripcion_cargos=new ArrayList<>();
+    List<Integer> codigo_servicios=new ArrayList<>();
+    List<String> nombres_firmantes_servicios=new ArrayList<>();
+    List<String> apellidos_firmantes_servicios=new ArrayList<>();
+    List<String> cedula_firmantes_servicios=new ArrayList<>();
+    List<String> descripcion_servicios=new ArrayList<>();
    
     private void firmantes_cargos()
     {
@@ -46,13 +51,15 @@ public class ConexionConsultarFirmas {
         conex= conectar.getConexion();
         consulta= conex.prepareStatement(query_firmas_cargos);
         consulta.setInt(1, codigo_seccion);
+        consulta.setInt(2, codigo_seccion);
         ejecutar=consulta.executeQuery();
         while( ejecutar.next() )
         {
-                   cargos_firmantes.add(ejecutar.getInt("cargo"));
-                   nombres_firmantes.add(ejecutar.getString("nombre"));
-                   apellidos_firmantes.add(ejecutar.getString("apellido"));
-                   cedula_firmantes.add(ejecutar.getString("cedula"));
+                   descripcion_cargos.add(ejecutar.getString("descripcion"));
+                   nombres_firmantes_cargos.add(ejecutar.getString("nombre"));
+                   apellidos_firmantes_cargos.add(ejecutar.getString("apellido"));
+                   cedula_firmantes_cargos.add(ejecutar.getString("cedula"));
+                   codigo_cargos.add(ejecutar.getInt("codigo"));
                      
                
         }//if
@@ -60,39 +67,88 @@ public class ConexionConsultarFirmas {
     }//consulta
            catch(SQLException ex)
     {
-        JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de la seccion en la cual trabajar.\n Ventana Conexion Seccion \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de los firmantes en cargos.\n Ventana Conexion consultar firmas \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+    }
+    }//consulta
+    private void firmantes_servicios()
+    {
+             try
+    {
+        conectar.Conectar();
+        conex= conectar.getConexion();
+        consulta= conex.prepareStatement(query_firmas_servicios);
+        consulta.setInt(1, codigo_seccion);
+        consulta.setInt(2, codigo_seccion);
+        ejecutar=consulta.executeQuery();
+        while( ejecutar.next() )
+        {
+                   descripcion_servicios.add(ejecutar.getString("nombre_servicio"));
+                   nombres_firmantes_servicios.add(ejecutar.getString("nombre"));
+                   apellidos_firmantes_servicios.add(ejecutar.getString("apellido"));
+                   cedula_firmantes_servicios.add(ejecutar.getString("cedula"));
+                   codigo_servicios.add(ejecutar.getInt("cod_servicio"));
+                     
+               
+        }//if
+       conectar.Cerrar();
+    }//consulta
+           catch(SQLException ex)
+    {
+        JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de de los firmantes en servicios.\n Ventana Conexion consultar firmas \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
     }
     }//consulta
     
     public void consulta(){
         firmantes_cargos();
+        firmantes_servicios();
     }
-    
-    
-    public List<String> nombre_firmas()
-    {
-        return nombres_firmantes;
+
+    public void setCodigo_seccion(int codigo_seccion) {
+        this.codigo_seccion = codigo_seccion;
     }
-    public List<String> apellido_firmas()
-    {
-        return apellidos_firmantes;
-    }
-    public List<String> cedula_firmas()
-    {
-        return cedula_firmantes;
-    }
-    public List<Integer> cargos_firmas()
-    {
-        return cargos_firmantes;
-    }
-    public List<Integer> codigos_cargos()
-    {
+
+    public List<Integer> getCodigo_cargos() {
         return codigo_cargos;
     }
-    public List<String> nombres_cargos()
-    {
+
+    public List<String> getNombres_firmantes_cargos() {
+        return nombres_firmantes_cargos;
+    }
+
+    public List<String> getApellidos_firmantes_cargos() {
+        return apellidos_firmantes_cargos;
+    }
+
+    public List<String> getCedula_firmantes_cargos() {
+        return cedula_firmantes_cargos;
+    }
+
+    public List<String> getDescripcion_cargos() {
         return descripcion_cargos;
     }
+
+    public List<Integer> getCodigo_servicios() {
+        return codigo_servicios;
+    }
+
+    public List<String> getNombres_firmantes_servicios() {
+        return nombres_firmantes_servicios;
+    }
+
+    public List<String> getApellidos_firmantes_servicios() {
+        return apellidos_firmantes_servicios;
+    }
+
+    public List<String> getCedula_firmantes_servicios() {
+        return cedula_firmantes_servicios;
+    }
+
+    public List<String> getDescripcion_servicios() {
+        return descripcion_servicios;
+    }
+    
+    
+ 
    
     
    

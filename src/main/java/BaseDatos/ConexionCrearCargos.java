@@ -13,6 +13,7 @@ public class ConexionCrearCargos {
     int resultado;
     String cedula_firmante_defecto="123";
     String descripcion;
+    int codigo_seccion;
     
     
     public void crear()
@@ -22,8 +23,10 @@ public class ConexionCrearCargos {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("insert into cargos values (DEFAULT, ?, cedula_firmante_defecto)");
+        consulta= conex.prepareStatement("insert into cargos values (DEFAULT, ?,?,?)");
         consulta.setString(1, descripcion);
+        consulta.setString(2, cedula_firmante_defecto);
+        consulta.setInt(3, codigo_seccion);
         
         
         ejecutar=consulta.executeUpdate();
@@ -53,7 +56,9 @@ public class ConexionCrearCargos {
     {
         descripcion=descrip;
     }
-    
+    public void setSeccion(int recibido){
+        codigo_seccion=recibido;
+    }    
     
     
 }//clase

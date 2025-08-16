@@ -6,6 +6,7 @@
 package inventario;
 
 import BaseDatos.ConexionCrearServicios;
+import BaseDatos.ConexionEmpresas;
 import BaseDatos.ConexionVerAlmacenes;
 import javax.swing.JOptionPane;
 
@@ -16,9 +17,13 @@ import javax.swing.JOptionPane;
 public class Crear_Servicio extends javax.swing.JDialog {
 
    String almacenActivoMostrar;
+   int codigo_seccion;
     public Crear_Servicio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        ConexionEmpresas secciones=new ConexionEmpresas();
+        secciones.consulta();
+        codigo_seccion=secciones.codigo_empresa();
         ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
          almacenPrincipal.consultaAlmacenPrincipal();
          almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
@@ -152,6 +157,7 @@ public class Crear_Servicio extends javax.swing.JDialog {
         {
             ConexionCrearServicios servicio= new ConexionCrearServicios();
             servicio.setNombre(Campo_nombre.getText().trim().toUpperCase());
+            servicio.setSeccion(codigo_seccion);
             servicio.crear();
             if(servicio.respuesta()==1)
             {

@@ -366,6 +366,13 @@ public class Ventana_Principal extends javax.swing.JFrame {
               firmas.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
               firmas.setVisible(true);
            }
+           if( ((nodo.getParent().toString()).equals("Firmantes")) && ((nodeInfo.toString()).equals("Configurar")) ){
+               VerFirmantes firmas= new VerFirmantes(this, true);
+              firmas.setResizable(false);
+              firmas.setLocationRelativeTo(null);
+              firmas.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+              firmas.setVisible(true);
+           }
           
           if( ((nodo.getParent().toString()).equals("Configuracion")) && ((nodeInfo.toString()).equals("Secciones")) )
           {
