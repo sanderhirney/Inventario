@@ -2,7 +2,7 @@
 package Reportes;
 //para reportes que son filtrados
 //por la seccion en la que se esta trabajando
-import BaseDatos.ConexionConsultarFirmas;
+import BaseDatos.ConexionConsultarFirmasAsignadas;
 import BaseDatos.ConexionReporteGruposArtf4;
 import java.awt.Desktop;
 import java.io.File;
@@ -41,7 +41,7 @@ int estado=20;
     List<String> descripcion_cargos=new ArrayList<>();
    
     ConexionReporteGruposArtf4 grupos=new ConexionReporteGruposArtf4();
-    ConexionConsultarFirmas firmantes=new ConexionConsultarFirmas();
+    ConexionConsultarFirmasAsignadas firmantes=new ConexionConsultarFirmasAsignadas();
 
 
 int mes_consulta_inicio=1;//si mes consulta=2 o mayor a dos el mes anterior sera 1 

@@ -3,7 +3,7 @@
  */
 package Reportes;
 
-import BaseDatos.ConexionConsultarFirmas;
+import BaseDatos.ConexionConsultarFirmasAsignadas;
 import BaseDatos.ConexionFormateadorReporte;
 import BaseDatos.ConexionReporteEntradas;
 import java.awt.Desktop;
@@ -96,7 +96,7 @@ catch(Exception e)
 public void ejecutar()
 {
     ConexionReporteEntradas entradas=new ConexionReporteEntradas();
-    ConexionConsultarFirmas firmantes=new ConexionConsultarFirmas();
+    ConexionConsultarFirmasAsignadas firmantes=new ConexionConsultarFirmasAsignadas();
     ConexionFormateadorReporte decimales=new ConexionFormateadorReporte ();
                
     try(FileInputStream excel=new FileInputStream(nombreNuevo);)

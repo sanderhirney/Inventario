@@ -1,7 +1,7 @@
 
 package Reportes;
 
-import BaseDatos.ConexionConsultarFirmas;
+import BaseDatos.ConexionConsultarFirmasAsignadas;
 import BaseDatos.ConexionFormateadorReporte;
 import BaseDatos.ConexionReporteEntradas;
 import BaseDatos.ConexionReporteSalidas;
@@ -54,7 +54,7 @@ public class Salida {
  int codigo_concepto;
  String descripcion_concepto;
  ConexionReporteSalidas salidas=new ConexionReporteSalidas();
- ConexionConsultarFirmas firmantes=new ConexionConsultarFirmas();
+ ConexionConsultarFirmasAsignadas firmantes=new ConexionConsultarFirmasAsignadas();
  ConexionFormateadorReporte decimales=new ConexionFormateadorReporte ();
  public void copiar()
  {

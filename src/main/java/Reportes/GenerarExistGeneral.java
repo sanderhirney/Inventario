@@ -2,7 +2,7 @@
 package Reportes;
 //para reportes que muestran informacion general
 //es decir no se filtra por la seccion en la que se esta trabajando
-import BaseDatos.ConexionConsultarFirmas;
+import BaseDatos.ConexionConsultarFirmasAsignadas;
 import BaseDatos.ConexionReporteGruposGen;
 import java.awt.Desktop;
 import java.io.File;
@@ -40,7 +40,7 @@ int estado=20;
     List<String> cedula_firmantes=new ArrayList<>();
     List<String> descripcion_cargos=new ArrayList<>();
     ConexionReporteGruposGen grupos=new ConexionReporteGruposGen();
-    ConexionConsultarFirmas firmantes=new ConexionConsultarFirmas();
+    ConexionConsultarFirmasAsignadas firmantes=new ConexionConsultarFirmasAsignadas();
 
 
 int mes_consulta_inicio=1;//si mes consulta=2 o mayor a dos el mes anterior sera 1 

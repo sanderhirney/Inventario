@@ -1,7 +1,7 @@
 
 package Reportes;
 
-import BaseDatos.ConexionConsultarFirmas;
+import BaseDatos.ConexionConsultarFirmasAsignadas;
 import BaseDatos.ConexionReporteEntradas;
 
 import java.awt.Desktop;
@@ -47,7 +47,7 @@ int estado=20;
  String destino;
  //para las firmas
  //ConexionReporteEntradas entradas=new ConexionReporteEntradas();
- ConexionConsultarFirmas firmantes=new ConexionConsultarFirmas();
+ ConexionConsultarFirmasAsignadas firmantes=new ConexionConsultarFirmasAsignadas();
 
   /*********************/
  String seccion;

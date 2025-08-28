@@ -3,7 +3,7 @@ package inventario;
 
 import BaseDatos.ConexionActualizarSeccion;
 import BaseDatos.ConexionCargos;
-import BaseDatos.ConexionConsultarFirmas;
+import BaseDatos.ConexionConsultarFirmasAsignadas;
 import BaseDatos.ConexionEmpresas;
 import BaseDatos.ConexionVerAlmacenes;
 import java.util.ArrayList;
@@ -45,7 +45,7 @@ List<String> descripcion_servicios=new ArrayList<>();
         secciones.consulta();
         codigo_seccion=secciones.codigo_empresa();
         
-        ConexionConsultarFirmas firmas=new ConexionConsultarFirmas();
+        ConexionConsultarFirmasAsignadas firmas=new ConexionConsultarFirmasAsignadas();
         firmas.setCodigo_seccion(codigo_seccion);
         firmas.consulta();
         codigo_cargos=firmas.getCodigo_cargos();
@@ -105,15 +105,14 @@ List<String> descripcion_servicios=new ArrayList<>();
         etiquetaInformacion = new javax.swing.JLabel();
         etiquetaInformacion1 = new javax.swing.JLabel();
         panelBotones = new javax.swing.JPanel();
-        Boton_guardar1 = new javax.swing.JButton();
-        Boton_guardar = new javax.swing.JButton();
+        botonConfigurar = new javax.swing.JButton();
         Boton_cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Etiq_encabezado.setText("<html><body><center>Sistema Administrativo de Inventario </body></html>");
 
-        jLabel1.setText("Cargos");
+        jLabel1.setText("Firmantes");
 
         Campo_buscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -146,21 +145,13 @@ List<String> descripcion_servicios=new ArrayList<>();
 
         etiquetaInformacion1.setText("Actualice un cargo de ser necesario, si observa alguna error en la lista.");
 
-        Boton_guardar1.setText("Nuevo");
-        Boton_guardar1.addActionListener(new java.awt.event.ActionListener() {
+        botonConfigurar.setText("Configurar");
+        botonConfigurar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton_guardar1ActionPerformed(evt);
+                botonConfigurarActionPerformed(evt);
             }
         });
-        panelBotones.add(Boton_guardar1);
-
-        Boton_guardar.setText("Actualizar");
-        Boton_guardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton_guardarActionPerformed(evt);
-            }
-        });
-        panelBotones.add(Boton_guardar);
+        panelBotones.add(botonConfigurar);
 
         Boton_cancelar.setText("Cancelar");
         Boton_cancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -174,7 +165,6 @@ List<String> descripcion_servicios=new ArrayList<>();
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Separador1)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -185,23 +175,27 @@ List<String> descripcion_servicios=new ArrayList<>();
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(59, 59, 59)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(Campo_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 1033, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(etiquetaInformacion1)
-                                            .addComponent(etiquetaInformacion))
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 927, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(etiquetaInformacion1)
+                                    .addComponent(etiquetaInformacion)
+                                    .addComponent(Campo_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 928, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(61, 61, 61))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(etiquetaAlmacenActivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(panelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, 980, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(Etiq_encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel1))
-                            .addComponent(etiquetaAlmacenActivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(jLabel1)
+                                .addGap(164, 164, 164))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Separador1, javax.swing.GroupLayout.PREFERRED_SIZE, 987, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -249,25 +243,16 @@ List<String> descripcion_servicios=new ArrayList<>();
         filtro.setRowFilter(RowFilter.regexFilter(Campo_buscar.getText(), 0));
     }//GEN-LAST:event_Campo_buscarKeyPressed
 
-    private void Boton_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_guardarActionPerformed
+    private void botonConfigurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfigurarActionPerformed
         // TODO add your handling code here:
-            ConfigurarCargos cargos= new ConfigurarCargos(null, true);
-              cargos.setResizable(false);
-              cargos.setLocationRelativeTo(null);
-              cargos.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              cargos.setVisible(true);
+            ConfigurarFirmantes firmas= new ConfigurarFirmantes(null, true);
+              firmas.setResizable(false);
+              firmas.setLocationRelativeTo(null);
+              firmas.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+              firmas.setVisible(true);
         
         
-    }//GEN-LAST:event_Boton_guardarActionPerformed
-
-    private void Boton_guardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_guardar1ActionPerformed
-        // TODO add your handling code here:
-              Crear_Cargo cargos= new Crear_Cargo(null, true);
-              cargos.setResizable(false);
-              cargos.setLocationRelativeTo(null);
-              cargos.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              cargos.setVisible(true);
-    }//GEN-LAST:event_Boton_guardar1ActionPerformed
+    }//GEN-LAST:event_botonConfigurarActionPerformed
 public int getEstado()
 {
     System.out.println("Estado: "+estado);
@@ -331,12 +316,11 @@ public int getCodigo()
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Boton_cancelar;
-    private javax.swing.JButton Boton_guardar;
-    private javax.swing.JButton Boton_guardar1;
     private javax.swing.JTextField Campo_buscar;
     private javax.swing.JLabel Etiq_encabezado;
     private javax.swing.JSeparator Separador1;
     private javax.swing.JTable TablaCargos;
+    private javax.swing.JButton botonConfigurar;
     private javax.swing.JLabel etiquetaAlmacenActivo;
     private javax.swing.JLabel etiquetaExistencia;
     private javax.swing.JLabel etiquetaInformacion;

@@ -1,7 +1,7 @@
 
 package Reportes;
 
-import BaseDatos.ConexionConsultarFirmas;
+import BaseDatos.ConexionConsultarFirmasAsignadas;
 import BaseDatos.ConexionFormateadorReporte;
 import BaseDatos.ConexionReporteEntradas;
 import java.awt.Desktop;
