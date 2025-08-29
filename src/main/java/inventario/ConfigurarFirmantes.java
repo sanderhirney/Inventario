@@ -1,6 +1,8 @@
 package inventario;
 
+import BaseDatos.ConexionConsultarDatosFirmantes;
 import BaseDatos.ConexionConsultarFirmasAsignadas;
+import BaseDatos.ConexionEmpresas;
 import BaseDatos.ConexionVerAlmacenes;
 import java.awt.Component;
 import java.awt.PopupMenu;
@@ -21,27 +23,41 @@ public class ConfigurarFirmantes extends javax.swing.JDialog {
  
  List<Integer> codigoCargo= new ArrayList<>();
  List<String> nombreCargo= new ArrayList<>();
+ List<Integer> codigoServicio= new ArrayList<>();
+ List<String> nombreServicio= new ArrayList<>();
+ List<String> cedulaFirmante=new ArrayList<>();
+ List<String> nombreFirmante=new ArrayList<>();
  DefaultTableModel modelo;
  String almacenActivoMostrar;
  Iterator lista1;
  Iterator lista2;
+ int codigoSeccion=0;
     public ConfigurarFirmantes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         modelo=(DefaultTableModel)tablaFirmas.getModel();
         JComboBox comboNombres=new JComboBox();
+        ConexionEmpresas consulta_seccion=new ConexionEmpresas();
+        consulta_seccion.consulta();
+        codigoSeccion=consulta_seccion.codigo_empresa();
+        ConexionConsultarDatosFirmantes datos=new ConexionConsultarDatosFirmantes();
+        datos.setCodigo_seccion(codigoSeccion);
+        datos.consulta();
+        cedulaFirmante=datos.getCedula_firmantes();
+        nombreFirmante=datos.getNombres_firmantes();
         ConexionConsultarFirmasAsignadas ver = new ConexionConsultarFirmasAsignadas();
-        ver.setCodigo_seccion(02);
+        ver.setCodigo_seccion(codigoSeccion);
         ver.consulta();
         codigoCargo=ver.getCodigo_cargos();
         nombreCargo=ver.getDescripcion_cargos();
-        
-        lista1=nombreCargo.iterator();
-        lista2=codigoCargo.iterator();
+        codigoServicio=ver.getCodigo_servicios();
+        nombreServicio=ver.getDescripcion_servicios();
+        lista1=cedulaFirmante.iterator();
+        lista2=nombreFirmante.iterator();
          while(lista2.hasNext())
         {
             
-            comboNombres.addItem(lista2.next());
+            comboNombres.addItem(lista1.next()+" "+lista2.next());
         }
          DefaultCellEditor celda=new DefaultCellEditor(comboNombres);
          TableColumn columna=tablaFirmas.getColumnModel().getColumn(1);
@@ -49,6 +65,9 @@ public class ConfigurarFirmantes extends javax.swing.JDialog {
         
          for(String cargo: nombreCargo){
              modelo.addRow(new Object[]{cargo, ""});
+         }
+         for(String servicio: nombreServicio){
+             modelo.addRow(new Object[]{servicio, ""});
          }
         
         
