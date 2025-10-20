@@ -1,21 +1,15 @@
 package inventario;
 
+import BaseDatos.ConexionAsignarActualizarFirmas;
 import BaseDatos.ConexionConsultarDatosFirmantes;
 import BaseDatos.ConexionConsultarFirmasAsignadas;
 import BaseDatos.ConexionEmpresas;
 import BaseDatos.ConexionVerAlmacenes;
-import java.awt.Component;
-import java.awt.PopupMenu;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import javax.swing.DefaultCellEditor;
-import javax.swing.DefaultListModel;
-import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 
 public class ConfigurarFirmantes extends javax.swing.JDialog {
@@ -31,12 +25,13 @@ public class ConfigurarFirmantes extends javax.swing.JDialog {
  String almacenActivoMostrar;
  Iterator lista1;
  Iterator lista2;
+ Iterator lista3;
+ Iterator lista4;
  int codigoSeccion=0;
     public ConfigurarFirmantes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        modelo=(DefaultTableModel)tablaFirmas.getModel();
-        JComboBox comboNombres=new JComboBox();
+       
         ConexionEmpresas consulta_seccion=new ConexionEmpresas();
         consulta_seccion.consulta();
         codigoSeccion=consulta_seccion.codigo_empresa();
@@ -57,20 +52,20 @@ public class ConfigurarFirmantes extends javax.swing.JDialog {
          while(lista2.hasNext())
         {
             
-            comboNombres.addItem(lista1.next()+" "+lista2.next());
+            comboFirmantes.addItem(lista1.next()+" "+lista2.next());
         }
-         DefaultCellEditor celda=new DefaultCellEditor(comboNombres);
-         TableColumn columna=tablaFirmas.getColumnModel().getColumn(1);
-         columna.setCellEditor(celda);
         
-         for(String cargo: nombreCargo){
-             modelo.addRow(new Object[]{cargo, ""});
+         lista3=nombreCargo.iterator();
+         lista4=nombreServicio.iterator();
+         while(lista3.hasNext()){
+             comboCargosServicios.addItem((String) lista3.next());
+             
          }
-         for(String servicio: nombreServicio){
-             modelo.addRow(new Object[]{servicio, ""});
+         while(lista4.hasNext()){
+             comboCargosServicios.addItem((String) lista4.next());
          }
-        
-        
+         
+                
       
         ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
          almacenPrincipal.consultaAlmacenPrincipal();
@@ -94,8 +89,10 @@ public class ConfigurarFirmantes extends javax.swing.JDialog {
         panelBotones = new javax.swing.JPanel();
         botonGuardar = new javax.swing.JButton();
         botonSalir = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tablaFirmas = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        comboFirmantes = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        comboCargosServicios = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -119,23 +116,9 @@ public class ConfigurarFirmantes extends javax.swing.JDialog {
         });
         panelBotones.add(botonSalir);
 
-        tablaFirmas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        jLabel2.setText("Cargo/Servicio");
 
-            },
-            new String [] {
-                "Cargos", "Firmantes"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(tablaFirmas);
+        jLabel3.setText("Firmante");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,15 +132,31 @@ public class ConfigurarFirmantes extends javax.swing.JDialog {
                         .addGap(11, 11, 11))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(panelBotones, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jSeparator1))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(Etiq_encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(147, 147, 147)
-                                .addComponent(jLabel1)))
-                        .addContainerGap(32, Short.MAX_VALUE))))
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(panelBotones, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
+                                .addComponent(jSeparator1)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(31, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(229, 229, 229))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(223, 223, 223))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(comboFirmantes, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24))))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(32, 32, 32)
+                    .addComponent(comboCargosServicios, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(23, 23, 23)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,10 +170,19 @@ public class ConfigurarFirmantes extends javax.swing.JDialog {
                 .addGap(12, 12, 12)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel2)
+                .addGap(48, 48, 48)
+                .addComponent(jLabel3)
                 .addGap(18, 18, 18)
+                .addComponent(comboFirmantes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
                 .addComponent(panelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(227, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(123, 123, 123)
+                    .addComponent(comboCargosServicios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(377, Short.MAX_VALUE)))
         );
 
         pack();
@@ -189,8 +197,32 @@ public class ConfigurarFirmantes extends javax.swing.JDialog {
 
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
         // TODO add your handling code here:
+        ConexionAsignarActualizarFirmas firmas=new ConexionAsignarActualizarFirmas();
         
-        
+        int tamanio=nombreCargo.size();
+        int seleccionado=comboCargosServicios.getSelectedIndex();
+        //leo el tamaño del combo
+        //primero se cargan los cargos por ello leo la cantidad de cargos
+        //ejemplo si hay 5 cargos pues los cargos estaran en el indice del 0 al 4
+        //por lo tanto si el indice seleccionado es 5 0 mas estare en servicios
+        //ya que se agregan en este orden primero los cargos y luego los servicios
+        //solo hay dos tipos de firmas por cargo o servicio
+        //por lo tanto 0 para un cargo y 1 para un servicio
+        /*CARGO*/if(seleccionado<tamanio){
+            firmas.setCodigoSeccion(codigoSeccion);
+            firmas.setTipofirma(0);
+            firmas.setCargoServicio(codigoCargo.get(seleccionado));
+            firmas.setCedula(cedulaFirmante.get(comboFirmantes.getSelectedIndex()));
+            firmas.ejecutar();
+        }
+        /*SERVICIO*/if(seleccionado>=tamanio){
+            int indiceServicio=seleccionado-(tamanio);
+            firmas.setCodigoSeccion(codigoSeccion);
+            firmas.setTipofirma(1);
+             firmas.setCargoServicio(codigoServicio.get(indiceServicio));
+             firmas.setCedula(cedulaFirmante.get(comboFirmantes.getSelectedIndex()));
+             firmas.ejecutar();
+        }
     }//GEN-LAST:event_botonGuardarActionPerformed
 
     /**
@@ -242,11 +274,13 @@ public class ConfigurarFirmantes extends javax.swing.JDialog {
     private javax.swing.JLabel Etiq_encabezado;
     private javax.swing.JButton botonGuardar;
     private javax.swing.JButton botonSalir;
+    private javax.swing.JComboBox<String> comboCargosServicios;
+    private javax.swing.JComboBox<String> comboFirmantes;
     private javax.swing.JLabel etiquetaAlmacenActivo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel panelBotones;
-    private javax.swing.JTable tablaFirmas;
     // End of variables declaration//GEN-END:variables
 }
