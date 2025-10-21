@@ -1,2 +1,2 @@
-oct 20, 2025 12:07:20 P.Â M. shca.inventario.Inventario main
-INFORMACIÃ“N: Ingreso Satisfactorio
+oct. 20, 2025 8:29:39 P. M. shca.inventario.Inventario main
+INFORMACIÓN: Ingreso Satisfactorio

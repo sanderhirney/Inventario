@@ -9,6 +9,7 @@ import BaseDatos.ConexionVerAlmacenes;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -208,20 +209,48 @@ public class ConfigurarFirmantes extends javax.swing.JDialog {
         //ya que se agregan en este orden primero los cargos y luego los servicios
         //solo hay dos tipos de firmas por cargo o servicio
         //por lo tanto 0 para un cargo y 1 para un servicio
+        
+        
         /*CARGO*/if(seleccionado<tamanio){
-            firmas.setCodigoSeccion(codigoSeccion);
+            try{
+                firmas.setCodigoSeccion(codigoSeccion);
             firmas.setTipofirma(0);
             firmas.setCargoServicio(codigoCargo.get(seleccionado));
             firmas.setCedula(cedulaFirmante.get(comboFirmantes.getSelectedIndex()));
             firmas.ejecutar();
+            if(firmas.getResultado()==1){
+                JOptionPane.showMessageDialog(null, "Firmante asignado satisfactoriamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            }else
+            {
+               JOptionPane.showMessageDialog(null, "Error al actualizar la firma", "Error", JOptionPane.ERROR_MESSAGE);
+
+            }
+            }catch(Exception e){
+               JOptionPane.showMessageDialog(null, "Se presento el siguiente error: \n"+e, "Error", JOptionPane.ERROR_MESSAGE);
+
+            }
+            
         }
         /*SERVICIO*/if(seleccionado>=tamanio){
             int indiceServicio=seleccionado-(tamanio);
-            firmas.setCodigoSeccion(codigoSeccion);
+            try{
+                firmas.setCodigoSeccion(codigoSeccion);
             firmas.setTipofirma(1);
              firmas.setCargoServicio(codigoServicio.get(indiceServicio));
              firmas.setCedula(cedulaFirmante.get(comboFirmantes.getSelectedIndex()));
              firmas.ejecutar();
+              if(firmas.getResultado()==1){
+                JOptionPane.showMessageDialog(null, "Firmante asignado satisfactoriamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            }else
+            {
+               JOptionPane.showMessageDialog(null, "Error al actualizar la firma", "Error", JOptionPane.ERROR_MESSAGE);
+
+            }
+            }catch(Exception e){
+               JOptionPane.showMessageDialog(null, "Se presento el siguiente error: \n"+e, "Error", JOptionPane.ERROR_MESSAGE);
+
+            }
+            
         }
     }//GEN-LAST:event_botonGuardarActionPerformed
 

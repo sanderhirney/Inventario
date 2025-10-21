@@ -77,7 +77,7 @@ public class ConexionAsignarActualizarFirmas {
     {
         tipoFirmante=recibido;
     }
-    public int resultado()
+    public int getResultado()
     {
         return resultado;
     }
