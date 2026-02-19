@@ -1,10 +1,12 @@
 
 package BaseDatos;
 
+import inventario.LoggerInfo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 public class ConexionActualizarDecimal {
     Connection conex;
@@ -16,18 +18,22 @@ public class ConexionActualizarDecimal {
     int campo;
     int total;
     int respuesta;
-    private void actualizar()
+     Logger log=LoggerInfo.getLogger();
+    private void actualizar() throws SQLException
     {
-        System.out.println("codigo que se va a actualizar: "+codigo_empresa);
+        log.info("CONEXION BD ACTUALIZAR DECIMALES");
           try
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("update decimales set campo=?, total=? where cod_seccion=?");
-        consulta.setInt(1, campo);
-        consulta.setInt(2, total);
-        consulta.setInt(3, codigo_empresa);
-        respuesta=consulta.executeUpdate();
+        try(PreparedStatement consulta=conex.prepareStatement("update decimales set campo=?, total=? where cod_seccion=?")){
+             consulta.setInt(1, campo);
+             consulta.setInt(2, total);
+             consulta.setInt(3, codigo_empresa);
+             respuesta=consulta.executeUpdate();
+        }
+        
+        
         if(respuesta>0)
         {
             resultado=1;
@@ -42,8 +48,11 @@ public class ConexionActualizarDecimal {
     }//consulta
            catch(SQLException ex)
     {
+        log.severe(ex.getMessage());
         JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de la seccion en la cual trabajar.\n Ventana Conexion Actualizar Seccion \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
-    }
+    }finally{
+          conectar.Cerrar();
+          }
     }//consulta
     
     
@@ -70,7 +79,7 @@ public class ConexionActualizarDecimal {
         total=recibido;
     }
     
-    public void actualizarDecimal(){
+    public void actualizarDecimal() throws SQLException{
             actualizar();
     }
 }//clase

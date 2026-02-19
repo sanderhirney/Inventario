@@ -208,6 +208,7 @@ public class Crear_Decimal extends javax.swing.JDialog {
             decimal.setDecimalCampo(Integer.parseInt(Campo_decimal_campo.getText().trim()));
             decimal.setDecimalTotal(Integer.parseInt(Campo_decimal_total.getText().trim()));
             decimal.actualizarDecimal();
+               
            if(decimal.resultado()>0)
            {
                JOptionPane.showMessageDialog(null, "Datos actualizados en la seccion correctamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
@@ -217,7 +218,7 @@ public class Crear_Decimal extends javax.swing.JDialog {
                JOptionPane.showMessageDialog(null, "No se pudieron actualizar los datos", "Error", JOptionPane.ERROR_MESSAGE);
            }
             }
-            catch(NumberFormatException | HeadlessException e)
+            catch(NumberFormatException | HeadlessException | SQLException  e)
             {
                log.severe(e.getMessage());
                 JOptionPane.showMessageDialog(null, "No se pudo actualizar por: "+e, "Error", JOptionPane.ERROR_MESSAGE);

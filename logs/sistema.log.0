@@ -40,3 +40,19 @@ feb. 19, 2026 11:25:11 A. M. inventario.Asignar_seccion_art <init>
 INFORMACIÓN: ASIGNAR SECCION A ARTICULO
 feb. 19, 2026 11:25:11 A. M. BaseDatos.ConexionVerSecciones consulta
 INFORMACIÓN: CONSULTA DE EMPRSAS
+feb. 19, 2026 3:32:28 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+feb. 19, 2026 3:32:28 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-19_15-32-28.sql
+feb. 19, 2026 3:32:28 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-19_15-32-28.sql
+feb. 19, 2026 3:32:42 P. M. inventario.Crear_Decimal <init>
+INFORMACIÓN: CREAR / CONFIGURAR DECIMALES
+feb. 19, 2026 3:32:42 P. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE EMPRSAS
+feb. 19, 2026 3:32:51 P. M. BaseDatos.ConexionActualizarDecimal actualizar
+INFORMACIÓN: CONEXION BD ACTUALIZAR DECIMALES
+feb. 19, 2026 3:32:55 P. M. inventario.Crear_Decimal <init>
+INFORMACIÓN: CREAR / CONFIGURAR DECIMALES
+feb. 19, 2026 3:32:55 P. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE EMPRSAS
