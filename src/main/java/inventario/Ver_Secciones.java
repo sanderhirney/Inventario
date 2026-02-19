@@ -5,51 +5,52 @@ import BaseDatos.ConexionActualizarSeccion;
 import BaseDatos.ConexionEmpresas;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerSecciones;
+import Modelos.EmpresasDTO;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 public class Ver_Secciones extends javax.swing.JDialog {
-List<Integer> codigos=new ArrayList<>();
-List<String> nombres=new ArrayList<>();
 DefaultTableModel modelo;
-Iterator lista1;
-Iterator lista2;
 String nombre_seleccion;
 int estado=0;
 int codigo_seleccion;
 TableRowSorter filtro;
 String almacenActivoMostrar;
+List<EmpresasDTO> empresas=new ArrayList<>();
+Logger log=LoggerInfo.getLogger();
     public Ver_Secciones(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();
-        ConexionVerSecciones secciones=new ConexionVerSecciones();
-        ConexionEmpresas verseccion=new ConexionEmpresas();
-        secciones.consulta();
-        codigos=secciones.codigo();
-        nombres=secciones.nombre();
-        modelo=(DefaultTableModel)Tabla_Secciones.getModel();
-        filtro=new TableRowSorter(Tabla_Secciones.getModel());
         try{
-        lista1=codigos.iterator();
-        lista2=nombres.iterator();
-        while(lista1.hasNext())
+            initComponents();
+            log.info("VER SECCIONES");
+            ConexionVerSecciones secciones=new ConexionVerSecciones();
+           // ConexionEmpresas verseccion=new ConexionEmpresas();
+            empresas=secciones.consultaEmpresas();
+            modelo=(DefaultTableModel)Tabla_Secciones.getModel();
+            filtro=new TableRowSorter(Tabla_Secciones.getModel());
+                for(EmpresasDTO empresa:empresas)
+                {
+                    modelo.addRow(new Object[]{empresa.codigo(), empresa.descripcion()});
+                }
+            
+            ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
+            almacenPrincipal.consultaAlmacenPrincipal();
+            almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
+            etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+        }
+        catch(Exception ex)
         {
-            modelo.addRow(new Object[]{lista1.next(), lista2.next()});
+            log.severe(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error: "+ex, "Error Grave", JOptionPane.ERROR_MESSAGE);
         }
-        }
-        catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(null, "Error: "+e, "Error Grave", JOptionPane.ERROR_MESSAGE);
-        }
-        ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-         almacenPrincipal.consultaAlmacenPrincipal();
-         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
     }
 
    
@@ -216,7 +217,7 @@ String almacenActivoMostrar;
     }//GEN-LAST:event_Boton_guardarActionPerformed
 public int getEstado()
 {
-    System.out.println("Estado: "+estado);
+    log.info("estado: "+estado);
     return estado;
 }
     

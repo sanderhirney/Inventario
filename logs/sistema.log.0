@@ -1,0 +1,42 @@
+feb. 19, 2026 9:55:39 A. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+feb. 19, 2026 9:55:39 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+GRAVE: Cannot run program "C:\Program Files\PostgreSQL\16\bin\pg_dump.exe": CreateProcess error=2, El sistema no puede encontrar el archivo especificado
+feb. 19, 2026 9:57:18 A. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+feb. 19, 2026 9:57:18 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-19_09-57-18.sql
+feb. 19, 2026 9:57:19 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-19_09-57-18.sql
+feb. 19, 2026 10:10:40 A. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+feb. 19, 2026 10:10:40 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-19_10-10-40.sql
+feb. 19, 2026 10:10:40 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-19_10-10-40.sql
+feb. 19, 2026 10:11:37 A. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+feb. 19, 2026 10:11:37 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-19_10-11-37.sql
+feb. 19, 2026 10:11:37 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-19_10-11-37.sql
+feb. 19, 2026 11:22:56 A. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+feb. 19, 2026 11:22:56 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-19_11-22-56.sql
+feb. 19, 2026 11:22:56 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-19_11-22-56.sql
+feb. 19, 2026 11:23:25 A. M. inventario.Asignar_seccion_art <init>
+INFORMACIÓN: ASIGNAR SECCION A ARTICULO
+feb. 19, 2026 11:23:25 A. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE EMPRSAS
+feb. 19, 2026 11:25:07 A. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+feb. 19, 2026 11:25:07 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-19_11-25-07.sql
+feb. 19, 2026 11:25:07 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-19_11-25-07.sql
+feb. 19, 2026 11:25:11 A. M. inventario.Asignar_seccion_art <init>
+INFORMACIÓN: ASIGNAR SECCION A ARTICULO
+feb. 19, 2026 11:25:11 A. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE EMPRSAS

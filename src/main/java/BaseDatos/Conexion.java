@@ -5,11 +5,16 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import shca.inventario.Configuracion;
 public class Conexion {
     
-    private final String usuario="postgres";
+   /* private final String usuario="postgres";
      private final String password="243672";
-     private final String url="jdbc:postgresql://localhost:5432/Inventario";
+     private final String url="jdbc:postgresql://localhost:5432/Inventario";*/
+private final String usuario=Configuracion.get("db.usuario", "usuario");
+     private final String password=Configuracion.get("db.password", "123");
+     private final String url=Configuracion.get("db.url", "/");
+
      Connection conexion;
     public void Conectar ()throws SQLException
     {

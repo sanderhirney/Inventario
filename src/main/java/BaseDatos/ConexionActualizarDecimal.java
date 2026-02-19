@@ -16,8 +16,7 @@ public class ConexionActualizarDecimal {
     int campo;
     int total;
     int respuesta;
-   String nombre_empresa;
-    public void actualizar()
+    private void actualizar()
     {
         System.out.println("codigo que se va a actualizar: "+codigo_empresa);
           try
@@ -46,29 +45,7 @@ public class ConexionActualizarDecimal {
         JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de la seccion en la cual trabajar.\n Ventana Conexion Actualizar Seccion \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
     }
     }//consulta
-    public void buscar_codigo()
-    {
-          try
-    {
-        conectar.Conectar();
-        conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select cod_empresas from empresas where descripcion=?");
-        consulta.setString(1, nombre_empresa);
-        
-        ejecutar=consulta.executeQuery();
-        while(ejecutar.next())
-        {
-            codigo_empresa=ejecutar.getInt("cod_empresas");
-        }
-        
-        
-       
-    }//consulta
-           catch(SQLException ex)
-    {
-        JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de la seccion en la cual trabajar.\n Ventana Conexion Actualizar Seccion \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
-    }
-    }//consulta
+    
     
     
     
@@ -77,10 +54,13 @@ public class ConexionActualizarDecimal {
         return resultado;
         
     }
-    public void setNombre(String recibido)
-    {
-        nombre_empresa=recibido;
+
+    public void setCodigo_empresa(int codigo_empresa) {
+        this.codigo_empresa = codigo_empresa;
     }
+    
+            
+            
     public void setDecimalCampo(int recibido)
     {
         campo=recibido;
@@ -88,5 +68,9 @@ public class ConexionActualizarDecimal {
     public void setDecimalTotal(int recibido)
     {
         total=recibido;
+    }
+    
+    public void actualizarDecimal(){
+            actualizar();
     }
 }//clase

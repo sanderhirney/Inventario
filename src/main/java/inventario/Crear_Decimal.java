@@ -8,10 +8,13 @@ package inventario;
 import BaseDatos.ConexionActualizarDecimal;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerSecciones;
+import Modelos.EmpresasDTO;
 import java.awt.HeadlessException;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,27 +22,20 @@ import javax.swing.JOptionPane;
  * @author Usuario
  */
 public class Crear_Decimal extends javax.swing.JDialog {
-
- int decimal_campo;
- int decimal_total;
- List<Integer> codigo=new ArrayList<>();
- List<String> seccion=new ArrayList<>();
+ Logger log=LoggerInfo.getLogger();
+ List<EmpresasDTO> empresas=new ArrayList<>();
  int codigo_empresa;
- String nombre_empresa;
- Iterator lista1;
  String almacenActivoMostrar;
-    public Crear_Decimal(java.awt.Frame parent, boolean modal) {
+    public Crear_Decimal(java.awt.Frame parent, boolean modal) throws SQLException {
         super(parent, modal);
         initComponents();
+        log.info("CREAR / CONFIGURAR DECIMALES");
         
         ConexionVerSecciones secciones=new ConexionVerSecciones();
-        secciones.consulta();
-        codigo=secciones.codigo();
-        seccion=secciones.nombre();
-        lista1=seccion.iterator();
-        while(lista1.hasNext())
-        {
-            Combo_Secciones.addItem(lista1.next());
+        empresas=secciones.consultaEmpresas();
+        
+        for(EmpresasDTO empresa: empresas){
+            Combo_Secciones.addItem(empresa);
         }
         ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
          almacenPrincipal.consultaAlmacenPrincipal();
@@ -61,7 +57,7 @@ public class Crear_Decimal extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        Combo_Secciones = new javax.swing.JComboBox();
+        Combo_Secciones = new javax.swing.JComboBox<>();
         Etiq_nombre_seccion = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -206,12 +202,12 @@ public class Crear_Decimal extends javax.swing.JDialog {
             try
             {
             ConexionActualizarDecimal decimal=new ConexionActualizarDecimal();
-            nombre_empresa=(Combo_Secciones.getSelectedItem()).toString();
-            decimal.setNombre(nombre_empresa);
+            EmpresasDTO seleccionado=(EmpresasDTO) Combo_Secciones.getSelectedItem();
+            codigo_empresa=seleccionado.codigo();
+            decimal.setCodigo_empresa(codigo_empresa);
             decimal.setDecimalCampo(Integer.parseInt(Campo_decimal_campo.getText().trim()));
             decimal.setDecimalTotal(Integer.parseInt(Campo_decimal_total.getText().trim()));
-            decimal.buscar_codigo();
-            decimal.actualizar();
+            decimal.actualizarDecimal();
            if(decimal.resultado()>0)
            {
                JOptionPane.showMessageDialog(null, "Datos actualizados en la seccion correctamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
@@ -223,6 +219,7 @@ public class Crear_Decimal extends javax.swing.JDialog {
             }
             catch(NumberFormatException | HeadlessException e)
             {
+               log.severe(e.getMessage());
                 JOptionPane.showMessageDialog(null, "No se pudo actualizar por: "+e, "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -298,14 +295,18 @@ public class Crear_Decimal extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Crear_Decimal dialog = new Crear_Decimal(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                try {
+                    Crear_Decimal dialog = new Crear_Decimal(new javax.swing.JFrame(), true);
+                    dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                        @Override
+                        public void windowClosing(java.awt.event.WindowEvent e) {
+                            System.exit(0);
+                        }
+                    });
+                    dialog.setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Crear_Decimal.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -314,7 +315,7 @@ public class Crear_Decimal extends javax.swing.JDialog {
     private javax.swing.JButton Boton_Salir;
     private javax.swing.JTextField Campo_decimal_campo;
     private javax.swing.JTextField Campo_decimal_total;
-    private javax.swing.JComboBox Combo_Secciones;
+    private javax.swing.JComboBox<EmpresasDTO> Combo_Secciones;
     private javax.swing.JLabel Etiq_encabezado;
     private javax.swing.JLabel Etiq_nombre_seccion;
     private javax.swing.JButton boton_aceptar;

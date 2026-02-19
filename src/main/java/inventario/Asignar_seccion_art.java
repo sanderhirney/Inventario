@@ -9,9 +9,13 @@ import BaseDatos.ConexionArticuloaSeccion;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerArticulos;
 import BaseDatos.ConexionVerSecciones;
+import Modelos.EmpresasDTO;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,36 +33,30 @@ public class Asignar_seccion_art extends javax.swing.JDialog {
  List<String> nombre_articulo=new ArrayList<>();//articulo
  int codigo_origen;
  int codigo_destino;
- Iterator lista1;
- Iterator lista2;
- Iterator lista_codigos;
- Iterator lista_nombres;
+ Logger log=LoggerInfo.getLogger();
  DefaultTableModel modelo;
  String almacenActivoMostrar;
- 
+ List<EmpresasDTO> empresas=new ArrayList<>();
  int codigo_seleccion;
     public Asignar_seccion_art(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();
-        
-        ConexionVerSecciones secciones=new ConexionVerSecciones();
-        secciones.consulta();
-        codigo=secciones.codigo();
-        seccion=secciones.nombre();
-        lista1=seccion.iterator();
-        lista2=seccion.iterator();
-        while(lista1.hasNext())
-        {
-            Combo_Origen.addItem(lista1.next());
-        }
-        while(lista2.hasNext())
-        {
-            Combo_Destino.addItem(lista2.next());
-        }
+     try {
+         initComponents();
+         log.info("ASIGNAR SECCION A ARTICULO");
+         ConexionVerSecciones secciones=new ConexionVerSecciones();
+         empresas=secciones.consultaEmpresas();
+         for(EmpresasDTO empresa: empresas){
+             Combo_Origen.addItem(empresa);
+             Combo_Destino.addItem(empresa);
+         }
          ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
          almacenPrincipal.consultaAlmacenPrincipal();
          almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
          etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+     } catch (SQLException ex) {
+         log.severe(ex.getMessage());
+         Logger.getLogger(Asignar_seccion_art.class.getName()).log(Level.SEVERE, null, ex);
+     }
     }//constructor
 
     /**
@@ -244,10 +242,12 @@ public class Asignar_seccion_art extends javax.swing.JDialog {
        //opcion 0= Si, 1=No
         if(opcion==0)
         {
-            codigo_seleccion=Integer.parseInt(Tabla_articulo.getValueAt(Tabla_articulo.getSelectedRow(), 0).toString());
+            int filaSeleccionada=Tabla_articulo.getSelectedRow();
+            EmpresasDTO seleccionadoArticulo=empresas.get(filaSeleccionada);
+            EmpresasDTO seleccionadoSeccion=(EmpresasDTO) Combo_Destino.getSelectedItem();
             ConexionArticuloaSeccion articulo=new ConexionArticuloaSeccion();
-            articulo.setCodigoArticulo(codigo_seleccion);
-            articulo.setCodigoSeccion(codigo.get(Combo_Destino.getSelectedIndex()));
+            articulo.setCodigoArticulo(seleccionadoArticulo.codigo());
+            articulo.setCodigoSeccion(seleccionadoSeccion.codigo());
             articulo.Existencias();
             articulo.Costos();
             if(articulo.resultado()==1)
@@ -259,7 +259,8 @@ public class Asignar_seccion_art extends javax.swing.JDialog {
 
     private void boton_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_buscarActionPerformed
         // TODO add your handling code here:
-        codigo_origen=codigo.get(Combo_Origen.getSelectedIndex());
+        EmpresasDTO empresaSeleccionada=(EmpresasDTO)Combo_Origen.getSelectedItem();
+        codigo_origen=empresaSeleccionada.codigo();
         
         ConexionVerArticulos articulos=new ConexionVerArticulos();
         articulos.setSeccion(codigo_origen);
@@ -274,19 +275,17 @@ public class Asignar_seccion_art extends javax.swing.JDialog {
         else
         {
         try{
-            
-            lista_codigos=codigo_articulo.iterator();
-            lista_nombres=nombre_articulo.iterator();
-            while(lista_codigos.hasNext())
+            for(EmpresasDTO empresa: empresas)
             {
-                modelo.addRow(new Object[]{lista_codigos.next(), lista_nombres.next()});
+                modelo.addRow(new Object[]{empresa.codigo(), empresa.descripcion()});
                 
             }
         }
         catch(Exception e)
         {
+            log.severe(e.getMessage());
             JOptionPane.showMessageDialog(null, "No se pudo cargar datos de la seccion seleccionada: "+e, "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
+            
         }
         }//else
     }//GEN-LAST:event_boton_buscarActionPerformed
