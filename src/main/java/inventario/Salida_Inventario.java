@@ -11,10 +11,13 @@ import BaseDatos.ConexionVerConceptos;
 import BaseDatos.ConexionVerServicios;
 import Reportes.ReporteSalida;
 import java.awt.Dimension;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -604,37 +607,41 @@ public class Salida_Inventario extends javax.swing.JDialog {
                        operaciones.Actualizarexistencias();
                        if(operaciones.getResultadoOperacion()>0)
                        {
-                           ConexionActualizarTempSalida temp=new ConexionActualizarTempSalida();
-                           temp.setDocumento(numero_documento_rec);
-                           temp.setSeccion(codigo_seccion);
-                           temp.actualizarTempDoc();
-                           temp.actualizarArtDoc();
-                       //aqui en el if uso el operador || ya que si es una entrada
-                           //sin ningun tipo de informacion desde temporal
-                           //temp.resultado sera ==0
+                           try {
+                               ConexionActualizarTempSalida temp=new ConexionActualizarTempSalida();
+                               temp.setDocumento(numero_documento_rec);
+                               temp.setSeccion(codigo_seccion);
+                               temp.actualizarTemporalSalida();
+                               //aqui en el if uso el operador || ya que si es una entrada
+                               //sin ningun tipo de informacion desde temporal
+                               //temp.resultado sera ==0
                                if(temp.resultado()>0 || operaciones.getResultadoOperacion()>0)
                                {
-                                     modelo.setRowCount(0);
-                                     
+                                   modelo.setRowCount(0);
                                    
-                                    JOptionPane.showMessageDialog(null,"Informacion Ingresada Satisfactoriamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
                                    
-                                    Combo_Conceptos.setEnabled(true);
-                                    Combo_Servicio.setEnabled(true);
+                                   JOptionPane.showMessageDialog(null,"Informacion Ingresada Satisfactoriamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
                                    
-                                    //genero el reporte
-                                        
-                                        ReporteSalida reporte=new ReporteSalida();
-                                        reporte.setCodigoConcepto(concepto_salida);
-                                        reporte.llamarReporte();
-                                        
-                                       
+                                   Combo_Conceptos.setEnabled(true);
+                                   Combo_Servicio.setEnabled(true);
+                                   
+                                   //genero el reporte
+                                   
+                                   ReporteSalida reporte=new ReporteSalida();
+                                   reporte.setCodigoConcepto(concepto_salida);
+                                   reporte.llamarReporte();
+                                   
+                                   
                                }//if temp
                                else{
                                    JOptionPane.showMessageDialog(null," Fallo al actualizar los temporales \n Consulte al desarrollador", "Error grave", JOptionPane.ERROR_MESSAGE);
                                }
+                           } //if
+                           catch (SQLException ex) {
+                               Logger.getLogger(Salida_Inventario.class.getName()).log(Level.SEVERE, null, ex);
+                           }
                        
-                       }//if
+                       }
                        else
                        {
                            JOptionPane.showMessageDialog(null,"Informacion No ingresada. Fallo actualizar las existencias \n Consulte al desarrollador", "Error grave", JOptionPane.ERROR_MESSAGE);

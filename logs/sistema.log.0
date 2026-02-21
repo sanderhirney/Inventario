@@ -56,3 +56,131 @@ feb. 19, 2026 3:32:55 P. M. inventario.Crear_Decimal <init>
 INFORMACIÓN: CREAR / CONFIGURAR DECIMALES
 feb. 19, 2026 3:32:55 P. M. BaseDatos.ConexionVerSecciones consulta
 INFORMACIÓN: CONSULTA DE EMPRSAS
+feb. 21, 2026 10:26:29 A. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+feb. 21, 2026 10:26:29 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-21_10-26-29.sql
+feb. 21, 2026 10:26:30 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-21_10-26-29.sql
+feb. 21, 2026 10:26:31 A. M. inventario.Ver_Secciones <init>
+INFORMACIÓN: VER SECCIONES
+feb. 21, 2026 10:26:31 A. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE EMPRSAS
+feb. 21, 2026 10:26:35 A. M. BaseDatos.ConexionActualizarSeccion actualizar
+INFORMACIÓN: ACTUALIZAR SECCION
+feb. 21, 2026 10:26:36 A. M. inventario.Ver_Secciones getEstado
+INFORMACIÓN: estado: 1
+feb. 21, 2026 10:30:19 A. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+feb. 21, 2026 10:30:19 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-21_10-30-19.sql
+feb. 21, 2026 10:30:19 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-21_10-30-19.sql
+feb. 21, 2026 10:32:35 A. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+feb. 21, 2026 10:32:35 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-21_10-32-35.sql
+feb. 21, 2026 10:32:36 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-21_10-32-35.sql
+feb. 21, 2026 10:37:35 A. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+feb. 21, 2026 10:37:35 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-21_10-37-35.sql
+feb. 21, 2026 10:37:35 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-21_10-37-35.sql
+feb. 21, 2026 10:38:34 A. M. inventario.Ver_Secciones <init>
+INFORMACIÓN: VER SECCIONES
+feb. 21, 2026 10:38:34 A. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE EMPRSAS
+feb. 21, 2026 10:38:38 A. M. BaseDatos.ConexionActualizarSeccion actualizar
+INFORMACIÓN: ACTUALIZAR SECCION
+feb. 21, 2026 10:38:39 A. M. inventario.Ver_Secciones getEstado
+INFORMACIÓN: estado: 1
+feb. 21, 2026 10:38:47 A. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+feb. 21, 2026 10:38:47 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-21_10-38-47.sql
+feb. 21, 2026 10:38:47 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-21_10-38-47.sql
+feb. 21, 2026 10:38:47 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-02-19_09-57-18.sql
+feb. 21, 2026 10:38:48 A. M. inventario.Ver_Secciones <init>
+INFORMACIÓN: VER SECCIONES
+feb. 21, 2026 10:38:48 A. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE EMPRSAS
+feb. 21, 2026 10:38:51 A. M. BaseDatos.ConexionActualizarSeccion actualizar
+INFORMACIÓN: ACTUALIZAR SECCION
+feb. 21, 2026 10:38:52 A. M. inventario.Ver_Secciones getEstado
+INFORMACIÓN: estado: 1
+feb. 21, 2026 11:19:12 A. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+feb. 21, 2026 11:19:12 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-21_11-19-12.sql
+feb. 21, 2026 11:19:13 A. M. BaseDatos.ConexionEmpresas consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+feb. 21, 2026 11:19:13 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-21_11-19-12.sql
+feb. 21, 2026 11:19:13 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-02-19_10-10-40.sql
+feb. 21, 2026 11:19:14 A. M. inventario.Ver_Secciones <init>
+INFORMACIÓN: VER SECCIONES
+feb. 21, 2026 11:19:14 A. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE EMPRSAS
+feb. 21, 2026 11:19:14 A. M. BaseDatos.ConexionEmpresas consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+feb. 21, 2026 11:19:18 A. M. BaseDatos.ConexionActualizarSeccion actualizar
+INFORMACIÓN: ACTUALIZAR SECCION
+feb. 21, 2026 11:19:19 A. M. inventario.Ver_Secciones getEstado
+INFORMACIÓN: estado: 1
+feb. 21, 2026 11:19:19 A. M. BaseDatos.ConexionEmpresas consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+feb. 21, 2026 11:19:21 A. M. BaseDatos.ConexionEmpresas consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+feb. 21, 2026 11:19:21 A. M. BaseDatos.ConexionEmpresas consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+feb. 21, 2026 11:19:26 A. M. inventario.Asignar_seccion_art <init>
+INFORMACIÓN: ASIGNAR SECCION A ARTICULO
+feb. 21, 2026 11:19:26 A. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE EMPRSAS
+feb. 21, 2026 11:19:26 A. M. BaseDatos.ConexionEmpresas consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+feb. 21, 2026 11:19:43 A. M. inventario.Ver_Secciones <init>
+INFORMACIÓN: VER SECCIONES
+feb. 21, 2026 11:19:43 A. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE EMPRSAS
+feb. 21, 2026 11:19:43 A. M. BaseDatos.ConexionEmpresas consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+feb. 21, 2026 11:19:46 A. M. BaseDatos.ConexionActualizarSeccion actualizar
+INFORMACIÓN: ACTUALIZAR SECCION
+feb. 21, 2026 11:19:47 A. M. inventario.Ver_Secciones getEstado
+INFORMACIÓN: estado: 1
+feb. 21, 2026 11:19:47 A. M. BaseDatos.ConexionEmpresas consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+feb. 21, 2026 11:19:48 A. M. BaseDatos.ConexionEmpresas consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+feb. 21, 2026 11:19:48 A. M. BaseDatos.ConexionEmpresas consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+feb. 21, 2026 6:32:47 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+GRAVE: Found non-empty schema(s) "public" but no schema history table. Use baseline() or set baselineOnMigrate to true to initialize the schema history table.
+feb. 21, 2026 6:32:55 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+feb. 21, 2026 6:32:55 P. M. BaseDatos.ConexionEmpresas consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+feb. 21, 2026 6:32:55 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-21_18-32-55.sql
+feb. 21, 2026 6:32:55 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-21_18-32-55.sql
+feb. 21, 2026 6:32:55 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-02-19_10-11-37.sql
+feb. 21, 2026 6:35:33 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+feb. 21, 2026 6:35:33 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+feb. 21, 2026 6:35:33 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-21_18-35-33.sql
+feb. 21, 2026 6:35:34 P. M. BaseDatos.ConexionEmpresas consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+feb. 21, 2026 6:35:34 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-21_18-35-33.sql
+feb. 21, 2026 6:35:34 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-02-19_11-22-56.sql

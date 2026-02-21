@@ -420,6 +420,26 @@ CREATE TABLE public.firmas (
 ALTER TABLE public.firmas OWNER TO postgres;
 
 --
+-- Name: flyway_schema_history; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.flyway_schema_history (
+    installed_rank integer NOT NULL,
+    version character varying(50),
+    description character varying(200) NOT NULL,
+    type character varying(20) NOT NULL,
+    script character varying(1000) NOT NULL,
+    checksum integer,
+    installed_by character varying(100) NOT NULL,
+    installed_on timestamp without time zone DEFAULT now() NOT NULL,
+    execution_time integer NOT NULL,
+    success boolean NOT NULL
+);
+
+
+ALTER TABLE public.flyway_schema_history OWNER TO postgres;
+
+--
 -- Name: grupos; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1291,6 +1311,7 @@ COPY public.datosreportes (id, seccion, mesinicio, mesfin, anio, concepto) FROM 
 
 COPY public.decimales (cod_seccion, campo, total) FROM stdin;
 2	6	2
+3	4	6
 \.
 
 
@@ -1378,6 +1399,7 @@ COPY public.doc_salidas (id, fecha_documento, servicio, num_articulos, concepto_
 
 COPY public.empresas (cod_empresas, descripcion, firma1, firma2, firma3, firma4, seleccionado) FROM stdin;
 1	inicial	\N	\N	\N	\N	0
+3	HOSPITAL2026	\N	\N	\N	\N	0
 2	HOSPITAL2024	\N	\N	\N	\N	1
 \.
 
@@ -1557,6 +1579,15 @@ COPY public.firmas (cedula, nombre, apellido, seccion) FROM stdin;
 9132386	JOSE	CUELLAR	2
 3062380	JOSE	CUELLAR	2
 123	NO ASIGNADO	NO ASIGNADO	2
+\.
+
+
+--
+-- Data for Name: flyway_schema_history; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.flyway_schema_history (installed_rank, version, description, type, script, checksum, installed_by, installed_on, execution_time, success) FROM stdin;
+1	1	<< Flyway Baseline >>	BASELINE	<< Flyway Baseline >>	\N	postgres	2026-02-21 18:35:33.439966	0	t
 \.
 
 
@@ -2051,7 +2082,7 @@ SELECT pg_catalog.setval('public.doc_salidas_id_seq', 5, true);
 -- Name: empresas_cod_empresas_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.empresas_cod_empresas_seq', 2, true);
+SELECT pg_catalog.setval('public.empresas_cod_empresas_seq', 3, true);
 
 
 --
@@ -2238,6 +2269,14 @@ ALTER TABLE ONLY public.firmas
 
 
 --
+-- Name: flyway_schema_history flyway_schema_history_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.flyway_schema_history
+    ADD CONSTRAINT flyway_schema_history_pk PRIMARY KEY (installed_rank);
+
+
+--
 -- Name: grupos grupos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2315,6 +2354,13 @@ ALTER TABLE ONLY public.temporal_doc_salida
 
 ALTER TABLE ONLY public.unidades
     ADD CONSTRAINT unidades_pkey PRIMARY KEY (cod_unidad);
+
+
+--
+-- Name: flyway_schema_history_s_idx; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX flyway_schema_history_s_idx ON public.flyway_schema_history USING btree (success);
 
 
 --

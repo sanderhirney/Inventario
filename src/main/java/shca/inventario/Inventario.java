@@ -21,6 +21,8 @@ private final static Logger Log = Logger.getLogger("Inventario");
 public static void main(String[] args) {
     int estadoDeInicio=0;
     LoggerInfo.setup();
+    ConfiguracionBaseDatos configuracion=new ConfiguracionBaseDatos();
+    configuracion.migracion();
              try{
             /******eSTA SECCION ES PARA CAPTURAR LOS LOG DEL JASPER****/
         // 2. Configura las propiedades de Jasper 

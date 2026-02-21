@@ -2,15 +2,12 @@
 package inventario;
 
 import BaseDatos.ConexionActualizarSeccion;
-import BaseDatos.ConexionEmpresas;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerSecciones;
 import Modelos.EmpresasDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -194,23 +191,28 @@ Logger log=LoggerInfo.getLogger();
          if (opcion==0)
          {
             
-             ConexionActualizarSeccion modificar=new ConexionActualizarSeccion();
-             modificar.setCodigo(codigo_seleccion);
-             modificar.actualizar();
-             
-             if(modificar.resultado()>0)
-             {
-                 JOptionPane.showMessageDialog(null, "Seccion Actualizada", "Informacion" , JOptionPane.INFORMATION_MESSAGE);
-               estado=1;//variable que indica si ya se ejecuto la sentencia
-             }
-             if(modificar.resultado()==0)
-             {
-                 JOptionPane.showMessageDialog(null, "No se pudo actualizar la seccion. Revise", "Error" , JOptionPane.ERROR_MESSAGE);
-            estado=0;//variable que indica si ya se ejcuto la sentencia
-             }
-             
-             this.dispose();
-         }//if
+            try {
+                ConexionActualizarSeccion modificar=new ConexionActualizarSeccion();
+                modificar.setCodigo(codigo_seleccion);
+                modificar.actualizarSeccion();
+                
+                if(modificar.resultado()>0)
+                {
+                    JOptionPane.showMessageDialog(null, "Seccion Actualizada", "Informacion" , JOptionPane.INFORMATION_MESSAGE);
+                    estado=1;//variable que indica si ya se ejecuto la sentencia
+                }
+                if(modificar.resultado()==0)
+                {
+                    JOptionPane.showMessageDialog(null, "No se pudo actualizar la seccion. Revise", "Error" , JOptionPane.ERROR_MESSAGE);
+                    estado=0;//variable que indica si ya se ejcuto la sentencia
+                }
+                
+                this.dispose();
+            } //if
+            catch (SQLException ex) {
+                log.severe(ex.getMessage());
+            }
+         }
         
         dispose();
         

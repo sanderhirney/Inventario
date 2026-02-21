@@ -1,21 +1,23 @@
 
 package BaseDatos;
 
+import inventario.LoggerInfo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 public class ConexionEmpresas {
     Connection conex;
     PreparedStatement consulta;
     Conexion conectar= new Conexion();
     ResultSet ejecutar;
-    
+    Logger log=LoggerInfo.getLogger();
     int codigo_empresa;
     String nombre_empresa;
     public void consulta()
-    {
+    { log.info("CONEXION LEER SECCIONES");
           try
     {
         conectar.Conectar();
@@ -32,6 +34,7 @@ public class ConexionEmpresas {
     }//consulta
            catch(SQLException ex)
     {
+        log.severe(ex.getMessage());
         JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de la seccion en la cual trabajar.\n Ventana Conexion Seccion \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
     }
     }//consulta

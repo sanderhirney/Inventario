@@ -639,8 +639,7 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
                            ConexionActualizarTempEntrada temp=new ConexionActualizarTempEntrada();
                            temp.setDocumento(documento_rec);
                            temp.setSeccion(codigo_seccion);
-                           temp.actualizarTempDoc();
-                           temp.actualizarArtDoc();
+                           temp.actualizarTemporalEntrada();
                            if(temp.resultado()>=0)
                                {
                                    //limpio los campos

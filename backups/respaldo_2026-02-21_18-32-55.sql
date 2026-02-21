@@ -1291,6 +1291,7 @@ COPY public.datosreportes (id, seccion, mesinicio, mesfin, anio, concepto) FROM 
 
 COPY public.decimales (cod_seccion, campo, total) FROM stdin;
 2	6	2
+3	4	6
 \.
 
 
@@ -1378,6 +1379,7 @@ COPY public.doc_salidas (id, fecha_documento, servicio, num_articulos, concepto_
 
 COPY public.empresas (cod_empresas, descripcion, firma1, firma2, firma3, firma4, seleccionado) FROM stdin;
 1	inicial	\N	\N	\N	\N	0
+3	HOSPITAL2026	\N	\N	\N	\N	0
 2	HOSPITAL2024	\N	\N	\N	\N	1
 \.
 
@@ -1932,7 +1934,7 @@ COPY public.historiales (id, fecha, cod_articulo, valor_entrada, valor_salida, s
 --
 
 COPY public.inicios (consecutivo, estado) FROM stdin;
-1	0
+1	1
 \.
 
 
@@ -2051,7 +2053,7 @@ SELECT pg_catalog.setval('public.doc_salidas_id_seq', 5, true);
 -- Name: empresas_cod_empresas_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.empresas_cod_empresas_seq', 2, true);
+SELECT pg_catalog.setval('public.empresas_cod_empresas_seq', 3, true);
 
 
 --

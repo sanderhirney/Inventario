@@ -14,7 +14,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 public class Ventana_Principal extends javax.swing.JFrame {
    
     String nombre;//nombre tomado al iniciar el programa
-    ConexionEmpresas consulta_empresas=new ConexionEmpresas();
+    
     public Dimension resolucion;//variable para leer el ancho y alto de la ventana
     ConexionControlDeInicio inicio=new ConexionControlDeInicio();
   
@@ -25,7 +25,7 @@ public class Ventana_Principal extends javax.swing.JFrame {
         initComponents();
         resolucion=super.getToolkit().getScreenSize();
         this.setSize(resolucion);
-        
+        ConexionEmpresas consulta_empresas=new ConexionEmpresas();
         consulta_empresas.consulta();
         nombre=consulta_empresas.nombre_empresa();
        if(nombre==null)
@@ -446,14 +446,15 @@ public class Ventana_Principal extends javax.swing.JFrame {
 
     private void Boton_cambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_cambiarActionPerformed
         // TODO add your handling code here:
-        Ver_Secciones seccion= new Ver_Secciones(null, true);
+         Ver_Secciones seccion= new Ver_Secciones(null, true);
          seccion.setResizable(false);
-       seccion.setLocationRelativeTo(null);
-       seccion.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-       seccion.setVisible(true);
+         seccion.setLocationRelativeTo(null);
+         seccion.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+         seccion.setVisible(true);
        
        if(seccion.getEstado()==1)
        {
+           ConexionEmpresas consulta_empresas=new ConexionEmpresas();
             consulta_empresas.consulta();
             nombre=consulta_empresas.nombre_empresa();
             Etiq_titulo.setText(nombre);

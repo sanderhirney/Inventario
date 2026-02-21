@@ -7,81 +7,63 @@
 //reiterando si y solo si; el documento  a modificar se guarda nuevamente.
 package BaseDatos;
 
+import inventario.LoggerInfo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 public class ConexionActualizarTempEntrada {
     Connection conex;
-    PreparedStatement consulta;
     Conexion conectar= new Conexion();
     ResultSet ejecutar;
     int resultado;
     int seccion;
-    int respuesta;
-   String documento;
-    public void actualizarTempDoc()
+    String documento;
+    Logger log=LoggerInfo.getLogger();
+   
+    private void actualizarTemporal() throws SQLException
     {
-        
+        log.info("ACTUALIZAR TEMPORAL DE ENTRADA / LIMPIEZA");
           try
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("delete from temporal_doc_entrada where doc_entrada=? and seccion=?");
-        consulta.setString(1, documento);
-        consulta.setInt(2, seccion);
+        conex.setAutoCommit(false);
+        try(PreparedStatement consulta=conex.prepareStatement("delete from temporal_doc_entrada where doc_entrada=? and seccion=?")){
+            consulta.setString(1, documento);
+            consulta.setInt(2, seccion);
+            consulta.executeUpdate();
         
-        respuesta=consulta.executeUpdate();
-        if(respuesta>0)
-        {
-            resultado=1;
         }
-        if(respuesta==0)
-        {
-            resultado=0;
-        }
+        try(PreparedStatement consulta=conex.prepareStatement("delete from temporal_articulo where documento=? and seccion=?")){
+                consulta.setString(1, String.valueOf(documento));
+                consulta.setInt(2, seccion);
+
+                consulta.executeUpdate();
+
+               
+            }//consulta
+         conex.commit();
+         resultado=1;
         
         
-       
-    }//consulta
+        
+        
+    
+    }
+//consulta
            catch(SQLException ex)
     {
+        log.severe(ex.getMessage());
+        conex.rollback();
         JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion del estado del documento en la base temporal.\n Ventana Conexion Actualizar Documento temporal \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
     }
+          finally{
+          conectar.Cerrar();
+          }
     }//consulta
-    public void actualizarArtDoc()
-    {
-          try
-    {
-        conectar.Conectar();
-        conex= conectar.getConexion();
-        consulta= conex.prepareStatement("delete from temporal_articulo where documento=? and seccion=?");
-        consulta.setString(1, String.valueOf(documento));
-        consulta.setInt(2, seccion);
-        
-        respuesta=consulta.executeUpdate();
-        
-        if(respuesta>0)
-        {
-            resultado=1;
-        }
-        if(respuesta==0)
-        {
-            resultado=0;
-        }
-        
-        
-       
-    }//consulta
-           catch(SQLException ex)
-    {
-        JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion temporal de articulos.\n Ventana Conexion Actualizar Articulos temporal \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
-    }
-    }//consulta
-    
-    
-    
     public int resultado()
     {
         
@@ -96,4 +78,10 @@ public class ConexionActualizarTempEntrada {
 
     {
         seccion=recibido;
-    }}//clase
+    }
+    public void actualizarTemporalEntrada() throws SQLException{
+        actualizarTemporal();
+    }
+
+}//clase
+

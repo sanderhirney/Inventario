@@ -81,5 +81,19 @@
             <artifactId>AbsoluteLayout</artifactId>
             <version>RELEASE260</version>
         </dependency>
+        <!-- Source: https://mvnrepository.com/artifact/org.flywaydb/flyway-core -->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>12.0.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- Source: https://mvnrepository.com/artifact/org.flywaydb/flyway-database-postgresql -->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
+            <version>12.0.1</version>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
 </project>
