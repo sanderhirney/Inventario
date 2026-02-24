@@ -25,7 +25,7 @@ public class ReporteF157 {
              
         try {
             
-            InputStream report = ReporteF157.class.getResourceAsStream("/f15-7.jasper");
+            InputStream report = ReporteF157.class.getResourceAsStream("reports/f15-7.jasper");
             
             JasperReport reporte = (JasperReport) JRLoader.loadObject(report);
             JasperPrint jprint = JasperFillManager.fillReport(reporte, null, DatosdeGenerarF157.getDataSource());

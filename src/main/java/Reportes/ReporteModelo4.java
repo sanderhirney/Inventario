@@ -24,7 +24,7 @@ public class ReporteModelo4 {
       
        
         try {
-            InputStream report = ReporteEntrada.class.getResourceAsStream("/Modelo4Grupos.jasper");
+            InputStream report = ReporteEntrada.class.getResourceAsStream("reports//Modelo4Grupos.jasper");
             JasperReport reporte = (JasperReport) JRLoader.loadObject(report);
             JasperPrint jprint = JasperFillManager.fillReport(reporte, null, DatosdeGenerarModelo4.getDataSource());
             JasperViewer view = new JasperViewer(jprint, false);

@@ -184,3 +184,34 @@ feb. 21, 2026 6:35:34 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
 INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-21_18-35-33.sql
 feb. 21, 2026 6:35:34 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
 INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-02-19_11-22-56.sql
+feb. 24, 2026 10:18:44 A. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+feb. 24, 2026 10:18:44 A. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+feb. 24, 2026 10:18:44 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-24_10-18-44.sql
+feb. 24, 2026 10:18:44 A. M. BaseDatos.ConexionEmpresas consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+feb. 24, 2026 10:18:44 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-24_10-18-44.sql
+feb. 24, 2026 10:18:44 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-02-19_11-25-07.sql
+feb. 24, 2026 10:30:10 A. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+feb. 24, 2026 10:30:10 A. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+feb. 24, 2026 10:30:10 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-24_10-30-10.sql
+feb. 24, 2026 10:30:10 A. M. BaseDatos.ConexionEmpresas consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+feb. 24, 2026 10:30:10 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-24_10-30-10.sql
+feb. 24, 2026 10:30:10 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-02-19_15-32-28.sql
+feb. 24, 2026 11:05:10 A. M. shca.inventario.ConfiguracionBaseDatos migracion
+GRAVE: Validate failed: Migrations have failed validation
+Migration checksum mismatch for migration version 2
+-> Applied to database : 1192497805
+-> Resolved locally    : -1828629233
+Either revert the changes to the migration, or run repair to update the schema history.
+Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE

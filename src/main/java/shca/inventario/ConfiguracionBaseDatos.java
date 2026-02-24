@@ -24,9 +24,10 @@ public class ConfiguracionBaseDatos {
     Flyway flyway=Flyway.configure()
             //configuracion
             .dataSource(dataSource, usuario, password)
+            .schemas("hsdm")
             .baselineOnMigrate(true)//Esto le dice a Flyway: "Si encuentras tablas, crea tu bitácora y marca este punto como el inicio (baseline)".
+            .locations("classpath:db/migration")
             .load();
-    
                 //carga
                 flyway.migrate();
                 
