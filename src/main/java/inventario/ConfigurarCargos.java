@@ -6,52 +6,43 @@
 package inventario;
 
 import BaseDatos.ConexionCargos;
-import BaseDatos.ConexionConfigurarAlmacenes;
 import BaseDatos.ConexionConfigurarCargos;
 import BaseDatos.ConexionEmpresas;
 import BaseDatos.ConexionVerAlmacenes;
-import BaseDatos.ConexionVerServicios;
+import Modelos.CargosDTO;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+
 
 
 public class ConfigurarCargos extends javax.swing.JDialog {
-
- List<Integer> codigoCargos= new ArrayList<>();
- List<String> descripciones= new ArrayList<>();
  String almacenActivoMostrar;
- Iterator lista1;
  int codigoSeccionActual=0;
  int codigoCargoActualizar=0;
- 
+ List<CargosDTO> listaCargos=new ArrayList<>();
+ Logger log=LoggerInfo.getLogger();
     public ConfigurarCargos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
          ConexionCargos cargos= new ConexionCargos();
-        cargos.consulta();
-        codigoCargos=cargos.codigo();
-        descripciones=cargos.descripcion();
-        
+        try
+        {
+        listaCargos=cargos.consulta();
       
          ConexionEmpresas seccion=new ConexionEmpresas();
          seccion.consulta();
          codigoSeccionActual=seccion.codigo_empresa();
        
-        try
-        {
-            
-            lista1=descripciones.iterator();
-
-            while(lista1.hasNext())
-            {
-              comboCargos.addItem((String) lista1.next());
-            }//while
+       
+            for(CargosDTO cargo: listaCargos){
+                comboCargos.addItem(cargo.descripcion());
+            }
         }//try
         catch(Exception e)
         {
+            log.severe(e.getMessage());
             JOptionPane.showMessageDialog(null, "No se han podido obtener datos de los cargos debido a: \n "+e, "Error", JOptionPane.ERROR_MESSAGE);
         }
         

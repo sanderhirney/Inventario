@@ -9,9 +9,11 @@ import BaseDatos.ConexionCargos;
 import BaseDatos.ConexionCrearCargos;
 import BaseDatos.ConexionEmpresas;
 import BaseDatos.ConexionVerAlmacenes;
+import Modelos.CargosDTO;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,24 +21,28 @@ import javax.swing.JOptionPane;
  * @author Usuario
  */
 public class Crear_Cargo extends javax.swing.JDialog {
-
+   Logger log=LoggerInfo.getLogger();
    List<String> descripciones=new ArrayList<>();
-   Iterator lista1;
+   List<CargosDTO> listaCargos=new ArrayList<>();
    String almacenActivoMostrar;
    int codigo_seccion;
     public Crear_Cargo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();
-        ConexionEmpresas secciones=new ConexionEmpresas();
-        secciones.consulta();
-        codigo_seccion=secciones.codigo_empresa();
-        ConexionCargos cargos= new ConexionCargos();
-        cargos.consulta();
-        descripciones=cargos.descripcion();
-        ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-        almacenPrincipal.consultaAlmacenPrincipal();
-        almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-        etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+       try {
+           initComponents();
+           ConexionEmpresas secciones=new ConexionEmpresas();
+           secciones.consulta();
+           codigo_seccion=secciones.codigo_empresa();
+           ConexionCargos cargos= new ConexionCargos();
+           listaCargos=cargos.consulta();
+           ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
+           almacenPrincipal.consultaAlmacenPrincipal();
+           almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
+           etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+       } catch (SQLException ex) {
+           
+           log.severe(ex.getMessage());
+       }
     }
 
     /**
@@ -181,9 +187,10 @@ public class Crear_Cargo extends javax.swing.JDialog {
         char caracter = evt.getKeyChar();
         
         String temporal;
-        for (int i=0; i<descripciones.size(); i++)
-        {
-             temporal=descripciones.get(i);
+        for (int i=0; i<listaCargos.size(); i++)
+        {    
+             CargosDTO lista=(CargosDTO)listaCargos.get(i);
+             temporal=lista.descripcion();
              System.out.println(temporal);
              
                  if( ((temporal.charAt(i)))==(caracter) )

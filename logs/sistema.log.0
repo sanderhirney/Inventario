@@ -215,3 +215,40 @@ Migration checksum mismatch for migration version 2
 -> Resolved locally    : -1828629233
 Either revert the changes to the migration, or run repair to update the schema history.
 Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
+feb. 24, 2026 6:36:36 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+GRAVE: Failed to execute script V4__Campos_Unicos_Tablas.sql
+-----------------------------------------------------
+SQL State  : 42601
+Error Code : 0
+Message    : ERROR: error de sintaxis en o cerca de «;»
+  Position: 77
+Location   : db/migration/V4__Campos_Unicos_Tablas.sql (D:\USER\Documents\GitHub\Inventario\target\classes\db\migration\V4__Campos_Unicos_Tablas.sql)
+Line       : 17
+Statement  : Run Flyway with -X option to see the actual statement causing the problem
+
+feb. 24, 2026 6:36:59 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+feb. 24, 2026 6:36:59 P. M. BaseDatos.ConexionEmpresas consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+feb. 24, 2026 6:36:59 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-24_18-36-59.sql
+feb. 24, 2026 6:37:00 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-24_18-36-59.sql
+feb. 24, 2026 6:37:00 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-02-21_10-32-35.sql
+feb. 24, 2026 6:37:38 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+feb. 24, 2026 6:37:38 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+feb. 24, 2026 6:37:38 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-24_18-37-38.sql
+feb. 24, 2026 6:37:38 P. M. BaseDatos.ConexionEmpresas consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+feb. 24, 2026 6:37:38 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-24_18-37-38.sql
+feb. 24, 2026 6:37:38 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-02-21_10-37-35.sql
+feb. 24, 2026 6:37:44 P. M. BaseDatos.ConexionCargos consultar
+INFORMACIÓN: CONSULTAR CARGOS
+feb. 24, 2026 6:37:44 P. M. BaseDatos.ConexionEmpresas consulta
+INFORMACIÓN: CONEXION LEER SECCIONES

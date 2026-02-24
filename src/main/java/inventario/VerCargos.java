@@ -1,49 +1,43 @@
 
 package inventario;
 
-import BaseDatos.ConexionActualizarSeccion;
 import BaseDatos.ConexionCargos;
-import BaseDatos.ConexionEmpresas;
 import BaseDatos.ConexionVerAlmacenes;
+import Modelos.CargosDTO;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 public class VerCargos extends javax.swing.JDialog {
-List<String> descripciones=new ArrayList<>();
-List<Integer> codigoCargos=new ArrayList<>();
 DefaultTableModel modelo;
-Iterator lista1;
-Iterator lista2;
 String nombre_seleccion;
 int estado=0;
 int codigo_seleccion;
 TableRowSorter filtro;
 String almacenActivoMostrar;
+Logger log=LoggerInfo.getLogger();
+List<CargosDTO> listaCargos=new ArrayList<>();
     public VerCargos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-       
-         ConexionCargos cargos= new ConexionCargos();
-        cargos.consulta();
-        codigoCargos=cargos.codigo();
-        descripciones=cargos.descripcion();
+           try{
+        ConexionCargos cargos= new ConexionCargos();
+        listaCargos=cargos.consulta();
         modelo=(DefaultTableModel)TablaCargos.getModel();
         filtro=new TableRowSorter(TablaCargos.getModel());
-        try{
-        lista1=codigoCargos.iterator();
-        lista2=descripciones.iterator();
-        while(lista1.hasNext())
+    
+        for(CargosDTO cargo:listaCargos)
         {
-            modelo.addRow(new Object[]{lista1.next(), lista2.next()});
+            modelo.addRow(new Object[]{cargo.codigo(), cargo.descripcion()});
         }
         }
         catch(Exception e)
         {
+            log.severe(e.getMessage());
             JOptionPane.showMessageDialog(null, "Error: "+e, "Error Grave", JOptionPane.ERROR_MESSAGE);
         }
         ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
