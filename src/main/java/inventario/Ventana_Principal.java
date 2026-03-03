@@ -1,7 +1,7 @@
 package inventario;
 
 import BaseDatos.ConexionControlDeInicio;
-import BaseDatos.ConexionEmpresas;
+import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionReporteModelo4;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -25,9 +25,9 @@ public class Ventana_Principal extends javax.swing.JFrame {
         initComponents();
         resolucion=super.getToolkit().getScreenSize();
         this.setSize(resolucion);
-        ConexionEmpresas consulta_empresas=new ConexionEmpresas();
-        consulta_empresas.consulta();
-        nombre=consulta_empresas.nombre_empresa();
+        ConexionSecciones consulta_secciones=new ConexionSecciones();
+        consulta_secciones.consulta();
+        nombre=consulta_secciones.nombre_seccion();
        if(nombre==null)
         {
             JOptionPane.showMessageDialog(null, "No se pudo Obtener la informacion de la Seccion en cual trabajar.\n Ventana Principal \n Contacte al Desarrollador \n " ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
@@ -454,9 +454,9 @@ public class Ventana_Principal extends javax.swing.JFrame {
        
        if(seccion.getEstado()==1)
        {
-           ConexionEmpresas consulta_empresas=new ConexionEmpresas();
+           ConexionSecciones consulta_empresas=new ConexionSecciones();
             consulta_empresas.consulta();
-            nombre=consulta_empresas.nombre_empresa();
+            nombre=consulta_empresas.nombre_seccion();
             Etiq_titulo.setText(nombre);
        }
         

@@ -9,9 +9,15 @@ CREATE TABLE grupos (
 
 CREATE TABLE subgrupos (
     grupo_codigo VARCHAR(2) REFERENCES grupos(codigo),
-    codigo VARCHAR(4) NOT NULL, -- Ej: '01'
+    codigo VARCHAR(20) NOT NULL, -- Ej: '01'
     descripcion VARCHAR(200) NOT NULL,
     PRIMARY KEY (grupo_codigo, codigo)
+);
+
+CREATE TABLE conceptos (
+    codigo INTEGER PRIMARY KEY,
+    descripcion VARCHAR(100) NOT NULL,
+    tipo VARCHAR(1) NOT NULL -- 'E' para Entrada, 'S' para Salida
 );
 
 -- =============================================================================
@@ -37,7 +43,7 @@ CREATE TABLE articulos (
     nombre VARCHAR(250) NOT NULL,
     unidad_id INTEGER REFERENCES unidades(id),
     grupo_cod VARCHAR(2),
-    subgrupo_cod VARCHAR(2),
+    subgrupo_cod VARCHAR(20), -- Ajustado a 20 para coincidir con subgrupos.codigo
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (grupo_cod, subgrupo_cod) REFERENCES subgrupos(grupo_codigo, codigo)
 );
@@ -50,7 +56,8 @@ CREATE TABLE hospitales (
     id SERIAL PRIMARY KEY,
     rif VARCHAR(20) UNIQUE NOT NULL,
     nombre VARCHAR(250) NOT NULL,
-    direccion TEXT
+    direccion TEXT,
+    estado BOOLEAN DEFAULT TRUE -- Recuperado para que V5 no falle
 );
 
 CREATE TABLE secciones (
@@ -62,13 +69,14 @@ CREATE TABLE secciones (
 );
 
 -- =============================================================================
--- 4. MOVIMIENTOS Y DOCUMENTOS (SIN TABLAS TEMPORALES)
+-- 4. MOVIMIENTOS Y DOCUMENTOS
 -- =============================================================================
 
 CREATE TABLE documentos (
     id SERIAL PRIMARY KEY,
     hospital_id INTEGER REFERENCES hospitales(id),
     seccion_id INTEGER REFERENCES secciones(id),
+    concepto_id INTEGER REFERENCES conceptos(codigo),
     tipo VARCHAR(10) NOT NULL, -- 'ENTRADA' o 'SALIDA'
     numero_provisional VARCHAR(50), -- Para el modo "Borrador"
     correlativo_legal INTEGER,    -- Reinicia cada mes (Pub. 15)
@@ -82,7 +90,7 @@ CREATE TABLE documentos (
 );
 
 -- =============================================================================
--- 5. KARDEX Y SALDOS UNIFICADOS (EL CORAZÓN DEL COSTO PROMEDIO)
+-- 5. KARDEX Y SALDOS UNIFICADOS
 -- =============================================================================
 
 CREATE TABLE saldos (
@@ -90,7 +98,7 @@ CREATE TABLE saldos (
     seccion_id INTEGER REFERENCES secciones(id),
     hospital_id INTEGER REFERENCES hospitales(id),
     stock_actual NUMERIC(20,8) DEFAULT 0,
-    costo_promedio NUMERIC(20,10) DEFAULT 0, -- Máxima precisión para devaluación
+    costo_promedio NUMERIC(20,10) DEFAULT 0,
     PRIMARY KEY (articulo_id, seccion_id)
 );
 
@@ -101,10 +109,47 @@ CREATE TABLE kardex (
     seccion_id INTEGER REFERENCES secciones(id),
     cantidad NUMERIC(20,8) NOT NULL,
     costo_unitario NUMERIC(20,10) NOT NULL,
-    -- Saldo resultante después de este movimiento (para reportes históricos)
     saldo_cantidad_post NUMERIC(20,8),
     saldo_costo_prom_post NUMERIC(20,10)
 );
 
--- Comentario de auditoría para Flyway
 COMMENT ON TABLE saldos IS 'Tabla unificada de existencias y costos por sección';
+
+-- =============================================================================
+-- 6. TABLAS OPERATIVAS ADICIONALES
+-- =============================================================================
+
+CREATE TABLE cargos (
+    id SERIAL PRIMARY KEY,
+    hospital_id INTEGER REFERENCES hospitales(id),
+    descripcion VARCHAR(100) NOT NULL, -- Director, Administrador...
+    cedula_firmante VARCHAR(20) DEFAULT 'NO ASIGNADO',
+    seccion_id INTEGER REFERENCES secciones(id)
+);
+
+CREATE TABLE servicios (
+    id SERIAL PRIMARY KEY,
+    hospital_id INTEGER REFERENCES hospitales(id),
+    nombre_servicio VARCHAR(200) NOT NULL,
+    cedula_firmante VARCHAR(20) DEFAULT 'NO ASIGNADO',
+    seccion_id INTEGER REFERENCES secciones(id)
+);
+
+CREATE TABLE almacenes (
+    codigo_almacen VARCHAR(20) PRIMARY KEY, -- El código único del Ministerio
+    hospital_id INTEGER REFERENCES hospitales(id),
+    denominacion VARCHAR(100) NOT NULL,
+    ubicacion VARCHAR(100),
+    seccion_id INTEGER REFERENCES secciones(id),
+    es_principal BOOLEAN DEFAULT FALSE,
+    alias VARCHAR(10)
+);
+
+CREATE TABLE inicios (
+    id SERIAL PRIMARY KEY,
+    estado INTEGER NOT NULL DEFAULT 0, -- 0: Cerrado, 1: Abierto
+    fecha_ultimo_acceso TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Registro inicial de control
+INSERT INTO inicios (estado) VALUES (0);

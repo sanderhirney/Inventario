@@ -22,3 +22,14 @@ feb. 24, 2026 11:24:05 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
 INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-02-24_11-24-04.sql
 feb. 24, 2026 11:24:05 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
 INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-02-21_10-30-19.sql
+mar. 03, 2026 6:29:53 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+GRAVE: Failed to execute script V5__Carga_Configuracion_Inicial.sql
+------------------------------------------------------------
+SQL State  : 42703
+Error Code : 0
+Message    : ERROR: no existe la columna «estado» en la relación «hospitales»
+  Position: 180
+Location   : db/migration/V5__Carga_Configuracion_Inicial.sql (D:\USER\Documents\GitHub\Inventario\target\classes\db\migration\V5__Carga_Configuracion_Inicial.sql)
+Line       : 4
+Statement  : Run Flyway with -X option to see the actual statement causing the problem
+

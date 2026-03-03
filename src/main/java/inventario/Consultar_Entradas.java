@@ -3,7 +3,7 @@ package inventario;
 
 import BaseDatos.ConexionBuscarArtHistorial;
 import BaseDatos.ConexionConsultarDecimales;
-import BaseDatos.ConexionEmpresas;
+import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionGuardarTemporal;
 import BaseDatos.ConexionModifEntradas;
 import BaseDatos.ConexionValidadorErroresRegistro;
@@ -58,10 +58,10 @@ JFrame ventanaPrincipal;
          //valido si hay errores con las entradas
         ConexionValidadorErroresRegistro errores=new ConexionValidadorErroresRegistro();
         errores.consulta(1);//la consulta de ver las entradas
-         ConexionEmpresas seccion=new ConexionEmpresas();
+         ConexionSecciones seccion=new ConexionSecciones();
          seccion.consulta();
-         codigo_seccion=seccion.codigo_empresa();
-         nombre_seccion=seccion.nombre_empresa();
+         codigo_seccion=seccion.codigo_seccion();
+         nombre_seccion=seccion.nombre_seccion();
          //consulto las entradas
          ConexionVerEntradas entradas=new ConexionVerEntradas();
          entradas.setSeccion(codigo_seccion);

@@ -1,7 +1,7 @@
 
 package inventario;
 
-import BaseDatos.ConexionEmpresas;
+import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionReporteKardex;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerArticulos;
@@ -43,10 +43,10 @@ String almacenActivoMostrar;
         initComponents();
         
         Tabla_resultados.setVisible(false);
-        ConexionEmpresas secciones=new ConexionEmpresas();
+        ConexionSecciones secciones=new ConexionSecciones();
        
         secciones.consulta();
-        codigo_seccion=secciones.codigo_empresa();
+        codigo_seccion=secciones.codigo_seccion();
         ConexionVerArticulos articulos=new ConexionVerArticulos();
         
         articulos.setSeccion(codigo_seccion);

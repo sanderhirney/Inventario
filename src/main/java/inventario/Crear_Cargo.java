@@ -7,7 +7,7 @@ package inventario;
 
 import BaseDatos.ConexionCargos;
 import BaseDatos.ConexionCrearCargos;
-import BaseDatos.ConexionEmpresas;
+import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
 import Modelos.CargosDTO;
 import java.sql.SQLException;
@@ -30,9 +30,9 @@ public class Crear_Cargo extends javax.swing.JDialog {
         super(parent, modal);
        try {
            initComponents();
-           ConexionEmpresas secciones=new ConexionEmpresas();
+           ConexionSecciones secciones=new ConexionSecciones();
            secciones.consulta();
-           codigo_seccion=secciones.codigo_empresa();
+           codigo_seccion=secciones.codigo_seccion();
            ConexionCargos cargos= new ConexionCargos();
            listaCargos=cargos.consulta();
            ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();

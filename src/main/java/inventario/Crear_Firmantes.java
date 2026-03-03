@@ -2,7 +2,7 @@
 package inventario;
 
 import BaseDatos.ConexionCrearFirmantes;
-import BaseDatos.ConexionEmpresas;
+import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerificarFirmantes;
 import java.util.ArrayList;
@@ -21,9 +21,9 @@ public class Crear_Firmantes extends javax.swing.JDialog {
     public Crear_Firmantes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        ConexionEmpresas seccion=new ConexionEmpresas();
+        ConexionSecciones seccion=new ConexionSecciones();
         seccion.consulta();
-        seccion_firmas=seccion.codigo_empresa();
+        seccion_firmas=seccion.codigo_seccion();
        
         
        

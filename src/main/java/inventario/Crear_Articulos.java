@@ -5,7 +5,7 @@ import BaseDatos.ConexionComprobarGrupos;
 import BaseDatos.ConexionConsultarUnidades;
 import BaseDatos.ConexionCrearArticulo;
 import BaseDatos.ConexionDeshacerArt;
-import BaseDatos.ConexionEmpresas;
+import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
 import java.util.ArrayList;
 import java.util.Date;
@@ -55,9 +55,9 @@ public class Crear_Articulos extends javax.swing.JDialog {
         {
             Combo_Grupo.addItem(lista3.next()+"-"+lista4.next()+" "+lista2.next());
         }
-        ConexionEmpresas secciones=new ConexionEmpresas();
+        ConexionSecciones secciones=new ConexionSecciones();
         secciones.consulta();
-        codigo_seccion=secciones.codigo_empresa();
+        codigo_seccion=secciones.codigo_seccion();
         ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
          almacenPrincipal.consultaAlmacenPrincipal();
          almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();

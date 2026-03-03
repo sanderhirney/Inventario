@@ -4,7 +4,7 @@ package inventario;
 import BaseDatos.ConexionActualizarTempEntrada;
 import BaseDatos.ConexionConsultarDecimales;
 import BaseDatos.ConexionCrearEntrada;
-import BaseDatos.ConexionEmpresas;
+import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionOperacionesEntrada;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerConceptos;
@@ -43,7 +43,7 @@ List<Double> existencia_promedio=new ArrayList<>();
 DefaultTableModel modelo;
 ConexionVerConceptos conceptos= new ConexionVerConceptos();
 ConexionVerProveedores proveedor= new ConexionVerProveedores();
-ConexionEmpresas secciones=new ConexionEmpresas();
+ConexionSecciones secciones=new ConexionSecciones();
 ConexionConsultarDecimales decimales=new ConexionConsultarDecimales();
 ConexionVerAlmacenes almacenes=new ConexionVerAlmacenes();
 Iterator lista1;
@@ -89,8 +89,8 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
         modelo= (DefaultTableModel)Tabla_datos.getModel();//para poder manipular la tabla
         Etiq_Fecha_Oper.setText(sql.toString());
          secciones.consulta();
-        codigo_seccion=secciones.codigo_empresa();
-        nombre_seccion=secciones.nombre_empresa();
+        codigo_seccion=secciones.codigo_seccion();
+        nombre_seccion=secciones.nombre_seccion();
         conceptos.setTipo(1);
         conceptos.consulta();//obtengo los conceptos
         proveedor.consulta();//obtengo los proveedores

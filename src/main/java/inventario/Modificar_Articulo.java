@@ -3,7 +3,7 @@ package inventario;
 
 import BaseDatos.ConexionComprobarGrupos;
 import BaseDatos.ConexionConsultarUnidades;
-import BaseDatos.ConexionEmpresas;
+import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionModificarArticulos;
 import BaseDatos.ConexionReporteKardex;
 import BaseDatos.ConexionVerAlmacenes;
@@ -69,9 +69,9 @@ int codigoUnidadActual;
         }
         
        
-        ConexionEmpresas secciones=new ConexionEmpresas();
+        ConexionSecciones secciones=new ConexionSecciones();
         secciones.consulta();
-        codigo_seccion=secciones.codigo_empresa();
+        codigo_seccion=secciones.codigo_seccion();
         ConexionVerArticulos articulos=new ConexionVerArticulos();
         articulos.setSeccion(codigo_seccion);
         articulos.consulta();

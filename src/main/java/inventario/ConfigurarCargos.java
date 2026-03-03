@@ -7,7 +7,7 @@ package inventario;
 
 import BaseDatos.ConexionCargos;
 import BaseDatos.ConexionConfigurarCargos;
-import BaseDatos.ConexionEmpresas;
+import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
 import Modelos.CargosDTO;
 import java.util.ArrayList;
@@ -31,15 +31,15 @@ public class ConfigurarCargos extends javax.swing.JDialog {
         {
         listaCargos=cargos.consulta();
       
-         ConexionEmpresas seccion=new ConexionEmpresas();
+         ConexionSecciones seccion=new ConexionSecciones();
          seccion.consulta();
-         codigoSeccionActual=seccion.codigo_empresa();
+         codigoSeccionActual=seccion.codigo_seccion();
        
        
             for(CargosDTO cargo: listaCargos){
                 comboCargos.addItem(cargo.descripcion());
             }
-        }//try
+        }//try//try
         catch(Exception e)
         {
             log.severe(e.getMessage());

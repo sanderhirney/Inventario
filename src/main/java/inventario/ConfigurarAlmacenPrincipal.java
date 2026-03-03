@@ -6,7 +6,7 @@
 package inventario;
 
 import BaseDatos.ConexionConfigurarAlmacenes;
-import BaseDatos.ConexionEmpresas;
+import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerServicios;
 import java.util.ArrayList;
@@ -31,9 +31,9 @@ public class ConfigurarAlmacenPrincipal extends javax.swing.JDialog {
         almacenes.consulta();
         codigosAlmacenes=almacenes.getCodigoAlmacenes();
         descripcionAlmacenes=almacenes.getDenominacionAlmacenes();
-         ConexionEmpresas seccion=new ConexionEmpresas();
+         ConexionSecciones seccion=new ConexionSecciones();
          seccion.consulta();
-         codigoSeccionActual=seccion.codigo_empresa();
+         codigoSeccionActual=seccion.codigo_seccion();
        
         try
         {

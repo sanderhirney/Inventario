@@ -4,7 +4,7 @@ package inventario;
 import BaseDatos.ConexionActualizarSeccion;
 import BaseDatos.ConexionCargos;
 import BaseDatos.ConexionConsultarFirmasAsignadas;
-import BaseDatos.ConexionEmpresas;
+import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -41,9 +41,9 @@ List<String> descripcion_servicios=new ArrayList<>();
     public VerFirmantes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        ConexionEmpresas secciones=new ConexionEmpresas();
+        ConexionSecciones secciones=new ConexionSecciones();
         secciones.consulta();
-        codigo_seccion=secciones.codigo_empresa();
+        codigo_seccion=secciones.codigo_seccion();
         
         ConexionConsultarFirmasAsignadas firmas=new ConexionConsultarFirmasAsignadas();
         firmas.setCodigo_seccion(codigo_seccion);

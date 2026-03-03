@@ -4,7 +4,7 @@ package inventario;
 import BaseDatos.ConexionActualizarTempSalida;
 import BaseDatos.ConexionConsultarDecimales;
 import BaseDatos.ConexionCrearSalida;
-import BaseDatos.ConexionEmpresas;
+import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionOperacionesSalidas;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerConceptos;
@@ -35,7 +35,7 @@ public class Salida_Inventario extends javax.swing.JDialog {
     List<String> descripcion_servicios =new ArrayList<>();
     List<Integer> codigo_servicios=new ArrayList<>();
     ConexionVerServicios servicios= new ConexionVerServicios();
-    ConexionEmpresas secciones=new ConexionEmpresas();
+    ConexionSecciones secciones=new ConexionSecciones();
     ConexionVerAlmacenes almacenes=new ConexionVerAlmacenes();
     List<Integer> existencias_Actuales=new ArrayList<>();
     List<String> codigo_almacenes_despacho=new ArrayList<>();
@@ -86,8 +86,8 @@ public class Salida_Inventario extends javax.swing.JDialog {
         resolucion=super.getToolkit().getScreenSize();
         this.setSize(resolucion);
         secciones.consulta();
-        codigo_seccion=secciones.codigo_empresa();
-        nombre_seccion=secciones.nombre_empresa();
+        codigo_seccion=secciones.codigo_seccion();
+        nombre_seccion=secciones.nombre_seccion();
         modelo= (DefaultTableModel)Tabla_datos.getModel();//para poder manipular la tabla
         conceptos.setTipo(0);//1 cuando es concepto de entrada y 0 cuando es concepto de salida
         conceptos.consulta();

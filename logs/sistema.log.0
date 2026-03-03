@@ -393,3 +393,397 @@ mar. 01, 2026 6:32:25 P. M. BaseDatos.Conexion Conectar
 INFORMACIÓN: CONEXION A BD
 mar. 01, 2026 6:32:28 P. M. BaseDatos.Conexion Conectar
 INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 5:51:00 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+GRAVE: Failed to execute script V6__Carga_Catalogo_Pub15.sql
+-----------------------------------------------------
+SQL State  : 42703
+Error Code : 0
+Message    : ERROR: no existe la columna «nombre» en la relación «grupos»
+  Where: función PL/pgSQL inline_code_block en la línea 7 en sentencia SQL
+Location   : db/migration/V6__Carga_Catalogo_Pub15.sql (D:\USER\Documents\GitHub\Inventario\target\classes\db\migration\V6__Carga_Catalogo_Pub15.sql)
+Line       : 2
+Statement  : Run Flyway with -X option to see the actual statement causing the problem
+
+mar. 03, 2026 5:51:09 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 5:51:09 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 5:51:09 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 03, 2026 5:51:10 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-03_17-51-09.sql
+mar. 03, 2026 5:51:10 P. M. BaseDatos.ConexionEmpresas consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 03, 2026 5:51:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 5:51:10 P. M. BaseDatos.ConexionEmpresas consulta
+GRAVE: ERROR: no existe la relación «empresas»
+  Position: 39
+mar. 03, 2026 5:51:10 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-03_17-51-09.sql
+mar. 03, 2026 5:51:10 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-02-21_18-35-33.sql
+mar. 03, 2026 5:52:10 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+GRAVE: Failed to execute script V6__Carga_Catalogo_Pub15.sql
+-----------------------------------------------------
+SQL State  : 42703
+Error Code : 0
+Message    : ERROR: no existe la columna «id»
+  Where: función PL/pgSQL inline_code_block en la línea 7 en sentencia SQL
+Location   : db/migration/V6__Carga_Catalogo_Pub15.sql (D:\USER\Documents\GitHub\Inventario\target\classes\db\migration\V6__Carga_Catalogo_Pub15.sql)
+Line       : 2
+Statement  : Run Flyway with -X option to see the actual statement causing the problem
+
+mar. 03, 2026 5:52:19 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 5:52:21 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 5:53:33 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+GRAVE: Failed to execute script V6__Carga_Catalogo_Pub15.sql
+-----------------------------------------------------
+SQL State  : 42703
+Error Code : 0
+Message    : ERROR: no existe la columna «id»
+  Where: función PL/pgSQL inline_code_block en la línea 8 en sentencia SQL
+Location   : db/migration/V6__Carga_Catalogo_Pub15.sql (D:\USER\Documents\GitHub\Inventario\target\classes\db\migration\V6__Carga_Catalogo_Pub15.sql)
+Line       : 2
+Statement  : Run Flyway with -X option to see the actual statement causing the problem
+
+mar. 03, 2026 5:53:43 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 5:53:44 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 5:53:44 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 03, 2026 5:53:44 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-03_17-53-44.sql
+mar. 03, 2026 5:53:44 P. M. BaseDatos.ConexionEmpresas consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 03, 2026 5:53:44 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 5:53:44 P. M. BaseDatos.ConexionEmpresas consulta
+GRAVE: ERROR: no existe la relación «empresas»
+  Position: 39
+mar. 03, 2026 5:53:44 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-03_17-53-44.sql
+mar. 03, 2026 5:53:44 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-02-24_10-18-44.sql
+mar. 03, 2026 5:54:48 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+GRAVE: Failed to execute script V6__Carga_Catalogo_Pub15.sql
+-----------------------------------------------------
+SQL State  : 42703
+Error Code : 0
+Message    : ERROR: no existe la columna «id»
+  Where: función PL/pgSQL inline_code_block en la línea 7 en sentencia SQL
+Location   : db/migration/V6__Carga_Catalogo_Pub15.sql (D:\USER\Documents\GitHub\Inventario\target\classes\db\migration\V6__Carga_Catalogo_Pub15.sql)
+Line       : 2
+Statement  : Run Flyway with -X option to see the actual statement causing the problem
+
+mar. 03, 2026 5:54:51 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 5:54:53 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 5:57:30 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+GRAVE: Failed to execute script V6__Carga_Catalogo_Pub15.sql
+-----------------------------------------------------
+SQL State  : 42703
+Error Code : 0
+Message    : ERROR: no existe la columna «id»
+  Where: función PL/pgSQL inline_code_block en la línea 7 en sentencia SQL
+Location   : db/migration/V6__Carga_Catalogo_Pub15.sql (D:\USER\Documents\GitHub\Inventario\target\classes\db\migration\V6__Carga_Catalogo_Pub15.sql)
+Line       : 2
+Statement  : Run Flyway with -X option to see the actual statement causing the problem
+
+mar. 03, 2026 5:59:01 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 5:59:02 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 5:59:02 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 03, 2026 5:59:02 P. M. BaseDatos.ConexionEmpresas consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 03, 2026 5:59:02 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 5:59:02 P. M. BaseDatos.ConexionEmpresas consulta
+GRAVE: ERROR: no existe la relación «empresas»
+  Position: 39
+mar. 03, 2026 5:59:02 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-03_17-59-02.sql
+mar. 03, 2026 5:59:03 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-03_17-59-02.sql
+mar. 03, 2026 5:59:03 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-02-24_10-30-10.sql
+mar. 03, 2026 6:01:24 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+GRAVE: Failed to execute script V6__Carga_Catalogo_Pub15.sql
+-----------------------------------------------------
+SQL State  : 42703
+Error Code : 0
+Message    : ERROR: no existe la columna «id»
+  Where: función PL/pgSQL inline_code_block en la línea 7 en sentencia SQL
+Location   : db/migration/V6__Carga_Catalogo_Pub15.sql (D:\USER\Documents\GitHub\Inventario\target\classes\db\migration\V6__Carga_Catalogo_Pub15.sql)
+Line       : 2
+Statement  : Run Flyway with -X option to see the actual statement causing the problem
+
+mar. 03, 2026 6:01:32 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 6:01:34 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 6:03:57 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+GRAVE: Failed to execute script V6__Carga_Catalogo_Pub15.sql
+-----------------------------------------------------
+SQL State  : 42703
+Error Code : 0
+Message    : ERROR: no existe la columna «id»
+  Where: función PL/pgSQL inline_code_block en la línea 7 en sentencia SQL
+Location   : db/migration/V6__Carga_Catalogo_Pub15.sql (D:\USER\Documents\GitHub\Inventario\target\classes\db\migration\V6__Carga_Catalogo_Pub15.sql)
+Line       : 2
+Statement  : Run Flyway with -X option to see the actual statement causing the problem
+
+mar. 03, 2026 6:04:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 6:04:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 6:04:07 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 03, 2026 6:04:07 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-03_18-04-07.sql
+mar. 03, 2026 6:04:07 P. M. BaseDatos.ConexionEmpresas consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 03, 2026 6:04:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 6:04:07 P. M. BaseDatos.ConexionEmpresas consulta
+GRAVE: ERROR: no existe la relación «empresas»
+  Position: 39
+mar. 03, 2026 6:04:07 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-03_18-04-07.sql
+mar. 03, 2026 6:04:07 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-02-24_11-19-38.sql
+mar. 03, 2026 6:07:01 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+GRAVE: Failed to execute script V6__Carga_Catalogo_Pub15.sql
+-----------------------------------------------------
+SQL State  : 42703
+Error Code : 0
+Message    : ERROR: no existe la columna «id»
+  Where: función PL/pgSQL inline_code_block en la línea 7 en sentencia SQL
+Location   : db/migration/V6__Carga_Catalogo_Pub15.sql (D:\USER\Documents\GitHub\Inventario\target\classes\db\migration\V6__Carga_Catalogo_Pub15.sql)
+Line       : 2
+Statement  : Run Flyway with -X option to see the actual statement causing the problem
+
+mar. 03, 2026 6:07:15 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 6:07:17 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 6:09:27 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+GRAVE: Failed to execute script V6__Carga_Catalogo_Pub15.sql
+-----------------------------------------------------
+SQL State  : 22001
+Error Code : 0
+Message    : ERROR: el valor es demasiado largo para el tipo character varying(4)
+  Where: sentencia SQL: «INSERT INTO hsdm.subgrupos (grupo_codigo, codigo, descripcion) VALUES 
+    (g3_id, '01', 'Maquinas, muebles y demas equipos de oficina'),
+    (g3_id, '02', 'Mobiliario y enseres de alojamiento'),
+    (g3_id, '03', 'Maquinaria y demas equipos de construcción, campo, industria y taller'),
+    (g3_id, '03-01', 'Equipos de taller de uso general'),
+    (g3_id, '03-02', 'Maquinaria y equipo de construccion y conservacion'),
+    (g3_id, '03-03', 'Maquinaria y equipo para mantenimiento de automotores'),
+    (g3_id, '03-04', 'Maquinaria y equipo agricola y pecuario'),
+    (g3_id, '03-05', 'Maquinaria y equipo de artes graficas'),
+    (g3_id, '03-06', 'Maquinaria industrial'),
+    (g3_id, '04', 'Equipos de transporte'),
+    (g3_id, '04-01', 'Vehiculos automotores terrestres'),
+    (g3_id, '04-02', 'Otros vehiculos terrestres'),
+    (g3_id, '05', 'Equipos de telecomunicaciones'),
+    (g3_id, '06', 'Equipos Medico-Quirurgicos, dentales y veterinarios'),
+    (g3_id, '06-01', 'Equipos Medico-Quirurgicos y de veterinaria'),
+    (g3_id, '06-02', 'Equipos dentales'),
+    (g3_id, '07', 'Equipos cientificos y de enseñanza'),
+    (g3_id, '07-01', 'Equipos cientificos y de laboratorio'),
+    (g3_id, '07-02', 'Equipos de enseñanza, deporte y recreacion'),
+    (g3_id, '07-03', 'Elementos de culto'),
+    (g3_id, '08', 'Colecciones culturales, artisticas e historicas'),
+    (g3_id, '08-01', 'Libros'),
+    (g3_id, '08-02', 'Colecciones cientificas'),
+    (g3_id, '08-03', 'Colecciones artisticas y ornamentales'),
+    (g3_id, '09', 'Armamento y equipo de defensa'),
+    (g3_id, '11', 'Otros bienes muebles en deposito')»
+función PL/pgSQL inline_code_block en la línea 13 en sentencia SQL
+Location   : db/migration/V6__Carga_Catalogo_Pub15.sql (D:\USER\Documents\GitHub\Inventario\target\classes\db\migration\V6__Carga_Catalogo_Pub15.sql)
+Line       : 2
+Statement  : Run Flyway with -X option to see the actual statement causing the problem
+
+mar. 03, 2026 6:09:35 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 6:09:35 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 6:09:35 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 03, 2026 6:09:35 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-03_18-09-35.sql
+mar. 03, 2026 6:09:35 P. M. BaseDatos.ConexionEmpresas consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 03, 2026 6:09:35 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 6:09:35 P. M. BaseDatos.ConexionEmpresas consulta
+GRAVE: ERROR: no existe la relación «empresas»
+  Position: 39
+mar. 03, 2026 6:09:35 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-03_18-09-35.sql
+mar. 03, 2026 6:09:35 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-02-24_11-24-04.sql
+mar. 03, 2026 6:14:22 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+GRAVE: Failed to execute script V2_1__Agregar_Concepto_a_Docs.sql
+----------------------------------------------------------
+SQL State  : 42701
+Error Code : 0
+Message    : ERROR: ya existe la columna «concepto_id» en la relación «documentos»
+Location   : db/migration/V2_1__Agregar_Concepto_a_Docs.sql (D:\USER\Documents\GitHub\Inventario\target\classes\db\migration\V2_1__Agregar_Concepto_a_Docs.sql)
+Line       : 2
+Statement  : Run Flyway with -X option to see the actual statement causing the problem
+
+mar. 03, 2026 6:14:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 6:14:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 6:14:36 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 03, 2026 6:14:36 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-03_18-14-36.sql
+mar. 03, 2026 6:14:36 P. M. BaseDatos.ConexionEmpresas consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 03, 2026 6:14:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 6:14:36 P. M. BaseDatos.ConexionEmpresas consulta
+GRAVE: ERROR: no existe la relación «empresas»
+  Position: 39
+mar. 03, 2026 6:14:37 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-03_18-14-36.sql
+mar. 03, 2026 6:14:37 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-02-24_18-36-59.sql
+mar. 03, 2026 6:20:34 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+GRAVE: Failed to execute script V1__Esquema_Maestro_Inventario.sql
+-----------------------------------------------------------
+SQL State  : 42703
+Error Code : 0
+Message    : ERROR: no existe la columna «id» referida en la llave foránea
+Location   : db/migration/V1__Esquema_Maestro_Inventario.sql (D:\USER\Documents\GitHub\Inventario\target\classes\db\migration\V1__Esquema_Maestro_Inventario.sql)
+Line       : 68
+Statement  : Run Flyway with -X option to see the actual statement causing the problem
+
+mar. 03, 2026 6:20:41 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 6:20:42 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 6:20:43 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 03, 2026 6:20:43 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-03_18-20-43.sql
+mar. 03, 2026 6:20:43 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-03_18-20-43.sql
+mar. 03, 2026 6:20:43 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-02-24_18-37-38.sql
+mar. 03, 2026 6:23:18 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+GRAVE: Found more than one migration with version 2
+Offenders:
+-> D:\USER\Documents\GitHub\Inventario\target\classes\db\migration\V2__Tablas_Operativas_y_Control.sql (SQL)
+-> D:\USER\Documents\GitHub\Inventario\target\classes\db\migration\V2__Carga_Conceptos_Oficiales.sql (SQL)
+mar. 03, 2026 6:23:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 6:23:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 6:23:30 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 03, 2026 6:23:30 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-03_18-23-30.sql
+mar. 03, 2026 6:23:30 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-03_18-23-30.sql
+mar. 03, 2026 6:23:30 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-01_17-46-27.sql
+mar. 03, 2026 6:24:09 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+GRAVE: Found more than one migration with version 2
+Offenders:
+-> D:\USER\Documents\GitHub\Inventario\target\classes\db\migration\V2__Tablas_Operativas_y_Control.sql (SQL)
+-> D:\USER\Documents\GitHub\Inventario\target\classes\db\migration\V2__Carga_Conceptos_Oficiales.sql (SQL)
+mar. 03, 2026 6:24:39 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 6:24:41 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 6:24:42 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 03, 2026 6:24:42 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-03_18-24-42.sql
+mar. 03, 2026 6:24:42 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-03_18-24-42.sql
+mar. 03, 2026 6:24:42 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-01_17-47-26.sql
+mar. 03, 2026 6:24:57 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+GRAVE: Found more than one migration with version 2
+Offenders:
+-> D:\USER\Documents\GitHub\Inventario\target\classes\db\migration\V2__Carga_Conceptos_Oficiales.sql (SQL)
+-> D:\USER\Documents\GitHub\Inventario\target\classes\db\migration\V2__Tablas_Operativas_y_Control.sql (SQL)
+mar. 03, 2026 6:24:59 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 6:25:00 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 6:25:01 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 03, 2026 6:25:01 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-03_18-25-01.sql
+mar. 03, 2026 6:25:01 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-03_18-25-01.sql
+mar. 03, 2026 6:25:01 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-01_17-52-50.sql
+mar. 03, 2026 6:26:12 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+GRAVE: Failed to execute script V1__Esquema_Maestro_Inventario.sql
+-----------------------------------------------------------
+SQL State  : 42703
+Error Code : 0
+Message    : ERROR: no existe la columna «id» referida en la llave foránea
+Location   : db/migration/V1__Esquema_Maestro_Inventario.sql (D:\USER\Documents\GitHub\Inventario\target\classes\db\migration\V1__Esquema_Maestro_Inventario.sql)
+Line       : 68
+Statement  : Run Flyway with -X option to see the actual statement causing the problem
+
+mar. 03, 2026 6:26:19 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 6:26:20 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 6:26:20 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 03, 2026 6:26:20 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-03_18-26-20.sql
+mar. 03, 2026 6:26:21 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-03_18-26-20.sql
+mar. 03, 2026 6:26:21 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-03_17-51-09.sql
+mar. 03, 2026 6:27:10 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+GRAVE: Failed to execute script V1__Esquema_Maestro_Inventario.sql
+-----------------------------------------------------------
+SQL State  : 42703
+Error Code : 0
+Message    : ERROR: no existe la columna «id» referida en la llave foránea
+Location   : db/migration/V1__Esquema_Maestro_Inventario.sql (D:\USER\Documents\GitHub\Inventario\target\classes\db\migration\V1__Esquema_Maestro_Inventario.sql)
+Line       : 74
+Statement  : Run Flyway with -X option to see the actual statement causing the problem
+
+mar. 03, 2026 6:27:51 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 6:27:52 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 03, 2026 6:27:52 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 03, 2026 6:27:52 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-03_18-27-52.sql
+mar. 03, 2026 6:27:53 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-03_18-27-52.sql
+mar. 03, 2026 6:27:53 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-03_17-53-44.sql
+mar. 03, 2026 6:28:06 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+GRAVE: Failed to execute script V5__Carga_Configuracion_Inicial.sql
+------------------------------------------------------------
+SQL State  : 42703
+Error Code : 0
+Message    : ERROR: no existe la columna «estado» en la relación «hospitales»
+  Position: 180
+Location   : db/migration/V5__Carga_Configuracion_Inicial.sql (D:\USER\Documents\GitHub\Inventario\target\classes\db\migration\V5__Carga_Configuracion_Inicial.sql)
+Line       : 4
+Statement  : Run Flyway with -X option to see the actual statement causing the problem
+

@@ -2,7 +2,7 @@
 package inventario;
 
 import BaseDatos.ConexionDatosdeReporte;
-import BaseDatos.ConexionEmpresas;
+import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
 import Reportes.GenerarExceF4;
 import Reportes.GenerarExistGeneral;
@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  * @author Usuario
  */
 public class Reportes extends javax.swing.JDialog {
-ConexionEmpresas secciones=new ConexionEmpresas();
+ConexionSecciones secciones=new ConexionSecciones();
   int mes_reporte;
   int anio_reporte;
   int seccion;
@@ -26,7 +26,7 @@ ConexionEmpresas secciones=new ConexionEmpresas();
         super(parent, modal);
         initComponents();
         secciones.consulta();
-        seccion=secciones.codigo_empresa();
+        seccion=secciones.codigo_seccion();
         Progreso.setVisible(false);
         
         

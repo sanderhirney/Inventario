@@ -57,7 +57,7 @@ CREATE TABLE hsdm.articulos (
     nombre character varying(250) NOT NULL,
     unidad_id integer,
     grupo_cod character varying(2),
-    subgrupo_cod character varying(2),
+    subgrupo_cod character varying(20),
     fecha_creacion timestamp without time zone DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -144,6 +144,7 @@ CREATE TABLE hsdm.documentos (
     id integer NOT NULL,
     hospital_id integer,
     seccion_id integer,
+    concepto_id integer,
     tipo character varying(10) NOT NULL,
     numero_provisional character varying(50),
     correlativo_legal integer,
@@ -153,19 +154,11 @@ CREATE TABLE hsdm.documentos (
     fecha_registro timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     estado integer DEFAULT 0,
     observaciones text,
-    valor_total numeric(20,4) DEFAULT 0,
-    concepto_id integer
+    valor_total numeric(20,4) DEFAULT 0
 );
 
 
 ALTER TABLE hsdm.documentos OWNER TO postgres;
-
---
--- Name: COLUMN documentos.concepto_id; Type: COMMENT; Schema: hsdm; Owner: postgres
---
-
-COMMENT ON COLUMN hsdm.documentos.concepto_id IS 'Relación con el catálogo de motivos legales de la Pub. 15';
-
 
 --
 -- Name: documentos_id_seq; Type: SEQUENCE; Schema: hsdm; Owner: postgres
@@ -229,7 +222,8 @@ CREATE TABLE hsdm.hospitales (
     id integer NOT NULL,
     rif character varying(20) NOT NULL,
     nombre character varying(250) NOT NULL,
-    direccion text
+    direccion text,
+    estado boolean DEFAULT true
 );
 
 
@@ -448,7 +442,7 @@ ALTER SEQUENCE hsdm.servicios_id_seq OWNED BY hsdm.servicios.id;
 
 CREATE TABLE hsdm.subgrupos (
     grupo_codigo character varying(2) NOT NULL,
-    codigo character varying(4) NOT NULL,
+    codigo character varying(20) NOT NULL,
     descripcion character varying(200) NOT NULL
 );
 
@@ -887,26 +881,6 @@ CREATE TABLE public.firmas (
 
 
 ALTER TABLE public.firmas OWNER TO postgres;
-
---
--- Name: flyway_schema_history; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.flyway_schema_history (
-    installed_rank integer NOT NULL,
-    version character varying(50),
-    description character varying(200) NOT NULL,
-    type character varying(20) NOT NULL,
-    script character varying(1000) NOT NULL,
-    checksum integer,
-    installed_by character varying(100) NOT NULL,
-    installed_on timestamp without time zone DEFAULT now() NOT NULL,
-    execution_time integer NOT NULL,
-    success boolean NOT NULL
-);
-
-
-ALTER TABLE public.flyway_schema_history OWNER TO postgres;
 
 --
 -- Name: grupos; Type: TABLE; Schema: public; Owner: postgres
@@ -1495,7 +1469,7 @@ COPY hsdm.conceptos (codigo, descripcion, tipo) FROM stdin;
 -- Data for Name: documentos; Type: TABLE DATA; Schema: hsdm; Owner: postgres
 --
 
-COPY hsdm.documentos (id, hospital_id, seccion_id, tipo, numero_provisional, correlativo_legal, mes_legal, anio_legal, fecha_emision, fecha_registro, estado, observaciones, valor_total, concepto_id) FROM stdin;
+COPY hsdm.documentos (id, hospital_id, seccion_id, concepto_id, tipo, numero_provisional, correlativo_legal, mes_legal, anio_legal, fecha_emision, fecha_registro, estado, observaciones, valor_total) FROM stdin;
 \.
 
 
@@ -1504,10 +1478,12 @@ COPY hsdm.documentos (id, hospital_id, seccion_id, tipo, numero_provisional, cor
 --
 
 COPY hsdm.flyway_schema_history (installed_rank, version, description, type, script, checksum, installed_by, installed_on, execution_time, success) FROM stdin;
-1	1	Esquema Maestro Inventario	SQL	V1__Esquema_Maestro_Inventario.sql	-1316697988	postgres	2026-02-24 10:18:43.824809	88	t
-2	2	Tablas Operativas y Control	SQL	V2__Tablas_Operativas_y_Control.sql	-1828629233	postgres	2026-02-24 10:30:10.269074	86	t
-3	2.1	Agregar Concepto a Docs	SQL	V2_1__Agregar_Concepto_a_Docs.sql	-827745499	postgres	2026-02-24 11:24:04.26583	47	t
-4	3	Carga Conceptos Oficiales	SQL	V3__Carga_Conceptos_Oficiales.sql	-619923483	postgres	2026-02-24 11:24:04.357873	7	t
+0	\N	<< Flyway Schema Creation >>	SCHEMA	"hsdm"	\N	postgres	2026-03-03 18:32:35.950384	0	t
+1	1	Esquema Maestro Inventario	SQL	V1__Esquema_Maestro_Inventario.sql	812778820	postgres	2026-03-03 18:32:36.028213	76	t
+2	2	Carga Conceptos Oficiales	SQL	V2__Carga_Conceptos_Oficiales.sql	-619923483	postgres	2026-03-03 18:32:36.144233	6	t
+3	3	Campos Unicos Tablas	SQL	V3__Campos_Unicos_Tablas.sql	1933198203	postgres	2026-03-03 18:32:36.15916	12	t
+4	4	Carga Catalogo Pub15	SQL	V4__Carga_Catalogo_Pub15.sql	-1401829198	postgres	2026-03-03 18:32:36.182107	8	t
+5	5	Carga Configuracion Inicial	SQL	V5__Carga_Configuracion_Inicial.sql	1867448618	postgres	2026-03-03 18:32:36.202571	7	t
 \.
 
 
@@ -1516,6 +1492,8 @@ COPY hsdm.flyway_schema_history (installed_rank, version, description, type, scr
 --
 
 COPY hsdm.grupos (codigo, descripcion) FROM stdin;
+3	Bienes Muebles en Depósito
+4	Materiales de Consumo
 \.
 
 
@@ -1523,7 +1501,8 @@ COPY hsdm.grupos (codigo, descripcion) FROM stdin;
 -- Data for Name: hospitales; Type: TABLE DATA; Schema: hsdm; Owner: postgres
 --
 
-COPY hsdm.hospitales (id, rif, nombre, direccion) FROM stdin;
+COPY hsdm.hospitales (id, rif, nombre, direccion, estado) FROM stdin;
+1	G-00000000-0	HOSPITAL CENTRAL DE PRUEBA	DIRECCION GENERAL	t
 \.
 
 
@@ -1532,7 +1511,7 @@ COPY hsdm.hospitales (id, rif, nombre, direccion) FROM stdin;
 --
 
 COPY hsdm.inicios (id, estado, fecha_ultimo_acceso) FROM stdin;
-1	0	2026-02-24 10:30:10.300421
+1	1	2026-03-03 18:32:36.063205
 \.
 
 
@@ -1565,6 +1544,7 @@ COPY hsdm.saldos (articulo_id, seccion_id, hospital_id, stock_actual, costo_prom
 --
 
 COPY hsdm.secciones (id, hospital_id, descripcion, seleccionada, estado) FROM stdin;
+1	1	ALMACÉN CENTRAL / DEPÓSITO	t	t
 \.
 
 
@@ -1581,6 +1561,60 @@ COPY hsdm.servicios (id, hospital_id, nombre_servicio, cedula_firmante, seccion_
 --
 
 COPY hsdm.subgrupos (grupo_codigo, codigo, descripcion) FROM stdin;
+3	01	Maquinas, muebles y demas equipos de oficina
+3	02	Mobiliario y enseres de alojamiento
+3	03	Maquinaria y demas equipos de construcción, campo, industria y taller
+3	03-01	Equipos de taller de uso general
+3	03-02	Maquinaria y equipo de construccion y conservacion
+3	03-03	Maquinaria y equipo para mantenimiento de automotores
+3	03-04	Maquinaria y equipo agricola y pecuario
+3	03-05	Maquinaria y equipo de artes graficas
+3	03-06	Maquinaria industrial
+3	04	Equipos de transporte
+3	04-01	Vehiculos automotores terrestres
+3	04-02	Otros vehiculos terrestres
+3	05	Equipos de telecomunicaciones
+3	06	Equipos Medico-Quirurgicos, dentales y veterinarios
+3	06-01	Equipos Medico-Quirurgicos y de veterinaria
+3	06-02	Equipos dentales
+3	07	Equipos cientificos y de enseñanza
+3	07-01	Equipos cientificos y de laboratorio
+3	07-02	Equipos de enseñanza, deporte y recreacion
+3	07-03	Elementos de culto
+3	08	Colecciones culturales, artisticas e historicas
+3	08-01	Libros
+3	08-02	Colecciones cientificas
+3	08-03	Colecciones artisticas y ornamentales
+3	09	Armamento y equipo de defensa
+3	11	Otros bienes muebles en deposito
+4	20	Alimentos y bebidas
+4	21	Materiales agrícolas y pecuarios
+4	21-A	Abonos
+4	21-B	Alimentos para animales
+4	21-C	Insecticidas
+4	21-D	Semillas
+4	22	Drogas medicinas materiales odontologicas, de laboratorio de sanidad y similares
+4	22-A	Drogas medicinas y elementos de curacion para pacientes
+4	22-B	Materiales de odontologia
+4	22-C	Materiales para laboratorio
+4	22-D	Suministros menores ortopedicos
+4	22-E	Drogas, Med., y elementos de C.(PTES)
+4	22-G	Sustancias para laboratorio
+4	22-H	Materiales para rayos X
+4	22-J	Materiales Médicos Quirurgicos
+4	23	Materiales de construccion
+4	23-A	Materiales basicos y estructurales
+4	23-B	Materiales y utiles para instituciones sanitarias
+4	24	Materiales para industria y taller
+4	25	Repuestos accesorios y herramientas menores
+4	25-H	Herramientas menores
+4	27	Utiles de escritorio y oficina
+4	28	Materiales de uso personal de alojamiento y de limpieza
+4	28-H	Utiles y materiales de aseo
+4	28-K	Vestuario para pacientes
+4	30-A	Combustible
+4	30-B	Aceites y grasas lubricantes
+4	30-D	Gas combustible
 \.
 
 
@@ -2274,15 +2308,6 @@ COPY public.firmas (cedula, nombre, apellido, seccion) FROM stdin;
 
 
 --
--- Data for Name: flyway_schema_history; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.flyway_schema_history (installed_rank, version, description, type, script, checksum, installed_by, installed_on, execution_time, success) FROM stdin;
-1	1	<< Flyway Baseline >>	BASELINE	<< Flyway Baseline >>	\N	postgres	2026-02-21 18:35:33.439966	0	t
-\.
-
-
---
 -- Data for Name: grupos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2654,7 +2679,7 @@ COPY public.historiales (id, fecha, cod_articulo, valor_entrada, valor_salida, s
 --
 
 COPY public.inicios (consecutivo, estado) FROM stdin;
-1	1
+1	0
 \.
 
 
@@ -2745,7 +2770,7 @@ SELECT pg_catalog.setval('hsdm.documentos_id_seq', 1, false);
 -- Name: hospitales_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
 --
 
-SELECT pg_catalog.setval('hsdm.hospitales_id_seq', 1, false);
+SELECT pg_catalog.setval('hsdm.hospitales_id_seq', 1, true);
 
 
 --
@@ -2766,7 +2791,7 @@ SELECT pg_catalog.setval('hsdm.kardex_id_seq', 1, false);
 -- Name: secciones_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
 --
 
-SELECT pg_catalog.setval('hsdm.secciones_id_seq', 1, false);
+SELECT pg_catalog.setval('hsdm.secciones_id_seq', 1, true);
 
 
 --
@@ -3159,14 +3184,6 @@ ALTER TABLE ONLY public.firmas
 
 
 --
--- Name: flyway_schema_history flyway_schema_history_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.flyway_schema_history
-    ADD CONSTRAINT flyway_schema_history_pk PRIMARY KEY (installed_rank);
-
-
---
 -- Name: grupos grupos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3254,10 +3271,38 @@ CREATE INDEX flyway_schema_history_s_idx ON hsdm.flyway_schema_history USING btr
 
 
 --
--- Name: flyway_schema_history_s_idx; Type: INDEX; Schema: public; Owner: postgres
+-- Name: nombre_cargos_unique; Type: INDEX; Schema: hsdm; Owner: postgres
 --
 
-CREATE INDEX flyway_schema_history_s_idx ON public.flyway_schema_history USING btree (success);
+CREATE UNIQUE INDEX nombre_cargos_unique ON hsdm.cargos USING btree (lower((descripcion)::text));
+
+
+--
+-- Name: nombre_proveedores_unique; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX nombre_proveedores_unique ON hsdm.proveedores USING btree (lower((nombre)::text));
+
+
+--
+-- Name: nombre_secciones_unique; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX nombre_secciones_unique ON hsdm.secciones USING btree (lower((descripcion)::text));
+
+
+--
+-- Name: nombre_servicios_unique; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX nombre_servicios_unique ON hsdm.servicios USING btree (lower((nombre_servicio)::text));
+
+
+--
+-- Name: nombre_unidades_unique; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX nombre_unidades_unique ON hsdm.unidades USING btree (lower((nombre)::text));
 
 
 --

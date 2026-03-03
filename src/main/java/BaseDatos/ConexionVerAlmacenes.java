@@ -27,9 +27,9 @@ public class ConexionVerAlmacenes {
     String codigoAlmacenPrincipal;
     int codigoSeccion;
     private void consultarSeccion(){
-        ConexionEmpresas seccion= new ConexionEmpresas();
+        ConexionSecciones seccion= new ConexionSecciones();
         seccion.consulta();
-        codigoSeccion=seccion.codigo_empresa();
+        codigoSeccion=seccion.codigo_seccion();
     }
     
     public void consulta()

@@ -3,7 +3,7 @@ package inventario;
 import BaseDatos.ConexionAsignarActualizarFirmas;
 import BaseDatos.ConexionConsultarDatosFirmantes;
 import BaseDatos.ConexionConsultarFirmasAsignadas;
-import BaseDatos.ConexionEmpresas;
+import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
 
 import java.util.ArrayList;
@@ -33,9 +33,9 @@ public class ConfigurarFirmantes extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
        
-        ConexionEmpresas consulta_seccion=new ConexionEmpresas();
+        ConexionSecciones consulta_seccion=new ConexionSecciones();
         consulta_seccion.consulta();
-        codigoSeccion=consulta_seccion.codigo_empresa();
+        codigoSeccion=consulta_seccion.codigo_seccion();
         ConexionConsultarDatosFirmantes datos=new ConexionConsultarDatosFirmantes();
         datos.setCodigo_seccion(codigoSeccion);
         datos.consulta();

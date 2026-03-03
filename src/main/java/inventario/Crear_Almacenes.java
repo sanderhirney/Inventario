@@ -6,7 +6,7 @@
 package inventario;
 
 import BaseDatos.ConexionCrearAlmacen;
-import BaseDatos.ConexionEmpresas;
+import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -26,9 +26,9 @@ String almacenActivoMostrar;
         super(parent, modal);
         initComponents();
         radio_despacho.setSelected(true);
-        ConexionEmpresas seccion=new ConexionEmpresas();
+        ConexionSecciones seccion=new ConexionSecciones();
         seccion.consulta();
-        seccion_actual=seccion.codigo_empresa();
+        seccion_actual=seccion.codigo_seccion();
         ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
          almacenPrincipal.consultaAlmacenPrincipal();
          almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();

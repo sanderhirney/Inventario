@@ -1,7 +1,7 @@
 
 package inventario;
 
-import BaseDatos.ConexionEmpresas;
+import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerArticulos;
 import java.util.ArrayList;
@@ -28,9 +28,9 @@ TableRowSorter<TableModel> filtro;
         super(parent, modal);
         initComponents();
         ConexionVerArticulos articulos=new ConexionVerArticulos();
-        ConexionEmpresas secc=new ConexionEmpresas();
+        ConexionSecciones secc=new ConexionSecciones();
         secc.consulta();
-        seccion=secc.codigo_empresa();
+        seccion=secc.codigo_seccion();
         articulos.setSeccion(seccion);
         articulos.consulta();
         codigos=articulos.codigo();
