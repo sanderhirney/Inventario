@@ -5,12 +5,8 @@ import BaseDatos.ConexionRespaldos;
 import inventario.LoggerInfo;
 import inventario.Ventana_Principal;
 import java.awt.HeadlessException;
-import java.io.IOException;
 import java.sql.SQLException;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.FileHandler;
 import java.util.logging.Handler;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
@@ -18,7 +14,7 @@ import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 public class Inventario {
     
 private final static Logger Log = Logger.getLogger("Inventario");
-public static void main(String[] args) {
+public static void main(String[] args) throws SQLException {
     int estadoDeInicio=0;
     LoggerInfo.setup();
     ConfiguracionBaseDatos configuracion=new ConfiguracionBaseDatos();
@@ -64,7 +60,7 @@ public static void main(String[] args) {
                         //opcion 0= Si, 1=No
                          if (opcion==0)
                          {
-                            inicio.cerar();
+                            inicio.cerrar();
                             System.exit(0);
                          }//if
             }

@@ -2,11 +2,11 @@ package inventario;
 
 import BaseDatos.ConexionControlDeInicio;
 import BaseDatos.ConexionSecciones;
-import BaseDatos.ConexionReporteModelo4;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.io.File;
-import java.net.URL;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 
@@ -14,7 +14,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 public class Ventana_Principal extends javax.swing.JFrame {
    
     String nombre;//nombre tomado al iniciar el programa
-    
+    Logger log=LoggerInfo.getLogger();
     public Dimension resolucion;//variable para leer el ancho y alto de la ventana
     ConexionControlDeInicio inicio=new ConexionControlDeInicio();
   
@@ -207,7 +207,11 @@ public class Ventana_Principal extends javax.swing.JFrame {
          if (opcion==0)
          {
             
-             inicio.cerar();
+                 try {
+                     inicio.cerrar();
+                 } catch (SQLException ex) {
+                     log.severe(ex.toString());
+                 }
              System.exit(0);
          }//if
                  
