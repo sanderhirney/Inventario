@@ -1,15 +1,17 @@
 
 package BaseDatos;
 
+import inventario.LoggerInfo;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 public class ConexionCrearAlmacen {
     Connection conex;
-    PreparedStatement consulta;
+    Logger log=LoggerInfo.getLogger();
     Conexion conectar= new Conexion();
     ResultSet Respuesta;
     int ejecutar;
@@ -23,39 +25,48 @@ public class ConexionCrearAlmacen {
     int principal=0;//el almacen siempre se crea en 0 osea no se crea principal. PAra crearlo principal se debe ir a la configuracion
     java.sql.Date fecha_creacion;
     
-    public void crear()
+    public void crear() throws SQLException
     {
+        log.info("CREAR ALMACEN");
           try
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("insert into almacenes values (?, ?, ?, ?, ?, ?, ?, ?)");
-        
-        consulta.setString(1, codigo_almacen);
-        consulta.setString(2, denominacion_almacen);
-        consulta.setString(3, ubicacion_almacen);
-        consulta.setInt(4, seccion);
-        consulta.setInt(5, tipo);//1 para despacho y 0 para destino
-        consulta.setString(6, alias_almacen);
-        consulta.setDate(7, fecha_creacion);
-        consulta.setInt(8, 0);//se crea un almacen como que no es principal por eso se coloca en 
-        ejecutar=consulta.executeUpdate();
-        if( ejecutar> 0 )
-        {
-          resultado=1;         
-        }//if
-        else
-        {
-            resultado=0;
+        try(PreparedStatement consulta= conex.prepareStatement("insert into almacenes values (?, ?, ?, ?, ?, ?, ?, ?)") ){
+            consulta.setString(1, codigo_almacen);
+            consulta.setString(2, denominacion_almacen);
+            consulta.setString(3, ubicacion_almacen);
+            consulta.setInt(4, seccion);
+            consulta.setInt(5, tipo);//1 para despacho y 0 para destino
+            consulta.setString(6, alias_almacen);
+            consulta.setDate(7, fecha_creacion);
+            consulta.setInt(8, 0);//se crea un almacen como que no es principal por eso se coloca en 
+            ejecutar=consulta.executeUpdate();
+            if( ejecutar> 0 )
+            {
+              resultado=1;         
+            }//if
+            else
+            {
+                resultado=0;
+            }
         }
-        conectar.Cerrar();
+       
+        
+        
        
     }//consulta
     
            catch(SQLException ex)
     {
+        log.severe("ERROR AL CREAR EL ALMACEN");
+        log.severe(ex.toString());
         JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de guardar el almacen.\n Ventana Crear Almacenes \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
     }
+        finally{
+                  conectar.Cerrar();
+
+          }
           
            }//crear
           

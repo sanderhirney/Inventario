@@ -8,10 +8,10 @@ package inventario;
 import BaseDatos.ConexionCrearAlmacen;
 import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
+import BaseDatos.conexionCrearHospitales;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  *
  * @author Usuario
  */
-public class Crear_Almacenes extends javax.swing.JDialog {
+public class Crear_Hospital extends javax.swing.JDialog {
 
 LocalDate fecha=LocalDate.now();
 Date fecha_creacion=Date.valueOf(fecha);
@@ -27,10 +27,10 @@ int seccion_actual;
 String almacenActivoMostrar;
     Logger log=LoggerInfo.getLogger();
 
-    public Crear_Almacenes(java.awt.Frame parent, boolean modal) {
+    public Crear_Hospital(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        radio_despacho.setSelected(true);
+        radioSi.setSelected(true);
         ConexionSecciones seccion=new ConexionSecciones();
         seccion.consulta();
         seccion_actual=seccion.codigo_seccion();
@@ -58,33 +58,29 @@ String almacenActivoMostrar;
         etiqueta_denominacion = new javax.swing.JLabel();
         etiqueta_ubicacion = new javax.swing.JLabel();
         etiqueta_tipo = new javax.swing.JLabel();
-        etiqueta_alias = new javax.swing.JLabel();
         panel_boton = new javax.swing.JPanel();
         Boton_Guardar = new javax.swing.JButton();
         Boton_Salir = new javax.swing.JButton();
-        campo_codigo = new javax.swing.JTextField();
-        campo_denominacion = new javax.swing.JTextField();
-        campo_ubicacion = new javax.swing.JTextField();
-        radio_recibe = new javax.swing.JRadioButton();
-        radio_despacho = new javax.swing.JRadioButton();
-        campo_alias = new javax.swing.JTextField();
+        campoRif = new javax.swing.JTextField();
+        campoNombre = new javax.swing.JTextField();
+        campoDireccion = new javax.swing.JTextField();
+        radioNo = new javax.swing.JRadioButton();
+        radioSi = new javax.swing.JRadioButton();
         etiquetaAlmacenActivo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Etiq_encabezado.setText("<html><body><center>Sistema Administrativo de Inventario </body></html>");
 
-        jLabel1.setText("                 Crear Almacenes");
+        jLabel1.setText("                 Crear Hospitales");
 
-        etiqueta_codigo.setText("Codigo de Almacen");
+        etiqueta_codigo.setText("Rif");
 
-        etiqueta_denominacion.setText("Denominaciòn de Almacen");
+        etiqueta_denominacion.setText("Nombre");
 
-        etiqueta_ubicacion.setText("Ubiaciòn de Almacen");
+        etiqueta_ubicacion.setText("Direccion");
 
-        etiqueta_tipo.setText("Tipo de Almacen");
-
-        etiqueta_alias.setText("Alias de Almacen");
+        etiqueta_tipo.setText("Activo");
 
         Boton_Guardar.setText("Guardar");
         Boton_Guardar.addActionListener(new java.awt.event.ActionListener() {
@@ -102,33 +98,32 @@ String almacenActivoMostrar;
         });
         panel_boton.add(Boton_Salir);
 
-        campo_codigo.addKeyListener(new java.awt.event.KeyAdapter() {
+        campoRif.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                campo_codigoKeyTyped(evt);
+                campoRifKeyTyped(evt);
             }
         });
 
-        campo_denominacion.addKeyListener(new java.awt.event.KeyAdapter() {
+        campoNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                campo_denominacionKeyTyped(evt);
+                campoNombreKeyTyped(evt);
             }
         });
 
-        campo_ubicacion.addKeyListener(new java.awt.event.KeyAdapter() {
+        campoDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                campo_ubicacionKeyTyped(evt);
+                campoDireccionKeyTyped(evt);
             }
         });
 
-        grupoTipo.add(radio_recibe);
-        radio_recibe.setText("Recibe");
+        grupoTipo.add(radioNo);
+        radioNo.setText("No");
 
-        grupoTipo.add(radio_despacho);
-        radio_despacho.setText("Despacho");
-
-        campo_alias.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                campo_aliasKeyTyped(evt);
+        grupoTipo.add(radioSi);
+        radioSi.setText("Si");
+        radioSi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioSiActionPerformed(evt);
             }
         });
 
@@ -151,19 +146,17 @@ String almacenActivoMostrar;
                             .addComponent(etiqueta_codigo)
                             .addComponent(etiqueta_denominacion)
                             .addComponent(etiqueta_ubicacion)
-                            .addComponent(etiqueta_tipo)
-                            .addComponent(etiqueta_alias))
-                        .addGap(35, 35, 35)
+                            .addComponent(etiqueta_tipo))
+                        .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(radio_despacho)
+                                .addComponent(radioSi)
                                 .addGap(18, 18, 18)
-                                .addComponent(radio_recibe)
+                                .addComponent(radioNo)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(campo_alias, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(campo_codigo)
-                            .addComponent(campo_denominacion)
-                            .addComponent(campo_ubicacion))))
+                            .addComponent(campoRif)
+                            .addComponent(campoNombre)
+                            .addComponent(campoDireccion))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -180,25 +173,21 @@ String almacenActivoMostrar;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(etiqueta_codigo)
-                    .addComponent(campo_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoRif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(etiqueta_denominacion)
-                    .addComponent(campo_denominacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(etiqueta_ubicacion)
-                    .addComponent(campo_ubicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(etiqueta_tipo)
-                    .addComponent(radio_recibe)
-                    .addComponent(radio_despacho))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(etiqueta_alias)
-                    .addComponent(campo_alias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                    .addComponent(radioNo)
+                    .addComponent(radioSi))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(panel_boton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -218,46 +207,41 @@ String almacenActivoMostrar;
 
     private void Boton_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_GuardarActionPerformed
         // TODO add your handling code here:
-        String temp_codigo=campo_codigo.getText().trim();
-        String temp_denominacion=campo_denominacion.getText().trim();
-        String temp_ubicacion=campo_ubicacion.getText().trim();
+        String temp_codigo=campoRif.getText().trim();
+        String temp_denominacion=campoNombre.getText().trim();
+        String temp_ubicacion=campoDireccion.getText().trim();
         
-        int temp_tipo=0;
-        if(radio_recibe.isSelected()){
-            temp_tipo=0;//1 para despacho
+        boolean temp_tipo=true;
+        if(radioNo.isSelected()){
+            temp_tipo=false;//1 para despacho
         }
-        if(radio_despacho.isSelected()){
-            temp_tipo=1;
-        }
-        String temp_alias=campo_alias.getText().trim();
-        
-        if(temp_codigo.isEmpty() || temp_denominacion.isEmpty() || temp_ubicacion.isEmpty() || temp_alias.isEmpty())
+        if(temp_codigo.isEmpty() || temp_denominacion.isEmpty() || temp_ubicacion.isEmpty())
             {
              JOptionPane.showMessageDialog(null, "Debe completar todos los campos", "Revisar", JOptionPane.ERROR_MESSAGE);
  
             }else
             {
             try {
-                ConexionCrearAlmacen crear=new ConexionCrearAlmacen();
-                crear.setCodigoAlmacen(temp_codigo);
-                crear.setDenominacionAlmacen(temp_denominacion);
-                crear.setUbicacionAlmacen(temp_ubicacion);
-                crear.setAliasAlmacen(temp_alias);
-                crear.setTFechaCreacionAlmacen(fecha_creacion);
-                crear.setTipoAlmacen(temp_tipo);
-                crear.setSeccionAlmacen(seccion_actual);
+                conexionCrearHospitales crear=new conexionCrearHospitales();
+                crear.setRif(temp_codigo);
+                crear.setNombre(temp_denominacion);
+                crear.setDireccion(temp_ubicacion);
+            
+                crear.setFecha_creacion(fecha_creacion);
+                crear.setActivo(temp_tipo);
+                
                
                 crear.crear();
                 if(crear.getRespuesta()>0){
-                    JOptionPane.showMessageDialog(null, "almacen creado Exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
-                    campo_codigo.setText("");
-                    campo_denominacion.setText("");
-                    campo_denominacion.setText("");
-                    campo_ubicacion.setText("");
-                    campo_alias.setText("");
+                    JOptionPane.showMessageDialog(null, "Hospital creado Exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                    campoRif.setText("");
+                    campoNombre.setText("");
+                    campoNombre.setText("");
+                    campoDireccion.setText("");
+                    
                 }else
                 {
-                    JOptionPane.showMessageDialog(null, "Ocurrio un error al crear el almacen", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Ocurrio un error al crear el Hospital", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (SQLException ex) {
                 log.severe("ERROR AL CREAR EL ALMACEN");
@@ -268,44 +252,38 @@ String almacenActivoMostrar;
         
     }//GEN-LAST:event_Boton_GuardarActionPerformed
 
-    private void campo_codigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campo_codigoKeyTyped
+    private void campoRifKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoRifKeyTyped
       char caracter=evt.getKeyChar();
-         if(campo_codigo.getText().length()>= 19)
+         if(campoRif.getText().length()>= 19)
             {
                JOptionPane.showMessageDialog(null, "Este campo admite un maximo de 20 caracteres", "Revisar", JOptionPane.ERROR_MESSAGE);
               evt.consume();
             }//if
-    }//GEN-LAST:event_campo_codigoKeyTyped
+    }//GEN-LAST:event_campoRifKeyTyped
 
-    private void campo_denominacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campo_denominacionKeyTyped
+    private void campoNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoNombreKeyTyped
         // TODO add your handling code here:
         char caracter=evt.getKeyChar();
-        if(campo_denominacion.getText().length()>=69)
+        if(campoNombre.getText().length()>=69)
             {
                JOptionPane.showMessageDialog(null, "Este campo admite un maximo de 70 caracteres", "Revisar", JOptionPane.ERROR_MESSAGE);
               evt.consume();
             }//if
-    }//GEN-LAST:event_campo_denominacionKeyTyped
+    }//GEN-LAST:event_campoNombreKeyTyped
 
-    private void campo_ubicacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campo_ubicacionKeyTyped
+    private void campoDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoDireccionKeyTyped
         // TODO add your handling code here:
         char caracter=evt.getKeyChar();
-        if(campo_ubicacion.getText().length()>=99)
+        if(campoDireccion.getText().length()>=99)
             {
                JOptionPane.showMessageDialog(null, "Este campo admite un maximo de 100 caracteres", "Revisar", JOptionPane.ERROR_MESSAGE);
               evt.consume();
             }//if
-    }//GEN-LAST:event_campo_ubicacionKeyTyped
+    }//GEN-LAST:event_campoDireccionKeyTyped
 
-    private void campo_aliasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campo_aliasKeyTyped
+    private void radioSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioSiActionPerformed
         // TODO add your handling code here:
-        char caracter=evt.getKeyChar();
-        if(campo_alias.getText().length()>=9)
-            {
-               JOptionPane.showMessageDialog(null, "Este campo admite un maximo de 10 caracteres", "Revisar", JOptionPane.ERROR_MESSAGE);
-              evt.consume();
-            }//if
-    }//GEN-LAST:event_campo_aliasKeyTyped
+    }//GEN-LAST:event_radioSiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -324,20 +302,21 @@ String almacenActivoMostrar;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Crear_Almacenes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Crear_Hospital.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Crear_Almacenes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Crear_Hospital.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Crear_Almacenes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Crear_Hospital.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Crear_Almacenes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Crear_Hospital.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Crear_Almacenes dialog = new Crear_Almacenes(new javax.swing.JFrame(), true);
+                Crear_Hospital dialog = new Crear_Hospital(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -354,12 +333,10 @@ String almacenActivoMostrar;
     private javax.swing.JButton Boton_Salir;
     private javax.swing.JLabel Etiq_encabezado;
     private javax.swing.JSeparator Separador1;
-    private javax.swing.JTextField campo_alias;
-    private javax.swing.JTextField campo_codigo;
-    private javax.swing.JTextField campo_denominacion;
-    private javax.swing.JTextField campo_ubicacion;
+    private javax.swing.JTextField campoDireccion;
+    private javax.swing.JTextField campoNombre;
+    private javax.swing.JTextField campoRif;
     private javax.swing.JLabel etiquetaAlmacenActivo;
-    private javax.swing.JLabel etiqueta_alias;
     private javax.swing.JLabel etiqueta_codigo;
     private javax.swing.JLabel etiqueta_denominacion;
     private javax.swing.JLabel etiqueta_tipo;
@@ -367,7 +344,7 @@ String almacenActivoMostrar;
     private javax.swing.ButtonGroup grupoTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel panel_boton;
-    private javax.swing.JRadioButton radio_despacho;
-    private javax.swing.JRadioButton radio_recibe;
+    private javax.swing.JRadioButton radioNo;
+    private javax.swing.JRadioButton radioSi;
     // End of variables declaration//GEN-END:variables
 }

@@ -90,6 +90,10 @@ public class Ventana_Principal extends javax.swing.JFrame {
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Tipos");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Hospitales");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Crear");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Articulos");
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Crear");
         treeNode2.add(treeNode3);
@@ -287,6 +291,14 @@ public class Ventana_Principal extends javax.swing.JFrame {
               consultar_serv.setLocationRelativeTo(null);
               consultar_serv.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
               consultar_serv.setVisible(true);
+          }
+          if( ((nodo.getParent().toString()).equals("Hospitales")) && ((nodeInfo.toString()).equals("Crear")) )
+          {
+               Crear_Hospital crear= new Crear_Hospital(this, true);
+                crear.setResizable(false);
+                crear.setLocationRelativeTo(null);
+                crear.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+                crear.setVisible(true);
           }
           if( ((nodo.getParent().toString()).equals("Almacenes")) && ((nodeInfo.toString()).equals("Crear")) )
           {
