@@ -8,9 +8,13 @@ package inventario;
 import BaseDatos.ConexionCrearAlmacen;
 import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
+import BaseDatos.ConexionVerHospitales;
+import Modelos.HospitalDTO;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -25,9 +29,9 @@ LocalDate fecha=LocalDate.now();
 Date fecha_creacion=Date.valueOf(fecha);
 int seccion_actual;
 String almacenActivoMostrar;
-    Logger log=LoggerInfo.getLogger();
-
-    public Crear_Almacenes(java.awt.Frame parent, boolean modal) {
+    private static final Logger log=LoggerInfo.getLogger();
+    List<HospitalDTO> hospitales=new ArrayList<>();
+    public Crear_Almacenes(java.awt.Frame parent, boolean modal) throws SQLException {
         super(parent, modal);
         initComponents();
         radio_despacho.setSelected(true);
@@ -35,9 +39,14 @@ String almacenActivoMostrar;
         seccion.consulta();
         seccion_actual=seccion.codigo_seccion();
         ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-         almacenPrincipal.consultaAlmacenPrincipal();
-         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+        almacenPrincipal.consultaAlmacenPrincipal();
+        almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
+        etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+        ConexionVerHospitales hospital=new ConexionVerHospitales();
+        hospitales=hospital.consultar();
+        for(HospitalDTO lista: hospitales){
+            comboHospitales.addItem(lista);
+        }
         
     }
 
@@ -69,6 +78,8 @@ String almacenActivoMostrar;
         radio_despacho = new javax.swing.JRadioButton();
         campo_alias = new javax.swing.JTextField();
         etiquetaAlmacenActivo = new javax.swing.JLabel();
+        etiquetaHospital = new javax.swing.JLabel();
+        comboHospitales = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -132,6 +143,8 @@ String almacenActivoMostrar;
             }
         });
 
+        etiquetaHospital.setText("Hospital: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -152,18 +165,20 @@ String almacenActivoMostrar;
                             .addComponent(etiqueta_denominacion)
                             .addComponent(etiqueta_ubicacion)
                             .addComponent(etiqueta_tipo)
-                            .addComponent(etiqueta_alias))
+                            .addComponent(etiqueta_alias)
+                            .addComponent(etiquetaHospital))
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(campo_alias, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(campo_codigo)
+                            .addComponent(campo_denominacion)
+                            .addComponent(campo_ubicacion)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(radio_despacho)
                                 .addGap(18, 18, 18)
                                 .addComponent(radio_recibe)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(campo_alias, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(campo_codigo)
-                            .addComponent(campo_denominacion)
-                            .addComponent(campo_ubicacion))))
+                            .addComponent(comboHospitales, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -198,9 +213,13 @@ String almacenActivoMostrar;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(etiqueta_alias)
                     .addComponent(campo_alias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(etiquetaHospital)
+                    .addComponent(comboHospitales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(panel_boton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 33, Short.MAX_VALUE))
         );
 
         pack();
@@ -221,13 +240,15 @@ String almacenActivoMostrar;
         String temp_codigo=campo_codigo.getText().trim();
         String temp_denominacion=campo_denominacion.getText().trim();
         String temp_ubicacion=campo_ubicacion.getText().trim();
+        HospitalDTO hospitalSeleccionado=(HospitalDTO)comboHospitales.getSelectedItem();
         
-        int temp_tipo=0;
+        boolean temp_recibe=false;
+        boolean temp_despacho=false;
         if(radio_recibe.isSelected()){
-            temp_tipo=0;//1 para despacho
+            temp_recibe=true;//1 para despacho
         }
         if(radio_despacho.isSelected()){
-            temp_tipo=1;
+            temp_despacho=true;
         }
         String temp_alias=campo_alias.getText().trim();
         
@@ -244,7 +265,9 @@ String almacenActivoMostrar;
                 crear.setUbicacionAlmacen(temp_ubicacion);
                 crear.setAliasAlmacen(temp_alias);
                 crear.setTFechaCreacionAlmacen(fecha_creacion);
-                crear.setTipoAlmacen(temp_tipo);
+                crear.setTipoAlmacenRecibe(temp_recibe);
+                crear.setIdHospital(hospitalSeleccionado.id());
+                crear.setTipoAlmacenDespacho(temp_despacho);
                 crear.setSeccionAlmacen(seccion_actual);
                
                 crear.crear();
@@ -337,14 +360,18 @@ String almacenActivoMostrar;
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Crear_Almacenes dialog = new Crear_Almacenes(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                try {
+                    Crear_Almacenes dialog = new Crear_Almacenes(new javax.swing.JFrame(), true);
+                    dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                        @Override
+                        public void windowClosing(java.awt.event.WindowEvent e) {
+                            System.exit(0);
+                        }
+                    });
+                    dialog.setVisible(true);
+                } catch (SQLException ex) {
+                        log.severe(ex.toString());
+                }
             }
         });
     }
@@ -358,7 +385,9 @@ String almacenActivoMostrar;
     private javax.swing.JTextField campo_codigo;
     private javax.swing.JTextField campo_denominacion;
     private javax.swing.JTextField campo_ubicacion;
+    private javax.swing.JComboBox<HospitalDTO> comboHospitales;
     private javax.swing.JLabel etiquetaAlmacenActivo;
+    private javax.swing.JLabel etiquetaHospital;
     private javax.swing.JLabel etiqueta_alias;
     private javax.swing.JLabel etiqueta_codigo;
     private javax.swing.JLabel etiqueta_denominacion;

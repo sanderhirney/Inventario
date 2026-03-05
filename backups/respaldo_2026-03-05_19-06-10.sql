@@ -1503,6 +1503,7 @@ COPY hsdm.grupos (codigo, descripcion) FROM stdin;
 
 COPY hsdm.hospitales (id, rif, nombre, direccion, estado) FROM stdin;
 1	G-00000000-0	HOSPITAL CENTRAL DE PRUEBA	DIRECCION GENERAL	t
+2	G123456	HSDM	SAN ANTONIO	t
 \.
 
 
@@ -2770,7 +2771,7 @@ SELECT pg_catalog.setval('hsdm.documentos_id_seq', 1, false);
 -- Name: hospitales_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
 --
 
-SELECT pg_catalog.setval('hsdm.hospitales_id_seq', 1, true);
+SELECT pg_catalog.setval('hsdm.hospitales_id_seq', 2, true);
 
 
 --

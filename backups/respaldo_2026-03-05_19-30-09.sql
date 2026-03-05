@@ -41,7 +41,10 @@ CREATE TABLE hsdm.almacenes (
     ubicacion character varying(100),
     seccion_id integer,
     es_principal boolean DEFAULT false,
-    alias character varying(10)
+    es_despacho boolean DEFAULT true,
+    es_destino boolean DEFAULT true,
+    alias character varying(10),
+    fecha_creacion timestamp without time zone DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -354,13 +357,6 @@ CREATE TABLE hsdm.saldos (
 
 
 ALTER TABLE hsdm.saldos OWNER TO postgres;
-
---
--- Name: TABLE saldos; Type: COMMENT; Schema: hsdm; Owner: postgres
---
-
-COMMENT ON TABLE hsdm.saldos IS 'Tabla unificada de existencias y costos por sección';
-
 
 --
 -- Name: secciones; Type: TABLE; Schema: hsdm; Owner: postgres
@@ -1411,7 +1407,7 @@ ALTER TABLE ONLY public.unidades ALTER COLUMN cod_unidad SET DEFAULT nextval('pu
 -- Data for Name: almacenes; Type: TABLE DATA; Schema: hsdm; Owner: postgres
 --
 
-COPY hsdm.almacenes (codigo_almacen, hospital_id, denominacion, ubicacion, seccion_id, es_principal, alias) FROM stdin;
+COPY hsdm.almacenes (codigo_almacen, hospital_id, denominacion, ubicacion, seccion_id, es_principal, es_despacho, es_destino, alias, fecha_creacion) FROM stdin;
 \.
 
 
@@ -1478,12 +1474,12 @@ COPY hsdm.documentos (id, hospital_id, seccion_id, concepto_id, tipo, numero_pro
 --
 
 COPY hsdm.flyway_schema_history (installed_rank, version, description, type, script, checksum, installed_by, installed_on, execution_time, success) FROM stdin;
-0	\N	<< Flyway Schema Creation >>	SCHEMA	"hsdm"	\N	postgres	2026-03-03 18:32:35.950384	0	t
-1	1	Esquema Maestro Inventario	SQL	V1__Esquema_Maestro_Inventario.sql	812778820	postgres	2026-03-03 18:32:36.028213	76	t
-2	2	Carga Conceptos Oficiales	SQL	V2__Carga_Conceptos_Oficiales.sql	-619923483	postgres	2026-03-03 18:32:36.144233	6	t
-3	3	Campos Unicos Tablas	SQL	V3__Campos_Unicos_Tablas.sql	1933198203	postgres	2026-03-03 18:32:36.15916	12	t
-4	4	Carga Catalogo Pub15	SQL	V4__Carga_Catalogo_Pub15.sql	-1401829198	postgres	2026-03-03 18:32:36.182107	8	t
-5	5	Carga Configuracion Inicial	SQL	V5__Carga_Configuracion_Inicial.sql	1867448618	postgres	2026-03-03 18:32:36.202571	7	t
+0	\N	<< Flyway Schema Creation >>	SCHEMA	"hsdm"	\N	postgres	2026-03-05 19:24:09.529221	0	t
+1	1	Esquema Maestro Inventario	SQL	V1__Esquema_Maestro_Inventario.sql	-1331939728	postgres	2026-03-05 19:24:09.630522	72	t
+2	2	Carga Conceptos Oficiales	SQL	V2__Carga_Conceptos_Oficiales.sql	-619923483	postgres	2026-03-05 19:24:09.752843	7	t
+3	3	Campos Unicos Tablas	SQL	V3__Campos_Unicos_Tablas.sql	1933198203	postgres	2026-03-05 19:24:09.773022	11	t
+4	4	Carga Catalogo Pub15	SQL	V4__Carga_Catalogo_Pub15.sql	-1401829198	postgres	2026-03-05 19:24:09.796705	8	t
+5	5	Carga Configuracion Inicial	SQL	V5__Carga_Configuracion_Inicial.sql	1867448618	postgres	2026-03-05 19:24:09.816911	8	t
 \.
 
 
@@ -1511,7 +1507,7 @@ COPY hsdm.hospitales (id, rif, nombre, direccion, estado) FROM stdin;
 --
 
 COPY hsdm.inicios (id, estado, fecha_ultimo_acceso) FROM stdin;
-1	1	2026-03-03 18:32:36.063205
+1	1	2026-03-05 19:24:09.67374
 \.
 
 

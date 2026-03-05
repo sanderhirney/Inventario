@@ -17,7 +17,9 @@ public class ConexionCrearAlmacen {
     int ejecutar;
     int resultado;
     int seccion;
-    int tipo;
+    int idHospital;
+    boolean tipoRecibe;
+    boolean tipoDespacho;
     String codigo_almacen;
     String denominacion_almacen;
     String ubicacion_almacen;
@@ -32,15 +34,19 @@ public class ConexionCrearAlmacen {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        try(PreparedStatement consulta= conex.prepareStatement("insert into almacenes values (?, ?, ?, ?, ?, ?, ?, ?)") ){
+        try(PreparedStatement consulta= conex.prepareStatement("insert into almacenes values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)") ){
             consulta.setString(1, codigo_almacen);
-            consulta.setString(2, denominacion_almacen);
-            consulta.setString(3, ubicacion_almacen);
-            consulta.setInt(4, seccion);
-            consulta.setInt(5, tipo);//1 para despacho y 0 para destino
-            consulta.setString(6, alias_almacen);
-            consulta.setDate(7, fecha_creacion);
-            consulta.setInt(8, 0);//se crea un almacen como que no es principal por eso se coloca en 
+            consulta.setInt(2, idHospital);
+            consulta.setString(3, denominacion_almacen);
+            consulta.setString(4, ubicacion_almacen);
+            consulta.setInt(5, seccion);
+            consulta.setBoolean(6, false);//por defecto no se crea como principal
+            consulta.setBoolean(7, tipoDespacho);
+            consulta.setBoolean(8, tipoRecibe);
+            
+            consulta.setString(9, alias_almacen);
+            consulta.setDate(10, fecha_creacion);
+           
             ejecutar=consulta.executeUpdate();
             if( ejecutar> 0 )
             {
@@ -92,9 +98,16 @@ public class ConexionCrearAlmacen {
     {
         alias_almacen=recibido;
     }
-    public void setTipoAlmacen(int recibido)
+    public void setTipoAlmacenRecibe(boolean recibido)
     {
-        tipo=recibido;
+        tipoRecibe=recibido;
+    }
+    public void setTipoAlmacenDespacho(boolean recibido)
+    {
+        tipoDespacho=recibido;
+    }
+    public void setIdHospital(int recibido){
+        idHospital=recibido;
     }
     public void setSeccionAlmacen(int recibido)
     {

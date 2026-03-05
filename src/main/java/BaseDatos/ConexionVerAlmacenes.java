@@ -115,7 +115,7 @@ public class ConexionVerAlmacenes {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select codigo_almacen, denominacion, ubicacion from almacenes where principal=1 and seccion=?");
+        consulta= conex.prepareStatement("select codigo_almacen, denominacion, ubicacion from almacenes where es_principal=true and seccion_id=?");
         consulta.setInt(1, codigoSeccion);
         ejecutar=consulta.executeQuery();
         while( ejecutar.next() )
