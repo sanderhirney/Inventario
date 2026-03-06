@@ -8,7 +8,7 @@ package inventario;
 import BaseDatos.ConexionActualizarDecimal;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerSecciones;
-import Modelos.EmpresasDTO;
+import Modelos.SeccionesDTO;
 import java.awt.HeadlessException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
  */
 public class Crear_Decimal extends javax.swing.JDialog {
  Logger log=LoggerInfo.getLogger();
- List<EmpresasDTO> empresas=new ArrayList<>();
+ List<SeccionesDTO> empresas=new ArrayList<>();
  int codigo_empresa;
  String almacenActivoMostrar;
     public Crear_Decimal(java.awt.Frame parent, boolean modal) throws SQLException {
@@ -32,9 +32,9 @@ public class Crear_Decimal extends javax.swing.JDialog {
         log.info("CREAR / CONFIGURAR DECIMALES");
         
         ConexionVerSecciones secciones=new ConexionVerSecciones();
-        empresas=secciones.consultaEmpresas();
+        empresas=secciones.consultaSeccion();
         
-        for(EmpresasDTO empresa: empresas){
+        for(SeccionesDTO empresa: empresas){
             Combo_Secciones.addItem(empresa);
         }
         ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
@@ -202,7 +202,7 @@ public class Crear_Decimal extends javax.swing.JDialog {
             try
             {
             ConexionActualizarDecimal decimal=new ConexionActualizarDecimal();
-            EmpresasDTO seleccionado=(EmpresasDTO) Combo_Secciones.getSelectedItem();
+            SeccionesDTO seleccionado=(SeccionesDTO) Combo_Secciones.getSelectedItem();
             codigo_empresa=seleccionado.codigo();
             decimal.setCodigo_empresa(codigo_empresa);
             decimal.setDecimalCampo(Integer.parseInt(Campo_decimal_campo.getText().trim()));
@@ -316,7 +316,7 @@ public class Crear_Decimal extends javax.swing.JDialog {
     private javax.swing.JButton Boton_Salir;
     private javax.swing.JTextField Campo_decimal_campo;
     private javax.swing.JTextField Campo_decimal_total;
-    private javax.swing.JComboBox<EmpresasDTO> Combo_Secciones;
+    private javax.swing.JComboBox<SeccionesDTO> Combo_Secciones;
     private javax.swing.JLabel Etiq_encabezado;
     private javax.swing.JLabel Etiq_nombre_seccion;
     private javax.swing.JButton boton_aceptar;

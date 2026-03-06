@@ -7,6 +7,7 @@ import BaseDatos.ConexionVerArticulos;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -24,10 +25,11 @@ int codigo_seccion;
 TableRowSorter filtro;
 int habilitarBoton=1;//1 para si y 0 cero para no. si es entrada si. si es salida No lo habilita
 String almacenActivoMostrar;
+Logger log=LoggerInfo.getLogger();
     public Ver_Articulos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+        try{
         ConexionSecciones secciones=new ConexionSecciones();
         secciones.consulta();
         codigo_seccion=secciones.codigo_seccion();
@@ -36,6 +38,10 @@ String almacenActivoMostrar;
          almacenPrincipal.consultaAlmacenPrincipal();
          almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
          etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+        }catch(Exception e){
+        log.severe("ERROR AL VER ARTICULOS");
+        log.severe(e.toString());
+        }
       
     }
 

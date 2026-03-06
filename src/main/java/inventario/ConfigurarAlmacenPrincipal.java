@@ -8,12 +8,11 @@ package inventario;
 import BaseDatos.ConexionConfigurarAlmacenes;
 import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
-import BaseDatos.ConexionVerServicios;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 
 public class ConfigurarAlmacenPrincipal extends javax.swing.JDialog {
@@ -24,10 +23,13 @@ public class ConfigurarAlmacenPrincipal extends javax.swing.JDialog {
  String almacenActivoMostrar;
  Iterator lista1;
  int codigoSeccionActual=0;
- 
+     Logger log=LoggerInfo.getLogger();
+
     public ConfigurarAlmacenPrincipal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        try
+        {
         almacenes.consulta();
         codigosAlmacenes=almacenes.getCodigoAlmacenes();
         descripcionAlmacenes=almacenes.getDenominacionAlmacenes();
@@ -35,8 +37,7 @@ public class ConfigurarAlmacenPrincipal extends javax.swing.JDialog {
          seccion.consulta();
          codigoSeccionActual=seccion.codigo_seccion();
        
-        try
-        {
+        
             
             lista1=descripcionAlmacenes.iterator();
 
@@ -47,6 +48,8 @@ public class ConfigurarAlmacenPrincipal extends javax.swing.JDialog {
         }//try
         catch(Exception e)
         {
+            log.severe("NO SE HA OBTENIDO DATOS DEL ALMACEN PRINCIPAL EN LA CONFIGURACION DEL ALMANCEN PRINCIPAL");
+            log.severe(e.toString());
             JOptionPane.showMessageDialog(null, "No se han podido obtener datos de los almacenes debido a: \n "+e, "Error", JOptionPane.ERROR_MESSAGE);
         }
         

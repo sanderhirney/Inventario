@@ -15,7 +15,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
@@ -266,7 +265,9 @@ String almacenActivoMostrar;
                 crear.setAliasAlmacen(temp_alias);
                 crear.setTFechaCreacionAlmacen(fecha_creacion);
                 crear.setTipoAlmacenRecibe(temp_recibe);
-                crear.setIdHospital(hospitalSeleccionado.id());
+                crear.setIdHospital(hospitalSeleccionado.id()
+                
+                );
                 crear.setTipoAlmacenDespacho(temp_despacho);
                 crear.setSeccionAlmacen(seccion_actual);
                

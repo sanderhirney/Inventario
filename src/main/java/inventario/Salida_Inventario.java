@@ -80,9 +80,11 @@ public class Salida_Inventario extends javax.swing.JDialog {
     //para darle formato al campo al momento de realizar la multiplicacion de cantidad*costo unitaroio
     int consecutivo=0;
     String almacenActivoMostrar;
+    Logger log=LoggerInfo.getLogger();
  public Salida_Inventario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        try{
         resolucion=super.getToolkit().getScreenSize();
         this.setSize(resolucion);
         secciones.consulta();
@@ -137,6 +139,11 @@ public class Salida_Inventario extends javax.swing.JDialog {
         tope=decimal_campo;
         
         Combo_almacen_destino.setEnabled(false);
+        
+        }catch(Exception e){
+        log.severe("ERROR EN SALIDAS DE INVENTARIO");
+        log.severe(e.toString());
+        }
               
     }//constructor
 

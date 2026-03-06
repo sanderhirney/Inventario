@@ -9,7 +9,7 @@ import BaseDatos.ConexionArticuloaSeccion;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerArticulos;
 import BaseDatos.ConexionVerSecciones;
-import Modelos.EmpresasDTO;
+import Modelos.SeccionesDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -36,7 +36,7 @@ public class Asignar_seccion_art extends javax.swing.JDialog {
  Logger log=LoggerInfo.getLogger();
  DefaultTableModel modelo;
  String almacenActivoMostrar;
- List<EmpresasDTO> empresas=new ArrayList<>();
+ List<SeccionesDTO> empresas=new ArrayList<>();
  int codigo_seleccion;
     public Asignar_seccion_art(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -44,8 +44,8 @@ public class Asignar_seccion_art extends javax.swing.JDialog {
          initComponents();
          log.info("ASIGNAR SECCION A ARTICULO");
          ConexionVerSecciones secciones=new ConexionVerSecciones();
-         empresas=secciones.consultaEmpresas();
-         for(EmpresasDTO empresa: empresas){
+         empresas=secciones.consultaSeccion();
+         for(SeccionesDTO empresa: empresas){
              Combo_Origen.addItem(empresa);
              Combo_Destino.addItem(empresa);
          }
@@ -243,8 +243,8 @@ public class Asignar_seccion_art extends javax.swing.JDialog {
         if(opcion==0)
         {
             int filaSeleccionada=Tabla_articulo.getSelectedRow();
-            EmpresasDTO seleccionadoArticulo=empresas.get(filaSeleccionada);
-            EmpresasDTO seleccionadoSeccion=(EmpresasDTO) Combo_Destino.getSelectedItem();
+            SeccionesDTO seleccionadoArticulo=empresas.get(filaSeleccionada);
+            SeccionesDTO seleccionadoSeccion=(SeccionesDTO) Combo_Destino.getSelectedItem();
             ConexionArticuloaSeccion articulo=new ConexionArticuloaSeccion();
             articulo.setCodigoArticulo(seleccionadoArticulo.codigo());
             articulo.setCodigoSeccion(seleccionadoSeccion.codigo());
@@ -259,7 +259,7 @@ public class Asignar_seccion_art extends javax.swing.JDialog {
 
     private void boton_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_buscarActionPerformed
         // TODO add your handling code here:
-        EmpresasDTO empresaSeleccionada=(EmpresasDTO)Combo_Origen.getSelectedItem();
+        SeccionesDTO empresaSeleccionada=(SeccionesDTO)Combo_Origen.getSelectedItem();
         codigo_origen=empresaSeleccionada.codigo();
         
         ConexionVerArticulos articulos=new ConexionVerArticulos();
@@ -275,7 +275,7 @@ public class Asignar_seccion_art extends javax.swing.JDialog {
         else
         {
         try{
-            for(EmpresasDTO empresa: empresas)
+            for(SeccionesDTO empresa: empresas)
             {
                 modelo.addRow(new Object[]{empresa.codigo(), empresa.descripcion()});
                 

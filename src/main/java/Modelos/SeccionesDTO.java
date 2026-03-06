@@ -8,7 +8,7 @@ package Modelos;
  *
  * @author USER
  */
-public record EmpresasDTO(
+public record SeccionesDTO(
         int codigo,
         String descripcion
         ) {

@@ -4,7 +4,7 @@ package inventario;
 import BaseDatos.ConexionActualizarSeccion;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerSecciones;
-import Modelos.EmpresasDTO;
+import Modelos.SeccionesDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,19 +21,18 @@ int estado=0;
 int codigo_seleccion;
 TableRowSorter filtro;
 String almacenActivoMostrar;
-List<EmpresasDTO> empresas=new ArrayList<>();
+List<SeccionesDTO> secciones=new ArrayList<>();
 Logger log=LoggerInfo.getLogger();
     public Ver_Secciones(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         try{
             initComponents();
             log.info("VER SECCIONES");
-            ConexionVerSecciones secciones=new ConexionVerSecciones();
-           // ConexionEmpresas verseccion=new ConexionEmpresas();
-            empresas=secciones.consultaEmpresas();
+            ConexionVerSecciones seccion=new ConexionVerSecciones();
+            secciones=seccion.consultaSeccion();
             modelo=(DefaultTableModel)Tabla_Secciones.getModel();
             filtro=new TableRowSorter(Tabla_Secciones.getModel());
-                for(EmpresasDTO empresa:empresas)
+                for(SeccionesDTO empresa:secciones)
                 {
                     modelo.addRow(new Object[]{empresa.codigo(), empresa.descripcion()});
                 }
@@ -219,8 +218,7 @@ Logger log=LoggerInfo.getLogger();
     }//GEN-LAST:event_Boton_guardarActionPerformed
 public int getEstado()
 {
-    log.info("estado: "+estado);
-    return estado;
+      return estado;
 }
     
     public String getNombre()

@@ -1,14 +1,13 @@
 
 package inventario;
 
-import BaseDatos.ConexionActualizarSeccion;
-import BaseDatos.ConexionCargos;
 import BaseDatos.ConexionConsultarFirmasAsignadas;
 import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -38,9 +37,11 @@ List<String> nombres_firmantes_servicios=new ArrayList<>();
 List<String> apellidos_firmantes_servicios=new ArrayList<>();
 List<String> cedula_firmantes_servicios=new ArrayList<>();
 List<String> descripcion_servicios=new ArrayList<>();
+Logger log=LoggerInfo.getLogger();
     public VerFirmantes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        try{
         ConexionSecciones secciones=new ConexionSecciones();
         secciones.consulta();
         codigo_seccion=secciones.codigo_seccion();
@@ -86,7 +87,10 @@ List<String> descripcion_servicios=new ArrayList<>();
          almacenPrincipal.consultaAlmacenPrincipal();
          almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
          etiquetaAlmacenActivo.setText(almacenActivoMostrar);
-        
+        }catch(Exception e){
+        log.severe("ERROR AL VER LOS FIRMANTES");
+        log.severe(e.toString());
+        }
     }
 
    

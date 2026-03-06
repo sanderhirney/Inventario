@@ -5,7 +5,6 @@
  */
 package inventario;
 
-import BaseDatos.ConexionCrearAlmacen;
 import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.conexionCrearHospitales;
@@ -30,6 +29,7 @@ String almacenActivoMostrar;
     public Crear_Hospital(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        try{
         radioSi.setSelected(true);
         ConexionSecciones seccion=new ConexionSecciones();
         seccion.consulta();
@@ -38,6 +38,10 @@ String almacenActivoMostrar;
          almacenPrincipal.consultaAlmacenPrincipal();
          almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
          etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+        }catch(Exception e){
+            log.severe("ERROR AL CREAR HOSPITAL");
+            log.severe(e.toString());
+        }
         
     }
 

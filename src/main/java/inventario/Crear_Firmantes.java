@@ -5,9 +5,11 @@ import BaseDatos.ConexionCrearFirmantes;
 import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerificarFirmantes;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -18,9 +20,12 @@ public class Crear_Firmantes extends javax.swing.JDialog {
     Iterator lista1;
     int seccion_firmas;
     String almacenActivoMostrar;
+    Logger log=LoggerInfo.getLogger();
     public Crear_Firmantes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        try{
         ConexionSecciones seccion=new ConexionSecciones();
         seccion.consulta();
         seccion_firmas=seccion.codigo_seccion();
@@ -31,7 +36,10 @@ public class Crear_Firmantes extends javax.swing.JDialog {
          almacenPrincipal.consultaAlmacenPrincipal();
          almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
          etiquetaAlmacenActivo.setText(almacenActivoMostrar);
-        
+        }catch(SQLException e){
+        log.severe("ERROR AL CREAR FIRMANTES");
+        log.severe(e.toString());
+        }
     }
 
     

@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -36,12 +37,12 @@ Iterator lista5;
 Iterator lista6;
 Iterator lista7;
 String almacenActivoMostrar;
- 
+ Logger log=LoggerInfo.getLogger();
  
     public Kardex_Articulos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+        try{
         Tabla_resultados.setVisible(false);
         ConexionSecciones secciones=new ConexionSecciones();
        
@@ -72,6 +73,11 @@ String almacenActivoMostrar;
          almacenPrincipal.consultaAlmacenPrincipal();
          almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
          etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+         
+        }catch(Exception e){
+        log.severe("ERROR AL CONSULTAR EL KARDEX DE ARTICULOS");
+        log.severe(e.toString());
+        }
     }
 
    

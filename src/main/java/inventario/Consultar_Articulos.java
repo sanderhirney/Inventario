@@ -7,6 +7,7 @@ import BaseDatos.ConexionVerArticulos;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -24,9 +25,12 @@ String codigo_seleccion;
 int seccion;
 String almacenActivoMostrar;
 TableRowSorter<TableModel> filtro;
+Logger log=LoggerInfo.getLogger();
+
     public Consultar_Articulos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    try{
         ConexionVerArticulos articulos=new ConexionVerArticulos();
         ConexionSecciones secc=new ConexionSecciones();
         secc.consulta();
@@ -37,7 +41,7 @@ TableRowSorter<TableModel> filtro;
         nombres=articulos.nombre();
         modelo=(DefaultTableModel)Tabla_articulos.getModel();
         filtro=new TableRowSorter<>(Tabla_articulos.getModel());
-        try{
+       
         lista1=codigos.iterator();
         lista2=nombres.iterator();
         while(lista1.hasNext())
@@ -47,6 +51,8 @@ TableRowSorter<TableModel> filtro;
         }
         catch(Exception e)
         {
+            log.severe("ERROR EN LA Consulta DE ARTICULOS");
+            log.severe(e.toString());
             JOptionPane.showMessageDialog(null, "Error: "+e, "Error Grave", JOptionPane.ERROR_MESSAGE);
         }
         ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();

@@ -14,9 +14,9 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -54,9 +54,12 @@ int decimal_cantidad=0;
 int fila_seleccionada;//variable para tomar la fila que ha sido seleccionada
 String almacenActivoMostrar;
 JFrame ventanaPrincipal;
+Logger log=LoggerInfo.getLogger();
     public Consultar_Salidas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();
+        initComponents();           
+        try
+        {
         ConexionValidadorErroresRegistro errores=new ConexionValidadorErroresRegistro();
         errores.consulta(2);
         //consulto la seccion que enviare a la consulta de ver las salidas
@@ -103,8 +106,7 @@ JFrame ventanaPrincipal;
                    formateado.add(formato.setScale(decimal_cantidad, RoundingMode.FLOOR));
 
                   }//for
-                    try
-                    {
+                    
                         lista1=fechaDespacho.iterator();
                         lista2=documento.iterator();
                         lista3=nombre_servicio.iterator();
@@ -121,17 +123,21 @@ JFrame ventanaPrincipal;
                             modelo.addRow(new Object[]{lista1.next(), lista2.next(), lista3.next(), lista4.next(), lista5.next(), lista6.next()});
 
                         }
-                    }//try
-                    catch(Exception e)
-                    {
-                        JOptionPane.showMessageDialog(null, "No se puede desplegar informacion por: "+e+"\n Consulte al desarrollador", "Error Grave", JOptionPane.ERROR_MESSAGE);
-
-                    }
+         
+                     
+                   
          }//if
          if(salidas.getResultado()==0)
          {
              JOptionPane.showMessageDialog(null, "No se encuentran aun salidas registradas en el sistema", "Error", JOptionPane.ERROR_MESSAGE);
          }
+        }catch(Exception e)
+                    {
+                        log.severe("ERROR AL CONSULTAR LAS SALIDAS");
+                        log.severe(e.toString());
+                        JOptionPane.showMessageDialog(null, "No se puede desplegar informacion por: "+e+"\n Consulte al desarrollador", "Error Grave", JOptionPane.ERROR_MESSAGE);
+
+                    }
          ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
          almacenPrincipal.consultaAlmacenPrincipal();
          almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();

@@ -1,7 +1,7 @@
 
 package BaseDatos;
 
-import Modelos.EmpresasDTO;
+import Modelos.SeccionesDTO;
 import inventario.LoggerInfo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,35 +14,34 @@ import javax.swing.JOptionPane;
 public class ConexionVerSecciones {
     Logger log=LoggerInfo.getLogger();
     Connection conex;
-    PreparedStatement consulta;
     Conexion conectar= new Conexion();
-    ResultSet ejecutar;
-    List<EmpresasDTO> listaEmpresas=new ArrayList<>();;
-    private List<EmpresasDTO> consulta() throws SQLException
+    List<SeccionesDTO> listaEmpresas=new ArrayList<>();;
+    private List<SeccionesDTO> consulta() throws SQLException
     {
-        log.info("CONSULTA DE EMPRSAS");
+        log.info("CONSULTA DE SECCIONES");
           try
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select cod_empresas, descripcion from empresas");
-        ejecutar=consulta.executeQuery();
-        while( ejecutar.next() )
-        {
-            EmpresasDTO empresas=new EmpresasDTO(
-            ejecutar.getInt("cod_empresas"),
+        try(PreparedStatement consulta= conex.prepareStatement("select id, descripcion from secciones") ){
+         try(ResultSet ejecutar=consulta.executeQuery()){
+                 while( ejecutar.next() )
+                 {
+            SeccionesDTO empresas=new SeccionesDTO(
+            ejecutar.getInt("id"),
             ejecutar.getString("descripcion")
             
             );
-            listaEmpresas.add(empresas);
+            listaEmpresas.add(empresas);           
             
-            
-                     
-                    
-                     
-        }//if
+                }//while
+         }
+        }
+        
+        
        
-    }//consulta
+       
+    }//consulta//consulta
            catch(SQLException ex)
     {
         log.severe(ex.getMessage());
@@ -54,7 +53,7 @@ public class ConexionVerSecciones {
           return listaEmpresas;
     }//consulta
     
-    public List<EmpresasDTO> consultaEmpresas() throws SQLException
+    public List<SeccionesDTO> consultaSeccion() throws SQLException
     {
         return consulta();
     }

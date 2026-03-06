@@ -9,6 +9,7 @@ import Reportes.GenerarExistGeneral;
 import Reportes.ReporteExistencias;
 import Reportes.ReporteF157;
 import Reportes.ReporteModelo4;
+import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
@@ -22,9 +23,11 @@ ConexionSecciones secciones=new ConexionSecciones();
   int anio_reporte;
   int seccion;
   String almacenActivoMostrar;
+  Logger log=LoggerInfo.getLogger();
     public Reportes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        try{
         secciones.consulta();
         seccion=secciones.codigo_seccion();
         Progreso.setVisible(false);
@@ -34,6 +37,11 @@ ConexionSecciones secciones=new ConexionSecciones();
          almacenPrincipal.consultaAlmacenPrincipal();
          almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
          etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+        }
+         catch(Exception e){
+                 log.severe("ERROR AL LLAMAR OPCIONES DE REPORTE");
+                 log.severe(e.toString());
+                 }
     }
 
     /**

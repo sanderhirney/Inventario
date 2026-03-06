@@ -1,12 +1,14 @@
 
 package BaseDatos;
 
+import inventario.LoggerInfo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 public class ConexionVerAlmacenes {
     Connection conex;
@@ -26,10 +28,16 @@ public class ConexionVerAlmacenes {
     String ubicacionAlmacenPrincipal;
     String codigoAlmacenPrincipal;
     int codigoSeccion;
+    Logger log=LoggerInfo.getLogger();
     private void consultarSeccion(){
+        try{
         ConexionSecciones seccion= new ConexionSecciones();
         seccion.consulta();
         codigoSeccion=seccion.codigo_seccion();
+        }catch(Exception e){
+        log.severe("ERROR EN LA CONEXION DE VER ALMACENES");
+        log.severe(e.toString());
+        }
     }
     
     public void consulta()

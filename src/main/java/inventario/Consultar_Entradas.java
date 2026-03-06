@@ -11,12 +11,12 @@ import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerEntradas;
 import BaseDatos.ConexionVerTempEntradas;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.sql.Date;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -51,10 +51,12 @@ List<String> calculoFormateado=new ArrayList<>();
 int decimal_unitario;
 int decimal_totales;
 JFrame ventanaPrincipal;
+Logger log=LoggerInfo.getLogger();
     public Consultar_Entradas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+         try
+         {
          //valido si hay errores con las entradas
         ConexionValidadorErroresRegistro errores=new ConexionValidadorErroresRegistro();
         errores.consulta(1);//la consulta de ver las entradas
@@ -90,8 +92,7 @@ JFrame ventanaPrincipal;
          //los meto al iterador para poder mostrarlos en la tabla
          //lo coloco en un bloque try catch para poder tomar cualquier excepcion en este proceso
          
-         try
-         {
+        
          lista1=fecha.iterator();
          lista2=documento.iterator();
          lista3=concepto.iterator();
@@ -108,6 +109,8 @@ JFrame ventanaPrincipal;
          }
          catch(Exception e)
          {
+             log.severe("ERROR AL CONSULTAR ENTRADAS");
+             log.severe(e.toString());
              JOptionPane.showMessageDialog(null, "No se puede desplegar informacion por: "+e+"\n Consulte al desarrollador", "Error Grave", JOptionPane.ERROR_MESSAGE);
          }
          

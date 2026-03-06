@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 public class ConexionCrearAlmacen {
     Connection conex;
     Logger log=LoggerInfo.getLogger();
+   
     Conexion conectar= new Conexion();
     ResultSet Respuesta;
     int ejecutar;

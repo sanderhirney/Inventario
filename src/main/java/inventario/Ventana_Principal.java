@@ -5,7 +5,6 @@ import BaseDatos.ConexionSecciones;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.sql.SQLException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -23,6 +22,7 @@ public class Ventana_Principal extends javax.swing.JFrame {
     public Ventana_Principal() {
         this.getContentPane().setBackground(Color.WHITE);//color de fondo
         initComponents();
+        try{
         resolucion=super.getToolkit().getScreenSize();
         this.setSize(resolucion);
         ConexionSecciones consulta_secciones=new ConexionSecciones();
@@ -38,7 +38,10 @@ public class Ventana_Principal extends javax.swing.JFrame {
        Etiq_titulo.setText(nombre);
         }
              
-       
+       }catch(Exception e){
+        log.severe("ERROR AL EJECUTAR LA VENTANA PRINCIPAL");
+        log.severe(e.toString());
+        }
       
     }
 
@@ -462,7 +465,8 @@ public class Ventana_Principal extends javax.swing.JFrame {
 
     private void Boton_cambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_cambiarActionPerformed
         // TODO add your handling code here:
-         Ver_Secciones seccion= new Ver_Secciones(null, true);
+        try{ 
+        Ver_Secciones seccion= new Ver_Secciones(null, true);
          seccion.setResizable(false);
          seccion.setLocationRelativeTo(null);
          seccion.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -475,6 +479,10 @@ public class Ventana_Principal extends javax.swing.JFrame {
             nombre=consulta_empresas.nombre_seccion();
             Etiq_titulo.setText(nombre);
        }
+        }catch(Exception e){
+        log.severe("ERROR AL EJECUTAR EL CAMBIO DE SECCION");
+        log.severe(e.toString());
+        }
         
     }//GEN-LAST:event_Boton_cambiarActionPerformed
 

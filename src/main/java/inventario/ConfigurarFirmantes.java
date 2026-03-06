@@ -5,10 +5,12 @@ import BaseDatos.ConexionConsultarDatosFirmantes;
 import BaseDatos.ConexionConsultarFirmasAsignadas;
 import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
+import java.sql.SQLException;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,10 +31,12 @@ public class ConfigurarFirmantes extends javax.swing.JDialog {
  Iterator lista3;
  Iterator lista4;
  int codigoSeccion=0;
+ Logger log=LoggerInfo.getLogger();
+
     public ConfigurarFirmantes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-       
+       try{
         ConexionSecciones consulta_seccion=new ConexionSecciones();
         consulta_seccion.consulta();
         codigoSeccion=consulta_seccion.codigo_seccion();
@@ -65,7 +69,11 @@ public class ConfigurarFirmantes extends javax.swing.JDialog {
          while(lista4.hasNext()){
              comboCargosServicios.addItem((String) lista4.next());
          }
-         
+       }
+         catch(Exception e){
+                 log.severe("ERROR EN LA CONFIGURACION DE FIRMANTES");
+                 log.severe(e.toString());
+                 }
                 
       
         ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();

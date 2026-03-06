@@ -8,6 +8,7 @@ package inventario;
 import BaseDatos.ConexionCrearServicios;
 import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,9 +19,11 @@ public class Crear_Servicio extends javax.swing.JDialog {
 
    String almacenActivoMostrar;
    int codigo_seccion;
+   Logger log=LoggerInfo.getLogger();
     public Crear_Servicio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        try{
         ConexionSecciones secciones=new ConexionSecciones();
         secciones.consulta();
         codigo_seccion=secciones.codigo_seccion();
@@ -28,6 +31,10 @@ public class Crear_Servicio extends javax.swing.JDialog {
          almacenPrincipal.consultaAlmacenPrincipal();
          almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
          etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+        }catch(Exception e){
+         log.severe("ERROR AL CREAR EL SERVICIO");
+         log.severe(e.toString());
+        }
     }
 
     /**

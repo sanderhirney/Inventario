@@ -5,13 +5,12 @@ import BaseDatos.ConexionComprobarGrupos;
 import BaseDatos.ConexionConsultarUnidades;
 import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionModificarArticulos;
-import BaseDatos.ConexionReporteKardex;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerArticulos;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -40,11 +39,13 @@ String almacenActivoMostrar;
 int codigoGrupoActual;
 String codigoSubGrupoActual;
 int codigoUnidadActual;
- 
+ Logger log=LoggerInfo.getLogger();
  
     public Modificar_Articulo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        try{
         ConexionComprobarGrupos grupo=new ConexionComprobarGrupos();
         
         grupo.validar();
@@ -96,6 +97,11 @@ int codigoUnidadActual;
          almacenPrincipal.consultaAlmacenPrincipal();
          almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
          etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+        }catch(Exception e){
+        log.severe("ERROR AL MODIFICAR ARTICULOS");
+        log.severe(e.toString());
+        }
+
     }
 
    

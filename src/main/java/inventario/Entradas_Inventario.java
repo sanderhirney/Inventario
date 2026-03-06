@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -81,9 +82,11 @@ String documento_rec;
 public Dimension resolucion;//variable para leer el ancho y alto de la ventana
 //para darle formato al campo al momento de realizar la multiplicacion de cantidad*costo unitaroio
  String almacenActivoMostrar;
+ Logger log=LoggerInfo.getLogger();
  public Entradas_Inventario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        try{
         resolucion=super.getToolkit().getScreenSize();
         this.setSize(resolucion);
         modelo= (DefaultTableModel)Tabla_datos.getModel();//para poder manipular la tabla
@@ -131,6 +134,11 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
          almacenPrincipal.consultaAlmacenPrincipal();
          almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
          etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+         
+        }catch(Exception e){
+            log.severe("ERROR AL CREAR LA ENTRADA");
+            log.severe(e.toString());
+        }
     }//constructor
    
     

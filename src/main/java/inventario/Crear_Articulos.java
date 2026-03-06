@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -29,10 +30,13 @@ public class Crear_Articulos extends javax.swing.JDialog {
     Date fecha= new Date();
     int codigo_seccion;
     String almacenActivoMostrar;
+    Logger log=LoggerInfo.getLogger();
  java.sql.Date sqlFecha = new java.sql.Date(fecha.getTime());
     public Crear_Articulos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        try
+        {
         ConexionComprobarGrupos grupo=new ConexionComprobarGrupos();
         grupo.validar();
         codigoGrupo=grupo.grupos();
@@ -62,6 +66,10 @@ public class Crear_Articulos extends javax.swing.JDialog {
          almacenPrincipal.consultaAlmacenPrincipal();
          almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
          etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+        }catch(Exception e){
+        log.severe("ERROR AL CREAR ARTICULO");
+        log.severe(e.toString());
+        }
     }
 
     
