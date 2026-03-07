@@ -3,6 +3,7 @@ package inventario;
 
 import BaseDatos.ConexionCargos;
 import BaseDatos.ConexionVerAlmacenes;
+import Modelos.AlmacenDTO;
 import Modelos.CargosDTO;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ String nombre_seleccion;
 int estado=0;
 int codigo_seleccion;
 TableRowSorter filtro;
-String almacenActivoMostrar;
+AlmacenDTO almacenPrincipal;
 Logger log=LoggerInfo.getLogger();
 List<CargosDTO> listaCargos=new ArrayList<>();
     public VerCargos(java.awt.Frame parent, boolean modal) {
@@ -40,10 +41,13 @@ List<CargosDTO> listaCargos=new ArrayList<>();
             log.severe(e.getMessage());
             JOptionPane.showMessageDialog(null, "Error: "+e, "Error Grave", JOptionPane.ERROR_MESSAGE);
         }
-        ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-         almacenPrincipal.consultaAlmacenPrincipal();
-         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+         GestionDeAlmacenes.getInstance().llamarDatos();
+        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+        if(almacenPrincipal != null){
+            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+        }else{
+             etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
         
     }
 

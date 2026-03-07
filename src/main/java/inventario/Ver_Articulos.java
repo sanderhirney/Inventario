@@ -4,6 +4,7 @@ package inventario;
 import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerArticulos;
+import Modelos.AlmacenDTO;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -22,6 +23,7 @@ Iterator lista2;
 String nombre_seleccion;
 String codigo_seleccion;
 int codigo_seccion;
+AlmacenDTO almacenPrincipal;
 TableRowSorter filtro;
 int habilitarBoton=1;//1 para si y 0 cero para no. si es entrada si. si es salida No lo habilita
 String almacenActivoMostrar;
@@ -33,11 +35,13 @@ Logger log=LoggerInfo.getLogger();
         ConexionSecciones secciones=new ConexionSecciones();
         secciones.consulta();
         codigo_seccion=secciones.codigo_seccion();
-        //InformacionArticulos();
-        ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-         almacenPrincipal.consultaAlmacenPrincipal();
-         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+         GestionDeAlmacenes.getInstance().llamarDatos();
+        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+        if(almacenPrincipal != null){
+            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+        }else{
+             etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
         }catch(Exception e){
         log.severe("ERROR AL VER ARTICULOS");
         log.severe(e.toString());

@@ -9,6 +9,7 @@ import BaseDatos.ConexionCargos;
 import BaseDatos.ConexionCrearCargos;
 import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
+import Modelos.AlmacenDTO;
 import Modelos.CargosDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class Crear_Cargo extends javax.swing.JDialog {
    Logger log=LoggerInfo.getLogger();
    List<String> descripciones=new ArrayList<>();
    List<CargosDTO> listaCargos=new ArrayList<>();
-   String almacenActivoMostrar;
+   AlmacenDTO almacenPrincipal;
    int codigo_seccion;
     public Crear_Cargo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -35,10 +36,13 @@ public class Crear_Cargo extends javax.swing.JDialog {
            codigo_seccion=secciones.codigo_seccion();
            ConexionCargos cargos= new ConexionCargos();
            listaCargos=cargos.consulta();
-           ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-           almacenPrincipal.consultaAlmacenPrincipal();
-           almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-           etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+            GestionDeAlmacenes.getInstance().llamarDatos();
+        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+        if(almacenPrincipal != null){
+            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+        }else{
+             etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
        } catch (SQLException ex) {
            
            log.severe(ex.getMessage());

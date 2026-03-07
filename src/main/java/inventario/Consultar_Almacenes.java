@@ -6,6 +6,7 @@
 package inventario;
 
 import BaseDatos.ConexionVerAlmacenes;
+import Modelos.AlmacenDTO;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -17,53 +18,28 @@ import javax.swing.table.DefaultTableModel;
  * @author Usuario
  */
 public class Consultar_Almacenes extends javax.swing.JDialog {
-
-    List<String> codigos_almacenes=new ArrayList<>();
-    List<String> denominacion_almacenes=new ArrayList<>();
-    List<Integer> tipo_almacenes=new ArrayList<>();
-    List<Integer> principal= new ArrayList<>();
-    List<String> denominacionesTipo=new ArrayList<>();
-    List<String> denominacionesPrincipal=new ArrayList<>();
+    List<AlmacenDTO> listaAlmacenes=new ArrayList<>();
+    
     DefaultTableModel modelo;
-    Iterator lista1;
-    Iterator lista2;
-    Iterator lista3;
-    Iterator lista4;
+    
     public Consultar_Almacenes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         
         modelo=(DefaultTableModel)Tabla_almacenes.getModel();
-        ConexionVerAlmacenes almacenes=new ConexionVerAlmacenes();
-        almacenes.consulta();
-        codigos_almacenes=almacenes.getCodigoAlmacenes();
-        denominacion_almacenes=almacenes.getDenominacionAlmacenes();
-        tipo_almacenes=almacenes.getTipoAlmacenes();
-        principal=almacenes.getprincipal();
-        
-        for(int i=0; i<tipo_almacenes.size(); i++){
-            if(tipo_almacenes.get(i)==0){
-                denominacionesTipo.add("DESTINO");
-            }
-            if(tipo_almacenes.get(i)==1){
-                denominacionesTipo.add("DESPACHO");
-            }
-        }
-        for(int i=0; i<principal.size(); i++){
-            if(principal.get(i)==0){
-                denominacionesPrincipal.add("NO");
-            }
-            if(principal.get(i)==1){
-                denominacionesPrincipal.add("SI");
-            }
-        }
-        lista1=codigos_almacenes.iterator();
-        lista2=denominacion_almacenes.iterator();
-        lista3=denominacionesTipo.iterator();
-        lista4=denominacionesPrincipal.iterator();
-        while(lista1.hasNext())
-        {
-            modelo.addRow(new Object[]{lista1.next(), lista2.next(), lista3.next(), lista4.next()});
+        GestionDeAlmacenes.getInstance().llamarDatos();
+        listaAlmacenes=GestionDeAlmacenes.getInstance().almacenes();
+        for(AlmacenDTO almacen: listaAlmacenes){
+          
+            modelo.addRow(new Object[]{almacen.codigo(), almacen.denominacion(), 
+                (
+                 (almacen.despacho()&&almacen.destino())?"DESPACHO/DETINO":
+                 (almacen.despacho())?"DESPACHO":
+                 (almacen.destino())? "DESTINO":"NOESTABLECIDO"
+                        
+                        
+                 ), 
+                almacen.principal()?"SI":"NO"});
         }
     }
 

@@ -4,6 +4,7 @@ package inventario;
 import BaseDatos.ConexionConsultarFirmasAsignadas;
 import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
+import Modelos.AlmacenDTO;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -25,7 +26,6 @@ String nombre_seleccion;
 int estado=0;
 int codigo_seleccion;
 TableRowSorter filtro;
-String almacenActivoMostrar;
 int codigo_seccion;
 List<Integer> codigo_cargos=new ArrayList<>();
 List<String> nombres_firmantes_cargos=new ArrayList<>();
@@ -38,6 +38,7 @@ List<String> apellidos_firmantes_servicios=new ArrayList<>();
 List<String> cedula_firmantes_servicios=new ArrayList<>();
 List<String> descripcion_servicios=new ArrayList<>();
 Logger log=LoggerInfo.getLogger();
+AlmacenDTO almacenPrincipal;
     public VerFirmantes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -83,10 +84,13 @@ Logger log=LoggerInfo.getLogger();
         {
             JOptionPane.showMessageDialog(null, "Error: "+e, "Error Grave", JOptionPane.ERROR_MESSAGE);
         }
-         ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-         almacenPrincipal.consultaAlmacenPrincipal();
-         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+          GestionDeAlmacenes.getInstance().llamarDatos();
+        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+        if(almacenPrincipal != null){
+            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+        }else{
+             etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
         }catch(Exception e){
         log.severe("ERROR AL VER LOS FIRMANTES");
         log.severe(e.toString());

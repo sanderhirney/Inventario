@@ -4,8 +4,7 @@ package inventario;
 import BaseDatos.ConexionDatosdeReporte;
 import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
-import Reportes.GenerarExceF4;
-import Reportes.GenerarExistGeneral;
+import Modelos.AlmacenDTO;
 import Reportes.ReporteExistencias;
 import Reportes.ReporteF157;
 import Reportes.ReporteModelo4;
@@ -22,7 +21,7 @@ ConexionSecciones secciones=new ConexionSecciones();
   int mes_reporte;
   int anio_reporte;
   int seccion;
-  String almacenActivoMostrar;
+ AlmacenDTO almacenPrincipal;
   Logger log=LoggerInfo.getLogger();
     public Reportes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -31,12 +30,13 @@ ConexionSecciones secciones=new ConexionSecciones();
         secciones.consulta();
         seccion=secciones.codigo_seccion();
         Progreso.setVisible(false);
-        
-        
-        ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-         almacenPrincipal.consultaAlmacenPrincipal();
-         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+         GestionDeAlmacenes.getInstance().llamarDatos();
+        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+        if(almacenPrincipal != null){
+            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+        }else{
+             etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
         }
          catch(Exception e){
                  log.severe("ERROR AL LLAMAR OPCIONES DE REPORTE");

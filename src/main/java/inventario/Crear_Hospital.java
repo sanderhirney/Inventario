@@ -8,6 +8,7 @@ package inventario;
 import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.conexionCrearHospitales;
+import Modelos.AlmacenDTO;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -25,7 +26,7 @@ Date fecha_creacion=Date.valueOf(fecha);
 int seccion_actual;
 String almacenActivoMostrar;
     Logger log=LoggerInfo.getLogger();
-
+AlmacenDTO almacenPrincipal=null;
     public Crear_Hospital(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -34,10 +35,14 @@ String almacenActivoMostrar;
         ConexionSecciones seccion=new ConexionSecciones();
         seccion.consulta();
         seccion_actual=seccion.codigo_seccion();
-        ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-         almacenPrincipal.consultaAlmacenPrincipal();
-         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+        GestionDeAlmacenes.getInstance().llamarDatos();
+        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+        if(almacenPrincipal != null){
+            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+        }else{
+             etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
+        
         }catch(Exception e){
             log.severe("ERROR AL CREAR HOSPITAL");
             log.severe(e.toString());

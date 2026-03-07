@@ -3,8 +3,9 @@ package Reportes;
 
 import BaseDatos.ConexionConsultarDecimales;
 import BaseDatos.ConexionReporteSalidas;
-import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerSeccionActiva;
+import Modelos.AlmacenDTO;
+import inventario.GestionDeAlmacenes;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +18,7 @@ import net.sf.jasperreports.engine.JRField;
 
 public class DatosdeGenerarSalida implements JRDataSource{
         private int index;
+        AlmacenDTO almacenPrincipal;
         List<String> subgrupo=new ArrayList<>();
         List<Integer> grupo=new ArrayList<>();
         List<Integer> codigoCargos=new ArrayList<>();
@@ -46,7 +48,7 @@ public class DatosdeGenerarSalida implements JRDataSource{
         ConexionReporteSalidas reporte=new ConexionReporteSalidas();
         ConexionConsultarDecimales decimales=new ConexionConsultarDecimales();
         ConexionVerSeccionActiva seccionActiva=new ConexionVerSeccionActiva();
-        ConexionVerAlmacenes almacen=new ConexionVerAlmacenes();
+        
     public DatosdeGenerarSalida(){
         reporte.consultas();
         codigoArticulos=reporte.getCodigosArticulos();
@@ -70,10 +72,11 @@ public class DatosdeGenerarSalida implements JRDataSource{
         decimales.consulta();
         decimalesPrecioUnitario=decimales.getDecimalCampo();
         decimalesCalculoTotal=decimales.getDecimalTotal();
-        almacen.consultaAlmacenPrincipal();
-        denominacionAlmacenPrincipal=almacen.getDenominacionprincipal();
-        ubicacionAlmacenPrincipal=almacen.getUbicacionprincipal();
-        codigoAlmacenPrincipal=almacen.getCodigoPrincipal();
+        
+        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+        denominacionAlmacenPrincipal=almacenPrincipal.denominacion();
+        ubicacionAlmacenPrincipal=almacenPrincipal.ubicacion();
+        codigoAlmacenPrincipal=almacenPrincipal.codigo();
         
     }
        

@@ -4,6 +4,7 @@ package inventario;
 import BaseDatos.ConexionActualizarSeccion;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerSecciones;
+import Modelos.AlmacenDTO;
 import Modelos.SeccionesDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ String nombre_seleccion;
 int estado=0;
 int codigo_seleccion;
 TableRowSorter filtro;
-String almacenActivoMostrar;
+AlmacenDTO almacenPrincipal;
 List<SeccionesDTO> secciones=new ArrayList<>();
 Logger log=LoggerInfo.getLogger();
     public Ver_Secciones(java.awt.Frame parent, boolean modal) {
@@ -32,15 +33,17 @@ Logger log=LoggerInfo.getLogger();
             secciones=seccion.consultaSeccion();
             modelo=(DefaultTableModel)Tabla_Secciones.getModel();
             filtro=new TableRowSorter(Tabla_Secciones.getModel());
-                for(SeccionesDTO empresa:secciones)
+                for(SeccionesDTO section:secciones)
                 {
-                    modelo.addRow(new Object[]{empresa.codigo(), empresa.descripcion()});
+                    modelo.addRow(new Object[]{section.codigo(), section.descripcion()});
                 }
-            
-            ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-            almacenPrincipal.consultaAlmacenPrincipal();
-            almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-            etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+             GestionDeAlmacenes.getInstance().llamarDatos();
+        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+        if(almacenPrincipal != null){
+            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+        }else{
+             etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
         }
         catch(Exception ex)
         {

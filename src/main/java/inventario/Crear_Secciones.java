@@ -2,8 +2,8 @@
 package inventario;
 
 import BaseDatos.ConexionCrearEmpresas;
-import BaseDatos.ConexionFirmantes;
 import BaseDatos.ConexionVerAlmacenes;
+import Modelos.AlmacenDTO;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,22 +11,21 @@ import javax.swing.JOptionPane;
 
 
 public class Crear_Secciones extends javax.swing.JDialog {
-Iterator lista1;
-Iterator lista2;
-Iterator lista3;
-Iterator lista4;
 int posicion;
 List<String> cedulas_firmas= new ArrayList<>();
 List<String> nombres_firmas= new ArrayList<>();
 List<String> apellidos_firmas= new ArrayList<>();
-String almacenActivoMostrar;
+AlmacenDTO almacenPrincipal;
     public Crear_Secciones(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-         almacenPrincipal.consultaAlmacenPrincipal();
-         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+         GestionDeAlmacenes.getInstance().llamarDatos();
+        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+        if(almacenPrincipal != null){
+            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+        }else{
+             etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
         
       
     }

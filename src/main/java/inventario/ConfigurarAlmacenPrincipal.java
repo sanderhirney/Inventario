@@ -8,6 +8,7 @@ package inventario;
 import BaseDatos.ConexionConfigurarAlmacenes;
 import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
+import Modelos.AlmacenDTO;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -17,34 +18,31 @@ import javax.swing.JOptionPane;
 
 public class ConfigurarAlmacenPrincipal extends javax.swing.JDialog {
 
- ConexionVerAlmacenes almacenes = new ConexionVerAlmacenes();
+ List<AlmacenDTO> listaAlmacenes=new ArrayList<>();
+ AlmacenDTO almacenPrincipal;
  List<String> codigosAlmacenes= new ArrayList<>();
  List<String> descripcionAlmacenes= new ArrayList<>();
  String almacenActivoMostrar;
- Iterator lista1;
+
  int codigoSeccionActual=0;
      Logger log=LoggerInfo.getLogger();
 
     public ConfigurarAlmacenPrincipal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        GestionDeAlmacenes.getInstance().llamarDatos();
         try
         {
-        almacenes.consulta();
-        codigosAlmacenes=almacenes.getCodigoAlmacenes();
-        descripcionAlmacenes=almacenes.getDenominacionAlmacenes();
+        listaAlmacenes=GestionDeAlmacenes.getInstance().almacenes();
+        for(AlmacenDTO almacen: listaAlmacenes){
+            codigosAlmacenes.add(almacen.codigo());
+            descripcionAlmacenes.add(almacen.denominacion());
+            comboAlmacenes.addItem(almacen.denominacion());
+        }
+        
          ConexionSecciones seccion=new ConexionSecciones();
          seccion.consulta();
          codigoSeccionActual=seccion.codigo_seccion();
-       
-        
-            
-            lista1=descripcionAlmacenes.iterator();
-
-            while(lista1.hasNext())
-            {
-              comboAlmacenes.addItem((String) lista1.next());
-            }//while
         }//try
         catch(Exception e)
         {
@@ -53,11 +51,12 @@ public class ConfigurarAlmacenPrincipal extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "No se han podido obtener datos de los almacenes debido a: \n "+e, "Error", JOptionPane.ERROR_MESSAGE);
         }
         
-        ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-        almacenPrincipal.setCodigoSeccion(codigoSeccionActual);
-         almacenPrincipal.consultaAlmacenPrincipal();
-         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+        almacenPrincipal=GestionDeAlmacenes.getInstance().almacenPrincipal();
+        if(almacenPrincipal != null){
+            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+        }else{
+             etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
     }
 
     /**

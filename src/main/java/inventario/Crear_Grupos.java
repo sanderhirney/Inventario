@@ -8,6 +8,7 @@ package inventario;
 import BaseDatos.ConexionComprobarGrupos;
 import BaseDatos.ConexionCrearGrupos;
 import BaseDatos.ConexionVerAlmacenes;
+import Modelos.AlmacenDTO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -24,14 +25,17 @@ public class Crear_Grupos extends javax.swing.JDialog {
       List<String> codigos=new ArrayList<>();
       List<Integer> grupos=new ArrayList<>();
       int continuar;//variable que indica si continua o no
-      String almacenActivoMostrar;
+      AlmacenDTO almacenPrincipal;
     public Crear_Grupos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-         almacenPrincipal.consultaAlmacenPrincipal();
-         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+         GestionDeAlmacenes.getInstance().llamarDatos();
+        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+        if(almacenPrincipal != null){
+            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+        }else{
+             etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
     }
 
     /**

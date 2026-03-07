@@ -10,6 +10,7 @@ import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerConceptos;
 import BaseDatos.ConexionVerProveedores;
 import BaseDatos.ConexionVerificarDocumentoEntrada;
+import Modelos.AlmacenDTO;
 import Reportes.ReporteEntrada;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -23,7 +24,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Entradas_Inventario extends javax.swing.JDialog {
-
+AlmacenDTO almacenPrincipal;
+List<AlmacenDTO> listaAlmacenes=new ArrayList<>();
 List<String> descripcion=new ArrayList<>();
 List<Integer> codigo=new ArrayList<>();  
 List<String> nombre_proveedor=new ArrayList<>();
@@ -81,11 +83,12 @@ java.sql.Date fecha_doc_rec;
 String documento_rec;
 public Dimension resolucion;//variable para leer el ancho y alto de la ventana
 //para darle formato al campo al momento de realizar la multiplicacion de cantidad*costo unitaroio
- String almacenActivoMostrar;
+
  Logger log=LoggerInfo.getLogger();
  public Entradas_Inventario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        GestionDeAlmacenes.getInstance().llamarDatos();
         try{
         resolucion=super.getToolkit().getScreenSize();
         this.setSize(resolucion);
@@ -103,10 +106,16 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
         rif_proveedor=proveedor.rif_proveedor();
         lista1=descripcion.iterator();
         lista3=codigo.iterator();
-        almacenes.setCodigoSeccion(codigo_seccion);
-        almacenes.consultaDespacho();
-        codigo_almacenes=almacenes.getCodigoAlmacenesDespacho();
-        nombre_almacenes=almacenes.getDenominacionAlmacenesDespacho();
+        listaAlmacenes=GestionDeAlmacenes.getInstance().almacenes();
+        for(AlmacenDTO almacen: listaAlmacenes){
+            if(almacen.despacho()){
+                codigo_almacenes.add(almacen.codigo());
+                nombre_almacenes.add(almacen.denominacion());
+                Combo_Almacen.addItem(almacen.codigo()+" - "+almacen.denominacion());
+            }
+            
+           
+        }
         lista4=codigo_almacenes.iterator();
         lista5=nombre_almacenes.iterator();
         while(lista1.hasNext())
@@ -118,9 +127,7 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
         {
         Combo_Proveedor.addItem(lista2.next());
         }//while
-        while(lista4.hasNext()){
-         Combo_Almacen.addItem(lista4.next() + "-" + lista5.next());
-        }
+        
        
         decimales.setSeccion(codigo_seccion);
         decimales.consulta();
@@ -130,10 +137,13 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
         {
             JOptionPane.showMessageDialog(null, "La configuracion de decimales estan en cero(0) y con ellos los campos muestran todos los digitos", "Precaucion", JOptionPane.WARNING_MESSAGE);
         }
-        ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-         almacenPrincipal.consultaAlmacenPrincipal();
-         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+         
+        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+        if(almacenPrincipal != null){
+            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+        }else{
+             etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
          
         }catch(Exception e){
             log.severe("ERROR AL CREAR LA ENTRADA");

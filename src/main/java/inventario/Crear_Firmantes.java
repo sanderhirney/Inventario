@@ -5,6 +5,7 @@ import BaseDatos.ConexionCrearFirmantes;
 import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerificarFirmantes;
+import Modelos.AlmacenDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,7 +20,7 @@ public class Crear_Firmantes extends javax.swing.JDialog {
     List<Integer> codigos=new ArrayList<>();
     Iterator lista1;
     int seccion_firmas;
-    String almacenActivoMostrar;
+    AlmacenDTO almacenPrincipal;
     Logger log=LoggerInfo.getLogger();
     public Crear_Firmantes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -29,13 +30,16 @@ public class Crear_Firmantes extends javax.swing.JDialog {
         ConexionSecciones seccion=new ConexionSecciones();
         seccion.consulta();
         seccion_firmas=seccion.codigo_seccion();
-       
+         GestionDeAlmacenes.getInstance().llamarDatos();
+        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+        if(almacenPrincipal != null){
+            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+        }else{
+             etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
         
        
-       ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-         almacenPrincipal.consultaAlmacenPrincipal();
-         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+       
         }catch(SQLException e){
         log.severe("ERROR AL CREAR FIRMANTES");
         log.severe(e.toString());

@@ -9,6 +9,7 @@ import BaseDatos.ConexionArticuloaSeccion;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerArticulos;
 import BaseDatos.ConexionVerSecciones;
+import Modelos.AlmacenDTO;
 import Modelos.SeccionesDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ public class Asignar_seccion_art extends javax.swing.JDialog {
  DefaultTableModel modelo;
  String almacenActivoMostrar;
  List<SeccionesDTO> empresas=new ArrayList<>();
+ AlmacenDTO almacenPrincipal;
  int codigo_seleccion;
     public Asignar_seccion_art(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -49,10 +51,13 @@ public class Asignar_seccion_art extends javax.swing.JDialog {
              Combo_Origen.addItem(empresa);
              Combo_Destino.addItem(empresa);
          }
-         ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-         almacenPrincipal.consultaAlmacenPrincipal();
-         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+          GestionDeAlmacenes.getInstance().llamarDatos();
+        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+        if(almacenPrincipal != null){
+            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+        }else{
+             etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
      } catch (SQLException ex) {
          log.severe(ex.getMessage());
          Logger.getLogger(Asignar_seccion_art.class.getName()).log(Level.SEVERE, null, ex);

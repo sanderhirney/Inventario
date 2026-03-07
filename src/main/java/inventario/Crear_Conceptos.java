@@ -7,6 +7,7 @@ package inventario;
 
 import BaseDatos.ConexionCrearConceptos;
 import BaseDatos.ConexionVerAlmacenes;
+import Modelos.AlmacenDTO;
 
 import javax.swing.JOptionPane;
 
@@ -17,15 +18,18 @@ import javax.swing.JOptionPane;
 public class Crear_Conceptos extends javax.swing.JDialog {
 
     String tip;
-    String almacenActivoMostrar;
+    AlmacenDTO almacenPrincipal;
      
     public Crear_Conceptos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-         almacenPrincipal.consultaAlmacenPrincipal();
-         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+         GestionDeAlmacenes.getInstance().llamarDatos();
+        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+        if(almacenPrincipal != null){
+            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+        }else{
+             etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
        
     }
 

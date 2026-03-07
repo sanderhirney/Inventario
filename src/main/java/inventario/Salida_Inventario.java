@@ -9,6 +9,7 @@ import BaseDatos.ConexionOperacionesSalidas;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerConceptos;
 import BaseDatos.ConexionVerServicios;
+import Modelos.AlmacenDTO;
 import Reportes.ReporteSalida;
 import java.awt.Dimension;
 import java.sql.SQLException;
@@ -23,6 +24,9 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class Salida_Inventario extends javax.swing.JDialog {
+    AlmacenDTO almacenPrincipal;
+    List<AlmacenDTO> listaAlmacenes=new ArrayList<>();
+    
     DefaultTableModel modelo;
     Iterator lista1;
     Iterator lista2;
@@ -95,12 +99,21 @@ public class Salida_Inventario extends javax.swing.JDialog {
         conceptos.consulta();
         descripcion_concepto=conceptos.descripcion();
         codigo_concepto=conceptos.codigo();
-        almacenes.consultaDespacho();
-        almacenes.consultaDestino();
-        codigo_almacenes_despacho=almacenes.getCodigoAlmacenesDespacho();
-        nombre_almacenes_despacho=almacenes.getDenominacionAlmacenesDespacho();
-        codigo_almacenes_destino=almacenes.getCodigoAlmacenesDestino();
-        nombre_almacenes_destino=almacenes.getDenominacionAlmacenesDestino();
+        listaAlmacenes=GestionDeAlmacenes.getInstance().almacenes();
+        for(AlmacenDTO almacen: listaAlmacenes){
+          if(almacen.despacho()){
+              codigo_almacenes_despacho.add(almacen.codigo());
+            nombre_almacenes_despacho.add(almacen.denominacion());
+            Combo_almacen_despacho.addItem(almacen.denominacion());
+          }
+          if(almacen.destino()){
+              codigo_almacenes_destino.add(almacen.codigo());
+             nombre_almacenes_destino.add(almacen.denominacion());
+             Combo_almacen_destino.addItem(almacen.denominacion());
+          }
+        }
+        
+        
         lista1=descripcion_concepto.iterator();
         lista3=codigo_concepto.iterator();
         lista4=nombre_almacenes_despacho.iterator();
@@ -119,18 +132,12 @@ public class Salida_Inventario extends javax.swing.JDialog {
             Combo_Servicio.addItem(lista2.next());
             
         }
-        while(lista4.hasNext())
-        {
-            Combo_almacen_despacho.addItem((String) lista4.next());
+        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+        if(almacenPrincipal != null){
+            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+        }else{
+             etiquetaAlmacenActivo.setText("NO OBTENIDO");
         }
-        while(lista5.hasNext())
-        {
-            Combo_almacen_destino.addItem((String) lista5.next());
-        }
-        ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-         almacenPrincipal.consultaAlmacenPrincipal();
-         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
         
         decimales.setSeccion(codigo_seccion);
         decimales.consulta();

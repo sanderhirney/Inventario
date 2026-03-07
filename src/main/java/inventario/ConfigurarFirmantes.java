@@ -4,8 +4,7 @@ import BaseDatos.ConexionAsignarActualizarFirmas;
 import BaseDatos.ConexionConsultarDatosFirmantes;
 import BaseDatos.ConexionConsultarFirmasAsignadas;
 import BaseDatos.ConexionSecciones;
-import BaseDatos.ConexionVerAlmacenes;
-import java.sql.SQLException;
+import Modelos.AlmacenDTO;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -31,6 +30,7 @@ public class ConfigurarFirmantes extends javax.swing.JDialog {
  Iterator lista3;
  Iterator lista4;
  int codigoSeccion=0;
+ AlmacenDTO almacenPrincipal;
  Logger log=LoggerInfo.getLogger();
 
     public ConfigurarFirmantes(java.awt.Frame parent, boolean modal) {
@@ -76,10 +76,13 @@ public class ConfigurarFirmantes extends javax.swing.JDialog {
                  }
                 
       
-        ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-         almacenPrincipal.consultaAlmacenPrincipal();
-         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+         GestionDeAlmacenes.getInstance().llamarDatos();
+        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+        if(almacenPrincipal != null){
+            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+        }else{
+             etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
     }
 
     /**

@@ -7,6 +7,7 @@ package inventario;
 
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerServicios;
+import Modelos.AlmacenDTO;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -22,7 +23,7 @@ public class Consultar_Servicio extends javax.swing.JDialog {
  DefaultTableModel modelo;
  Iterator lista1;
  Iterator lista2;
- String almacenActivoMostrar;
+ AlmacenDTO almacenPrincipal;
     public Consultar_Servicio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -44,10 +45,13 @@ public class Consultar_Servicio extends javax.swing.JDialog {
         {
             JOptionPane.showMessageDialog(null, "No se han podido obtener datos debido a: \n "+e, "Eror", JOptionPane.ERROR_MESSAGE);
         }
-        ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-         almacenPrincipal.consultaAlmacenPrincipal();
-         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+         GestionDeAlmacenes.getInstance().llamarDatos();
+        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+        if(almacenPrincipal != null){
+            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+        }else{
+             etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
     }
 
     /**

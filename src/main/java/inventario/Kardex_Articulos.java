@@ -3,8 +3,8 @@ package inventario;
 
 import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionReporteKardex;
-import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerArticulos;
+import Modelos.AlmacenDTO;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -38,7 +38,7 @@ Iterator lista6;
 Iterator lista7;
 String almacenActivoMostrar;
  Logger log=LoggerInfo.getLogger();
- 
+ AlmacenDTO almacenPrincipal;
     public Kardex_Articulos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -69,10 +69,13 @@ String almacenActivoMostrar;
         {
             JOptionPane.showMessageDialog(null, "Error: "+e, "Error Grave", JOptionPane.ERROR_MESSAGE);
         }
-        ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-         almacenPrincipal.consultaAlmacenPrincipal();
-         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+         GestionDeAlmacenes.getInstance().llamarDatos();
+        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+        if(almacenPrincipal != null){
+            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+        }else{
+             etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
          
         }catch(Exception e){
         log.severe("ERROR AL CONSULTAR EL KARDEX DE ARTICULOS");

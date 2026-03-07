@@ -7,6 +7,7 @@ import BaseDatos.ConexionCrearArticulo;
 import BaseDatos.ConexionDeshacerArt;
 import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
+import Modelos.AlmacenDTO;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -29,7 +30,7 @@ public class Crear_Articulos extends javax.swing.JDialog {
     Iterator lista4;
     Date fecha= new Date();
     int codigo_seccion;
-    String almacenActivoMostrar;
+    AlmacenDTO almacenPrincipal;
     Logger log=LoggerInfo.getLogger();
  java.sql.Date sqlFecha = new java.sql.Date(fecha.getTime());
     public Crear_Articulos(java.awt.Frame parent, boolean modal) {
@@ -62,10 +63,13 @@ public class Crear_Articulos extends javax.swing.JDialog {
         ConexionSecciones secciones=new ConexionSecciones();
         secciones.consulta();
         codigo_seccion=secciones.codigo_seccion();
-        ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-         almacenPrincipal.consultaAlmacenPrincipal();
-         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+         GestionDeAlmacenes.getInstance().llamarDatos();
+        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+        if(almacenPrincipal != null){
+            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+        }else{
+             etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
         }catch(Exception e){
         log.severe("ERROR AL CREAR ARTICULO");
         log.severe(e.toString());

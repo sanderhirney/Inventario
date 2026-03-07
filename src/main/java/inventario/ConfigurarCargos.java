@@ -9,6 +9,7 @@ import BaseDatos.ConexionCargos;
 import BaseDatos.ConexionConfigurarCargos;
 import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
+import Modelos.AlmacenDTO;
 import Modelos.CargosDTO;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ public class ConfigurarCargos extends javax.swing.JDialog {
  int codigoSeccionActual=0;
  int codigoCargoActualizar=0;
  List<CargosDTO> listaCargos=new ArrayList<>();
+ AlmacenDTO almacenPrincipal;
  Logger log=LoggerInfo.getLogger();
     public ConfigurarCargos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -46,11 +48,13 @@ public class ConfigurarCargos extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "No se han podido obtener datos de los cargos debido a: \n "+e, "Error", JOptionPane.ERROR_MESSAGE);
         }
         
-        ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-        almacenPrincipal.setCodigoSeccion(codigoSeccionActual);
-         almacenPrincipal.consultaAlmacenPrincipal();
-         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+         GestionDeAlmacenes.getInstance().llamarDatos();
+        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+        if(almacenPrincipal != null){
+            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+        }else{
+             etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
     }
 
     /**

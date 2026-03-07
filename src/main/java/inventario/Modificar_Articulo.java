@@ -7,6 +7,7 @@ import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionModificarArticulos;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerArticulos;
+import Modelos.AlmacenDTO;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -35,7 +36,7 @@ Iterator lista2;
 Iterator lista3;
 Iterator lista4;
 Iterator lista5;
-String almacenActivoMostrar;
+AlmacenDTO almacenPrincipal;
 int codigoGrupoActual;
 String codigoSubGrupoActual;
 int codigoUnidadActual;
@@ -93,10 +94,13 @@ int codigoUnidadActual;
         {
             JOptionPane.showMessageDialog(null, "Error: "+e, "Error Grave", JOptionPane.ERROR_MESSAGE);
         }
-        ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-         almacenPrincipal.consultaAlmacenPrincipal();
-         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+         GestionDeAlmacenes.getInstance().llamarDatos();
+        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+        if(almacenPrincipal != null){
+            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+        }else{
+             etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
         }catch(Exception e){
         log.severe("ERROR AL MODIFICAR ARTICULOS");
         log.severe(e.toString());

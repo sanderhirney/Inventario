@@ -7,9 +7,9 @@ import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionGuardarTemporal;
 import BaseDatos.ConexionModifEntradas;
 import BaseDatos.ConexionValidadorErroresRegistro;
-import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerEntradas;
 import BaseDatos.ConexionVerTempEntradas;
+import Modelos.AlmacenDTO;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.text.DecimalFormat;
@@ -44,13 +44,13 @@ String codigo_seleccion;
 int codigo_seccion;
 String nombre_seccion;
 String documento_seleccionado;
-String almacenActivoMostrar;
 TableRowSorter filtro;
 List<BigDecimal>formateado=new ArrayList<>();
 List<String> calculoFormateado=new ArrayList<>();
 int decimal_unitario;
 int decimal_totales;
 JFrame ventanaPrincipal;
+AlmacenDTO almacenPrincipal;
 Logger log=LoggerInfo.getLogger();
     public Consultar_Entradas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -114,10 +114,13 @@ Logger log=LoggerInfo.getLogger();
              JOptionPane.showMessageDialog(null, "No se puede desplegar informacion por: "+e+"\n Consulte al desarrollador", "Error Grave", JOptionPane.ERROR_MESSAGE);
          }
          
-         ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-         almacenPrincipal.consultaAlmacenPrincipal();
-         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+         GestionDeAlmacenes.getInstance().llamarDatos();
+        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+        if(almacenPrincipal != null){
+            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+        }else{
+             etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
          
     }
 

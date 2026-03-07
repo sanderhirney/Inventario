@@ -23,6 +23,7 @@ public class Ventana_Principal extends javax.swing.JFrame {
         this.getContentPane().setBackground(Color.WHITE);//color de fondo
         initComponents();
         try{
+            log.info("VENTANA PRINCIPAL CARGADA");
         resolucion=super.getToolkit().getScreenSize();
         this.setSize(resolucion);
         ConexionSecciones consulta_secciones=new ConexionSecciones();

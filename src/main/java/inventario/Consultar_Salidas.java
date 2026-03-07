@@ -7,9 +7,9 @@ import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionGuardarTemporal;
 import BaseDatos.ConexionModifSalidas;
 import BaseDatos.ConexionValidadorErroresRegistro;
-import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerSalidas;
 import BaseDatos.ConexionVerTempSalidas;
+import Modelos.AlmacenDTO;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Date;
@@ -54,6 +54,7 @@ int decimal_cantidad=0;
 int fila_seleccionada;//variable para tomar la fila que ha sido seleccionada
 String almacenActivoMostrar;
 JFrame ventanaPrincipal;
+AlmacenDTO almacenPrincipal;
 Logger log=LoggerInfo.getLogger();
     public Consultar_Salidas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -138,11 +139,13 @@ Logger log=LoggerInfo.getLogger();
                         JOptionPane.showMessageDialog(null, "No se puede desplegar informacion por: "+e+"\n Consulte al desarrollador", "Error Grave", JOptionPane.ERROR_MESSAGE);
 
                     }
-         ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-         almacenPrincipal.consultaAlmacenPrincipal();
-         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
-         
+         GestionDeAlmacenes.getInstance().llamarDatos();
+        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+        if(almacenPrincipal != null){
+            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+        }else{
+             etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
          
     }
 

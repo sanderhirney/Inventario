@@ -9,6 +9,7 @@ import BaseDatos.ConexionCrearAlmacen;
 import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerHospitales;
+import Modelos.AlmacenDTO;
 import Modelos.HospitalDTO;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -28,6 +29,7 @@ LocalDate fecha=LocalDate.now();
 Date fecha_creacion=Date.valueOf(fecha);
 int seccion_actual;
 String almacenActivoMostrar;
+AlmacenDTO almacenPrincipal;
     private static final Logger log=LoggerInfo.getLogger();
     List<HospitalDTO> hospitales=new ArrayList<>();
     public Crear_Almacenes(java.awt.Frame parent, boolean modal) throws SQLException {
@@ -37,10 +39,13 @@ String almacenActivoMostrar;
         ConexionSecciones seccion=new ConexionSecciones();
         seccion.consulta();
         seccion_actual=seccion.codigo_seccion();
-        ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-        almacenPrincipal.consultaAlmacenPrincipal();
-        almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-        etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+         GestionDeAlmacenes.getInstance().llamarDatos();
+        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+        if(almacenPrincipal != null){
+            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+        }else{
+             etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
         ConexionVerHospitales hospital=new ConexionVerHospitales();
         hospitales=hospital.consultar();
         for(HospitalDTO lista: hospitales){

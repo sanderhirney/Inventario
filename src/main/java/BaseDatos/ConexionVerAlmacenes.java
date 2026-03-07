@@ -1,6 +1,7 @@
 
 package BaseDatos;
 
+import Modelos.AlmacenDTO;
 import inventario.LoggerInfo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,168 +30,79 @@ public class ConexionVerAlmacenes {
     String codigoAlmacenPrincipal;
     int codigoSeccion;
     Logger log=LoggerInfo.getLogger();
+    List<AlmacenDTO> listaAlmacenes=new ArrayList<>();
+    AlmacenDTO almacenPrincipal;
     private void consultarSeccion(){
+        codigoSeccion=0;
         try{
         ConexionSecciones seccion= new ConexionSecciones();
         seccion.consulta();
         codigoSeccion=seccion.codigo_seccion();
         }catch(Exception e){
-        log.severe("ERROR EN LA CONEXION DE VER ALMACENES");
+        log.severe("ERROR EN LA CONEXION DE VER SECCIONES EN ALMACENES");
         log.severe(e.toString());
         }
     }
     
-    public void consulta()
-    {
-        consultarSeccion();
+    private void consultaGeneral() throws SQLException{
+            
+                 consultarSeccion();
         /*************/
           try
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select codigo_almacen, denominacion, tipo, principal from almacenes where seccion=? order by codigo_almacen");
-        consulta.setInt(1, codigoSeccion);
-        ejecutar=consulta.executeQuery();
-        while( ejecutar.next() )
-        {
-                     nombres_almacenes.add(ejecutar.getString("denominacion"));
-                     codigos_almacenes.add(ejecutar.getString("codigo_almacen"));
-                     tipo_almacenes.add(ejecutar.getInt(("tipo")));
-                     principal.add(ejecutar.getInt("principal"));
-                     
-                  
-                     
-        }//if
-          conectar.Cerrar();
+        try(PreparedStatement consulta2=conex.prepareStatement("select codigo_almacen,hospital_id, denominacion,ubicacion,  seccion_id, es_principal, es_despacho, es_destino, alias from almacenes where seccion_id=? order by codigo_almacen")){
+            consulta2.setInt(1, codigoSeccion);
+            try(ResultSet ejecutar2=consulta2.executeQuery()){
+                while(ejecutar2.next()){
+                AlmacenDTO almacen=new AlmacenDTO(
+                ejecutar2.getString("codigo_almacen"),
+                ejecutar2.getInt("hospital_id"),
+                ejecutar2.getString("denominacion"),
+                ejecutar2.getString("ubicacion"),
+                ejecutar2.getInt("seccion_id"),
+                ejecutar2.getBoolean("es_principal"),
+                ejecutar2.getBoolean("es_despacho"),
+                ejecutar2.getBoolean("es_destino"),
+                ejecutar2.getString("alias")
+                        
+                                    
+                
+                );
+                
+                listaAlmacenes.add(almacen);
+                
+                if(almacen.principal()){
+                almacenPrincipal=almacen;
+                }
+                }
+          }
+        }
+        
     }//consulta
            catch(SQLException ex)
     {
-        JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de los Almacene.\n Ventana Ver Alamcenes\n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de los Almacenes.\n Ventana Ver Almacenes\n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
     }
-    }//consulta
-    public void consultaDespacho()//1 para despacho y 0 para dstino
-    {
-        consultarSeccion();
-          try
-    {
-        conectar.Conectar();
-        conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select codigo_almacen, denominacion from almacenes where tipo=01 and seccion=?");
-        consulta.setInt(1, codigoSeccion);
-        ejecutar=consulta.executeQuery();
-        while( ejecutar.next() )
-        {
-                     nombres_almacenes_despacho.add(ejecutar.getString("denominacion"));
-                     codigos_almacenes_despacho.add(ejecutar.getString("codigo_almacen"));
-                  
-                     
-        }//if
+          finally{
           conectar.Cerrar();
-    }//consulta
-           catch(SQLException ex)
-    {
-        JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de los almacenes de Despacho.\n Ventana Ver Almacenes \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+          }
+          
     }
-    }//consulta
-    public void consultaDestino()//1 para despacho y 0 para dstino
-    {
-        consultarSeccion();
-          try
-    {
-        conectar.Conectar();
-        conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select codigo_almacen, denominacion from almacenes where tipo=0 and seccion=?");
-        consulta.setInt(1, codigoSeccion);
-        ejecutar=consulta.executeQuery();
-        while( ejecutar.next() )
-        {
-                     nombres_almacenes_destino.add(ejecutar.getString("denominacion"));
-                     codigos_almacenes_destino.add(ejecutar.getString("codigo_almacen"));
-                  
-                     
-        }//if
-          conectar.Cerrar();
-    }//consulta
-           catch(SQLException ex)
-    {
-        JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de los almacenes de destino.\n Ventana Ver Almacenes \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+    public void consultarAlmacenes() throws SQLException{
+        listaAlmacenes.clear();
+        almacenPrincipal=null;
+        consultaGeneral();
     }
-    }//consulta
-    public void consultaAlmacenPrincipal()//1 para despacho y 0 para dstino
-    {
-        consultarSeccion();
-          try
-    {
-        conectar.Conectar();
-        conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select codigo_almacen, denominacion, ubicacion from almacenes where es_principal=true and seccion_id=?");
-        consulta.setInt(1, codigoSeccion);
-        ejecutar=consulta.executeQuery();
-        while( ejecutar.next() )
-        {
-                    denominacionAlmacenPrincipal=(ejecutar.getString("denominacion"));
-                    ubicacionAlmacenPrincipal=(ejecutar.getString("ubicacion"));
-                    codigoAlmacenPrincipal=(ejecutar.getString("codigo_almacen"));
-                  
-                     
-        }//if
-          conectar.Cerrar();
-    }//consulta
-           catch(SQLException ex)
-    {
-        JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion del almacen principal.\n Ventana Ver Almacenes \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+    public List<AlmacenDTO> obtenerAlmacenes(){
+        return listaAlmacenes;
     }
-    }//consulta
-    
-    public List<String> getCodigoAlmacenes()
-    {
-        return codigos_almacenes;
-    }
-    public void setCodigoSeccion(int recibido){
-        codigoSeccion=recibido;
-    }
-    public List<String> getDenominacionAlmacenes()
-    {
-        return nombres_almacenes;
-    }
-      public List<String> getCodigoAlmacenesDespacho()
-    {
-        return codigos_almacenes_despacho;
+    public AlmacenDTO obtenerAlmacenPrincipal(){
+     return almacenPrincipal;
     }
     
-    public List<String> getDenominacionAlmacenesDespacho()
-    {
-        return nombres_almacenes_despacho;
-    }
-      public List<String> getCodigoAlmacenesDestino()
-    {
-        return codigos_almacenes_destino;
-    }
     
-    public List<String> getDenominacionAlmacenesDestino()
-    {
-        return nombres_almacenes_destino;
-    }
-    public List<Integer> getTipoAlmacenes()
-    {
-        return tipo_almacenes;
-    }
-    public List<Integer> getprincipal()
-    {
-        return principal;
-    }
-    
-    public String getDenominacionprincipal()
-    {
-        return denominacionAlmacenPrincipal;
-    }
-     public String getUbicacionprincipal()
-    {
-        return ubicacionAlmacenPrincipal;
-    }
-     public String getCodigoPrincipal(){
-         return codigoAlmacenPrincipal;
-     }
     
     
 }//clase

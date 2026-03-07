@@ -6,7 +6,7 @@
 package inventario;
 
 import BaseDatos.ConexionCrearUnidades;
-import BaseDatos.ConexionVerAlmacenes;
+import Modelos.AlmacenDTO;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,14 +15,17 @@ import javax.swing.JOptionPane;
  */
 public class Crear_Unidades extends javax.swing.JDialog {
 
-    String almacenActivoMostrar;
+    AlmacenDTO almacenPrincipal;
     public Crear_Unidades(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-         almacenPrincipal.consultaAlmacenPrincipal();
-         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+         GestionDeAlmacenes.getInstance().llamarDatos();
+        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+        if(almacenPrincipal != null){
+            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+        }else{
+             etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
     }
 
     /**

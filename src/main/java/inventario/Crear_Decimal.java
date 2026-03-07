@@ -8,6 +8,7 @@ package inventario;
 import BaseDatos.ConexionActualizarDecimal;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerSecciones;
+import Modelos.AlmacenDTO;
 import Modelos.SeccionesDTO;
 import java.awt.HeadlessException;
 import java.sql.SQLException;
@@ -25,7 +26,7 @@ public class Crear_Decimal extends javax.swing.JDialog {
  Logger log=LoggerInfo.getLogger();
  List<SeccionesDTO> empresas=new ArrayList<>();
  int codigo_empresa;
- String almacenActivoMostrar;
+ AlmacenDTO almacenPrincipal;
     public Crear_Decimal(java.awt.Frame parent, boolean modal) throws SQLException {
         super(parent, modal);
         initComponents();
@@ -37,10 +38,13 @@ public class Crear_Decimal extends javax.swing.JDialog {
         for(SeccionesDTO empresa: empresas){
             Combo_Secciones.addItem(empresa);
         }
-        ConexionVerAlmacenes almacenPrincipal= new ConexionVerAlmacenes();
-         almacenPrincipal.consultaAlmacenPrincipal();
-         almacenActivoMostrar=almacenPrincipal.getDenominacionprincipal();
-         etiquetaAlmacenActivo.setText(almacenActivoMostrar);
+         GestionDeAlmacenes.getInstance().llamarDatos();
+        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+        if(almacenPrincipal != null){
+            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+        }else{
+             etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
         
     }
 
