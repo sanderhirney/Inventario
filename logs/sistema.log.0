@@ -1569,3 +1569,793 @@ mar. 07, 2026 12:18:24 P. M. BaseDatos.Conexion Conectar
 INFORMACIÓN: CONEXION A BD
 mar. 07, 2026 12:18:29 P. M. BaseDatos.Conexion Conectar
 INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:16:34 A. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 08, 2026 11:16:34 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:16:35 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:16:35 A. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 08, 2026 11:16:35 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_11-16-35.sql
+mar. 08, 2026 11:16:35 A. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 08, 2026 11:16:35 A. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 11:16:35 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:16:36 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_11-16-35.sql
+mar. 08, 2026 11:16:36 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-06_17-05-28.sql
+mar. 08, 2026 11:16:50 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:19:48 A. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 08, 2026 11:19:48 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:19:48 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:19:48 A. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 08, 2026 11:19:48 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_11-19-48.sql
+mar. 08, 2026 11:19:49 A. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 08, 2026 11:19:49 A. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 11:19:49 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:19:49 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_11-19-48.sql
+mar. 08, 2026 11:19:49 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-06_17-14-38.sql
+mar. 08, 2026 11:19:59 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:23:18 A. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 08, 2026 11:23:18 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:23:18 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:23:18 A. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 08, 2026 11:23:18 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_11-23-18.sql
+mar. 08, 2026 11:23:18 A. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 08, 2026 11:23:18 A. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 11:23:18 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:23:18 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_11-23-18.sql
+mar. 08, 2026 11:23:18 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-06_17-15-29.sql
+mar. 08, 2026 11:23:29 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:33:37 A. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 08, 2026 11:33:37 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:33:37 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:33:37 A. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 08, 2026 11:33:37 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_11-33-37.sql
+mar. 08, 2026 11:33:37 A. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 08, 2026 11:33:37 A. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 11:33:37 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:33:37 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_11-33-37.sql
+mar. 08, 2026 11:33:37 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-07_09-10-02.sql
+mar. 08, 2026 11:33:50 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:37:10 A. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 08, 2026 11:37:10 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:37:10 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:37:10 A. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 08, 2026 11:37:10 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_11-37-10.sql
+mar. 08, 2026 11:37:11 A. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 08, 2026 11:37:11 A. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 11:37:11 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:37:11 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_11-37-10.sql
+mar. 08, 2026 11:37:11 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-07_10-55-43.sql
+mar. 08, 2026 11:37:25 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:37:27 A. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 11:37:27 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:37:27 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:37:28 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:37:28 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:37:28 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:37:29 A. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 11:37:29 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:37:29 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:37:36 A. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 11:37:36 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:37:36 A. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 11:37:36 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:37:36 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:37:42 A. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 11:37:42 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:37:42 A. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 11:37:42 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:37:43 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:37:43 A. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 11:37:43 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:37:43 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:37:48 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:39:44 A. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 08, 2026 11:39:44 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:39:44 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:39:44 A. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 08, 2026 11:39:44 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_11-39-44.sql
+mar. 08, 2026 11:39:44 A. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 08, 2026 11:39:44 A. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 11:39:44 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:39:44 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_11-39-44.sql
+mar. 08, 2026 11:39:45 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-07_10-58-46.sql
+mar. 08, 2026 11:40:01 A. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 11:40:01 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:40:01 A. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 11:40:01 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:40:02 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:40:05 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:58:41 A. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 08, 2026 11:58:41 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:58:41 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:58:41 A. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 08, 2026 11:58:42 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_11-58-41.sql
+mar. 08, 2026 11:58:42 A. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 08, 2026 11:58:42 A. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 11:58:42 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:58:42 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_11-58-41.sql
+mar. 08, 2026 11:58:42 A. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-07_11-04-20.sql
+mar. 08, 2026 11:59:19 A. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 11:59:19 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:59:19 A. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 11:59:19 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:59:19 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:59:19 A. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 11:59:19 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:59:20 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 11:59:25 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:00:01 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 08, 2026 12:00:01 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:00:01 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:00:01 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 08, 2026 12:00:01 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_12-00-01.sql
+mar. 08, 2026 12:00:01 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 08, 2026 12:00:01 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:00:01 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:00:02 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_12-00-01.sql
+mar. 08, 2026 12:00:02 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-07_11-06-37.sql
+mar. 08, 2026 12:00:04 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:00:04 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:00:04 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:00:04 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:00:04 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:00:05 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:00:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:05:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:05:40 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 08, 2026 12:05:40 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:05:40 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:05:40 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 08, 2026 12:05:40 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_12-05-40.sql
+mar. 08, 2026 12:05:40 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 08, 2026 12:05:40 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:05:40 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:05:40 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_12-05-40.sql
+mar. 08, 2026 12:05:40 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-07_11-08-25.sql
+mar. 08, 2026 12:05:46 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:05:46 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:05:46 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:05:46 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:05:46 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:05:50 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:05:50 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:05:50 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:05:50 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:05:50 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:05:55 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:10:03 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 08, 2026 12:10:03 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:10:03 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:10:03 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 08, 2026 12:10:03 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_12-10-03.sql
+mar. 08, 2026 12:10:03 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_12-10-03.sql
+mar. 08, 2026 12:10:03 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-07_12-18-19.sql
+mar. 08, 2026 12:10:03 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 08, 2026 12:10:03 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:10:03 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:10:09 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:11:10 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 08, 2026 12:11:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:11:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:11:10 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 08, 2026 12:11:10 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_12-11-10.sql
+mar. 08, 2026 12:11:11 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 08, 2026 12:11:11 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:11:11 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:11:11 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_12-11-10.sql
+mar. 08, 2026 12:11:11 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-08_11-16-35.sql
+mar. 08, 2026 12:11:41 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:11:41 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:11:41 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:11:41 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:11:41 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:11:48 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:11:48 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:11:48 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:11:48 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:11:48 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:11:48 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:11:48 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:11:48 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:12:07 P. M. BaseDatos.ConexionCrearAlmacen crear
+INFORMACIÓN: CREAR ALMACEN
+mar. 08, 2026 12:12:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:12:10 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:12:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:12:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:12:10 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:12:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:12:13 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:12:13 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:12:14 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:12:14 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:12:14 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:12:15 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:17:13 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:17:18 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:29:55 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 08, 2026 12:29:55 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:29:55 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:29:55 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 08, 2026 12:29:55 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_12-29-55.sql
+mar. 08, 2026 12:29:56 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_12-29-55.sql
+mar. 08, 2026 12:29:56 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-08_11-19-48.sql
+mar. 08, 2026 12:29:56 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 08, 2026 12:29:56 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:29:56 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:29:59 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:29:59 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:29:59 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:30:06 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:30:06 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:30:06 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:30:06 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:30:06 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:31:47 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:31:58 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 08, 2026 12:31:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:31:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:31:58 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 08, 2026 12:31:58 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_12-31-58.sql
+mar. 08, 2026 12:31:59 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 08, 2026 12:31:59 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:31:59 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:31:59 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_12-31-58.sql
+mar. 08, 2026 12:31:59 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-08_11-23-18.sql
+mar. 08, 2026 12:32:01 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:32:01 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:32:02 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:32:02 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:32:02 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:32:04 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:32:04 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:32:08 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:32:08 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:32:08 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:32:12 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:32:12 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:32:12 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:32:21 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:34:02 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 08, 2026 12:34:02 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:34:02 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:34:02 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 08, 2026 12:34:02 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_12-34-02.sql
+mar. 08, 2026 12:34:03 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_12-34-02.sql
+mar. 08, 2026 12:34:03 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-08_11-33-37.sql
+mar. 08, 2026 12:34:03 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 08, 2026 12:34:03 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:34:03 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:34:06 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:34:06 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:34:06 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:34:06 P. M. inventario.ConfigurarTiposAlmacenes <init>
+GRAVE: ERROR AL OBETENER DATOS PARA EL TIPO DE ALMACEN
+mar. 08, 2026 12:34:06 P. M. inventario.ConfigurarTiposAlmacenes <init>
+GRAVE: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+mar. 08, 2026 12:34:49 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:34:49 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:34:49 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:34:59 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:34:59 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:35:00 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:35:00 P. M. inventario.ConfigurarTiposAlmacenes <init>
+GRAVE: ERROR AL OBETENER DATOS PARA EL TIPO DE ALMACEN
+mar. 08, 2026 12:35:00 P. M. inventario.ConfigurarTiposAlmacenes <init>
+GRAVE: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+mar. 08, 2026 12:36:48 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:36:52 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:37:24 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 08, 2026 12:37:24 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:37:24 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:37:24 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 08, 2026 12:37:24 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_12-37-24.sql
+mar. 08, 2026 12:37:24 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 08, 2026 12:37:24 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:37:24 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:37:24 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_12-37-24.sql
+mar. 08, 2026 12:37:24 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-08_11-37-10.sql
+mar. 08, 2026 12:37:28 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:37:28 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:37:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:37:29 P. M. inventario.ConfigurarTiposAlmacenes <init>
+GRAVE: ERROR AL OBETENER DATOS PARA EL TIPO DE ALMACEN
+mar. 08, 2026 12:37:29 P. M. inventario.ConfigurarTiposAlmacenes <init>
+GRAVE: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+mar. 08, 2026 12:37:41 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:37:41 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:37:41 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:37:41 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:37:41 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:37:45 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:37:45 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:37:45 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:37:45 P. M. inventario.ConfigurarTiposAlmacenes <init>
+GRAVE: ERROR AL OBETENER DATOS PARA EL TIPO DE ALMACEN
+mar. 08, 2026 12:37:45 P. M. inventario.ConfigurarTiposAlmacenes <init>
+GRAVE: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+mar. 08, 2026 12:37:50 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:38:27 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 08, 2026 12:38:27 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:38:27 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:38:27 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 08, 2026 12:38:27 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_12-38-27.sql
+mar. 08, 2026 12:38:28 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 08, 2026 12:38:28 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:38:28 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:38:28 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_12-38-27.sql
+mar. 08, 2026 12:38:28 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-08_11-39-44.sql
+mar. 08, 2026 12:38:31 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:38:31 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:38:31 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:38:31 P. M. inventario.ConfigurarTiposAlmacenes <init>
+GRAVE: ERROR AL OBETENER DATOS PARA EL TIPO DE ALMACEN
+mar. 08, 2026 12:38:31 P. M. inventario.ConfigurarTiposAlmacenes <init>
+GRAVE: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+mar. 08, 2026 12:38:40 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:43:36 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 08, 2026 12:43:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:43:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:43:36 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 08, 2026 12:43:36 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_12-43-36.sql
+mar. 08, 2026 12:43:36 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_12-43-36.sql
+mar. 08, 2026 12:43:36 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-08_11-58-41.sql
+mar. 08, 2026 12:43:36 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 08, 2026 12:43:36 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:43:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:43:39 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:43:39 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:43:39 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:43:39 P. M. inventario.ConfigurarTiposAlmacenes <init>
+GRAVE: ERROR AL OBETENER DATOS PARA EL TIPO DE ALMACEN
+mar. 08, 2026 12:43:39 P. M. inventario.ConfigurarTiposAlmacenes <init>
+GRAVE: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+mar. 08, 2026 12:43:43 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:43:43 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:43:43 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:43:43 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:43:43 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:43:47 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:52:19 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 08, 2026 12:52:19 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:52:19 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:52:19 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 08, 2026 12:52:19 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_12-52-19.sql
+mar. 08, 2026 12:52:19 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 08, 2026 12:52:19 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:52:19 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:52:19 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_12-52-19.sql
+mar. 08, 2026 12:52:19 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-08_12-00-01.sql
+mar. 08, 2026 12:52:22 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:52:22 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:52:22 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:52:33 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:52:42 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:52:42 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:52:42 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:54:51 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:54:59 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 08, 2026 12:54:59 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:54:59 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:54:59 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 08, 2026 12:54:59 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_12-54-59.sql
+mar. 08, 2026 12:54:59 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 08, 2026 12:54:59 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:54:59 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:54:59 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_12-54-59.sql
+mar. 08, 2026 12:54:59 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-08_12-05-40.sql
+mar. 08, 2026 12:55:03 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:55:03 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:55:03 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:55:03 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:55:03 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:55:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:55:13 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:55:13 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:55:13 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:55:16 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:55:16 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:55:16 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:55:16 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:55:16 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:55:23 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:58:58 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 08, 2026 12:58:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:58:59 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:58:59 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 08, 2026 12:58:59 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_12-58-59.sql
+mar. 08, 2026 12:58:59 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-08_12-58-59.sql
+mar. 08, 2026 12:58:59 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-08_12-10-03.sql
+mar. 08, 2026 12:58:59 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 08, 2026 12:58:59 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:58:59 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:59:04 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:59:04 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:59:04 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:59:04 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:59:04 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:59:09 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:59:10 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 08, 2026 12:59:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:59:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 08, 2026 12:59:16 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD

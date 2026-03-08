@@ -6,9 +6,12 @@
 package inventario;
 
 import BaseDatos.ConexionConfigurarAlmacenes;
+import BaseDatos.ConexionSecciones;
 import Modelos.AlmacenDTO;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -16,27 +19,28 @@ public class ConfigurarTiposAlmacenes extends javax.swing.JDialog {
 
  List<String> codigosAlmacenes= new ArrayList<>();
  List<String> descripcionAlmacenes= new ArrayList<>();
- List<Integer> tipoAlmacenes=new ArrayList<>();
  List<AlmacenDTO> listaAlmacenes=new ArrayList<>();
  AlmacenDTO almacenPrincipal;
- //TIPO 1 DESPACHO TIPO 0 RECIBE
+ int codigoSeccionActual=0;
+ Logger log=LoggerInfo.getLogger();
+
+ 
     public ConfigurarTiposAlmacenes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        try{
+        // 2. Limpiar el combo y las listas auxiliares antes de llenar
+        comboAlmacenes.removeAllItems();
+        codigosAlmacenes.clear(); 
+        descripcionAlmacenes.clear();
         GestionDeAlmacenes.getInstance().llamarDatos();
+        try{
+        
         listaAlmacenes=GestionDeAlmacenes.getInstance().almacenes();
         for(AlmacenDTO almacen:listaAlmacenes){
              codigosAlmacenes.add(almacen.codigo());
              descripcionAlmacenes.add(almacen.denominacion());
-             comboAlmacenes.addItem(almacen.denominacion());
+             comboAlmacenes.addItem(almacen);
              
-        }
-            
-        }//try
-        catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(null, "No se han podido obtener datos de los almacenes debido a: \n "+e, "Error", JOptionPane.ERROR_MESSAGE);
         }
         
         almacenPrincipal=GestionDeAlmacenes.getInstance().almacenPrincipal();
@@ -45,6 +49,20 @@ public class ConfigurarTiposAlmacenes extends javax.swing.JDialog {
         }else{
              etiquetaAlmacenActivo.setText("NO OBTENIDO");
         }
+        
+        ConexionSecciones seccion=new ConexionSecciones();
+         seccion.consulta();
+         codigoSeccionActual=seccion.codigo_seccion();
+            
+        }//try
+        catch(Exception e)
+        {
+            log.severe("ERROR AL OBETENER DATOS PARA EL TIPO DE ALMACEN");
+            log.severe(e.toString());
+            JOptionPane.showMessageDialog(null, "No se han podido obtener datos de los almacenes debido a: \n "+e, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
     }
 
     /**
@@ -167,34 +185,70 @@ public class ConfigurarTiposAlmacenes extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void botonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarActionPerformed
-        int seleccionado=comboAlmacenes.getSelectedIndex();
-        int tipoSeleccionado=0;
+       try{
+        AlmacenDTO seleccionado=(AlmacenDTO)comboAlmacenes.getSelectedItem();
+        boolean esDespacho=false;
+        boolean esDestino=false;
         if(botonDespacho.isSelected()){
-            tipoSeleccionado=1;
+           esDespacho=true;
         }
         if(botonRecibe.isSelected()){
-            tipoSeleccionado=0;
+            esDestino=true;
         }
         ConexionConfigurarAlmacenes configurar=new ConexionConfigurarAlmacenes();
-         configurar.setCodigoAlmacen(codigosAlmacenes.get(seleccionado));
-        configurar.setTipoActualizar(tipoSeleccionado);
+        configurar.setCodigoAlmacen(seleccionado.codigo());
+        configurar.setAlmacenDespacho(esDespacho);
+        configurar.setAlmacenDestino(esDestino);
+        configurar.setCodigoSeccion(codigoSeccionActual);
         configurar.actualizar();
         if(configurar.getRespuesta()==1){
             JOptionPane.showMessageDialog(null,"Tipo de almacen actualizado exitosamente" , "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            //actualizamos la informacion
+            GestionDeAlmacenes.getInstance().llamarDatos();
+            // Guardamos qué índice estaba seleccionado para que no se mueva el cursor
+            int indexSeleccionado = comboAlmacenes.getSelectedIndex();
+
+            comboAlmacenes.removeAllItems();
+            codigosAlmacenes.clear();
+            descripcionAlmacenes.clear();
+
+            listaAlmacenes = GestionDeAlmacenes.getInstance().almacenes();
+
+            for (AlmacenDTO almacen : listaAlmacenes) {
+                codigosAlmacenes.add(almacen.codigo());
+                descripcionAlmacenes.add(almacen.denominacion());
+                comboAlmacenes.addItem(almacen);
+            }
+            // Restauramos la selección para que el usuario no pierda donde estaba
+            if (indexSeleccionado != -1 && indexSeleccionado < comboAlmacenes.getItemCount()) {
+                comboAlmacenes.setSelectedIndex(indexSeleccionado);
+            }
+          
         }else{
             JOptionPane.showMessageDialog(null,"No se pudo actualizar el tipo de almacen" , "Error", JOptionPane.ERROR_MESSAGE);
         }
+       }catch(SQLException ex){
+       log.severe(ex.toString());
+       }
     }//GEN-LAST:event_botonActualizarActionPerformed
 
     private void comboAlmacenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboAlmacenesActionPerformed
         // TODO add your handling code here:
-        
-            if(tipoAlmacenes.get(comboAlmacenes.getSelectedIndex())==1){
-                botonDespacho.setSelected(true);
-            }
-             if(tipoAlmacenes.get(comboAlmacenes.getSelectedIndex())==0){
-                botonRecibe.setSelected(true);
-            }
+    // 1. Obtenemos el objeto seleccionado directamente del combo
+    AlmacenDTO seleccionado = (AlmacenDTO) comboAlmacenes.getSelectedItem();
+
+    // 2. IMPORTANTE: Validar que no sea nulo (esto evita el error de índice al cargar)
+    if (seleccionado == null) {
+        return; 
+    }
+
+    // 3. Marcamos los botones según el objeto SELECCIONADO (sin bucles)
+    // Usamos el booleano directamente para prender o apagar el botón
+    botonDespacho.setSelected(seleccionado.despacho());
+    botonRecibe.setSelected(seleccionado.destino());
+
+          
+           
     }//GEN-LAST:event_comboAlmacenesActionPerformed
 
     /**
@@ -248,7 +302,7 @@ public class ConfigurarTiposAlmacenes extends javax.swing.JDialog {
     private javax.swing.JButton botonActualizar;
     private javax.swing.JRadioButton botonDespacho;
     private javax.swing.JRadioButton botonRecibe;
-    private javax.swing.JComboBox<String> comboAlmacenes;
+    private javax.swing.JComboBox<AlmacenDTO> comboAlmacenes;
     private javax.swing.JLabel etiquetaAlmacenActivo;
     private javax.swing.ButtonGroup grupoBotones;
     private javax.swing.JButton jButton1;

@@ -6,7 +6,6 @@
 package inventario;
 
 import BaseDatos.ConexionSecciones;
-import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.conexionCrearHospitales;
 import Modelos.AlmacenDTO;
 import java.sql.Date;
@@ -23,8 +22,7 @@ public class Crear_Hospital extends javax.swing.JDialog {
 
 LocalDate fecha=LocalDate.now();
 Date fecha_creacion=Date.valueOf(fecha);
-int seccion_actual;
-String almacenActivoMostrar;
+//int seccion_actual;
     Logger log=LoggerInfo.getLogger();
 AlmacenDTO almacenPrincipal=null;
     public Crear_Hospital(java.awt.Frame parent, boolean modal) {
@@ -32,9 +30,9 @@ AlmacenDTO almacenPrincipal=null;
         initComponents();
         try{
         radioSi.setSelected(true);
-        ConexionSecciones seccion=new ConexionSecciones();
-        seccion.consulta();
-        seccion_actual=seccion.codigo_seccion();
+       // ConexionSecciones seccion=new ConexionSecciones();
+     //   seccion.consulta();
+       // seccion_actual=seccion.codigo_seccion();
         GestionDeAlmacenes.getInstance().llamarDatos();
         almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
         if(almacenPrincipal != null){

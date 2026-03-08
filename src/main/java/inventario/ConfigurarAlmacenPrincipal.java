@@ -7,10 +7,9 @@ package inventario;
 
 import BaseDatos.ConexionConfigurarAlmacenes;
 import BaseDatos.ConexionSecciones;
-import BaseDatos.ConexionVerAlmacenes;
 import Modelos.AlmacenDTO;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -22,7 +21,6 @@ public class ConfigurarAlmacenPrincipal extends javax.swing.JDialog {
  AlmacenDTO almacenPrincipal;
  List<String> codigosAlmacenes= new ArrayList<>();
  List<String> descripcionAlmacenes= new ArrayList<>();
- String almacenActivoMostrar;
 
  int codigoSeccionActual=0;
      Logger log=LoggerInfo.getLogger();
@@ -37,7 +35,7 @@ public class ConfigurarAlmacenPrincipal extends javax.swing.JDialog {
         for(AlmacenDTO almacen: listaAlmacenes){
             codigosAlmacenes.add(almacen.codigo());
             descripcionAlmacenes.add(almacen.denominacion());
-            comboAlmacenes.addItem(almacen.denominacion());
+            comboAlmacenes.addItem(almacen);
         }
         
          ConexionSecciones seccion=new ConexionSecciones();
@@ -164,15 +162,20 @@ public class ConfigurarAlmacenPrincipal extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
-        int seleccionado=comboAlmacenes.getSelectedIndex();
+        //int seleccionado=comboAlmacenes.getSelectedIndex();
+        AlmacenDTO seleccionado=(AlmacenDTO)comboAlmacenes.getSelectedItem();
+        try{
         ConexionConfigurarAlmacenes configurar=new ConexionConfigurarAlmacenes();
-        configurar.setCodigoAlmacen(codigosAlmacenes.get(seleccionado));
+        configurar.setCodigoAlmacen(seleccionado.codigo());
         configurar.setCodigoSeccion(codigoSeccionActual);
         configurar.consulta();
         if(configurar.getRespuesta()==1){
             JOptionPane.showMessageDialog(null,"Almacen principal configurado exitosamente" , "Informacion", JOptionPane.INFORMATION_MESSAGE);
         }else{
             JOptionPane.showMessageDialog(null,"No se pudo configurar el almacen principal" , "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        }catch(SQLException ex){
+        log.severe(ex.toString());
         }
     }//GEN-LAST:event_botonGuardarActionPerformed
 
@@ -225,7 +228,7 @@ public class ConfigurarAlmacenPrincipal extends javax.swing.JDialog {
     private javax.swing.JLabel Etiq_encabezado;
     private javax.swing.JPanel Panel1;
     private javax.swing.JButton botonGuardar;
-    private javax.swing.JComboBox<String> comboAlmacenes;
+    private javax.swing.JComboBox<AlmacenDTO> comboAlmacenes;
     private javax.swing.JLabel etiquetaAlmacenActivo;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

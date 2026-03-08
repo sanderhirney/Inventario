@@ -46,7 +46,7 @@ public static void main(String[] args) throws SQLException {
                 if(inicio.getResultado()==1){
                         Ventana_Principal ventana = new Ventana_Principal();
                         ventana.setLocationRelativeTo(null);
-                        ventana.setResizable(false);
+                       // ventana.setResizable(false);
                         ventana.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
                         ventana.setVisible(true);
                 }

@@ -5,7 +5,10 @@ import BaseDatos.ConexionSecciones;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.sql.SQLException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 
@@ -14,23 +17,25 @@ public class Ventana_Principal extends javax.swing.JFrame {
    
     String nombre;//nombre tomado al iniciar el programa
     Logger log=LoggerInfo.getLogger();
-    public Dimension resolucion;//variable para leer el ancho y alto de la ventana
     ConexionControlDeInicio inicio=new ConexionControlDeInicio();
   
       
     
     public Ventana_Principal() {
-        this.getContentPane().setBackground(Color.WHITE);//color de fondo
+      
         initComponents();
         try{
             log.info("VENTANA PRINCIPAL CARGADA");
-        resolucion=super.getToolkit().getScreenSize();
-        this.setSize(resolucion);
+       
+        this.getContentPane().setBackground(Color.WHITE);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        
         ConexionSecciones consulta_secciones=new ConexionSecciones();
         consulta_secciones.consulta();
         nombre=consulta_secciones.nombre_seccion();
        if(nombre==null)
         {
+            log.severe("NO SE PUDO OBTENER INFORMACION DE LA SECCION EN CUAL TRABAJAR");
             JOptionPane.showMessageDialog(null, "No se pudo Obtener la informacion de la Seccion en cual trabajar.\n Ventana Principal \n Contacte al Desarrollador \n " ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
@@ -38,6 +43,17 @@ public class Ventana_Principal extends javax.swing.JFrame {
         {
        Etiq_titulo.setText(nombre);
         }
+       
+       //mejorar el menu JTree:
+                // Elimina las líneas que unen los nodos
+         Arbol.putClientProperty("JTree.lineStyle", "None");
+
+         // Aumenta la altura de las filas (fundamental para que parezca un menú)
+         Arbol.setRowHeight(35); 
+
+         // Oculta el nodo raíz (el que dice "Menú" o "Inicio") para que se vea más limpio
+         Arbol.setRootVisible(false);
+         Arbol.setShowsRootHandles(true); // Muestra las flechitas para desplegar
              
        }catch(Exception e){
         log.severe("ERROR AL EJECUTAR LA VENTANA PRINCIPAL");
@@ -207,7 +223,13 @@ public class Ventana_Principal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+       //metodo para lanzar las ventanas
+    private void lanzarVentana(JDialog ventana) {
+            ventana.setResizable(false);
+            ventana.setLocationRelativeTo(this); // se centra en tu App
+            ventana.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+            ventana.setVisible(true);
+        }   
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
        
              int opcion= JOptionPane.showConfirmDialog(null," ¿Seguro desea Salir?. ¡No se conservara nada que no haya guardado!", "Confirmacion de Cancelar", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
@@ -227,239 +249,85 @@ public class Ventana_Principal extends javax.swing.JFrame {
 
     private void ArbolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ArbolMouseClicked
         // TODO add your handling code here:
-       if (evt.getClickCount() == 2)
-       {
-           
-        try
-        {
-          
-       
-          DefaultMutableTreeNode nodo = ((DefaultMutableTreeNode)Arbol.getLastSelectedPathComponent());     
-          Object nodeInfo = nodo.getUserObject();
-          
-          if( ((nodo.getParent().toString()).equals("Inventario")) && ((nodeInfo.toString()).equals("Entradas")) )
-          {
-            
-              //llamo primero a la ventana donde estan todas las entradas
-              //y desde esta ventana el usuario decide si crea uno nuevo 
-              //o modifica alguno seleccionado
-              Consultar_Entradas entrada=new Consultar_Entradas(this, true);
-              entrada.PrincipalFrame(this);
-              entrada.setResizable(false);
-              entrada.setLocationRelativeTo(null);
-              entrada.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              entrada.setVisible(true);
-              
-              
-             
-          }
-          if( ((nodo.getParent().toString()).equals("Inventario")) && ((nodeInfo.toString()).equals("Salidas")) )
-          {
-              Consultar_Salidas salida=new Consultar_Salidas(null, true);
-              salida.PrincipalFrame(this);
-              salida.setResizable(false);
-              salida.setLocationRelativeTo(null);
-              salida.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              salida.setVisible(true);
-             
-          }
-         
-          if( ((nodo.getParent().toString()).equals("Proveedores")) && ((nodeInfo.toString()).equals("Crear")) )
-          {
-              Crear_Proveedores crear_prov= new Crear_Proveedores(this, true);
-              crear_prov.setResizable(false);
-              crear_prov.setLocationRelativeTo(null);
-              crear_prov.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              crear_prov.setVisible(true);
-          }
-          if( ((nodo.getParent().toString()).equals("Proveedores")) && ((nodeInfo.toString()).equals("Consultar")) )
-          {
-              Consultar_Proveedores consultar_prov= new Consultar_Proveedores(this, true);
-              consultar_prov.setResizable(false);
-              consultar_prov.setLocationRelativeTo(null);
-              consultar_prov.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              consultar_prov.setVisible(true);
-          }
-          if( ((nodo.getParent().toString()).equals("Servicios")) && ((nodeInfo.toString()).equals("Crear")) )
-          {
-              Crear_Servicio crear_serv= new Crear_Servicio(this, true);
-              crear_serv.setResizable(false);
-              crear_serv.setLocationRelativeTo(null);
-              crear_serv.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              crear_serv.setVisible(true);
-          }
-          if( ((nodo.getParent().toString()).equals("Servicios")) && ((nodeInfo.toString()).equals("Consultar")) )
-          {
-              Consultar_Servicio consultar_serv= new Consultar_Servicio(this, true);
-              consultar_serv.setResizable(false);
-              consultar_serv.setLocationRelativeTo(null);
-              consultar_serv.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              consultar_serv.setVisible(true);
-          }
-          if( ((nodo.getParent().toString()).equals("Hospitales")) && ((nodeInfo.toString()).equals("Crear")) )
-          {
-               Crear_Hospital crear= new Crear_Hospital(this, true);
-                crear.setResizable(false);
-                crear.setLocationRelativeTo(null);
-                crear.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                crear.setVisible(true);
-          }
-          if( ((nodo.getParent().toString()).equals("Almacenes")) && ((nodeInfo.toString()).equals("Crear")) )
-          {
-              Crear_Almacenes crear_almacen= new Crear_Almacenes(this, true);
-                crear_almacen.setResizable(false);
-                crear_almacen.setLocationRelativeTo(null);
-                crear_almacen.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                crear_almacen.setVisible(true);
-          }
-          if( ((nodo.getParent().toString()).equals("Almacenes")) && ((nodeInfo.toString()).equals("Consultar")) )
-          {
-              Consultar_Almacenes consultar_almacenes= new Consultar_Almacenes(this, true);
-              consultar_almacenes.setResizable(false);
-              consultar_almacenes.setLocationRelativeTo(null);
-              consultar_almacenes.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              consultar_almacenes.setVisible(true);
-          }
-          if( ((nodo.getParent().toString()).equals("Almacenes")) && ((nodeInfo.toString()).equals("Principal")) )
-          {
-              ConfigurarAlmacenPrincipal configurar_almacenes= new ConfigurarAlmacenPrincipal(this, true);
-              configurar_almacenes.setResizable(false);
-              configurar_almacenes.setLocationRelativeTo(null);
-              configurar_almacenes.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              configurar_almacenes.setVisible(true);
-          }
-          if( ((nodo.getParent().toString()).equals("Almacenes")) && ((nodeInfo.toString()).equals("Tipos")) )
-          {
-              ConfigurarTiposAlmacenes tipos_almacenes= new ConfigurarTiposAlmacenes(this, true);
-              tipos_almacenes.setResizable(false);
-              tipos_almacenes.setLocationRelativeTo(null);
-              tipos_almacenes.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              tipos_almacenes.setVisible(true);
-          }
-          if( ((nodo.getParent().toString()).equals("Articulos")) && ((nodeInfo.toString()).equals("Crear")) )
-          {
-              Crear_Articulos crear_art= new Crear_Articulos(this, true);
-              crear_art.setResizable(false);
-              crear_art.setLocationRelativeTo(null);
-              crear_art.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              crear_art.setVisible(true);
-          }
-          if( ((nodo.getParent().toString()).equals("Articulos")) && ((nodeInfo.toString()).equals("Consultar")) )
-          {
-              Consultar_Articulos consultar_serv= new Consultar_Articulos(this, true);
-              consultar_serv.setResizable(false);
-              consultar_serv.setLocationRelativeTo(null);
-              consultar_serv.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              consultar_serv.setVisible(true);
-          }
-          if( ((nodo.getParent().toString()).equals("Articulos")) && ((nodeInfo.toString()).equals("Asignar")) )
-          {
-              Asignar_seccion_art asignar= new Asignar_seccion_art(this, true);
-              asignar.setResizable(false);
-              asignar.setLocationRelativeTo(null);
-              asignar.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              asignar.setVisible(true);
-          }
-          if( ((nodo.getParent().toString()).equals("Articulos")) && ((nodeInfo.toString()).equals("Modificar")) )
-          {
-              Modificar_Articulo modificar= new Modificar_Articulo(this, true);
-              modificar.setResizable(false);
-              modificar.setLocationRelativeTo(null);
-              modificar.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              modificar.setVisible(true);
-          }
-         
+       if (evt.getClickCount() == 2) {
+    DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) Arbol.getLastSelectedPathComponent();
+
+    // 1. Validaciones preventivas (Anti-Error)
+    if (nodo == null || !nodo.isLeaf()) {
+        return; // Si no hay selección o es un nodo padre, no hacemos nada
+    }
+
+    // 2. Extraemos info limpia
+    String hijo = nodo.getUserObject().toString();
+    String padre = (nodo.getParent() != null) ? nodo.getParent().toString() : "";
+
+    // 3. El Switch Maestro
+    switch (padre) {
+        case "Inventario" -> {
+            if (hijo.equals("Entradas")) {
+                Consultar_Entradas v = new Consultar_Entradas(this, true);
+                v.PrincipalFrame(this);
+                lanzarVentana(v);
+            } else if (hijo.equals("Salidas")) {
+                Consultar_Salidas v = new Consultar_Salidas(this, true);
+                v.PrincipalFrame(this);
+                lanzarVentana(v);
+            }  }
+
+        case "Proveedores" -> {
+            if (hijo.equals("Crear")) lanzarVentana(new Crear_Proveedores(this, true));
+            if (hijo.equals("Consultar")) lanzarVentana(new Consultar_Proveedores(this, true));
+               }
+
+        case "Almacenes" -> {
+            if (hijo.equals("Crear")) try {
+                lanzarVentana(new Crear_Almacenes(this, true));
+            } catch (SQLException ex) {
+                log.severe("ERROR AL LANZAR LA VENTANA DE CREAR ALMANACENES");
+                log.severe(ex.toString());
+            }
+            if (hijo.equals("Consultar")) lanzarVentana(new Consultar_Almacenes(this, true));
+            if (hijo.equals("Principal")) lanzarVentana(new ConfigurarAlmacenPrincipal(this, true));
+            if (hijo.equals("Tipos")) lanzarVentana(new ConfigurarTiposAlmacenes(this, true));
+               }
+        case "Hospitales" -> {
+            if (hijo.equals("Crear")) lanzarVentana(new Crear_Hospital(this, true));
+
         
-          if( ((nodo.getParent().toString()).equals("Reportes")) && ((nodeInfo.toString()).equals("Reportes")) )
-          {
-                       
-             Reportes reportes= new Reportes(this, true);
-              reportes.setResizable(false);
-              reportes.setLocationRelativeTo(null);
-              reportes.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              reportes.setVisible(true);
-          }
-           if( ((nodo.getParent().toString()).equals("Firmantes")) && ((nodeInfo.toString()).equals("Nuevo")) ){
-               Crear_Firmantes firmas= new Crear_Firmantes(this, true);
-              firmas.setResizable(false);
-              firmas.setLocationRelativeTo(null);
-              firmas.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              firmas.setVisible(true);
-           }
-           if( ((nodo.getParent().toString()).equals("Firmantes")) && ((nodeInfo.toString()).equals("Configurar")) ){
-               VerFirmantes firmas= new VerFirmantes(this, true);
-              firmas.setResizable(false);
-              firmas.setLocationRelativeTo(null);
-              firmas.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              firmas.setVisible(true);
-           }
-          
-          if( ((nodo.getParent().toString()).equals("Configuracion")) && ((nodeInfo.toString()).equals("Secciones")) )
-          {
-              Crear_Secciones secciones= new Crear_Secciones(this, true);
-              secciones.setResizable(false);
-              secciones.setLocationRelativeTo(null);
-              secciones.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              secciones.setVisible(true);
-          }
-          if( ((nodo.getParent().toString()).equals("Configuracion")) && ((nodeInfo.toString()).equals("Unidades")) )
-          {
-              Crear_Unidades unidades= new Crear_Unidades(this, true);
-              unidades.setResizable(false);
-              unidades.setLocationRelativeTo(null);
-              unidades.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              unidades.setVisible(true);
-          }
-          if( ((nodo.getParent().toString()).equals("Configuracion")) && ((nodeInfo.toString()).equals("Firmantes")) )
-          {
-              Crear_Firmantes firmas= new Crear_Firmantes(this, true);
-              firmas.setResizable(false);
-              firmas.setLocationRelativeTo(null);
-              firmas.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              firmas.setVisible(true);
-          }
-          if( ((nodo.getParent().toString()).equals("Configuracion")) && ((nodeInfo.toString()).equals("Cargos")) )
-          {
-              VerCargos cargos= new VerCargos(this, true);
-              cargos.setResizable(false);
-              cargos.setLocationRelativeTo(null);
-              cargos.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              cargos.setVisible(true);
-          }
-          if( ((nodo.getParent().toString()).equals("Configuracion")) && ((nodeInfo.toString()).equals("Conceptos")) )
-          {
-              Crear_Conceptos conceptos= new Crear_Conceptos(this, true);
-              conceptos.setResizable(false);
-              conceptos.setLocationRelativeTo(null);
-              conceptos.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              conceptos.setVisible(true);
-          }
-          if( ((nodo.getParent().toString()).equals("Configuracion")) && ((nodeInfo.toString()).equals("Grupos")) )
-          {
-              Crear_Grupos grupos= new Crear_Grupos(this, true);
-              grupos.setResizable(false);
-              grupos.setLocationRelativeTo(null);
-              grupos.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              grupos.setVisible(true);
-          }
-           if( ((nodo.getParent().toString()).equals("Configuracion")) && ((nodeInfo.toString()).equals("Decimales")) )
-          {
-              Crear_Decimal decimal= new Crear_Decimal(this, true);
-              decimal.setResizable(false);
-              decimal.setLocationRelativeTo(null);
-              decimal.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              decimal.setVisible(true);
-          }
-          
-   
-       }//evento try
-        catch( Exception e )
-        {
-            JOptionPane.showMessageDialog(null, "Por favor de doble click solo a los nodos internos.\n Ventana Principal  \n " +e,  "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         }
+        case "Articulos" ->{
+            if (hijo.equals("Crear")) lanzarVentana(new Crear_Articulos(this, true));
+            if (hijo.equals("Consultar")) lanzarVentana(new Consultar_Articulos(this, true));
+            if (hijo.equals("Asignar")) lanzarVentana(new Asignar_seccion_art(this, true));
+            if (hijo.equals("Modificar")) lanzarVentana(new Modificar_Articulo(this, true));
 
+        
+        }
+        case "Firmantes" -> {
+            if (hijo.equals("Configurar")) lanzarVentana(new VerFirmantes(this, true));
 
-    }//evento doble click
+        }
+        case "Reportes"->{
+           if (hijo.equals("Reportes")) lanzarVentana(new Reportes(this, true));
+
+        }
+            
+        case "Configuracion" -> {
+            if (hijo.equals("Secciones")) lanzarVentana(new Crear_Secciones(this, true));
+            if (hijo.equals("Unidades")) lanzarVentana(new Crear_Unidades(this, true));
+            if (hijo.equals("Firmantes")) lanzarVentana(new Crear_Firmantes(this, true));
+            if (hijo.equals("Cargos")) lanzarVentana(new VerCargos(this, true));
+            if (hijo.equals("Conceptos")) lanzarVentana(new Crear_Conceptos(this, true));
+            if (hijo.equals("Grupos")) lanzarVentana(new Crear_Grupos(this, true));
+            if (hijo.equals("Decimales")) try {
+                lanzarVentana(new Crear_Decimal(this, true));
+            } catch (SQLException ex) {
+                log.severe("ERROR AL LANZAR LA VENTANA DE CREAR DECIMALES");
+                log.severe(ex.toString());
+            }  
+        }
+    }//switch
+}//2 click
         
         
     }//GEN-LAST:event_ArbolMouseClicked
@@ -475,9 +343,9 @@ public class Ventana_Principal extends javax.swing.JFrame {
        
        if(seccion.getEstado()==1)
        {
-           ConexionSecciones consulta_empresas=new ConexionSecciones();
-            consulta_empresas.consulta();
-            nombre=consulta_empresas.nombre_seccion();
+           ConexionSecciones consulta_seccion=new ConexionSecciones();
+            consulta_seccion.consulta();
+            nombre=consulta_seccion.nombre_seccion();
             Etiq_titulo.setText(nombre);
        }
         }catch(Exception e){

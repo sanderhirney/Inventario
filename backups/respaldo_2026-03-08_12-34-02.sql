@@ -1408,7 +1408,8 @@ ALTER TABLE ONLY public.unidades ALTER COLUMN cod_unidad SET DEFAULT nextval('pu
 --
 
 COPY hsdm.almacenes (codigo_almacen, hospital_id, denominacion, ubicacion, seccion_id, es_principal, es_despacho, es_destino, alias, fecha_creacion) FROM stdin;
-306	1	HSDM	SAN ANTONIO	1	t	f	t	PRINC	2026-03-05 00:00:00
+306	1	HSDM	SAN ANTONIO	1	f	f	t	PRINC	2026-03-05 00:00:00
+456A	1	SECUNDARIO	HSDM	1	t	t	f	SEC	2026-03-08 00:00:00
 \.
 
 

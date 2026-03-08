@@ -5,10 +5,8 @@
  */
 package inventario;
 
-import BaseDatos.ConexionVerAlmacenes;
 import Modelos.AlmacenDTO;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -36,8 +34,7 @@ public class Consultar_Almacenes extends javax.swing.JDialog {
                  (almacen.despacho()&&almacen.destino())?"DESPACHO/DETINO":
                  (almacen.despacho())?"DESPACHO":
                  (almacen.destino())? "DESTINO":"NOESTABLECIDO"
-                        
-                        
+                                            
                  ), 
                 almacen.principal()?"SI":"NO"});
         }

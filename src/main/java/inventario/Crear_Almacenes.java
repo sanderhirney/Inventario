@@ -7,7 +7,6 @@ package inventario;
 
 import BaseDatos.ConexionCrearAlmacen;
 import BaseDatos.ConexionSecciones;
-import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerHospitales;
 import Modelos.AlmacenDTO;
 import Modelos.HospitalDTO;
@@ -28,7 +27,6 @@ public class Crear_Almacenes extends javax.swing.JDialog {
 LocalDate fecha=LocalDate.now();
 Date fecha_creacion=Date.valueOf(fecha);
 int seccion_actual;
-String almacenActivoMostrar;
 AlmacenDTO almacenPrincipal;
     private static final Logger log=LoggerInfo.getLogger();
     List<HospitalDTO> hospitales=new ArrayList<>();
@@ -39,7 +37,7 @@ AlmacenDTO almacenPrincipal;
         ConexionSecciones seccion=new ConexionSecciones();
         seccion.consulta();
         seccion_actual=seccion.codigo_seccion();
-         GestionDeAlmacenes.getInstance().llamarDatos();
+        GestionDeAlmacenes.getInstance().llamarDatos();
         almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
         if(almacenPrincipal != null){
             etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
