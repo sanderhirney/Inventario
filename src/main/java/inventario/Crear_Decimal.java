@@ -27,6 +27,7 @@ public class Crear_Decimal extends javax.swing.JDialog {
  List<SeccionesDTO> empresas=new ArrayList<>();
  int codigo_empresa;
  AlmacenDTO almacenPrincipal;
+ 
     public Crear_Decimal(java.awt.Frame parent, boolean modal) throws SQLException {
         super(parent, modal);
         initComponents();

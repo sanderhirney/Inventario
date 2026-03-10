@@ -1,22 +1,22 @@
 
 package inventario;
 
-import BaseDatos.ConexionCrearEmpresas;
-import BaseDatos.ConexionVerAlmacenes;
+import BaseDatos.ConexionCrearSecciones;
+import BaseDatos.ConexionVerHospitales;
 import Modelos.AlmacenDTO;
+import Modelos.HospitalDTO;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
 public class Crear_Secciones extends javax.swing.JDialog {
-int posicion;
-List<String> cedulas_firmas= new ArrayList<>();
-List<String> nombres_firmas= new ArrayList<>();
-List<String> apellidos_firmas= new ArrayList<>();
+List<HospitalDTO> hospitales=new ArrayList<>();
 AlmacenDTO almacenPrincipal;
-    public Crear_Secciones(java.awt.Frame parent, boolean modal) {
+ private static final Logger log=LoggerInfo.getLogger();
+    public Crear_Secciones(java.awt.Frame parent, boolean modal) throws SQLException {
         super(parent, modal);
         initComponents();
          GestionDeAlmacenes.getInstance().llamarDatos();
@@ -25,6 +25,11 @@ AlmacenDTO almacenPrincipal;
             etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
         }else{
              etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
+         ConexionVerHospitales hospital=new ConexionVerHospitales();
+        hospitales=hospital.consultar();
+        for(HospitalDTO lista: hospitales){
+            comboHospitales.addItem(lista);
         }
         
       
@@ -45,6 +50,15 @@ AlmacenDTO almacenPrincipal;
         Etiq_nombre = new javax.swing.JLabel();
         Campo_nombre = new javax.swing.JTextField();
         etiquetaAlmacenActivo = new javax.swing.JLabel();
+        etiquetaDecimales = new javax.swing.JLabel();
+        etiquetaCostos = new javax.swing.JLabel();
+        campoDecimalCosto = new javax.swing.JTextField();
+        etiquetaCostos1 = new javax.swing.JLabel();
+        campoDecimalCantidad = new javax.swing.JTextField();
+        etiqSimbolo = new javax.swing.JLabel();
+        campoSimbolo = new javax.swing.JTextField();
+        etiqHospital = new javax.swing.JLabel();
+        comboHospitales = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -90,6 +104,28 @@ AlmacenDTO almacenPrincipal;
                 .addGap(0, 11, Short.MAX_VALUE))
         );
 
+        etiquetaDecimales.setText("Decimales:");
+
+        etiquetaCostos.setText("Costos:");
+
+        campoDecimalCosto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoDecimalCostoKeyTyped(evt);
+            }
+        });
+
+        etiquetaCostos1.setText("Cantidad:");
+
+        campoDecimalCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoDecimalCantidadKeyTyped(evt);
+            }
+        });
+
+        etiqSimbolo.setText("Simbolo: ");
+
+        etiqHospital.setText("  Hospital:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -103,10 +139,32 @@ AlmacenDTO almacenPrincipal;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(Panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(etiquetaAlmacenActivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(etiquetaAlmacenActivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(etiqHospital)
+                            .addGap(18, 18, 18)
+                            .addComponent(comboHospitales, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(Panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(etiqSimbolo)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(campoSimbolo))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(etiquetaDecimales)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(etiquetaCostos, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(campoDecimalCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGap(18, 18, 18)
+                                    .addComponent(etiquetaCostos1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(campoDecimalCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(0, 0, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -120,11 +178,28 @@ AlmacenDTO almacenPrincipal;
                 .addComponent(etiquetaAlmacenActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Separador1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(etiqHospital)
+                    .addComponent(comboHospitales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
                 .addComponent(Panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(etiquetaDecimales)
+                        .addComponent(etiquetaCostos))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(campoDecimalCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(etiquetaCostos1)
+                        .addComponent(campoDecimalCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(etiqSimbolo)
+                    .addComponent(campoSimbolo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
                 .addComponent(Panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addGap(39, 39, 39))
         );
 
         pack();
@@ -149,19 +224,31 @@ AlmacenDTO almacenPrincipal;
         }//if
         else
         {
-            ConexionCrearEmpresas crear= new ConexionCrearEmpresas();
+            ConexionCrearSecciones crear= new ConexionCrearSecciones();
             String campo;
+            int decimalCosto;
+            int decimalCantidad;
+            String simbolo;
+            HospitalDTO hospitalSeleccionado=(HospitalDTO)comboHospitales.getSelectedItem();
             campo=Campo_nombre.getText().toUpperCase();
-            crear.setNombre(campo);
-           
-            crear.crear();
-            crear.consultar_ultimo();
-            crear.crear_decimal();
+            decimalCosto=Integer.parseInt(campoDecimalCosto.getText().trim());
+            decimalCantidad=Integer.parseInt(campoDecimalCantidad.getText().trim());
+            simbolo=campoSimbolo.getText().trim();
+            crear.setDescripcion(campo);
+            crear.setDecimalCosto(decimalCosto);
+            crear.setDecimalCantidad(decimalCantidad);
+            crear.setHospital_id(hospitalSeleccionado.id());
+            crear.crearSeccion();
+            
+            
             
             if(crear.respuesta()==1)
             {
                             JOptionPane.showMessageDialog(null, "Seccion creada satisfactoriamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
                            Campo_nombre.setText("");
+                           campoDecimalCosto.setText("");
+                           campoDecimalCantidad.setText("");
+                           campoSimbolo.setText("");
             }
             if(crear.respuesta()==0)
             {
@@ -171,6 +258,42 @@ AlmacenDTO almacenPrincipal;
             
         }//else
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void campoDecimalCostoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoDecimalCostoKeyTyped
+        // TODO add your handling code here:
+         char caracter = evt.getKeyChar();
+        if(((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/) && (caracter !='.'))
+      {
+         JOptionPane.showMessageDialog(null, "Este campo solo se admite numeros", "Revisar", JOptionPane.ERROR_MESSAGE);
+         evt.consume();
+      }
+        else
+        {
+        if(campoDecimalCosto.getText().trim().length()==1)
+        {
+            evt.consume();
+        }
+       
+        }
+    }//GEN-LAST:event_campoDecimalCostoKeyTyped
+
+    private void campoDecimalCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoDecimalCantidadKeyTyped
+        // TODO add your handling code here:
+         char caracter = evt.getKeyChar();
+        if(((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/) && (caracter !='.'))
+      {
+         JOptionPane.showMessageDialog(null, "Este campo solo se admite numeros", "Revisar", JOptionPane.ERROR_MESSAGE);
+         evt.consume();
+      }
+        else
+        {
+        if(campoDecimalCantidad.getText().trim().length()==1)
+        {
+            evt.consume();
+        }
+       
+        }
+    }//GEN-LAST:event_campoDecimalCantidadKeyTyped
 
     /**
      * @param args the command line arguments
@@ -203,14 +326,19 @@ AlmacenDTO almacenPrincipal;
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Crear_Secciones dialog = new Crear_Secciones(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                try {
+                    Crear_Secciones dialog = new Crear_Secciones(new javax.swing.JFrame(), true);
+                    dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                        @Override
+                        public void windowClosing(java.awt.event.WindowEvent e) {
+                            System.exit(0);
+                        }
+                    });
+                    dialog.setVisible(true);
+                } catch (SQLException ex) {
+                    log.severe("ERROR EN LA CREACION DE SECCIONES");
+                    log.severe(ex.toString());
+                }
             }
         });
     }
@@ -223,7 +351,16 @@ AlmacenDTO almacenPrincipal;
     private javax.swing.JPanel Panel1;
     private javax.swing.JPanel Panel2;
     private javax.swing.JSeparator Separador1;
+    private javax.swing.JTextField campoDecimalCantidad;
+    private javax.swing.JTextField campoDecimalCosto;
+    private javax.swing.JTextField campoSimbolo;
+    private javax.swing.JComboBox<HospitalDTO> comboHospitales;
+    private javax.swing.JLabel etiqHospital;
+    private javax.swing.JLabel etiqSimbolo;
     private javax.swing.JLabel etiquetaAlmacenActivo;
+    private javax.swing.JLabel etiquetaCostos;
+    private javax.swing.JLabel etiquetaCostos1;
+    private javax.swing.JLabel etiquetaDecimales;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

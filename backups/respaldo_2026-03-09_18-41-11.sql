@@ -56,6 +56,7 @@ ALTER TABLE hsdm.almacenes OWNER TO postgres;
 
 CREATE TABLE hsdm.articulos (
     id integer NOT NULL,
+    hospital_id integer,
     codigo_barra character varying(50),
     nombre character varying(250) NOT NULL,
     unidad_id integer,
@@ -132,6 +133,7 @@ ALTER SEQUENCE hsdm.cargos_id_seq OWNED BY hsdm.cargos.id;
 
 CREATE TABLE hsdm.conceptos (
     codigo integer NOT NULL,
+    hospital_id integer,
     descripcion character varying(100) NOT NULL,
     tipo character varying(1) NOT NULL
 );
@@ -210,6 +212,7 @@ ALTER TABLE hsdm.flyway_schema_history OWNER TO postgres;
 --
 
 CREATE TABLE hsdm.grupos (
+    hospital_id integer NOT NULL,
     codigo character varying(2) NOT NULL,
     descripcion character varying(200) NOT NULL
 );
@@ -260,6 +263,7 @@ ALTER SEQUENCE hsdm.hospitales_id_seq OWNED BY hsdm.hospitales.id;
 
 CREATE TABLE hsdm.inicios (
     id integer NOT NULL,
+    hospital_id integer,
     estado integer DEFAULT 0 NOT NULL,
     fecha_ultimo_acceso timestamp without time zone DEFAULT CURRENT_TIMESTAMP
 );
@@ -295,6 +299,7 @@ ALTER SEQUENCE hsdm.inicios_id_seq OWNED BY hsdm.inicios.id;
 
 CREATE TABLE hsdm.kardex (
     id integer NOT NULL,
+    hospital_id integer,
     documento_id integer,
     articulo_id integer,
     seccion_id integer,
@@ -334,6 +339,8 @@ ALTER SEQUENCE hsdm.kardex_id_seq OWNED BY hsdm.kardex.id;
 --
 
 CREATE TABLE hsdm.proveedores (
+    id integer NOT NULL,
+    hospital_id integer,
     rif character varying(20) NOT NULL,
     nombre character varying(250) NOT NULL,
     direccion text,
@@ -342,6 +349,28 @@ CREATE TABLE hsdm.proveedores (
 
 
 ALTER TABLE hsdm.proveedores OWNER TO postgres;
+
+--
+-- Name: proveedores_id_seq; Type: SEQUENCE; Schema: hsdm; Owner: postgres
+--
+
+CREATE SEQUENCE hsdm.proveedores_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE hsdm.proveedores_id_seq OWNER TO postgres;
+
+--
+-- Name: proveedores_id_seq; Type: SEQUENCE OWNED BY; Schema: hsdm; Owner: postgres
+--
+
+ALTER SEQUENCE hsdm.proveedores_id_seq OWNED BY hsdm.proveedores.id;
+
 
 --
 -- Name: saldos; Type: TABLE; Schema: hsdm; Owner: postgres
@@ -437,6 +466,7 @@ ALTER SEQUENCE hsdm.servicios_id_seq OWNED BY hsdm.servicios.id;
 --
 
 CREATE TABLE hsdm.subgrupos (
+    hospital_id integer NOT NULL,
     grupo_codigo character varying(2) NOT NULL,
     codigo character varying(20) NOT NULL,
     descripcion character varying(200) NOT NULL
@@ -451,6 +481,7 @@ ALTER TABLE hsdm.subgrupos OWNER TO postgres;
 
 CREATE TABLE hsdm.unidades (
     id integer NOT NULL,
+    hospital_id integer,
     nombre character varying(50) NOT NULL,
     abreviatura character varying(10) NOT NULL
 );
@@ -1264,6 +1295,13 @@ ALTER TABLE ONLY hsdm.kardex ALTER COLUMN id SET DEFAULT nextval('hsdm.kardex_id
 
 
 --
+-- Name: proveedores id; Type: DEFAULT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.proveedores ALTER COLUMN id SET DEFAULT nextval('hsdm.proveedores_id_seq'::regclass);
+
+
+--
 -- Name: secciones id; Type: DEFAULT; Schema: hsdm; Owner: postgres
 --
 
@@ -1408,7 +1446,6 @@ ALTER TABLE ONLY public.unidades ALTER COLUMN cod_unidad SET DEFAULT nextval('pu
 --
 
 COPY hsdm.almacenes (codigo_almacen, hospital_id, denominacion, ubicacion, seccion_id, es_principal, es_despacho, es_destino, alias, fecha_creacion) FROM stdin;
-306	1	HSDM	SAN ANTONIO	1	t	f	t	PRINC	2026-03-05 00:00:00
 \.
 
 
@@ -1416,7 +1453,7 @@ COPY hsdm.almacenes (codigo_almacen, hospital_id, denominacion, ubicacion, secci
 -- Data for Name: articulos; Type: TABLE DATA; Schema: hsdm; Owner: postgres
 --
 
-COPY hsdm.articulos (id, codigo_barra, nombre, unidad_id, grupo_cod, subgrupo_cod, fecha_creacion) FROM stdin;
+COPY hsdm.articulos (id, hospital_id, codigo_barra, nombre, unidad_id, grupo_cod, subgrupo_cod, fecha_creacion) FROM stdin;
 \.
 
 
@@ -1432,33 +1469,33 @@ COPY hsdm.cargos (id, hospital_id, descripcion, cedula_firmante, seccion_id) FRO
 -- Data for Name: conceptos; Type: TABLE DATA; Schema: hsdm; Owner: postgres
 --
 
-COPY hsdm.conceptos (codigo, descripcion, tipo) FROM stdin;
-1	Inventario Inicial	E
-2	Entradas por traspasos de otros almacenes	E
-3	Compras	E
-6	Produccion y transformacion de materiales	E
-7	Suministro de otras entidades	E
-8	Reintegro o devoluciones	E
-10	Reconstruccion de equipos	E
-11	Entradas por donacion	E
-12	Entradas por permuta	E
-14	Omision en inventarios y sobrantes	E
-17	Incorporacion para corregir registros anteriores	E
-19	Entradas o incorporaciones por otros conceptos	E
-51	Salidas por traspasos a otros almacenes	S
-52	Venta	S
-53	Entregas de bienes muebles en deposito	S
-54	Suministro de materiales de consumo	S
-55	Desarme	S
-56	Desincorporacion por inservibilidad	S
-57	Desincorporacion por deterioro	S
-58	Desincorporacion por mermas	S
-60	Faltantes por investigar	S
-61	Salidas por permuta	S
-62	Salidas por donacion	S
-63	Prestamos autorizados	S
-66	Desincorporacion para corregir registros anteriores	S
-69	Salidas o desincorporacion por otros conceptos	S
+COPY hsdm.conceptos (codigo, hospital_id, descripcion, tipo) FROM stdin;
+1	\N	Inventario Inicial	E
+2	\N	Entradas por traspasos de otros almacenes	E
+3	\N	Compras	E
+6	\N	Produccion y transformacion de materiales	E
+7	\N	Suministro de otras entidades	E
+8	\N	Reintegro o devoluciones	E
+10	\N	Reconstruccion de equipos	E
+11	\N	Entradas por donacion	E
+12	\N	Entradas por permuta	E
+14	\N	Omision en inventarios y sobrantes	E
+17	\N	Incorporacion para corregir registros anteriores	E
+19	\N	Entradas o incorporaciones por otros conceptos	E
+51	\N	Salidas por traspasos a otros almacenes	S
+52	\N	Venta	S
+53	\N	Entregas de bienes muebles en deposito	S
+54	\N	Suministro de materiales de consumo	S
+55	\N	Desarme	S
+56	\N	Desincorporacion por inservibilidad	S
+57	\N	Desincorporacion por deterioro	S
+58	\N	Desincorporacion por mermas	S
+60	\N	Faltantes por investigar	S
+61	\N	Salidas por permuta	S
+62	\N	Salidas por donacion	S
+63	\N	Prestamos autorizados	S
+66	\N	Desincorporacion para corregir registros anteriores	S
+69	\N	Salidas o desincorporacion por otros conceptos	S
 \.
 
 
@@ -1475,12 +1512,10 @@ COPY hsdm.documentos (id, hospital_id, seccion_id, concepto_id, tipo, numero_pro
 --
 
 COPY hsdm.flyway_schema_history (installed_rank, version, description, type, script, checksum, installed_by, installed_on, execution_time, success) FROM stdin;
-0	\N	<< Flyway Schema Creation >>	SCHEMA	"hsdm"	\N	postgres	2026-03-05 19:24:09.529221	0	t
-1	1	Esquema Maestro Inventario	SQL	V1__Esquema_Maestro_Inventario.sql	-1331939728	postgres	2026-03-05 19:24:09.630522	72	t
-2	2	Carga Conceptos Oficiales	SQL	V2__Carga_Conceptos_Oficiales.sql	-619923483	postgres	2026-03-05 19:24:09.752843	7	t
-3	3	Campos Unicos Tablas	SQL	V3__Campos_Unicos_Tablas.sql	1933198203	postgres	2026-03-05 19:24:09.773022	11	t
-4	4	Carga Catalogo Pub15	SQL	V4__Carga_Catalogo_Pub15.sql	-1401829198	postgres	2026-03-05 19:24:09.796705	8	t
-5	5	Carga Configuracion Inicial	SQL	V5__Carga_Configuracion_Inicial.sql	1867448618	postgres	2026-03-05 19:24:09.816911	8	t
+0	\N	<< Flyway Schema Creation >>	SCHEMA	"hsdm"	\N	postgres	2026-03-09 18:38:01.663118	0	t
+1	1	Esquema Maestro Inventario	SQL	V1__Esquema_Maestro_Inventario.sql	-2129292803	postgres	2026-03-09 18:38:01.739042	133	t
+2	2	Carga Conceptos Oficiales	SQL	V2__Carga_Conceptos_Oficiales.sql	-619923483	postgres	2026-03-09 18:38:01.92082	14	t
+3	3	Campos Unicos Tablas	SQL	V3__Campos_Unicos_Tablas.sql	1933198203	postgres	2026-03-09 18:38:01.943395	12	t
 \.
 
 
@@ -1488,9 +1523,9 @@ COPY hsdm.flyway_schema_history (installed_rank, version, description, type, scr
 -- Data for Name: grupos; Type: TABLE DATA; Schema: hsdm; Owner: postgres
 --
 
-COPY hsdm.grupos (codigo, descripcion) FROM stdin;
-3	Bienes Muebles en Depósito
-4	Materiales de Consumo
+COPY hsdm.grupos (hospital_id, codigo, descripcion) FROM stdin;
+1	3	Bienes Muebles en Depósito
+1	4	Materiales de Consumo
 \.
 
 
@@ -1499,7 +1534,7 @@ COPY hsdm.grupos (codigo, descripcion) FROM stdin;
 --
 
 COPY hsdm.hospitales (id, rif, nombre, direccion, estado) FROM stdin;
-1	G-00000000-0	HOSPITAL CENTRAL DE PRUEBA	DIRECCION GENERAL	t
+1	G-00000000-0	HOSPITAL DE CONFIGURACION	DIRECCION	t
 \.
 
 
@@ -1507,8 +1542,7 @@ COPY hsdm.hospitales (id, rif, nombre, direccion, estado) FROM stdin;
 -- Data for Name: inicios; Type: TABLE DATA; Schema: hsdm; Owner: postgres
 --
 
-COPY hsdm.inicios (id, estado, fecha_ultimo_acceso) FROM stdin;
-1	1	2026-03-05 19:24:09.67374
+COPY hsdm.inicios (id, hospital_id, estado, fecha_ultimo_acceso) FROM stdin;
 \.
 
 
@@ -1516,7 +1550,7 @@ COPY hsdm.inicios (id, estado, fecha_ultimo_acceso) FROM stdin;
 -- Data for Name: kardex; Type: TABLE DATA; Schema: hsdm; Owner: postgres
 --
 
-COPY hsdm.kardex (id, documento_id, articulo_id, seccion_id, cantidad, costo_unitario, saldo_cantidad_post, saldo_costo_prom_post) FROM stdin;
+COPY hsdm.kardex (id, hospital_id, documento_id, articulo_id, seccion_id, cantidad, costo_unitario, saldo_cantidad_post, saldo_costo_prom_post) FROM stdin;
 \.
 
 
@@ -1524,7 +1558,7 @@ COPY hsdm.kardex (id, documento_id, articulo_id, seccion_id, cantidad, costo_uni
 -- Data for Name: proveedores; Type: TABLE DATA; Schema: hsdm; Owner: postgres
 --
 
-COPY hsdm.proveedores (rif, nombre, direccion, telefono) FROM stdin;
+COPY hsdm.proveedores (id, hospital_id, rif, nombre, direccion, telefono) FROM stdin;
 \.
 
 
@@ -1541,7 +1575,7 @@ COPY hsdm.saldos (articulo_id, seccion_id, hospital_id, stock_actual, costo_prom
 --
 
 COPY hsdm.secciones (id, hospital_id, descripcion, seleccionada, estado) FROM stdin;
-1	1	ALMACÉN CENTRAL / DEPÓSITO	t	t
+1	1	AÑO FISCAL 	t	t
 \.
 
 
@@ -1557,61 +1591,61 @@ COPY hsdm.servicios (id, hospital_id, nombre_servicio, cedula_firmante, seccion_
 -- Data for Name: subgrupos; Type: TABLE DATA; Schema: hsdm; Owner: postgres
 --
 
-COPY hsdm.subgrupos (grupo_codigo, codigo, descripcion) FROM stdin;
-3	01	Maquinas, muebles y demas equipos de oficina
-3	02	Mobiliario y enseres de alojamiento
-3	03	Maquinaria y demas equipos de construcción, campo, industria y taller
-3	03-01	Equipos de taller de uso general
-3	03-02	Maquinaria y equipo de construccion y conservacion
-3	03-03	Maquinaria y equipo para mantenimiento de automotores
-3	03-04	Maquinaria y equipo agricola y pecuario
-3	03-05	Maquinaria y equipo de artes graficas
-3	03-06	Maquinaria industrial
-3	04	Equipos de transporte
-3	04-01	Vehiculos automotores terrestres
-3	04-02	Otros vehiculos terrestres
-3	05	Equipos de telecomunicaciones
-3	06	Equipos Medico-Quirurgicos, dentales y veterinarios
-3	06-01	Equipos Medico-Quirurgicos y de veterinaria
-3	06-02	Equipos dentales
-3	07	Equipos cientificos y de enseñanza
-3	07-01	Equipos cientificos y de laboratorio
-3	07-02	Equipos de enseñanza, deporte y recreacion
-3	07-03	Elementos de culto
-3	08	Colecciones culturales, artisticas e historicas
-3	08-01	Libros
-3	08-02	Colecciones cientificas
-3	08-03	Colecciones artisticas y ornamentales
-3	09	Armamento y equipo de defensa
-3	11	Otros bienes muebles en deposito
-4	20	Alimentos y bebidas
-4	21	Materiales agrícolas y pecuarios
-4	21-A	Abonos
-4	21-B	Alimentos para animales
-4	21-C	Insecticidas
-4	21-D	Semillas
-4	22	Drogas medicinas materiales odontologicas, de laboratorio de sanidad y similares
-4	22-A	Drogas medicinas y elementos de curacion para pacientes
-4	22-B	Materiales de odontologia
-4	22-C	Materiales para laboratorio
-4	22-D	Suministros menores ortopedicos
-4	22-E	Drogas, Med., y elementos de C.(PTES)
-4	22-G	Sustancias para laboratorio
-4	22-H	Materiales para rayos X
-4	22-J	Materiales Médicos Quirurgicos
-4	23	Materiales de construccion
-4	23-A	Materiales basicos y estructurales
-4	23-B	Materiales y utiles para instituciones sanitarias
-4	24	Materiales para industria y taller
-4	25	Repuestos accesorios y herramientas menores
-4	25-H	Herramientas menores
-4	27	Utiles de escritorio y oficina
-4	28	Materiales de uso personal de alojamiento y de limpieza
-4	28-H	Utiles y materiales de aseo
-4	28-K	Vestuario para pacientes
-4	30-A	Combustible
-4	30-B	Aceites y grasas lubricantes
-4	30-D	Gas combustible
+COPY hsdm.subgrupos (hospital_id, grupo_codigo, codigo, descripcion) FROM stdin;
+1	3	01	Maquinas, muebles y demas equipos de oficina
+1	3	02	Mobiliario y enseres de alojamiento
+1	3	03	Maquinaria y demas equipos de construcción, campo, industria y taller
+1	3	03-01	Equipos de taller de uso general
+1	3	03-02	Maquinaria y equipo de construccion y conservacion
+1	3	03-03	Maquinaria y equipo para mantenimiento de automotores
+1	3	03-04	Maquinaria y equipo agricola y pecuario
+1	3	03-05	Maquinaria y equipo de artes graficas
+1	3	03-06	Maquinaria industrial
+1	3	04	Equipos de transporte
+1	3	04-01	Vehiculos automotores terrestres
+1	3	04-02	Otros vehiculos terrestres
+1	3	05	Equipos de telecomunicaciones
+1	3	06	Equipos Medico-Quirurgicos, dentales y veterinarios
+1	3	06-01	Equipos Medico-Quirurgicos y de veterinaria
+1	3	06-02	Equipos dentales
+1	3	07	Equipos cientificos y de enseñanza
+1	3	07-01	Equipos cientificos y de laboratorio
+1	3	07-02	Equipos de enseñanza, deporte y recreacion
+1	3	07-03	Elementos de culto
+1	3	08	Colecciones culturales, artisticas e historicas
+1	3	08-01	Libros
+1	3	08-02	Colecciones cientificas
+1	3	08-03	Colecciones artisticas y ornamentales
+1	3	09	Armamento y equipo de defensa
+1	3	11	Otros bienes muebles en deposito
+1	4	20	Alimentos y bebidas
+1	4	21	Materiales agrícolas y pecuarios
+1	4	21-A	Abonos
+1	4	21-B	Alimentos para animales
+1	4	21-C	Insecticidas
+1	4	21-D	Semillas
+1	4	22	Drogas medicinas materiales odontologicas, de laboratorio de sanidad y similares
+1	4	22-A	Drogas medicinas y elementos de curacion para pacientes
+1	4	22-B	Materiales de odontologia
+1	4	22-C	Materiales para laboratorio
+1	4	22-D	Suministros menores ortopedicos
+1	4	22-E	Drogas, Med., y elementos de C.(PTES)
+1	4	22-G	Sustancias para laboratorio
+1	4	22-H	Materiales para rayos X
+1	4	22-J	Materiales Médicos Quirurgicos
+1	4	23	Materiales de construccion
+1	4	23-A	Materiales basicos y estructurales
+1	4	23-B	Materiales y utiles para instituciones sanitarias
+1	4	24	Materiales para industria y taller
+1	4	25	Repuestos accesorios y herramientas menores
+1	4	25-H	Herramientas menores
+1	4	27	Utiles de escritorio y oficina
+1	4	28	Materiales de uso personal de alojamiento y de limpieza
+1	4	28-H	Utiles y materiales de aseo
+1	4	28-K	Vestuario para pacientes
+1	4	30-A	Combustible
+1	4	30-B	Aceites y grasas lubricantes
+1	4	30-D	Gas combustible
 \.
 
 
@@ -1619,7 +1653,7 @@ COPY hsdm.subgrupos (grupo_codigo, codigo, descripcion) FROM stdin;
 -- Data for Name: unidades; Type: TABLE DATA; Schema: hsdm; Owner: postgres
 --
 
-COPY hsdm.unidades (id, nombre, abreviatura) FROM stdin;
+COPY hsdm.unidades (id, hospital_id, nombre, abreviatura) FROM stdin;
 \.
 
 
@@ -2774,7 +2808,7 @@ SELECT pg_catalog.setval('hsdm.hospitales_id_seq', 1, true);
 -- Name: inicios_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
 --
 
-SELECT pg_catalog.setval('hsdm.inicios_id_seq', 1, true);
+SELECT pg_catalog.setval('hsdm.inicios_id_seq', 1, false);
 
 
 --
@@ -2782,6 +2816,13 @@ SELECT pg_catalog.setval('hsdm.inicios_id_seq', 1, true);
 --
 
 SELECT pg_catalog.setval('hsdm.kardex_id_seq', 1, false);
+
+
+--
+-- Name: proveedores_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
+--
+
+SELECT pg_catalog.setval('hsdm.proveedores_id_seq', 1, false);
 
 
 --
@@ -2977,7 +3018,7 @@ ALTER TABLE ONLY hsdm.flyway_schema_history
 --
 
 ALTER TABLE ONLY hsdm.grupos
-    ADD CONSTRAINT grupos_pkey PRIMARY KEY (codigo);
+    ADD CONSTRAINT grupos_pkey PRIMARY KEY (hospital_id, codigo);
 
 
 --
@@ -3017,7 +3058,7 @@ ALTER TABLE ONLY hsdm.kardex
 --
 
 ALTER TABLE ONLY hsdm.proveedores
-    ADD CONSTRAINT proveedores_pkey PRIMARY KEY (rif);
+    ADD CONSTRAINT proveedores_pkey PRIMARY KEY (id);
 
 
 --
@@ -3049,7 +3090,7 @@ ALTER TABLE ONLY hsdm.servicios
 --
 
 ALTER TABLE ONLY hsdm.subgrupos
-    ADD CONSTRAINT subgrupos_pkey PRIMARY KEY (grupo_codigo, codigo);
+    ADD CONSTRAINT subgrupos_pkey PRIMARY KEY (hospital_id, grupo_codigo, codigo);
 
 
 --
@@ -3268,6 +3309,62 @@ CREATE INDEX flyway_schema_history_s_idx ON hsdm.flyway_schema_history USING btr
 
 
 --
+-- Name: idx_articulos_hosp_nombre; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_articulos_hosp_nombre ON hsdm.articulos USING btree (hospital_id, lower((nombre)::text));
+
+
+--
+-- Name: idx_cargos_hosp_sec_desc; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_cargos_hosp_sec_desc ON hsdm.cargos USING btree (hospital_id, lower((descripcion)::text));
+
+
+--
+-- Name: idx_documentos_entrada_prov; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_documentos_entrada_prov ON hsdm.documentos USING btree (hospital_id, seccion_id, numero_provisional) WHERE ((tipo)::text = 'ENTRADA'::text);
+
+
+--
+-- Name: idx_documentos_salida_mensual; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_documentos_salida_mensual ON hsdm.documentos USING btree (hospital_id, seccion_id, concepto_id, mes_legal, anio_legal, correlativo_legal) WHERE ((tipo)::text = 'SALIDA'::text);
+
+
+--
+-- Name: idx_proveedores_hosp_rif; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_proveedores_hosp_rif ON hsdm.proveedores USING btree (hospital_id, rif);
+
+
+--
+-- Name: idx_secciones_hosp_desc; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_secciones_hosp_desc ON hsdm.secciones USING btree (hospital_id, lower((descripcion)::text));
+
+
+--
+-- Name: idx_servicios_hosp_sec_desc; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_servicios_hosp_sec_desc ON hsdm.servicios USING btree (hospital_id, lower((nombre_servicio)::text));
+
+
+--
+-- Name: idx_unidades_hosp_nombre; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_unidades_hosp_nombre ON hsdm.unidades USING btree (hospital_id, lower((nombre)::text));
+
+
+--
 -- Name: nombre_cargos_unique; Type: INDEX; Schema: hsdm; Owner: postgres
 --
 
@@ -3319,11 +3416,19 @@ ALTER TABLE ONLY hsdm.almacenes
 
 
 --
--- Name: articulos articulos_grupo_cod_subgrupo_cod_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+-- Name: articulos articulos_hospital_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
 --
 
 ALTER TABLE ONLY hsdm.articulos
-    ADD CONSTRAINT articulos_grupo_cod_subgrupo_cod_fkey FOREIGN KEY (grupo_cod, subgrupo_cod) REFERENCES hsdm.subgrupos(grupo_codigo, codigo);
+    ADD CONSTRAINT articulos_hospital_id_fkey FOREIGN KEY (hospital_id) REFERENCES hsdm.hospitales(id);
+
+
+--
+-- Name: articulos articulos_hospital_id_grupo_cod_subgrupo_cod_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.articulos
+    ADD CONSTRAINT articulos_hospital_id_grupo_cod_subgrupo_cod_fkey FOREIGN KEY (hospital_id, grupo_cod, subgrupo_cod) REFERENCES hsdm.subgrupos(hospital_id, grupo_codigo, codigo);
 
 
 --
@@ -3351,6 +3456,14 @@ ALTER TABLE ONLY hsdm.cargos
 
 
 --
+-- Name: conceptos conceptos_hospital_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.conceptos
+    ADD CONSTRAINT conceptos_hospital_id_fkey FOREIGN KEY (hospital_id) REFERENCES hsdm.hospitales(id);
+
+
+--
 -- Name: documentos documentos_concepto_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
 --
 
@@ -3375,6 +3488,22 @@ ALTER TABLE ONLY hsdm.documentos
 
 
 --
+-- Name: grupos grupos_hospital_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.grupos
+    ADD CONSTRAINT grupos_hospital_id_fkey FOREIGN KEY (hospital_id) REFERENCES hsdm.hospitales(id);
+
+
+--
+-- Name: inicios inicios_hospital_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.inicios
+    ADD CONSTRAINT inicios_hospital_id_fkey FOREIGN KEY (hospital_id) REFERENCES hsdm.hospitales(id);
+
+
+--
 -- Name: kardex kardex_articulo_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
 --
 
@@ -3391,11 +3520,27 @@ ALTER TABLE ONLY hsdm.kardex
 
 
 --
+-- Name: kardex kardex_hospital_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.kardex
+    ADD CONSTRAINT kardex_hospital_id_fkey FOREIGN KEY (hospital_id) REFERENCES hsdm.hospitales(id);
+
+
+--
 -- Name: kardex kardex_seccion_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
 --
 
 ALTER TABLE ONLY hsdm.kardex
     ADD CONSTRAINT kardex_seccion_id_fkey FOREIGN KEY (seccion_id) REFERENCES hsdm.secciones(id);
+
+
+--
+-- Name: proveedores proveedores_hospital_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.proveedores
+    ADD CONSTRAINT proveedores_hospital_id_fkey FOREIGN KEY (hospital_id) REFERENCES hsdm.hospitales(id);
 
 
 --
@@ -3447,11 +3592,19 @@ ALTER TABLE ONLY hsdm.servicios
 
 
 --
--- Name: subgrupos subgrupos_grupo_codigo_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+-- Name: subgrupos subgrupos_hospital_id_grupo_codigo_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
 --
 
 ALTER TABLE ONLY hsdm.subgrupos
-    ADD CONSTRAINT subgrupos_grupo_codigo_fkey FOREIGN KEY (grupo_codigo) REFERENCES hsdm.grupos(codigo);
+    ADD CONSTRAINT subgrupos_hospital_id_grupo_codigo_fkey FOREIGN KEY (hospital_id, grupo_codigo) REFERENCES hsdm.grupos(hospital_id, codigo);
+
+
+--
+-- Name: unidades unidades_hospital_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.unidades
+    ADD CONSTRAINT unidades_hospital_id_fkey FOREIGN KEY (hospital_id) REFERENCES hsdm.hospitales(id);
 
 
 --

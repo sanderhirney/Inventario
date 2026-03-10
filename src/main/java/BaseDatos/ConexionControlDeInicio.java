@@ -50,7 +50,7 @@ public class ConexionControlDeInicio {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        try(PreparedStatement consulta= conex.prepareStatement("update inicios set estado=1") ){
+        try(PreparedStatement consulta= conex.prepareStatement("update inicios set estado=1, fecha_ultimo_acceso=CURRENT_TIMESTAMP  ") ){
             resultado=consulta.executeUpdate();
 
         }

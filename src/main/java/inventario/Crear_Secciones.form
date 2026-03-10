@@ -33,11 +33,40 @@
                       <Component id="jLabel1" min="-2" pref="114" max="-2" attributes="0"/>
                   </Group>
                   <Component id="Panel1" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="Panel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
                   <Component id="etiquetaAlmacenActivo" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="etiqHospital" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="comboHospitales" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="Panel2" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="etiqSimbolo" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="campoSimbolo" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="etiquetaDecimales" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="etiquetaCostos" min="-2" pref="48" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="campoDecimalCosto" min="-2" pref="109" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="etiquetaCostos1" min="-2" pref="89" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="campoDecimalCantidad" min="-2" pref="92" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -55,11 +84,33 @@
               <Component id="etiquetaAlmacenActivo" min="-2" pref="23" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="Separador1" min="-2" pref="10" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="etiqHospital" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboHospitales" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
               <Component id="Panel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="etiquetaDecimales" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="etiquetaCostos" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="campoDecimalCosto" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="etiquetaCostos1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="campoDecimalCantidad" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="etiqSimbolo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoSimbolo" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Component id="Panel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -136,6 +187,53 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JLabel" name="etiquetaAlmacenActivo">
+    </Component>
+    <Component class="javax.swing.JLabel" name="etiquetaDecimales">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Decimales:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="etiquetaCostos">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Costos:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="campoDecimalCosto">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campoDecimalCostoKeyTyped"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="etiquetaCostos1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cantidad:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="campoDecimalCantidad">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campoDecimalCantidadKeyTyped"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="etiqSimbolo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Simbolo: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="campoSimbolo">
+    </Component>
+    <Component class="javax.swing.JLabel" name="etiqHospital">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="  Hospital:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="comboHospitales">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;HospitalDTO&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

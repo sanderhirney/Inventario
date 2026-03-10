@@ -313,7 +313,12 @@ public class Ventana_Principal extends javax.swing.JFrame {
         }
             
         case "Configuracion" -> {
-            if (hijo.equals("Secciones")) lanzarVentana(new Crear_Secciones(this, true));
+            if (hijo.equals("Secciones")) try {
+                lanzarVentana(new Crear_Secciones(this, true));
+            } catch (SQLException ex) {
+                log.severe("ERROR AL LANZAR LA VENTANA DE CREAR SECCIONES");
+                log.severe(ex.toString());
+            }
             if (hijo.equals("Unidades")) lanzarVentana(new Crear_Unidades(this, true));
             if (hijo.equals("Firmantes")) lanzarVentana(new Crear_Firmantes(this, true));
             if (hijo.equals("Cargos")) lanzarVentana(new VerCargos(this, true));
