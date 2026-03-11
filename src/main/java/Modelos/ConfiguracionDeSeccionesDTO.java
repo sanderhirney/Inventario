@@ -8,16 +8,19 @@ package Modelos;
  *
  * @author USER
  */
-public record SeccionesDTO(
-        int codigo,
-        String descripcion
-        )
-
-{
+public record ConfiguracionDeSeccionesDTO(
+        int seccionId,
+        int hospitalId,
+        String nombreSeccion,
+        int decimalCosto,
+        int decimalCantidad,
+        String simbolo
+        
+        ) {
 
     @Override
     public String toString() {
-        return  descripcion ;
+        return nombreSeccion ;
     }
     
     

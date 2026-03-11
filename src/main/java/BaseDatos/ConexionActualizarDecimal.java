@@ -10,14 +10,15 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 public class ConexionActualizarDecimal {
     Connection conex;
-    PreparedStatement consulta;
     Conexion conectar= new Conexion();
     ResultSet ejecutar;
-    int resultado;
-    int codigo_empresa;
-    int campo;
-    int total;
+    int decimal_costo;
+    int decimal_cantidad;
+    String moneda_simbolo;
+    int idSeccion;
     int respuesta;
+    int resultado;
+    int idHospital;
      Logger log=LoggerInfo.getLogger();
     private void actualizar() throws SQLException
     {
@@ -26,22 +27,25 @@ public class ConexionActualizarDecimal {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        try(PreparedStatement consulta=conex.prepareStatement("update decimales set campo=?, total=? where cod_seccion=?")){
-             consulta.setInt(1, campo);
-             consulta.setInt(2, total);
-             consulta.setInt(3, codigo_empresa);
+        try(PreparedStatement consulta=conex.prepareStatement("update configuraciones set decimales_costos=?, decimales_cantidades=?, moneda_simbolo=? where seccion_id=? and hospital_id=?")){
+             consulta.setInt(1, decimal_costo);
+             consulta.setInt(2, decimal_cantidad);
+             consulta.setString(3, moneda_simbolo);
+             consulta.setInt(4, idSeccion);
+             consulta.setInt(5, idHospital);
              respuesta=consulta.executeUpdate();
-        }
+             
+                if(respuesta>0)
+                {
+                    resultado=1;
+                }
+                if(respuesta==0)
+                {
+                    resultado=0;
+                }
+                }       
         
         
-        if(respuesta>0)
-        {
-            resultado=1;
-        }
-        if(respuesta==0)
-        {
-            resultado=0;
-        }
         
         
        
@@ -54,6 +58,26 @@ public class ConexionActualizarDecimal {
           conectar.Cerrar();
           }
     }//consulta
+
+    public void setIdHospital(int idHospital) {
+        this.idHospital = idHospital;
+    }
+
+    public void setDecimal_costo(int decimal_costo) {
+        this.decimal_costo = decimal_costo;
+    }
+
+    public void setDecimal_cantidad(int decimal_cantidad) {
+        this.decimal_cantidad = decimal_cantidad;
+    }
+
+    public void setMoneda_simbolo(String moneda_simbolo) {
+        this.moneda_simbolo = moneda_simbolo;
+    }
+
+    public void setIdSeccion(int idSeccion) {
+        this.idSeccion = idSeccion;
+    }
     
     
     
@@ -64,20 +88,7 @@ public class ConexionActualizarDecimal {
         
     }
 
-    public void setCodigo_empresa(int codigo_empresa) {
-        this.codigo_empresa = codigo_empresa;
-    }
-    
-            
-            
-    public void setDecimalCampo(int recibido)
-    {
-        campo=recibido;
-    }
-    public void setDecimalTotal(int recibido)
-    {
-        total=recibido;
-    }
+   
     
     public void actualizarDecimal() throws SQLException{
             actualizar();

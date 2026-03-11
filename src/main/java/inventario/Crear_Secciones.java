@@ -237,6 +237,7 @@ AlmacenDTO almacenPrincipal;
             crear.setDescripcion(campo);
             crear.setDecimalCosto(decimalCosto);
             crear.setDecimalCantidad(decimalCantidad);
+            crear.setSimbolo(simbolo);
             crear.setHospital_id(hospitalSeleccionado.id());
             crear.crearSeccion();
             

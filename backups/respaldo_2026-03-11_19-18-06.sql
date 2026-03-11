@@ -1551,6 +1551,7 @@ COPY hsdm.conceptos (codigo, hospital_id, descripcion, tipo) FROM stdin;
 
 COPY hsdm.configuraciones (id, hospital_id, seccion_id, decimales_costos, decimales_cantidades, moneda_simbolo, permite_stock_negativo) FROM stdin;
 1	1	1	4	2	$	f
+2	1	4	6	6	\N	f
 \.
 
 
@@ -1596,7 +1597,7 @@ COPY hsdm.hospitales (id, rif, nombre, direccion, estado) FROM stdin;
 --
 
 COPY hsdm.inicios (id, hospital_id, estado, fecha_ultimo_acceso) FROM stdin;
-1	1	1	2026-03-10 10:26:16.147047
+1	1	1	2026-03-11 19:18:06.529206
 \.
 
 
@@ -1630,6 +1631,7 @@ COPY hsdm.saldos (articulo_id, seccion_id, hospital_id, stock_actual, costo_prom
 
 COPY hsdm.secciones (id, hospital_id, descripcion, seleccionada, estado) FROM stdin;
 1	1	AÑO FISCAL 	t	t
+4	1	2027	f	t
 \.
 
 
@@ -2848,7 +2850,7 @@ SELECT pg_catalog.setval('hsdm.cargos_id_seq', 1, false);
 -- Name: configuraciones_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
 --
 
-SELECT pg_catalog.setval('hsdm.configuraciones_id_seq', 1, true);
+SELECT pg_catalog.setval('hsdm.configuraciones_id_seq', 2, true);
 
 
 --
@@ -2890,7 +2892,7 @@ SELECT pg_catalog.setval('hsdm.proveedores_id_seq', 1, false);
 -- Name: secciones_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
 --
 
-SELECT pg_catalog.setval('hsdm.secciones_id_seq', 2, true);
+SELECT pg_catalog.setval('hsdm.secciones_id_seq', 4, true);
 
 
 --

@@ -325,7 +325,7 @@ public class Ventana_Principal extends javax.swing.JFrame {
             if (hijo.equals("Conceptos")) lanzarVentana(new Crear_Conceptos(this, true));
             if (hijo.equals("Grupos")) lanzarVentana(new Crear_Grupos(this, true));
             if (hijo.equals("Decimales")) try {
-                lanzarVentana(new Crear_Decimal(this, true));
+                lanzarVentana(new Configurar_Decimal(this, true));
             } catch (SQLException ex) {
                 log.severe("ERROR AL LANZAR LA VENTANA DE CREAR DECIMALES");
                 log.severe(ex.toString());

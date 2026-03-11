@@ -2846,3 +2846,493 @@ mar. 10, 2026 10:29:44 A. M. BaseDatos.Conexion Conectar
 INFORMACIÓN: CONEXION A BD
 mar. 10, 2026 10:29:50 A. M. BaseDatos.Conexion Conectar
 INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 6:39:22 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 11, 2026 6:39:22 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 6:39:22 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 6:39:22 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 11, 2026 6:39:22 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-11_18-39-22.sql
+mar. 11, 2026 6:39:22 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 11, 2026 6:39:22 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 11, 2026 6:39:22 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 6:39:22 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-11_18-39-22.sql
+mar. 11, 2026 6:39:23 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-09_18-41-11.sql
+mar. 11, 2026 6:39:27 P. M. inventario.Crear_Decimal <init>
+INFORMACIÓN: CREAR / CONFIGURAR DECIMALES
+mar. 11, 2026 6:39:27 P. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE SECCIONES
+mar. 11, 2026 6:39:27 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 6:39:27 P. M. BaseDatos.ConexionVerSecciones consulta
+GRAVE: ERROR: no existe la columna «decimales_costos»
+  Position: 25
+mar. 11, 2026 6:39:32 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 11, 2026 6:39:32 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 6:39:32 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 6:39:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 6:40:15 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 11, 2026 6:40:15 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 6:40:15 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 6:40:15 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 11, 2026 6:40:15 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-11_18-40-15.sql
+mar. 11, 2026 6:40:16 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 11, 2026 6:40:16 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 11, 2026 6:40:16 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 6:40:16 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-11_18-40-15.sql
+mar. 11, 2026 6:40:16 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-09_18-46-36.sql
+mar. 11, 2026 6:40:38 P. M. inventario.Crear_Decimal <init>
+INFORMACIÓN: CREAR / CONFIGURAR DECIMALES
+mar. 11, 2026 6:40:38 P. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE SECCIONES
+mar. 11, 2026 6:40:38 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 6:40:38 P. M. BaseDatos.ConexionVerSecciones consulta
+GRAVE: ERROR: no existe la columna «decimales_costos»
+  Position: 25
+mar. 11, 2026 6:41:01 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 11, 2026 6:41:01 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 6:41:01 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 6:41:04 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 6:41:44 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 11, 2026 6:41:44 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 6:41:44 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 6:41:44 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 11, 2026 6:41:44 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-11_18-41-44.sql
+mar. 11, 2026 6:41:45 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 11, 2026 6:41:45 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 11, 2026 6:41:45 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 6:41:45 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-11_18-41-44.sql
+mar. 11, 2026 6:41:45 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-09_18-47-45.sql
+mar. 11, 2026 6:41:49 P. M. inventario.Crear_Decimal <init>
+INFORMACIÓN: CREAR / CONFIGURAR DECIMALES
+mar. 11, 2026 6:41:49 P. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE SECCIONES
+mar. 11, 2026 6:41:49 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 6:41:49 P. M. BaseDatos.ConexionVerSecciones consulta
+GRAVE: ERROR: no existe la columna «decimales_costos»
+  Position: 25
+mar. 11, 2026 6:42:44 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 11, 2026 6:42:44 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 6:42:44 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 6:42:47 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:02:57 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 11, 2026 7:02:57 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:02:57 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:02:57 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 11, 2026 7:02:57 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-11_19-02-57.sql
+mar. 11, 2026 7:02:58 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 11, 2026 7:02:58 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 11, 2026 7:02:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:02:58 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-11_19-02-57.sql
+mar. 11, 2026 7:02:58 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-09_18-48-09.sql
+mar. 11, 2026 7:03:12 P. M. inventario.Configurar_Decimal <init>
+INFORMACIÓN: CREAR / CONFIGURAR DECIMALES
+mar. 11, 2026 7:03:12 P. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE SECCIONES
+mar. 11, 2026 7:03:12 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:03:12 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:03:15 P. M. inventario.Configurar_Decimal <init>
+INFORMACIÓN: CREAR / CONFIGURAR DECIMALES
+mar. 11, 2026 7:03:15 P. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE SECCIONES
+mar. 11, 2026 7:03:15 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:03:15 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:03:46 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:04:07 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 11, 2026 7:04:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:04:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:04:07 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 11, 2026 7:04:07 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-11_19-04-07.sql
+mar. 11, 2026 7:04:07 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 11, 2026 7:04:07 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 11, 2026 7:04:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:04:07 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-11_19-04-07.sql
+mar. 11, 2026 7:04:07 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-10_09-25-05.sql
+mar. 11, 2026 7:04:12 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:04:20 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 11, 2026 7:04:20 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:04:20 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:04:20 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 11, 2026 7:04:20 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-11_19-04-20.sql
+mar. 11, 2026 7:04:20 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 11, 2026 7:04:20 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 11, 2026 7:04:20 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:04:20 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-11_19-04-20.sql
+mar. 11, 2026 7:04:20 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-10_09-35-49.sql
+mar. 11, 2026 7:04:29 P. M. inventario.Configurar_Decimal <init>
+INFORMACIÓN: CREAR / CONFIGURAR DECIMALES
+mar. 11, 2026 7:04:29 P. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE SECCIONES
+mar. 11, 2026 7:04:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:04:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:04:29 P. M. inventario.Configurar_Decimal Combo_SeccionesActionPerformed
+GRAVE: ERROR AL CONSULTAR EN LA VENTANA DE CREAR DECIMALES
+mar. 11, 2026 7:04:29 P. M. inventario.Configurar_Decimal Combo_SeccionesActionPerformed
+GRAVE: java.lang.NullPointerException: Cannot invoke "Modelos.ConfiguracionDeSeccionesDTO.decimalCosto()" because "configuracion" is null
+mar. 11, 2026 7:04:29 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 11, 2026 7:04:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:04:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:04:33 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:04:33 P. M. inventario.Configurar_Decimal Combo_SeccionesActionPerformed
+GRAVE: ERROR AL CONSULTAR EN LA VENTANA DE CREAR DECIMALES
+mar. 11, 2026 7:04:33 P. M. inventario.Configurar_Decimal Combo_SeccionesActionPerformed
+GRAVE: java.lang.NullPointerException: Cannot invoke "Modelos.ConfiguracionDeSeccionesDTO.decimalCosto()" because "configuracion" is null
+mar. 11, 2026 7:04:37 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:08:47 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 11, 2026 7:08:47 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:08:47 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:08:47 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 11, 2026 7:08:47 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-11_19-08-47.sql
+mar. 11, 2026 7:08:47 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 11, 2026 7:08:47 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 11, 2026 7:08:47 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:08:47 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-11_19-08-47.sql
+mar. 11, 2026 7:08:47 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-10_10-18-27.sql
+mar. 11, 2026 7:08:50 P. M. inventario.Configurar_Decimal <init>
+INFORMACIÓN: CREAR / CONFIGURAR DECIMALES
+mar. 11, 2026 7:08:50 P. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE SECCIONES
+mar. 11, 2026 7:08:50 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:08:50 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:08:50 P. M. inventario.Configurar_Decimal Combo_SeccionesActionPerformed
+GRAVE: ERROR AL CONSULTAR EN LA VENTANA DE CREAR DECIMALES
+mar. 11, 2026 7:08:50 P. M. inventario.Configurar_Decimal Combo_SeccionesActionPerformed
+GRAVE: java.lang.NullPointerException: Cannot invoke "Modelos.ConfiguracionDeSeccionesDTO.decimalCosto()" because "configuracion" is null
+mar. 11, 2026 7:08:50 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 11, 2026 7:08:50 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:08:50 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:08:53 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:08:53 P. M. inventario.Configurar_Decimal Combo_SeccionesActionPerformed
+GRAVE: ERROR AL CONSULTAR EN LA VENTANA DE CREAR DECIMALES
+mar. 11, 2026 7:08:53 P. M. inventario.Configurar_Decimal Combo_SeccionesActionPerformed
+GRAVE: java.lang.NullPointerException: Cannot invoke "Modelos.ConfiguracionDeSeccionesDTO.decimalCosto()" because "configuracion" is null
+mar. 11, 2026 7:08:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:11:23 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 11, 2026 7:11:23 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:11:23 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:11:23 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 11, 2026 7:11:23 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-11_19-11-23.sql
+mar. 11, 2026 7:11:23 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 11, 2026 7:11:23 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 11, 2026 7:11:23 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:11:23 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-11_19-11-23.sql
+mar. 11, 2026 7:11:23 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-10_10-18-57.sql
+mar. 11, 2026 7:11:27 P. M. inventario.Configurar_Decimal <init>
+INFORMACIÓN: CREAR / CONFIGURAR DECIMALES
+mar. 11, 2026 7:11:27 P. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE SECCIONES
+mar. 11, 2026 7:11:27 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:11:28 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:11:28 P. M. BaseDatos.ConexionConfigurarSecciones consultar
+GRAVE: ERROR AL CONSULTAR LA CONFIGURACION DE LA SECCION
+mar. 11, 2026 7:11:28 P. M. BaseDatos.ConexionConfigurarSecciones consultar
+GRAVE: org.postgresql.util.PSQLException: ResultSet not positioned properly, perhaps you need to call next.
+mar. 11, 2026 7:11:28 P. M. inventario.Configurar_Decimal Combo_SeccionesActionPerformed
+GRAVE: ERROR AL CONSULTAR EN LA VENTANA DE CREAR DECIMALES
+mar. 11, 2026 7:11:28 P. M. inventario.Configurar_Decimal Combo_SeccionesActionPerformed
+GRAVE: java.lang.NullPointerException: Cannot invoke "Modelos.ConfiguracionDeSeccionesDTO.decimalCosto()" because "configuracion" is null
+mar. 11, 2026 7:11:28 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 11, 2026 7:11:28 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:11:28 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:11:38 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:11:38 P. M. BaseDatos.ConexionConfigurarSecciones consultar
+GRAVE: ERROR AL CONSULTAR LA CONFIGURACION DE LA SECCION
+mar. 11, 2026 7:11:38 P. M. BaseDatos.ConexionConfigurarSecciones consultar
+GRAVE: org.postgresql.util.PSQLException: ResultSet not positioned properly, perhaps you need to call next.
+mar. 11, 2026 7:11:38 P. M. inventario.Configurar_Decimal Combo_SeccionesActionPerformed
+GRAVE: ERROR AL CONSULTAR EN LA VENTANA DE CREAR DECIMALES
+mar. 11, 2026 7:11:38 P. M. inventario.Configurar_Decimal Combo_SeccionesActionPerformed
+GRAVE: java.lang.NullPointerException: Cannot invoke "Modelos.ConfiguracionDeSeccionesDTO.decimalCosto()" because "configuracion" is null
+mar. 11, 2026 7:11:43 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:14:30 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 11, 2026 7:14:30 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:14:30 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:14:30 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 11, 2026 7:14:30 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-11_19-14-30.sql
+mar. 11, 2026 7:14:30 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 11, 2026 7:14:30 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 11, 2026 7:14:30 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:14:30 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-11_19-14-30.sql
+mar. 11, 2026 7:14:30 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-10_10-26-16.sql
+mar. 11, 2026 7:14:32 P. M. inventario.Configurar_Decimal <init>
+INFORMACIÓN: CREAR / CONFIGURAR DECIMALES
+mar. 11, 2026 7:14:32 P. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE SECCIONES
+mar. 11, 2026 7:14:32 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:14:32 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:14:32 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 11, 2026 7:14:32 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:14:33 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:14:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:16:00 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 11, 2026 7:16:00 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:16:00 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:16:00 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 11, 2026 7:16:00 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-11_19-16-00.sql
+mar. 11, 2026 7:16:01 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 11, 2026 7:16:01 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 11, 2026 7:16:01 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:16:01 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-11_19-16-00.sql
+mar. 11, 2026 7:16:01 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-10_10-29-27.sql
+mar. 11, 2026 7:16:03 P. M. inventario.Configurar_Decimal <init>
+INFORMACIÓN: CREAR / CONFIGURAR DECIMALES
+mar. 11, 2026 7:16:03 P. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE SECCIONES
+mar. 11, 2026 7:16:03 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:16:03 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:16:04 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 11, 2026 7:16:04 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:16:04 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:16:06 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:16:52 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:17:02 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 11, 2026 7:17:02 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:17:02 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:17:02 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 11, 2026 7:17:02 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-11_19-17-02.sql
+mar. 11, 2026 7:17:02 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 11, 2026 7:17:02 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 11, 2026 7:17:02 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:17:02 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-11_19-17-02.sql
+mar. 11, 2026 7:17:02 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-11_18-39-22.sql
+mar. 11, 2026 7:17:10 P. M. inventario.Configurar_Decimal <init>
+INFORMACIÓN: CREAR / CONFIGURAR DECIMALES
+mar. 11, 2026 7:17:10 P. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE SECCIONES
+mar. 11, 2026 7:17:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:17:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:17:10 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 11, 2026 7:17:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:17:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:17:12 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:17:15 P. M. BaseDatos.ConexionActualizarDecimal actualizar
+INFORMACIÓN: CONEXION BD ACTUALIZAR DECIMALES
+mar. 11, 2026 7:17:15 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:17:16 P. M. BaseDatos.ConexionActualizarDecimal actualizar
+GRAVE: ERROR: no existe la columna «decimales_costo» en la relación «configuraciones»
+  Position: 28
+mar. 11, 2026 7:18:05 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:31:18 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 11, 2026 7:31:18 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:31:19 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:31:19 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 11, 2026 7:31:19 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-11_19-31-19.sql
+mar. 11, 2026 7:31:19 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-11_19-31-19.sql
+mar. 11, 2026 7:31:19 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-11_18-41-44.sql
+mar. 11, 2026 7:31:19 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 11, 2026 7:31:19 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 11, 2026 7:31:19 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:31:23 P. M. inventario.Configurar_Decimal <init>
+INFORMACIÓN: CREAR / CONFIGURAR DECIMALES
+mar. 11, 2026 7:31:23 P. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE SECCIONES
+mar. 11, 2026 7:31:23 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:31:23 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:31:23 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 11, 2026 7:31:23 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:31:23 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:31:23 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 11, 2026 7:31:23 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:31:23 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:31:26 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:31:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:31:32 P. M. BaseDatos.ConexionActualizarDecimal actualizar
+INFORMACIÓN: CONEXION BD ACTUALIZAR DECIMALES
+mar. 11, 2026 7:31:32 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:31:35 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:31:37 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 11, 2026 7:31:40 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD

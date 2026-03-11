@@ -23,7 +23,7 @@ public class ConexionVerSecciones {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        try(PreparedStatement consulta= conex.prepareStatement("select id, descripcion from secciones") ){
+        try(PreparedStatement consulta= conex.prepareStatement("select id, descripcion  from secciones") ){
          try(ResultSet ejecutar=consulta.executeQuery()){
                  while( ejecutar.next() )
                  {
