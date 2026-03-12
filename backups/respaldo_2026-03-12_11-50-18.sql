@@ -133,7 +133,7 @@ ALTER SEQUENCE hsdm.cargos_id_seq OWNED BY hsdm.cargos.id;
 
 CREATE TABLE hsdm.conceptos (
     codigo integer NOT NULL,
-    hospital_id integer,
+    hospital_id integer NOT NULL,
     descripcion character varying(100) NOT NULL,
     tipo character varying(1) NOT NULL
 );
@@ -1551,7 +1551,6 @@ COPY hsdm.conceptos (codigo, hospital_id, descripcion, tipo) FROM stdin;
 
 COPY hsdm.configuraciones (id, hospital_id, seccion_id, decimales_costos, decimales_cantidades, moneda_simbolo, permite_stock_negativo) FROM stdin;
 1	1	1	4	2	$	f
-2	1	4	6	6	\N	f
 \.
 
 
@@ -1568,8 +1567,8 @@ COPY hsdm.documentos (id, hospital_id, seccion_id, concepto_id, tipo, numero_pro
 --
 
 COPY hsdm.flyway_schema_history (installed_rank, version, description, type, script, checksum, installed_by, installed_on, execution_time, success) FROM stdin;
-0	\N	<< Flyway Schema Creation >>	SCHEMA	"hsdm"	\N	postgres	2026-03-10 09:35:37.2759	0	t
-1	1	Esquema Maestro Inventario	SQL	V1__Esquema_Maestro_Inventario.sql	-1770270502	postgres	2026-03-10 09:35:37.381541	189	t
+0	\N	<< Flyway Schema Creation >>	SCHEMA	"hsdm"	\N	postgres	2026-03-12 11:50:00.896163	0	t
+1	1	Esquema Maestro Inventario	SQL	V1__Esquema_Maestro_Inventario.sql	-1160231456	postgres	2026-03-12 11:50:01.006839	138	t
 \.
 
 
@@ -1597,7 +1596,7 @@ COPY hsdm.hospitales (id, rif, nombre, direccion, estado) FROM stdin;
 --
 
 COPY hsdm.inicios (id, hospital_id, estado, fecha_ultimo_acceso) FROM stdin;
-1	1	1	2026-03-11 19:11:23.628651
+1	1	1	2026-03-12 11:50:18.533736
 \.
 
 
@@ -1631,7 +1630,6 @@ COPY hsdm.saldos (articulo_id, seccion_id, hospital_id, stock_actual, costo_prom
 
 COPY hsdm.secciones (id, hospital_id, descripcion, seleccionada, estado) FROM stdin;
 1	1	AÑO FISCAL 	t	t
-4	1	2027	f	t
 \.
 
 
@@ -2850,7 +2848,7 @@ SELECT pg_catalog.setval('hsdm.cargos_id_seq', 1, false);
 -- Name: configuraciones_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
 --
 
-SELECT pg_catalog.setval('hsdm.configuraciones_id_seq', 2, true);
+SELECT pg_catalog.setval('hsdm.configuraciones_id_seq', 1, true);
 
 
 --
@@ -2892,7 +2890,7 @@ SELECT pg_catalog.setval('hsdm.proveedores_id_seq', 1, false);
 -- Name: secciones_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
 --
 
-SELECT pg_catalog.setval('hsdm.secciones_id_seq', 4, true);
+SELECT pg_catalog.setval('hsdm.secciones_id_seq', 1, true);
 
 
 --
@@ -3057,7 +3055,7 @@ ALTER TABLE ONLY hsdm.cargos
 --
 
 ALTER TABLE ONLY hsdm.conceptos
-    ADD CONSTRAINT conceptos_pkey PRIMARY KEY (codigo);
+    ADD CONSTRAINT conceptos_pkey PRIMARY KEY (hospital_id, codigo);
 
 
 --
@@ -3402,6 +3400,13 @@ CREATE UNIQUE INDEX idx_cargos_hosp_sec_desc ON hsdm.cargos USING btree (hospita
 
 
 --
+-- Name: idx_conceptos_desc_tipo_hosp; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_conceptos_desc_tipo_hosp ON hsdm.conceptos USING btree (hospital_id, tipo, lower((descripcion)::text));
+
+
+--
 -- Name: idx_documentos_entrada_prov; Type: INDEX; Schema: hsdm; Owner: postgres
 --
 
@@ -3413,6 +3418,13 @@ CREATE UNIQUE INDEX idx_documentos_entrada_prov ON hsdm.documentos USING btree (
 --
 
 CREATE UNIQUE INDEX idx_documentos_salida_mensual ON hsdm.documentos USING btree (hospital_id, seccion_id, concepto_id, mes_legal, anio_legal, correlativo_legal) WHERE ((tipo)::text = 'SALIDA'::text);
+
+
+--
+-- Name: idx_grupos_nombre_unique; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_grupos_nombre_unique ON hsdm.grupos USING btree (hospital_id, lower((descripcion)::text));
 
 
 --
@@ -3434,6 +3446,13 @@ CREATE UNIQUE INDEX idx_secciones_hosp_desc ON hsdm.secciones USING btree (hospi
 --
 
 CREATE UNIQUE INDEX idx_servicios_hosp_sec_desc ON hsdm.servicios USING btree (hospital_id, lower((nombre_servicio)::text));
+
+
+--
+-- Name: idx_subgrupos_nombre_unique; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_subgrupos_nombre_unique ON hsdm.subgrupos USING btree (hospital_id, grupo_codigo, lower((descripcion)::text));
 
 
 --
@@ -3524,11 +3543,11 @@ ALTER TABLE ONLY hsdm.configuraciones
 
 
 --
--- Name: documentos documentos_concepto_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+-- Name: documentos documentos_hospital_id_concepto_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
 --
 
 ALTER TABLE ONLY hsdm.documentos
-    ADD CONSTRAINT documentos_concepto_id_fkey FOREIGN KEY (concepto_id) REFERENCES hsdm.conceptos(codigo);
+    ADD CONSTRAINT documentos_hospital_id_concepto_id_fkey FOREIGN KEY (hospital_id, concepto_id) REFERENCES hsdm.conceptos(hospital_id, codigo);
 
 
 --

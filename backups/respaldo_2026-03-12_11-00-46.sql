@@ -1550,8 +1550,8 @@ COPY hsdm.conceptos (codigo, hospital_id, descripcion, tipo) FROM stdin;
 --
 
 COPY hsdm.configuraciones (id, hospital_id, seccion_id, decimales_costos, decimales_cantidades, moneda_simbolo, permite_stock_negativo) FROM stdin;
-1	1	1	4	2	$	f
-2	1	4	6	6	\N	f
+2	1	4	6	6	Bs.	f
+1	1	1	6	6	$.	f
 \.
 
 
@@ -1597,7 +1597,7 @@ COPY hsdm.hospitales (id, rif, nombre, direccion, estado) FROM stdin;
 --
 
 COPY hsdm.inicios (id, hospital_id, estado, fecha_ultimo_acceso) FROM stdin;
-1	1	1	2026-03-11 19:14:30.156458
+1	1	1	2026-03-12 11:00:46.833157
 \.
 
 

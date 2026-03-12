@@ -5,12 +5,13 @@
  */
 package inventario;
 
-import BaseDatos.ConexionComprobarGrupos;
 import BaseDatos.ConexionCrearGrupos;
-import BaseDatos.ConexionVerAlmacenes;
+import BaseDatos.ConexionVerHospitales;
 import Modelos.AlmacenDTO;
+import Modelos.HospitalDTO;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,19 +23,29 @@ public class Crear_Grupos extends javax.swing.JDialog {
     /**
      * Creates new form Crear_Servicio
      */
-      List<String> codigos=new ArrayList<>();
-      List<Integer> grupos=new ArrayList<>();
-      int continuar;//variable que indica si continua o no
+     
+      List<HospitalDTO> hospitales=new ArrayList<>();
       AlmacenDTO almacenPrincipal;
+      private static final Logger log=LoggerInfo.getLogger();
     public Crear_Grupos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        try{
          GestionDeAlmacenes.getInstance().llamarDatos();
         almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
         if(almacenPrincipal != null){
             etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
         }else{
              etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
+        GestionDeHospitales.getInstance().llamarDatos();
+        hospitales=GestionDeHospitales.getInstance().hospitales();
+        for(HospitalDTO lista: hospitales){
+            comboHospitales.addItem(lista);
+        }
+        }catch(Exception e){
+        log.severe("ERROR AL CARGAR ELEMENTOS DE LA VENTANA DE CREACION DE GRUPOS");
+        log.severe(e.toString());
         }
     }
 
@@ -60,6 +71,8 @@ public class Crear_Grupos extends javax.swing.JDialog {
         Campo_Subgrupo = new javax.swing.JTextField();
         Combo_grupo = new javax.swing.JComboBox();
         Etiq_codigoGrupo = new javax.swing.JLabel();
+        etiqHospital = new javax.swing.JLabel();
+        comboHospitales = new javax.swing.JComboBox<>();
         etiquetaAlmacenActivo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -98,6 +111,8 @@ public class Crear_Grupos extends javax.swing.JDialog {
 
         Etiq_codigoGrupo.setText("Codigo Grupo:");
 
+        etiqHospital.setText("Hospital:");
+
         javax.swing.GroupLayout Panel2Layout = new javax.swing.GroupLayout(Panel2);
         Panel2.setLayout(Panel2Layout);
         Panel2Layout.setHorizontalGroup(
@@ -107,18 +122,24 @@ public class Crear_Grupos extends javax.swing.JDialog {
                 .addGroup(Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Etiq_codigoSubgrupo)
                     .addComponent(Etiq_codigoGrupo)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(etiqHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Campo_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Campo_Nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                     .addComponent(Combo_grupo, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Campo_Subgrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(85, Short.MAX_VALUE))
+                    .addComponent(Campo_Subgrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboHospitales, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         Panel2Layout.setVerticalGroup(
             Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel2Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addGroup(Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(etiqHospital)
+                    .addComponent(comboHospitales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Combo_grupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Etiq_codigoGrupo))
@@ -186,6 +207,7 @@ public class Crear_Grupos extends javax.swing.JDialog {
 
     private void Boton_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_aceptarActionPerformed
         // TODO add your handling code here:
+        try{
         if( Campo_Subgrupo.getText().isEmpty() || Campo_Nombre.getText().isEmpty())
         {
              JOptionPane.showMessageDialog(null, "Debe completar todos los campos", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
@@ -193,46 +215,14 @@ public class Crear_Grupos extends javax.swing.JDialog {
          
         else
         {
-            
-                ConexionComprobarGrupos comprobar = new ConexionComprobarGrupos();
-                comprobar.validar();
-                codigos=comprobar.codigos();
-                grupos=comprobar.grupos();
-                if(!codigos.isEmpty())
-                {
-                   
-                for(int i=0; i<codigos.size(); i++)
-                {
-                    
-                    if( (Campo_Subgrupo.getText().trim().toUpperCase().equals(codigos.get(i))) && (Combo_grupo.getSelectedItem().toString().equals(grupos.get(i))))
-                            
-                    {
-                       JOptionPane.showMessageDialog(null, "Codigo de Sub Grupo ya registrado para el grupo seleccionadobdv", "Error", JOptionPane.ERROR_MESSAGE); 
-                       continuar=0;
-                       break;
-                    } 
-                    else
-                    {
-                      continuar=1;  
-                    }
-                     }//for
-                }//if que verifica que haya obtenido algo ya que si esta en blanco la base de datos debera continuar
-                   if(codigos.isEmpty())
-                    {
-                         
-                        
-                        continuar=1;
-                    }
-               
-                
-                    if(continuar==1) 
-                    {
+           
                         ConexionCrearGrupos crear= new ConexionCrearGrupos();
-                        crear.setSubGrupo(Campo_Subgrupo.getText().trim().toUpperCase());
-                        crear.setGrupo(Integer.parseInt(Combo_grupo.getSelectedItem().toString()));
-                        crear.setDescripcion(Campo_Nombre.getText().trim().toUpperCase());
-                        crear.crear();
-                        
+                        crear.setCodigoGrupo((String) Combo_grupo.getSelectedItem());
+                        crear.setCodigoSubgrupo(Campo_Subgrupo.getText().trim());
+                        crear.setDescripcion(Campo_Nombre.getText().trim());
+                        HospitalDTO seleccionado=(HospitalDTO)comboHospitales.getSelectedItem();
+                        crear.setHospital_id(seleccionado.id());
+                        crear.ejecutar();
                         if(crear.respuesta()==1)
                         {
                             JOptionPane.showMessageDialog(null, "Grupo y sub Grupo creado exitosamente", "Informacion", JOptionPane.INFORMATION_MESSAGE); 
@@ -242,15 +232,13 @@ public class Crear_Grupos extends javax.swing.JDialog {
                         else
                         {
                             JOptionPane.showMessageDialog(null, "Grupo y Sub Grupo no se han podido crear. Revise la informacion.", "Error", JOptionPane.ERROR_MESSAGE); 
-                        }
-                    }
-                
-                
-                
-                
-                
-            
+                        }  
         }
+        }catch(Exception ex){
+        log.severe("ERROR AL CREAR GRUPOS");
+        log.severe(ex.toString());
+        }
+        
     }//GEN-LAST:event_Boton_aceptarActionPerformed
 
     private void Campo_SubgrupoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Campo_SubgrupoKeyTyped
@@ -322,6 +310,8 @@ public class Crear_Grupos extends javax.swing.JDialog {
     private javax.swing.JLabel Etiq_encabezado;
     private javax.swing.JPanel Panel1;
     private javax.swing.JPanel Panel2;
+    private javax.swing.JComboBox<HospitalDTO> comboHospitales;
+    private javax.swing.JLabel etiqHospital;
     private javax.swing.JLabel etiquetaAlmacenActivo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

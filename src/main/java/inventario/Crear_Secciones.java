@@ -26,8 +26,8 @@ AlmacenDTO almacenPrincipal;
         }else{
              etiquetaAlmacenActivo.setText("NO OBTENIDO");
         }
-         ConexionVerHospitales hospital=new ConexionVerHospitales();
-        hospitales=hospital.consultar();
+        GestionDeHospitales.getInstance().llamarDatos();
+        hospitales=GestionDeHospitales.getInstance().hospitales();
         for(HospitalDTO lista: hospitales){
             comboHospitales.addItem(lista);
         }

@@ -5,7 +5,6 @@
  */
 package inventario;
 
-import BaseDatos.ConexionSecciones;
 import BaseDatos.conexionCrearHospitales;
 import Modelos.AlmacenDTO;
 import java.sql.Date;

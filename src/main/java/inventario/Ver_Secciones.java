@@ -2,7 +2,6 @@
 package inventario;
 
 import BaseDatos.ConexionActualizarSeccion;
-import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerSecciones;
 import Modelos.AlmacenDTO;
 import Modelos.SeccionesDTO;
@@ -29,8 +28,8 @@ Logger log=LoggerInfo.getLogger();
         try{
             initComponents();
             log.info("VER SECCIONES");
-            ConexionVerSecciones seccion=new ConexionVerSecciones();
-            secciones=seccion.consultaSeccion();
+            GestionDeSecciones.getInstance().llamarDatos();
+             secciones=GestionDeSecciones.getInstance().secciones();
             modelo=(DefaultTableModel)Tabla_Secciones.getModel();
             filtro=new TableRowSorter(Tabla_Secciones.getModel());
                 for(SeccionesDTO section:secciones)

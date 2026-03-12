@@ -36,8 +36,8 @@ public class Configurar_Decimal extends javax.swing.JDialog {
         initComponents();
         log.info("CREAR / CONFIGURAR DECIMALES");
         
-        ConexionVerSecciones secciones=new ConexionVerSecciones();
-        empresas=secciones.consultaSeccion();
+        GestionDeSecciones.getInstance().llamarDatos();
+        empresas=GestionDeSecciones.getInstance().secciones();
         
         for(SeccionesDTO seccion: empresas){
             Combo_Secciones.addItem(seccion);
@@ -49,8 +49,8 @@ public class Configurar_Decimal extends javax.swing.JDialog {
         }else{
              etiquetaAlmacenActivo.setText("NO OBTENIDO");
         }
-          ConexionVerHospitales hospital=new ConexionVerHospitales();
-        hospitales=hospital.consultar();
+         GestionDeHospitales.getInstance().llamarDatos();
+        hospitales=GestionDeHospitales.getInstance().hospitales();
         for(HospitalDTO lista: hospitales){
             comboHospitales.addItem(lista);
         }

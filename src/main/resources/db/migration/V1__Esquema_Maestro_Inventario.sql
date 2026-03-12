@@ -38,12 +38,12 @@ CREATE TABLE subgrupos (
 );
 
 CREATE TABLE conceptos (
-    codigo INTEGER PRIMARY KEY,
-    hospital_id INTEGER REFERENCES hospitales(id),
+	codigo INTEGER NOT NULL,
+    hospital_id INTEGER NOT NULL REFERENCES hospitales(id),
     descripcion VARCHAR(100) NOT NULL,
-    tipo VARCHAR(1) NOT NULL -- 'E' entrada, 'S' salida
+    tipo VARCHAR(1) NOT NULL, -- 'E' entrada, 'S' salida
+    PRIMARY KEY (hospital_id, codigo) -- Llave compuesta
 );
-
 -- =============================================================================
 -- 3. TABLAS MAESTRAS (CATÁLOGOS)
 -- =============================================================================
@@ -82,7 +82,7 @@ CREATE TABLE documentos (
     id SERIAL PRIMARY KEY,
     hospital_id INTEGER REFERENCES hospitales(id),
     seccion_id INTEGER REFERENCES secciones(id),
-    concepto_id INTEGER REFERENCES conceptos(codigo),
+    concepto_id INTEGER,
     tipo VARCHAR(10) NOT NULL, 
     numero_provisional VARCHAR(50), 
     correlativo_legal INTEGER,    
@@ -92,7 +92,9 @@ CREATE TABLE documentos (
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     estado INTEGER DEFAULT 0, 
     observaciones TEXT,
-    valor_total NUMERIC(20,4) DEFAULT 0
+    valor_total NUMERIC(20,4) DEFAULT 0,
+    FOREIGN KEY (hospital_id, concepto_id) REFERENCES conceptos(hospital_id, codigo)
+   
 );
 
 -- =============================================================================
@@ -179,6 +181,13 @@ CREATE UNIQUE INDEX idx_servicios_hosp_sec_desc ON servicios (hospital_id,  LOWE
 CREATE UNIQUE INDEX idx_proveedores_hosp_rif ON proveedores (hospital_id, rif);
 CREATE UNIQUE INDEX idx_unidades_hosp_nombre ON unidades (hospital_id, LOWER(nombre));
 CREATE UNIQUE INDEX idx_articulos_hosp_nombre on articulos(hospital_id, LOWER(nombre));
+-- 1. Evitar grupos con el mismo nombre en el mismo hospital
+CREATE UNIQUE INDEX idx_grupos_nombre_unique 
+ON grupos (hospital_id, LOWER(descripcion));
+
+-- 2. Evitar subgrupos con el mismo nombre dentro del mismo grupo y hospital
+CREATE UNIQUE INDEX idx_subgrupos_nombre_unique 
+ON subgrupos (hospital_id, grupo_codigo, LOWER(descripcion));
 
 -- RESET MENSUAL PUBLICACIÓN 15
 CREATE UNIQUE INDEX idx_documentos_salida_mensual 
@@ -188,6 +197,9 @@ WHERE tipo = 'SALIDA';
 CREATE UNIQUE INDEX idx_documentos_entrada_prov 
 ON documentos (hospital_id, seccion_id, numero_provisional)
 WHERE tipo = 'ENTRADA';
+-- Evita nombres de conceptos duplicados por hospital y tipo
+CREATE UNIQUE INDEX idx_conceptos_desc_tipo_hosp 
+ON conceptos (hospital_id, tipo, LOWER(descripcion));
 
 -- =============================================================================
 -- 8. BOOTSTRAP (INICIO AUTOMÁTICO)

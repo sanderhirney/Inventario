@@ -6,8 +6,12 @@
 package inventario;
 
 import BaseDatos.ConexionCrearConceptos;
-import BaseDatos.ConexionVerAlmacenes;
+import BaseDatos.ConexionVerHospitales;
 import Modelos.AlmacenDTO;
+import Modelos.HospitalDTO;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
@@ -17,18 +21,29 @@ import javax.swing.JOptionPane;
  */
 public class Crear_Conceptos extends javax.swing.JDialog {
 
-    String tip;
     AlmacenDTO almacenPrincipal;
-     
+    List<HospitalDTO> hospitales=new ArrayList<>();
+    private static final Logger log=LoggerInfo.getLogger();
+
     public Crear_Conceptos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    try{
          GestionDeAlmacenes.getInstance().llamarDatos();
         almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
         if(almacenPrincipal != null){
             etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
         }else{
              etiquetaAlmacenActivo.setText("NO OBTENIDO");
+        }
+        GestionDeHospitales.getInstance().llamarDatos();
+        hospitales=GestionDeHospitales.getInstance().hospitales();
+        for(HospitalDTO lista: hospitales){
+            comboHospitales.addItem(lista);
+        }
+        }catch(Exception e){
+        log.severe("ERROR AL CARGAR ELEMENTOS DE LA VENTANA DE CREACION DE GRUPOS");
+        log.severe(e.toString());
         }
        
     }
@@ -54,6 +69,8 @@ public class Crear_Conceptos extends javax.swing.JDialog {
         Combo_tipo = new javax.swing.JComboBox();
         Boton_aceptar = new javax.swing.JButton();
         etiquetaAlmacenActivo = new javax.swing.JLabel();
+        etiq_hospital = new javax.swing.JLabel();
+        comboHospitales = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -90,6 +107,8 @@ public class Crear_Conceptos extends javax.swing.JDialog {
             }
         });
 
+        etiq_hospital.setText("Hospital:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,11 +119,7 @@ public class Crear_Conceptos extends javax.swing.JDialog {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Etiq_codigo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Combo_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Etiq_nombre)
@@ -112,7 +127,15 @@ public class Crear_Conceptos extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Combo_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Campo_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(Campo_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(etiq_hospital)
+                            .addComponent(Etiq_codigo))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Combo_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboHospitales, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(94, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -141,7 +164,11 @@ public class Crear_Conceptos extends javax.swing.JDialog {
                 .addComponent(etiquetaAlmacenActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(etiq_hospital)
+                    .addComponent(comboHospitales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Etiq_codigo)
                     .addComponent(Combo_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -179,13 +206,15 @@ public class Crear_Conceptos extends javax.swing.JDialog {
 
     private void Boton_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_aceptarActionPerformed
         // TODO add your handling code here:
+        try{
+        String tipo="";
         if(Combo_tipo.getSelectedItem()=="Entrada")
         {
-            tip="E";
+            tipo="E";
         }
         if(Combo_tipo.getSelectedItem()=="Salida")
         {
-            tip="S";
+            tipo="S";
         }
         if(Campo_nombre.getText().trim().isEmpty())
         {
@@ -195,11 +224,13 @@ public class Crear_Conceptos extends javax.swing.JDialog {
         {
             int seleccion;
             seleccion= Integer.parseInt( Combo_Codigo.getSelectedItem().toString() );
-                     ConexionCrearConceptos crear= new ConexionCrearConceptos();
-                    crear.setCodigo(Integer.parseInt( (Combo_Codigo.getSelectedItem().toString()) ) );
-                    crear.setDescripcion(Campo_nombre.getText().trim().toUpperCase());
-                    crear.setTipo(tip);
-                    crear.crear();
+            HospitalDTO hospitalSeleccionado=(HospitalDTO)comboHospitales.getSelectedItem();
+            ConexionCrearConceptos crear= new ConexionCrearConceptos();
+            crear.setCodigo(seleccion);   
+            crear.setDescripcion(Campo_nombre.getText().trim().toUpperCase());
+            crear.setTipo(tipo);
+            crear.setHospital_id(hospitalSeleccionado.id());
+            crear.ejecutar();
                     if(crear.respuesta()==1)
                     {
                       JOptionPane.showMessageDialog(null, "Concepto Creado Exitosamente", "Informacion",  JOptionPane.INFORMATION_MESSAGE);
@@ -210,6 +241,10 @@ public class Crear_Conceptos extends javax.swing.JDialog {
                      JOptionPane.showMessageDialog(null, "No se pudo crear el concepto \n Consulte al desarrollador", "Error",  JOptionPane.ERROR_MESSAGE);
                    }
               
+        }
+        }catch(Exception ex){
+        log.severe("ERROR AL CREAR EL CONCEPTO");
+        log.severe(ex.toString());
         }
         
     }//GEN-LAST:event_Boton_aceptarActionPerformed
@@ -267,6 +302,8 @@ public class Crear_Conceptos extends javax.swing.JDialog {
     private javax.swing.JLabel Etiq_encabezado;
     private javax.swing.JLabel Etiq_nombre;
     private javax.swing.JLabel Etiq_tipo;
+    private javax.swing.JComboBox<HospitalDTO> comboHospitales;
+    private javax.swing.JLabel etiq_hospital;
     private javax.swing.JLabel etiquetaAlmacenActivo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;
