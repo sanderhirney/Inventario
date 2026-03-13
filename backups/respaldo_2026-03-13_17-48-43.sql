@@ -31,6 +31,202 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: almacenes; Type: TABLE; Schema: hsdm; Owner: postgres
+--
+
+CREATE TABLE hsdm.almacenes (
+    codigo_almacen character varying(20) NOT NULL,
+    hospital_id integer,
+    denominacion character varying(100) NOT NULL,
+    ubicacion character varying(100),
+    seccion_id integer,
+    es_principal boolean DEFAULT false,
+    es_despacho boolean DEFAULT true,
+    es_destino boolean DEFAULT true,
+    alias character varying(10),
+    fecha_creacion timestamp without time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE hsdm.almacenes OWNER TO postgres;
+
+--
+-- Name: articulos; Type: TABLE; Schema: hsdm; Owner: postgres
+--
+
+CREATE TABLE hsdm.articulos (
+    id integer NOT NULL,
+    hospital_id integer,
+    codigo_barra character varying(50),
+    nombre character varying(250) NOT NULL,
+    unidad_id integer,
+    grupo_cod character varying(2),
+    subgrupo_cod character varying(20),
+    fecha_creacion timestamp without time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE hsdm.articulos OWNER TO postgres;
+
+--
+-- Name: articulos_id_seq; Type: SEQUENCE; Schema: hsdm; Owner: postgres
+--
+
+CREATE SEQUENCE hsdm.articulos_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE hsdm.articulos_id_seq OWNER TO postgres;
+
+--
+-- Name: articulos_id_seq; Type: SEQUENCE OWNED BY; Schema: hsdm; Owner: postgres
+--
+
+ALTER SEQUENCE hsdm.articulos_id_seq OWNED BY hsdm.articulos.id;
+
+
+--
+-- Name: cargos; Type: TABLE; Schema: hsdm; Owner: postgres
+--
+
+CREATE TABLE hsdm.cargos (
+    id integer NOT NULL,
+    hospital_id integer,
+    descripcion character varying(100) NOT NULL,
+    cedula_firmante character varying(20) DEFAULT 'NO ASIGNADO'::character varying,
+    seccion_id integer
+);
+
+
+ALTER TABLE hsdm.cargos OWNER TO postgres;
+
+--
+-- Name: cargos_id_seq; Type: SEQUENCE; Schema: hsdm; Owner: postgres
+--
+
+CREATE SEQUENCE hsdm.cargos_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE hsdm.cargos_id_seq OWNER TO postgres;
+
+--
+-- Name: cargos_id_seq; Type: SEQUENCE OWNED BY; Schema: hsdm; Owner: postgres
+--
+
+ALTER SEQUENCE hsdm.cargos_id_seq OWNED BY hsdm.cargos.id;
+
+
+--
+-- Name: conceptos; Type: TABLE; Schema: hsdm; Owner: postgres
+--
+
+CREATE TABLE hsdm.conceptos (
+    codigo integer NOT NULL,
+    hospital_id integer NOT NULL,
+    descripcion character varying(100) NOT NULL,
+    tipo character varying(1) NOT NULL
+);
+
+
+ALTER TABLE hsdm.conceptos OWNER TO postgres;
+
+--
+-- Name: configuraciones; Type: TABLE; Schema: hsdm; Owner: postgres
+--
+
+CREATE TABLE hsdm.configuraciones (
+    id integer NOT NULL,
+    hospital_id integer,
+    seccion_id integer,
+    decimales_costos integer DEFAULT 4,
+    decimales_cantidades integer DEFAULT 2,
+    moneda_simbolo character varying(5) DEFAULT '$'::character varying,
+    permite_stock_negativo boolean DEFAULT false
+);
+
+
+ALTER TABLE hsdm.configuraciones OWNER TO postgres;
+
+--
+-- Name: configuraciones_id_seq; Type: SEQUENCE; Schema: hsdm; Owner: postgres
+--
+
+CREATE SEQUENCE hsdm.configuraciones_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE hsdm.configuraciones_id_seq OWNER TO postgres;
+
+--
+-- Name: configuraciones_id_seq; Type: SEQUENCE OWNED BY; Schema: hsdm; Owner: postgres
+--
+
+ALTER SEQUENCE hsdm.configuraciones_id_seq OWNED BY hsdm.configuraciones.id;
+
+
+--
+-- Name: documentos; Type: TABLE; Schema: hsdm; Owner: postgres
+--
+
+CREATE TABLE hsdm.documentos (
+    id integer NOT NULL,
+    hospital_id integer,
+    seccion_id integer,
+    concepto_id integer,
+    tipo character varying(10) NOT NULL,
+    numero_provisional character varying(50),
+    correlativo_legal integer,
+    mes_legal integer,
+    anio_legal integer,
+    fecha_emision date NOT NULL,
+    fecha_registro timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    estado integer DEFAULT 0,
+    observaciones text,
+    valor_total numeric(20,4) DEFAULT 0
+);
+
+
+ALTER TABLE hsdm.documentos OWNER TO postgres;
+
+--
+-- Name: documentos_id_seq; Type: SEQUENCE; Schema: hsdm; Owner: postgres
+--
+
+CREATE SEQUENCE hsdm.documentos_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE hsdm.documentos_id_seq OWNER TO postgres;
+
+--
+-- Name: documentos_id_seq; Type: SEQUENCE OWNED BY; Schema: hsdm; Owner: postgres
+--
+
+ALTER SEQUENCE hsdm.documentos_id_seq OWNED BY hsdm.documentos.id;
+
+
+--
 -- Name: flyway_schema_history; Type: TABLE; Schema: hsdm; Owner: postgres
 --
 
@@ -49,6 +245,310 @@ CREATE TABLE hsdm.flyway_schema_history (
 
 
 ALTER TABLE hsdm.flyway_schema_history OWNER TO postgres;
+
+--
+-- Name: grupos; Type: TABLE; Schema: hsdm; Owner: postgres
+--
+
+CREATE TABLE hsdm.grupos (
+    hospital_id integer NOT NULL,
+    codigo character varying(2) NOT NULL,
+    descripcion character varying(200) NOT NULL
+);
+
+
+ALTER TABLE hsdm.grupos OWNER TO postgres;
+
+--
+-- Name: hospitales; Type: TABLE; Schema: hsdm; Owner: postgres
+--
+
+CREATE TABLE hsdm.hospitales (
+    id integer NOT NULL,
+    rif character varying(20) NOT NULL,
+    nombre character varying(250) NOT NULL,
+    direccion text,
+    estado boolean DEFAULT true
+);
+
+
+ALTER TABLE hsdm.hospitales OWNER TO postgres;
+
+--
+-- Name: hospitales_id_seq; Type: SEQUENCE; Schema: hsdm; Owner: postgres
+--
+
+CREATE SEQUENCE hsdm.hospitales_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE hsdm.hospitales_id_seq OWNER TO postgres;
+
+--
+-- Name: hospitales_id_seq; Type: SEQUENCE OWNED BY; Schema: hsdm; Owner: postgres
+--
+
+ALTER SEQUENCE hsdm.hospitales_id_seq OWNED BY hsdm.hospitales.id;
+
+
+--
+-- Name: inicios; Type: TABLE; Schema: hsdm; Owner: postgres
+--
+
+CREATE TABLE hsdm.inicios (
+    id integer NOT NULL,
+    hospital_id integer,
+    estado integer DEFAULT 0 NOT NULL,
+    fecha_ultimo_acceso timestamp without time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE hsdm.inicios OWNER TO postgres;
+
+--
+-- Name: inicios_id_seq; Type: SEQUENCE; Schema: hsdm; Owner: postgres
+--
+
+CREATE SEQUENCE hsdm.inicios_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE hsdm.inicios_id_seq OWNER TO postgres;
+
+--
+-- Name: inicios_id_seq; Type: SEQUENCE OWNED BY; Schema: hsdm; Owner: postgres
+--
+
+ALTER SEQUENCE hsdm.inicios_id_seq OWNED BY hsdm.inicios.id;
+
+
+--
+-- Name: kardex; Type: TABLE; Schema: hsdm; Owner: postgres
+--
+
+CREATE TABLE hsdm.kardex (
+    id integer NOT NULL,
+    hospital_id integer,
+    documento_id integer,
+    articulo_id integer,
+    seccion_id integer,
+    cantidad numeric(20,8) NOT NULL,
+    costo_unitario numeric(20,10) NOT NULL,
+    saldo_cantidad_post numeric(20,8),
+    saldo_costo_prom_post numeric(20,10)
+);
+
+
+ALTER TABLE hsdm.kardex OWNER TO postgres;
+
+--
+-- Name: kardex_id_seq; Type: SEQUENCE; Schema: hsdm; Owner: postgres
+--
+
+CREATE SEQUENCE hsdm.kardex_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE hsdm.kardex_id_seq OWNER TO postgres;
+
+--
+-- Name: kardex_id_seq; Type: SEQUENCE OWNED BY; Schema: hsdm; Owner: postgres
+--
+
+ALTER SEQUENCE hsdm.kardex_id_seq OWNED BY hsdm.kardex.id;
+
+
+--
+-- Name: proveedores; Type: TABLE; Schema: hsdm; Owner: postgres
+--
+
+CREATE TABLE hsdm.proveedores (
+    id integer NOT NULL,
+    hospital_id integer,
+    rif character varying(20) NOT NULL,
+    nombre character varying(250) NOT NULL,
+    direccion text,
+    telefono character varying(50)
+);
+
+
+ALTER TABLE hsdm.proveedores OWNER TO postgres;
+
+--
+-- Name: proveedores_id_seq; Type: SEQUENCE; Schema: hsdm; Owner: postgres
+--
+
+CREATE SEQUENCE hsdm.proveedores_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE hsdm.proveedores_id_seq OWNER TO postgres;
+
+--
+-- Name: proveedores_id_seq; Type: SEQUENCE OWNED BY; Schema: hsdm; Owner: postgres
+--
+
+ALTER SEQUENCE hsdm.proveedores_id_seq OWNED BY hsdm.proveedores.id;
+
+
+--
+-- Name: saldos; Type: TABLE; Schema: hsdm; Owner: postgres
+--
+
+CREATE TABLE hsdm.saldos (
+    articulo_id integer NOT NULL,
+    seccion_id integer NOT NULL,
+    hospital_id integer,
+    stock_actual numeric(20,8) DEFAULT 0,
+    costo_promedio numeric(20,10) DEFAULT 0
+);
+
+
+ALTER TABLE hsdm.saldos OWNER TO postgres;
+
+--
+-- Name: secciones; Type: TABLE; Schema: hsdm; Owner: postgres
+--
+
+CREATE TABLE hsdm.secciones (
+    id integer NOT NULL,
+    hospital_id integer,
+    descripcion character varying(200) NOT NULL,
+    seleccionada boolean DEFAULT false,
+    estado boolean DEFAULT true
+);
+
+
+ALTER TABLE hsdm.secciones OWNER TO postgres;
+
+--
+-- Name: secciones_id_seq; Type: SEQUENCE; Schema: hsdm; Owner: postgres
+--
+
+CREATE SEQUENCE hsdm.secciones_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE hsdm.secciones_id_seq OWNER TO postgres;
+
+--
+-- Name: secciones_id_seq; Type: SEQUENCE OWNED BY; Schema: hsdm; Owner: postgres
+--
+
+ALTER SEQUENCE hsdm.secciones_id_seq OWNED BY hsdm.secciones.id;
+
+
+--
+-- Name: servicios; Type: TABLE; Schema: hsdm; Owner: postgres
+--
+
+CREATE TABLE hsdm.servicios (
+    id integer NOT NULL,
+    hospital_id integer,
+    nombre_servicio character varying(200) NOT NULL,
+    cedula_firmante character varying(20) DEFAULT 'NO ASIGNADO'::character varying,
+    seccion_id integer
+);
+
+
+ALTER TABLE hsdm.servicios OWNER TO postgres;
+
+--
+-- Name: servicios_id_seq; Type: SEQUENCE; Schema: hsdm; Owner: postgres
+--
+
+CREATE SEQUENCE hsdm.servicios_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE hsdm.servicios_id_seq OWNER TO postgres;
+
+--
+-- Name: servicios_id_seq; Type: SEQUENCE OWNED BY; Schema: hsdm; Owner: postgres
+--
+
+ALTER SEQUENCE hsdm.servicios_id_seq OWNED BY hsdm.servicios.id;
+
+
+--
+-- Name: subgrupos; Type: TABLE; Schema: hsdm; Owner: postgres
+--
+
+CREATE TABLE hsdm.subgrupos (
+    hospital_id integer NOT NULL,
+    grupo_codigo character varying(2) NOT NULL,
+    codigo character varying(20) NOT NULL,
+    descripcion character varying(200) NOT NULL
+);
+
+
+ALTER TABLE hsdm.subgrupos OWNER TO postgres;
+
+--
+-- Name: unidades; Type: TABLE; Schema: hsdm; Owner: postgres
+--
+
+CREATE TABLE hsdm.unidades (
+    id integer NOT NULL,
+    hospital_id integer,
+    nombre character varying(50) NOT NULL,
+    abreviatura character varying(10) NOT NULL
+);
+
+
+ALTER TABLE hsdm.unidades OWNER TO postgres;
+
+--
+-- Name: unidades_id_seq; Type: SEQUENCE; Schema: hsdm; Owner: postgres
+--
+
+CREATE SEQUENCE hsdm.unidades_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE hsdm.unidades_id_seq OWNER TO postgres;
+
+--
+-- Name: unidades_id_seq; Type: SEQUENCE OWNED BY; Schema: hsdm; Owner: postgres
+--
+
+ALTER SEQUENCE hsdm.unidades_id_seq OWNED BY hsdm.unidades.id;
+
 
 --
 -- Name: almacenes; Type: TABLE; Schema: public; Owner: postgres
@@ -792,6 +1292,83 @@ ALTER SEQUENCE public.unidades_cod_unidad_seq OWNED BY public.unidades.cod_unida
 
 
 --
+-- Name: articulos id; Type: DEFAULT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.articulos ALTER COLUMN id SET DEFAULT nextval('hsdm.articulos_id_seq'::regclass);
+
+
+--
+-- Name: cargos id; Type: DEFAULT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.cargos ALTER COLUMN id SET DEFAULT nextval('hsdm.cargos_id_seq'::regclass);
+
+
+--
+-- Name: configuraciones id; Type: DEFAULT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.configuraciones ALTER COLUMN id SET DEFAULT nextval('hsdm.configuraciones_id_seq'::regclass);
+
+
+--
+-- Name: documentos id; Type: DEFAULT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.documentos ALTER COLUMN id SET DEFAULT nextval('hsdm.documentos_id_seq'::regclass);
+
+
+--
+-- Name: hospitales id; Type: DEFAULT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.hospitales ALTER COLUMN id SET DEFAULT nextval('hsdm.hospitales_id_seq'::regclass);
+
+
+--
+-- Name: inicios id; Type: DEFAULT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.inicios ALTER COLUMN id SET DEFAULT nextval('hsdm.inicios_id_seq'::regclass);
+
+
+--
+-- Name: kardex id; Type: DEFAULT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.kardex ALTER COLUMN id SET DEFAULT nextval('hsdm.kardex_id_seq'::regclass);
+
+
+--
+-- Name: proveedores id; Type: DEFAULT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.proveedores ALTER COLUMN id SET DEFAULT nextval('hsdm.proveedores_id_seq'::regclass);
+
+
+--
+-- Name: secciones id; Type: DEFAULT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.secciones ALTER COLUMN id SET DEFAULT nextval('hsdm.secciones_id_seq'::regclass);
+
+
+--
+-- Name: servicios id; Type: DEFAULT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.servicios ALTER COLUMN id SET DEFAULT nextval('hsdm.servicios_id_seq'::regclass);
+
+
+--
+-- Name: unidades id; Type: DEFAULT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.unidades ALTER COLUMN id SET DEFAULT nextval('hsdm.unidades_id_seq'::regclass);
+
+
+--
 -- Name: articulos codigo; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -911,11 +1488,230 @@ ALTER TABLE ONLY public.unidades ALTER COLUMN cod_unidad SET DEFAULT nextval('pu
 
 
 --
+-- Data for Name: almacenes; Type: TABLE DATA; Schema: hsdm; Owner: postgres
+--
+
+COPY hsdm.almacenes (codigo_almacen, hospital_id, denominacion, ubicacion, seccion_id, es_principal, es_despacho, es_destino, alias, fecha_creacion) FROM stdin;
+\.
+
+
+--
+-- Data for Name: articulos; Type: TABLE DATA; Schema: hsdm; Owner: postgres
+--
+
+COPY hsdm.articulos (id, hospital_id, codigo_barra, nombre, unidad_id, grupo_cod, subgrupo_cod, fecha_creacion) FROM stdin;
+\.
+
+
+--
+-- Data for Name: cargos; Type: TABLE DATA; Schema: hsdm; Owner: postgres
+--
+
+COPY hsdm.cargos (id, hospital_id, descripcion, cedula_firmante, seccion_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: conceptos; Type: TABLE DATA; Schema: hsdm; Owner: postgres
+--
+
+COPY hsdm.conceptos (codigo, hospital_id, descripcion, tipo) FROM stdin;
+1	1	Inventario Inicial	E
+2	1	Entradas por traspasos de otros almacenes	E
+3	1	Compras	E
+6	1	Produccion y transformacion de materiales	E
+7	1	Suministro de otras entidades	E
+8	1	Reintegro o devoluciones	E
+10	1	Reconstruccion de equipos	E
+11	1	Entradas por donacion	E
+12	1	Entradas por permuta	E
+14	1	Omision en inventarios y sobrantes	E
+17	1	Incorporacion para corregir registros anteriores	E
+19	1	Entradas o incorporaciones por otros conceptos	E
+51	1	Salidas por traspasos a otros almacenes	S
+52	1	Venta	S
+53	1	Entregas de bienes muebles en deposito	S
+54	1	Suministro de materiales de consumo	S
+55	1	Desarme	S
+56	1	Desincorporacion por inservibilidad	S
+57	1	Desincorporacion por deterioro	S
+58	1	Desincorporacion por mermas	S
+60	1	Faltantes por investigar	S
+61	1	Salidas por permuta	S
+62	1	Salidas por donacion	S
+63	1	Prestamos autorizados	S
+66	1	Desincorporacion para corregir registros anteriores	S
+69	1	Salidas o desincorporacion por otros conceptos	S
+70	1	PRUEBA	E
+21	1	AJA	S
+\.
+
+
+--
+-- Data for Name: configuraciones; Type: TABLE DATA; Schema: hsdm; Owner: postgres
+--
+
+COPY hsdm.configuraciones (id, hospital_id, seccion_id, decimales_costos, decimales_cantidades, moneda_simbolo, permite_stock_negativo) FROM stdin;
+1	1	1	4	2	$	f
+\.
+
+
+--
+-- Data for Name: documentos; Type: TABLE DATA; Schema: hsdm; Owner: postgres
+--
+
+COPY hsdm.documentos (id, hospital_id, seccion_id, concepto_id, tipo, numero_provisional, correlativo_legal, mes_legal, anio_legal, fecha_emision, fecha_registro, estado, observaciones, valor_total) FROM stdin;
+\.
+
+
+--
 -- Data for Name: flyway_schema_history; Type: TABLE DATA; Schema: hsdm; Owner: postgres
 --
 
 COPY hsdm.flyway_schema_history (installed_rank, version, description, type, script, checksum, installed_by, installed_on, execution_time, success) FROM stdin;
-0	\N	<< Flyway Schema Creation >>	SCHEMA	"hsdm"	\N	postgres	2026-03-12 11:39:17.165652	0	t
+0	\N	<< Flyway Schema Creation >>	SCHEMA	"hsdm"	\N	postgres	2026-03-12 11:50:00.896163	0	t
+1	1	Esquema Maestro Inventario	SQL	V1__Esquema_Maestro_Inventario.sql	-1160231456	postgres	2026-03-12 11:50:01.006839	138	t
+\.
+
+
+--
+-- Data for Name: grupos; Type: TABLE DATA; Schema: hsdm; Owner: postgres
+--
+
+COPY hsdm.grupos (hospital_id, codigo, descripcion) FROM stdin;
+1	3	Bienes Muebles en Depósito
+1	4	Materiales de Consumo
+\.
+
+
+--
+-- Data for Name: hospitales; Type: TABLE DATA; Schema: hsdm; Owner: postgres
+--
+
+COPY hsdm.hospitales (id, rif, nombre, direccion, estado) FROM stdin;
+1	G-00000000-0	HOSPITAL DE CONFIGURACION	DIRECCION	t
+\.
+
+
+--
+-- Data for Name: inicios; Type: TABLE DATA; Schema: hsdm; Owner: postgres
+--
+
+COPY hsdm.inicios (id, hospital_id, estado, fecha_ultimo_acceso) FROM stdin;
+1	1	1	2026-03-13 17:48:43.892992
+\.
+
+
+--
+-- Data for Name: kardex; Type: TABLE DATA; Schema: hsdm; Owner: postgres
+--
+
+COPY hsdm.kardex (id, hospital_id, documento_id, articulo_id, seccion_id, cantidad, costo_unitario, saldo_cantidad_post, saldo_costo_prom_post) FROM stdin;
+\.
+
+
+--
+-- Data for Name: proveedores; Type: TABLE DATA; Schema: hsdm; Owner: postgres
+--
+
+COPY hsdm.proveedores (id, hospital_id, rif, nombre, direccion, telefono) FROM stdin;
+\.
+
+
+--
+-- Data for Name: saldos; Type: TABLE DATA; Schema: hsdm; Owner: postgres
+--
+
+COPY hsdm.saldos (articulo_id, seccion_id, hospital_id, stock_actual, costo_promedio) FROM stdin;
+\.
+
+
+--
+-- Data for Name: secciones; Type: TABLE DATA; Schema: hsdm; Owner: postgres
+--
+
+COPY hsdm.secciones (id, hospital_id, descripcion, seleccionada, estado) FROM stdin;
+1	1	AÑO FISCAL 	t	t
+\.
+
+
+--
+-- Data for Name: servicios; Type: TABLE DATA; Schema: hsdm; Owner: postgres
+--
+
+COPY hsdm.servicios (id, hospital_id, nombre_servicio, cedula_firmante, seccion_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: subgrupos; Type: TABLE DATA; Schema: hsdm; Owner: postgres
+--
+
+COPY hsdm.subgrupos (hospital_id, grupo_codigo, codigo, descripcion) FROM stdin;
+1	3	01	Maquinas, muebles y demas equipos de oficina
+1	3	02	Mobiliario y enseres de alojamiento
+1	3	03	Maquinaria y demas equipos de construcción, campo, industria y taller
+1	3	03-01	Equipos de taller de uso general
+1	3	03-02	Maquinaria y equipo de construccion y conservacion
+1	3	03-03	Maquinaria y equipo para mantenimiento de automotores
+1	3	03-04	Maquinaria y equipo agricola y pecuario
+1	3	03-05	Maquinaria y equipo de artes graficas
+1	3	03-06	Maquinaria industrial
+1	3	04	Equipos de transporte
+1	3	04-01	Vehiculos automotores terrestres
+1	3	04-02	Otros vehiculos terrestres
+1	3	05	Equipos de telecomunicaciones
+1	3	06	Equipos Medico-Quirurgicos, dentales y veterinarios
+1	3	06-01	Equipos Medico-Quirurgicos y de veterinaria
+1	3	06-02	Equipos dentales
+1	3	07	Equipos cientificos y de enseñanza
+1	3	07-01	Equipos cientificos y de laboratorio
+1	3	07-02	Equipos de enseñanza, deporte y recreacion
+1	3	07-03	Elementos de culto
+1	3	08	Colecciones culturales, artisticas e historicas
+1	3	08-01	Libros
+1	3	08-02	Colecciones cientificas
+1	3	08-03	Colecciones artisticas y ornamentales
+1	3	09	Armamento y equipo de defensa
+1	3	11	Otros bienes muebles en deposito
+1	4	20	Alimentos y bebidas
+1	4	21	Materiales agrícolas y pecuarios
+1	4	21-A	Abonos
+1	4	21-B	Alimentos para animales
+1	4	21-C	Insecticidas
+1	4	21-D	Semillas
+1	4	22	Drogas medicinas materiales odontologicas, de laboratorio de sanidad y similares
+1	4	22-A	Drogas medicinas y elementos de curacion para pacientes
+1	4	22-B	Materiales de odontologia
+1	4	22-C	Materiales para laboratorio
+1	4	22-D	Suministros menores ortopedicos
+1	4	22-E	Drogas, Med., y elementos de C.(PTES)
+1	4	22-G	Sustancias para laboratorio
+1	4	22-H	Materiales para rayos X
+1	4	22-J	Materiales Médicos Quirurgicos
+1	4	23	Materiales de construccion
+1	4	23-A	Materiales basicos y estructurales
+1	4	23-B	Materiales y utiles para instituciones sanitarias
+1	4	24	Materiales para industria y taller
+1	4	25	Repuestos accesorios y herramientas menores
+1	4	25-H	Herramientas menores
+1	4	27	Utiles de escritorio y oficina
+1	4	28	Materiales de uso personal de alojamiento y de limpieza
+1	4	28-H	Utiles y materiales de aseo
+1	4	28-K	Vestuario para pacientes
+1	4	30-A	Combustible
+1	4	30-B	Aceites y grasas lubricantes
+1	4	30-D	Gas combustible
+\.
+
+
+--
+-- Data for Name: unidades; Type: TABLE DATA; Schema: hsdm; Owner: postgres
+--
+
+COPY hsdm.unidades (id, hospital_id, nombre, abreviatura) FROM stdin;
+1	1	UNIDAD	und
+3	1	MAYOR	my
 \.
 
 
@@ -2039,6 +2835,83 @@ COPY public.unidades (cod_unidad, nombre, abreviatura) FROM stdin;
 
 
 --
+-- Name: articulos_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
+--
+
+SELECT pg_catalog.setval('hsdm.articulos_id_seq', 1, false);
+
+
+--
+-- Name: cargos_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
+--
+
+SELECT pg_catalog.setval('hsdm.cargos_id_seq', 1, false);
+
+
+--
+-- Name: configuraciones_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
+--
+
+SELECT pg_catalog.setval('hsdm.configuraciones_id_seq', 1, true);
+
+
+--
+-- Name: documentos_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
+--
+
+SELECT pg_catalog.setval('hsdm.documentos_id_seq', 1, false);
+
+
+--
+-- Name: hospitales_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
+--
+
+SELECT pg_catalog.setval('hsdm.hospitales_id_seq', 1, true);
+
+
+--
+-- Name: inicios_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
+--
+
+SELECT pg_catalog.setval('hsdm.inicios_id_seq', 1, true);
+
+
+--
+-- Name: kardex_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
+--
+
+SELECT pg_catalog.setval('hsdm.kardex_id_seq', 1, false);
+
+
+--
+-- Name: proveedores_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
+--
+
+SELECT pg_catalog.setval('hsdm.proveedores_id_seq', 1, false);
+
+
+--
+-- Name: secciones_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
+--
+
+SELECT pg_catalog.setval('hsdm.secciones_id_seq', 1, true);
+
+
+--
+-- Name: servicios_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
+--
+
+SELECT pg_catalog.setval('hsdm.servicios_id_seq', 1, false);
+
+
+--
+-- Name: unidades_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
+--
+
+SELECT pg_catalog.setval('hsdm.unidades_id_seq', 3, true);
+
+
+--
 -- Name: articulos_codigo_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2158,11 +3031,155 @@ SELECT pg_catalog.setval('public.unidades_cod_unidad_seq', 1, true);
 
 
 --
+-- Name: almacenes almacenes_pkey; Type: CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.almacenes
+    ADD CONSTRAINT almacenes_pkey PRIMARY KEY (codigo_almacen);
+
+
+--
+-- Name: articulos articulos_pkey; Type: CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.articulos
+    ADD CONSTRAINT articulos_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cargos cargos_pkey; Type: CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.cargos
+    ADD CONSTRAINT cargos_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: conceptos conceptos_pkey; Type: CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.conceptos
+    ADD CONSTRAINT conceptos_pkey PRIMARY KEY (hospital_id, codigo);
+
+
+--
+-- Name: configuraciones configuraciones_hospital_id_seccion_id_key; Type: CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.configuraciones
+    ADD CONSTRAINT configuraciones_hospital_id_seccion_id_key UNIQUE (hospital_id, seccion_id);
+
+
+--
+-- Name: configuraciones configuraciones_pkey; Type: CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.configuraciones
+    ADD CONSTRAINT configuraciones_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: documentos documentos_pkey; Type: CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.documentos
+    ADD CONSTRAINT documentos_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: flyway_schema_history flyway_schema_history_pk; Type: CONSTRAINT; Schema: hsdm; Owner: postgres
 --
 
 ALTER TABLE ONLY hsdm.flyway_schema_history
     ADD CONSTRAINT flyway_schema_history_pk PRIMARY KEY (installed_rank);
+
+
+--
+-- Name: grupos grupos_pkey; Type: CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.grupos
+    ADD CONSTRAINT grupos_pkey PRIMARY KEY (hospital_id, codigo);
+
+
+--
+-- Name: hospitales hospitales_pkey; Type: CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.hospitales
+    ADD CONSTRAINT hospitales_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: hospitales hospitales_rif_key; Type: CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.hospitales
+    ADD CONSTRAINT hospitales_rif_key UNIQUE (rif);
+
+
+--
+-- Name: inicios inicios_pkey; Type: CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.inicios
+    ADD CONSTRAINT inicios_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: kardex kardex_pkey; Type: CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.kardex
+    ADD CONSTRAINT kardex_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: proveedores proveedores_pkey; Type: CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.proveedores
+    ADD CONSTRAINT proveedores_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: saldos saldos_pkey; Type: CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.saldos
+    ADD CONSTRAINT saldos_pkey PRIMARY KEY (articulo_id, seccion_id);
+
+
+--
+-- Name: secciones secciones_pkey; Type: CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.secciones
+    ADD CONSTRAINT secciones_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: servicios servicios_pkey; Type: CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.servicios
+    ADD CONSTRAINT servicios_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: subgrupos subgrupos_pkey; Type: CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.subgrupos
+    ADD CONSTRAINT subgrupos_pkey PRIMARY KEY (hospital_id, grupo_codigo, codigo);
+
+
+--
+-- Name: unidades unidades_pkey; Type: CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.unidades
+    ADD CONSTRAINT unidades_pkey PRIMARY KEY (id);
 
 
 --
@@ -2370,6 +3387,307 @@ ALTER TABLE ONLY public.unidades
 --
 
 CREATE INDEX flyway_schema_history_s_idx ON hsdm.flyway_schema_history USING btree (success);
+
+
+--
+-- Name: idx_articulos_hosp_nombre; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_articulos_hosp_nombre ON hsdm.articulos USING btree (hospital_id, lower((nombre)::text));
+
+
+--
+-- Name: idx_cargos_hosp_sec_desc; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_cargos_hosp_sec_desc ON hsdm.cargos USING btree (hospital_id, lower((descripcion)::text));
+
+
+--
+-- Name: idx_conceptos_desc_tipo_hosp; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_conceptos_desc_tipo_hosp ON hsdm.conceptos USING btree (hospital_id, tipo, lower((descripcion)::text));
+
+
+--
+-- Name: idx_documentos_entrada_prov; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_documentos_entrada_prov ON hsdm.documentos USING btree (hospital_id, seccion_id, numero_provisional) WHERE ((tipo)::text = 'ENTRADA'::text);
+
+
+--
+-- Name: idx_documentos_salida_mensual; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_documentos_salida_mensual ON hsdm.documentos USING btree (hospital_id, seccion_id, concepto_id, mes_legal, anio_legal, correlativo_legal) WHERE ((tipo)::text = 'SALIDA'::text);
+
+
+--
+-- Name: idx_grupos_nombre_unique; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_grupos_nombre_unique ON hsdm.grupos USING btree (hospital_id, lower((descripcion)::text));
+
+
+--
+-- Name: idx_proveedores_hosp_rif; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_proveedores_hosp_rif ON hsdm.proveedores USING btree (hospital_id, rif);
+
+
+--
+-- Name: idx_secciones_hosp_desc; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_secciones_hosp_desc ON hsdm.secciones USING btree (hospital_id, lower((descripcion)::text));
+
+
+--
+-- Name: idx_servicios_hosp_sec_desc; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_servicios_hosp_sec_desc ON hsdm.servicios USING btree (hospital_id, lower((nombre_servicio)::text));
+
+
+--
+-- Name: idx_subgrupos_nombre_unique; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_subgrupos_nombre_unique ON hsdm.subgrupos USING btree (hospital_id, grupo_codigo, lower((descripcion)::text));
+
+
+--
+-- Name: idx_unidades_hosp_nombre; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_unidades_hosp_nombre ON hsdm.unidades USING btree (hospital_id, lower((nombre)::text));
+
+
+--
+-- Name: almacenes almacenes_hospital_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.almacenes
+    ADD CONSTRAINT almacenes_hospital_id_fkey FOREIGN KEY (hospital_id) REFERENCES hsdm.hospitales(id);
+
+
+--
+-- Name: almacenes almacenes_seccion_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.almacenes
+    ADD CONSTRAINT almacenes_seccion_id_fkey FOREIGN KEY (seccion_id) REFERENCES hsdm.secciones(id);
+
+
+--
+-- Name: articulos articulos_hospital_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.articulos
+    ADD CONSTRAINT articulos_hospital_id_fkey FOREIGN KEY (hospital_id) REFERENCES hsdm.hospitales(id);
+
+
+--
+-- Name: articulos articulos_hospital_id_grupo_cod_subgrupo_cod_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.articulos
+    ADD CONSTRAINT articulos_hospital_id_grupo_cod_subgrupo_cod_fkey FOREIGN KEY (hospital_id, grupo_cod, subgrupo_cod) REFERENCES hsdm.subgrupos(hospital_id, grupo_codigo, codigo);
+
+
+--
+-- Name: articulos articulos_unidad_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.articulos
+    ADD CONSTRAINT articulos_unidad_id_fkey FOREIGN KEY (unidad_id) REFERENCES hsdm.unidades(id);
+
+
+--
+-- Name: cargos cargos_hospital_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.cargos
+    ADD CONSTRAINT cargos_hospital_id_fkey FOREIGN KEY (hospital_id) REFERENCES hsdm.hospitales(id);
+
+
+--
+-- Name: cargos cargos_seccion_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.cargos
+    ADD CONSTRAINT cargos_seccion_id_fkey FOREIGN KEY (seccion_id) REFERENCES hsdm.secciones(id);
+
+
+--
+-- Name: conceptos conceptos_hospital_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.conceptos
+    ADD CONSTRAINT conceptos_hospital_id_fkey FOREIGN KEY (hospital_id) REFERENCES hsdm.hospitales(id);
+
+
+--
+-- Name: configuraciones configuraciones_hospital_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.configuraciones
+    ADD CONSTRAINT configuraciones_hospital_id_fkey FOREIGN KEY (hospital_id) REFERENCES hsdm.hospitales(id);
+
+
+--
+-- Name: configuraciones configuraciones_seccion_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.configuraciones
+    ADD CONSTRAINT configuraciones_seccion_id_fkey FOREIGN KEY (seccion_id) REFERENCES hsdm.secciones(id);
+
+
+--
+-- Name: documentos documentos_hospital_id_concepto_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.documentos
+    ADD CONSTRAINT documentos_hospital_id_concepto_id_fkey FOREIGN KEY (hospital_id, concepto_id) REFERENCES hsdm.conceptos(hospital_id, codigo);
+
+
+--
+-- Name: documentos documentos_hospital_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.documentos
+    ADD CONSTRAINT documentos_hospital_id_fkey FOREIGN KEY (hospital_id) REFERENCES hsdm.hospitales(id);
+
+
+--
+-- Name: documentos documentos_seccion_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.documentos
+    ADD CONSTRAINT documentos_seccion_id_fkey FOREIGN KEY (seccion_id) REFERENCES hsdm.secciones(id);
+
+
+--
+-- Name: grupos grupos_hospital_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.grupos
+    ADD CONSTRAINT grupos_hospital_id_fkey FOREIGN KEY (hospital_id) REFERENCES hsdm.hospitales(id);
+
+
+--
+-- Name: inicios inicios_hospital_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.inicios
+    ADD CONSTRAINT inicios_hospital_id_fkey FOREIGN KEY (hospital_id) REFERENCES hsdm.hospitales(id);
+
+
+--
+-- Name: kardex kardex_articulo_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.kardex
+    ADD CONSTRAINT kardex_articulo_id_fkey FOREIGN KEY (articulo_id) REFERENCES hsdm.articulos(id);
+
+
+--
+-- Name: kardex kardex_documento_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.kardex
+    ADD CONSTRAINT kardex_documento_id_fkey FOREIGN KEY (documento_id) REFERENCES hsdm.documentos(id);
+
+
+--
+-- Name: kardex kardex_hospital_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.kardex
+    ADD CONSTRAINT kardex_hospital_id_fkey FOREIGN KEY (hospital_id) REFERENCES hsdm.hospitales(id);
+
+
+--
+-- Name: kardex kardex_seccion_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.kardex
+    ADD CONSTRAINT kardex_seccion_id_fkey FOREIGN KEY (seccion_id) REFERENCES hsdm.secciones(id);
+
+
+--
+-- Name: proveedores proveedores_hospital_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.proveedores
+    ADD CONSTRAINT proveedores_hospital_id_fkey FOREIGN KEY (hospital_id) REFERENCES hsdm.hospitales(id);
+
+
+--
+-- Name: saldos saldos_articulo_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.saldos
+    ADD CONSTRAINT saldos_articulo_id_fkey FOREIGN KEY (articulo_id) REFERENCES hsdm.articulos(id);
+
+
+--
+-- Name: saldos saldos_hospital_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.saldos
+    ADD CONSTRAINT saldos_hospital_id_fkey FOREIGN KEY (hospital_id) REFERENCES hsdm.hospitales(id);
+
+
+--
+-- Name: saldos saldos_seccion_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.saldos
+    ADD CONSTRAINT saldos_seccion_id_fkey FOREIGN KEY (seccion_id) REFERENCES hsdm.secciones(id);
+
+
+--
+-- Name: secciones secciones_hospital_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.secciones
+    ADD CONSTRAINT secciones_hospital_id_fkey FOREIGN KEY (hospital_id) REFERENCES hsdm.hospitales(id);
+
+
+--
+-- Name: servicios servicios_hospital_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.servicios
+    ADD CONSTRAINT servicios_hospital_id_fkey FOREIGN KEY (hospital_id) REFERENCES hsdm.hospitales(id);
+
+
+--
+-- Name: servicios servicios_seccion_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.servicios
+    ADD CONSTRAINT servicios_seccion_id_fkey FOREIGN KEY (seccion_id) REFERENCES hsdm.secciones(id);
+
+
+--
+-- Name: subgrupos subgrupos_hospital_id_grupo_codigo_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.subgrupos
+    ADD CONSTRAINT subgrupos_hospital_id_grupo_codigo_fkey FOREIGN KEY (hospital_id, grupo_codigo) REFERENCES hsdm.grupos(hospital_id, codigo);
+
+
+--
+-- Name: unidades unidades_hospital_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.unidades
+    ADD CONSTRAINT unidades_hospital_id_fkey FOREIGN KEY (hospital_id) REFERENCES hsdm.hospitales(id);
 
 
 --

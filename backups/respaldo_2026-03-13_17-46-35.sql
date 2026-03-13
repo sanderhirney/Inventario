@@ -1542,6 +1542,8 @@ COPY hsdm.conceptos (codigo, hospital_id, descripcion, tipo) FROM stdin;
 63	1	Prestamos autorizados	S
 66	1	Desincorporacion para corregir registros anteriores	S
 69	1	Salidas o desincorporacion por otros conceptos	S
+70	1	PRUEBA	E
+21	1	AJA	S
 \.
 
 
@@ -1596,7 +1598,7 @@ COPY hsdm.hospitales (id, rif, nombre, direccion, estado) FROM stdin;
 --
 
 COPY hsdm.inicios (id, hospital_id, estado, fecha_ultimo_acceso) FROM stdin;
-1	1	1	2026-03-12 12:00:52.53725
+1	1	1	2026-03-13 17:46:35.60096
 \.
 
 

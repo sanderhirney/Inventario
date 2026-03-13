@@ -227,6 +227,48 @@ ALTER SEQUENCE hsdm.documentos_id_seq OWNED BY hsdm.documentos.id;
 
 
 --
+-- Name: firmantes; Type: TABLE; Schema: hsdm; Owner: postgres
+--
+
+CREATE TABLE hsdm.firmantes (
+    id integer NOT NULL,
+    hospital_id integer NOT NULL,
+    seccion_id integer,
+    cargo_id integer NOT NULL,
+    nombre_completo character varying(200) NOT NULL,
+    cedula character varying(20) NOT NULL,
+    fecha_inicio date DEFAULT CURRENT_DATE,
+    fecha_fin date,
+    activo boolean DEFAULT true,
+    CONSTRAINT check_fechas CHECK (((fecha_fin IS NULL) OR (fecha_fin >= fecha_inicio)))
+);
+
+
+ALTER TABLE hsdm.firmantes OWNER TO postgres;
+
+--
+-- Name: firmantes_id_seq; Type: SEQUENCE; Schema: hsdm; Owner: postgres
+--
+
+CREATE SEQUENCE hsdm.firmantes_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE hsdm.firmantes_id_seq OWNER TO postgres;
+
+--
+-- Name: firmantes_id_seq; Type: SEQUENCE OWNED BY; Schema: hsdm; Owner: postgres
+--
+
+ALTER SEQUENCE hsdm.firmantes_id_seq OWNED BY hsdm.firmantes.id;
+
+
+--
 -- Name: flyway_schema_history; Type: TABLE; Schema: hsdm; Owner: postgres
 --
 
@@ -1320,6 +1362,13 @@ ALTER TABLE ONLY hsdm.documentos ALTER COLUMN id SET DEFAULT nextval('hsdm.docum
 
 
 --
+-- Name: firmantes id; Type: DEFAULT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.firmantes ALTER COLUMN id SET DEFAULT nextval('hsdm.firmantes_id_seq'::regclass);
+
+
+--
 -- Name: hospitales id; Type: DEFAULT; Schema: hsdm; Owner: postgres
 --
 
@@ -1542,8 +1591,6 @@ COPY hsdm.conceptos (codigo, hospital_id, descripcion, tipo) FROM stdin;
 63	1	Prestamos autorizados	S
 66	1	Desincorporacion para corregir registros anteriores	S
 69	1	Salidas o desincorporacion por otros conceptos	S
-70	1	PRUEBA	E
-21	1	AJA	S
 \.
 
 
@@ -1565,12 +1612,20 @@ COPY hsdm.documentos (id, hospital_id, seccion_id, concepto_id, tipo, numero_pro
 
 
 --
+-- Data for Name: firmantes; Type: TABLE DATA; Schema: hsdm; Owner: postgres
+--
+
+COPY hsdm.firmantes (id, hospital_id, seccion_id, cargo_id, nombre_completo, cedula, fecha_inicio, fecha_fin, activo) FROM stdin;
+\.
+
+
+--
 -- Data for Name: flyway_schema_history; Type: TABLE DATA; Schema: hsdm; Owner: postgres
 --
 
 COPY hsdm.flyway_schema_history (installed_rank, version, description, type, script, checksum, installed_by, installed_on, execution_time, success) FROM stdin;
-0	\N	<< Flyway Schema Creation >>	SCHEMA	"hsdm"	\N	postgres	2026-03-12 11:50:00.896163	0	t
-1	1	Esquema Maestro Inventario	SQL	V1__Esquema_Maestro_Inventario.sql	-1160231456	postgres	2026-03-12 11:50:01.006839	138	t
+0	\N	<< Flyway Schema Creation >>	SCHEMA	"hsdm"	\N	postgres	2026-03-13 18:36:32.770041	0	t
+1	1	Esquema Maestro Inventario	SQL	V1__Esquema_Maestro_Inventario.sql	828586978	postgres	2026-03-13 18:36:32.856808	299	t
 \.
 
 
@@ -1598,7 +1653,7 @@ COPY hsdm.hospitales (id, rif, nombre, direccion, estado) FROM stdin;
 --
 
 COPY hsdm.inicios (id, hospital_id, estado, fecha_ultimo_acceso) FROM stdin;
-1	1	1	2026-03-12 12:08:00.619826
+1	1	1	2026-03-13 18:36:46.707934
 \.
 
 
@@ -2861,6 +2916,13 @@ SELECT pg_catalog.setval('hsdm.documentos_id_seq', 1, false);
 
 
 --
+-- Name: firmantes_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
+--
+
+SELECT pg_catalog.setval('hsdm.firmantes_id_seq', 1, false);
+
+
+--
 -- Name: hospitales_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
 --
 
@@ -3082,6 +3144,14 @@ ALTER TABLE ONLY hsdm.configuraciones
 
 ALTER TABLE ONLY hsdm.documentos
     ADD CONSTRAINT documentos_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: firmantes firmantes_pkey; Type: CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.firmantes
+    ADD CONSTRAINT firmantes_pkey PRIMARY KEY (id);
 
 
 --
@@ -3423,6 +3493,20 @@ CREATE UNIQUE INDEX idx_documentos_salida_mensual ON hsdm.documentos USING btree
 
 
 --
+-- Name: idx_firmante_cedula_hospital_activo; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_firmante_cedula_hospital_activo ON hsdm.firmantes USING btree (hospital_id, cedula) WHERE (activo = true);
+
+
+--
+-- Name: idx_firmantes_nombre_activo; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_firmantes_nombre_activo ON hsdm.firmantes USING btree (hospital_id, lower((nombre_completo)::text)) WHERE (activo = true);
+
+
+--
 -- Name: idx_grupos_nombre_unique; Type: INDEX; Schema: hsdm; Owner: postgres
 --
 
@@ -3434,6 +3518,13 @@ CREATE UNIQUE INDEX idx_grupos_nombre_unique ON hsdm.grupos USING btree (hospita
 --
 
 CREATE UNIQUE INDEX idx_proveedores_hosp_rif ON hsdm.proveedores USING btree (hospital_id, rif);
+
+
+--
+-- Name: idx_puesto_activo_unico; Type: INDEX; Schema: hsdm; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_puesto_activo_unico ON hsdm.firmantes USING btree (hospital_id, COALESCE(seccion_id, 0), cargo_id) WHERE (activo = true);
 
 
 --
@@ -3566,6 +3657,30 @@ ALTER TABLE ONLY hsdm.documentos
 
 ALTER TABLE ONLY hsdm.documentos
     ADD CONSTRAINT documentos_seccion_id_fkey FOREIGN KEY (seccion_id) REFERENCES hsdm.secciones(id);
+
+
+--
+-- Name: firmantes firmantes_cargo_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.firmantes
+    ADD CONSTRAINT firmantes_cargo_id_fkey FOREIGN KEY (cargo_id) REFERENCES hsdm.cargos(id);
+
+
+--
+-- Name: firmantes firmantes_hospital_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.firmantes
+    ADD CONSTRAINT firmantes_hospital_id_fkey FOREIGN KEY (hospital_id) REFERENCES hsdm.hospitales(id);
+
+
+--
+-- Name: firmantes firmantes_seccion_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.firmantes
+    ADD CONSTRAINT firmantes_seccion_id_fkey FOREIGN KEY (seccion_id) REFERENCES hsdm.secciones(id);
 
 
 --

@@ -16,6 +16,25 @@ CREATE TABLE secciones (
     seleccionada BOOLEAN DEFAULT FALSE,
     estado BOOLEAN DEFAULT TRUE
 );
+CREATE TABLE almacenes (
+     id SERIAL PRIMARY KEY,
+    codigo_almacen VARCHAR(20), 
+    hospital_id INTEGER REFERENCES hospitales(id),
+    denominacion VARCHAR(100) NOT NULL,
+    ubicacion VARCHAR(100),
+    seccion_id INTEGER REFERENCES secciones(id),
+    es_principal BOOLEAN DEFAULT FALSE,
+    es_despacho BOOLEAN DEFAULT TRUE,
+    es_destino BOOLEAN DEFAULT TRUE,
+    alias VARCHAR(10),
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    -- REGLA 1: Un hospital no puede tener dos almacenes con el mismo CÓDIGO
+    CONSTRAINT uk_almacen_codigo_por_hospital UNIQUE (hospital_id, codigo_almacen),
+    
+    -- REGLA 2: Un hospital no puede tener dos almacenes con el mismo NOMBRE
+    CONSTRAINT uk_almacen_nombre_por_hospital UNIQUE (hospital_id, denominacion)
+);
 
 -- =============================================================================
 -- 2. ESTRUCTURA DE CATALOGACIÓN
@@ -82,6 +101,8 @@ CREATE TABLE documentos (
     id SERIAL PRIMARY KEY,
     hospital_id INTEGER REFERENCES hospitales(id),
     seccion_id INTEGER REFERENCES secciones(id),
+    almacen_despacho_id INTEGER REFERENCES almacenes(id),
+    almacen_destino_id INTEGER REFERENCES almacenes(id),
     concepto_id INTEGER,
     tipo VARCHAR(10) NOT NULL, 
     numero_provisional VARCHAR(50), 
@@ -112,6 +133,7 @@ CREATE TABLE saldos (
 CREATE TABLE kardex (
     id SERIAL PRIMARY KEY,
     hospital_id INTEGER REFERENCES hospitales(id),
+    almacen_id INTEGER REFERENCES almacenes(id),
     documento_id INTEGER REFERENCES documentos(id),
     articulo_id INTEGER REFERENCES articulos(id),
     seccion_id INTEGER REFERENCES secciones(id),
@@ -126,32 +148,19 @@ CREATE TABLE kardex (
 -- =============================================================================
 CREATE TABLE cargos (
     id SERIAL PRIMARY KEY,
-    hospital_id INTEGER REFERENCES hospitales(id),
-    descripcion VARCHAR(100) NOT NULL, 
-    cedula_firmante VARCHAR(20) DEFAULT 'NO ASIGNADO',
-    seccion_id INTEGER REFERENCES secciones(id)
+    hospital_id INTEGER NOT NULL REFERENCES hospitales(id),
+    descripcion VARCHAR(100) NOT NULL,
+    UNIQUE (hospital_id, descripcion) 
 );
 
 CREATE TABLE servicios (
     id SERIAL PRIMARY KEY,
     hospital_id INTEGER REFERENCES hospitales(id),
     nombre_servicio VARCHAR(200) NOT NULL,
-    cedula_firmante VARCHAR(20) DEFAULT 'NO ASIGNADO',
     seccion_id INTEGER REFERENCES secciones(id)
 );
 
-CREATE TABLE almacenes (
-    codigo_almacen VARCHAR(20) PRIMARY KEY, 
-    hospital_id INTEGER REFERENCES hospitales(id),
-    denominacion VARCHAR(100) NOT NULL,
-    ubicacion VARCHAR(100),
-    seccion_id INTEGER REFERENCES secciones(id),
-    es_principal BOOLEAN DEFAULT FALSE,
-    es_despacho BOOLEAN DEFAULT TRUE,
-    es_destino BOOLEAN DEFAULT TRUE,
-    alias VARCHAR(10),
-    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+
 
 CREATE TABLE inicios (
     id SERIAL PRIMARY KEY,
@@ -169,6 +178,22 @@ CREATE TABLE configuraciones (
     moneda_simbolo VARCHAR(5) DEFAULT '$',
     permite_stock_negativo BOOLEAN DEFAULT FALSE,
     UNIQUE (hospital_id, seccion_id) -- Solo una configuración por sección
+);
+CREATE TABLE firmantes (
+
+    id SERIAL PRIMARY KEY,
+    hospital_id INTEGER NOT NULL REFERENCES hospitales(id),
+    seccion_id INTEGER REFERENCES secciones(id), -- NULL para cargos generales del hospital
+    cargo_id INTEGER NOT NULL REFERENCES cargos(id),
+    nombre_completo VARCHAR(200) NOT NULL,
+    cedula VARCHAR(20) NOT NULL,
+    fecha_inicio DATE DEFAULT CURRENT_DATE,
+    fecha_fin DATE, -- Se llena cuando la persona deja el cargo
+    activo BOOLEAN DEFAULT TRUE,
+    -- Restricción: No puede haber dos personas activas en el mismo puesto
+    -- Usamos un índice parcial abajo para manejar el NULL de seccion_id
+    CONSTRAINT check_fechas CHECK (fecha_fin IS NULL OR fecha_fin >= fecha_inicio)
+
 );
 
 -- =============================================================================
@@ -200,6 +225,24 @@ WHERE tipo = 'ENTRADA';
 -- Evita nombres de conceptos duplicados por hospital y tipo
 CREATE UNIQUE INDEX idx_conceptos_desc_tipo_hosp 
 ON conceptos (hospital_id, tipo, LOWER(descripcion));
+-- UNICIDAD DE PUESTO: Solo un jefe activo por hospital/sección/cargo.
+CREATE UNIQUE INDEX idx_puesto_activo_unico 
+ON firmantes (hospital_id, COALESCE(seccion_id, 0), cargo_id) 
+WHERE activo = TRUE;
+
+-- UNICIDAD DE CÉDULA: Una persona (cédula) solo puede tener UN cargo activo en el hospital.
+CREATE UNIQUE INDEX idx_firmante_cedula_hospital_activo 
+ON firmantes (hospital_id, cedula) 
+WHERE activo = TRUE;
+
+-- UNICIDAD DE NOMBRE: Evita nombres duplicados activos (insensible a mayúsculas).
+CREATE UNIQUE INDEX idx_firmantes_nombre_activo 
+ON firmantes (hospital_id, LOWER(nombre_completo)) 
+WHERE activo = TRUE;
+
+--  Nombre único de almacen sin importar mayúsculas/minúsculas
+CREATE UNIQUE INDEX idx_almacenes_nombre_case_insensitive 
+ON almacenes (hospital_id, LOWER(denominacion));
 
 -- =============================================================================
 -- 8. BOOTSTRAP (INICIO AUTOMÁTICO)

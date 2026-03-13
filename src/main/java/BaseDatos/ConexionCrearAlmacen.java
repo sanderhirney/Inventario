@@ -35,7 +35,7 @@ public class ConexionCrearAlmacen {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        try(PreparedStatement consulta= conex.prepareStatement("insert into almacenes values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)") ){
+        try(PreparedStatement consulta= conex.prepareStatement("insert into almacenes values (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)") ){
             consulta.setString(1, codigo_almacen);
             consulta.setInt(2, idHospital);
             consulta.setString(3, denominacion_almacen);
