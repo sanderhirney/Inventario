@@ -1571,6 +1571,7 @@ ALTER TABLE ONLY public.unidades ALTER COLUMN cod_unidad SET DEFAULT nextval('pu
 --
 
 COPY hsdm.almacenes (id, codigo_almacen, hospital_id, denominacion, ubicacion, seccion_id, es_principal, es_despacho, es_destino, alias, fecha_creacion) FROM stdin;
+1	306-59B	1	HSDM	SAN ANTONIO	1	t	t	f	HS	2026-03-13 00:00:00
 \.
 
 
@@ -1587,6 +1588,9 @@ COPY hsdm.articulos (id, hospital_id, codigo_barra, nombre, unidad_id, grupo_cod
 --
 
 COPY hsdm.cargos (id, hospital_id, descripcion) FROM stdin;
+2	1	ADMINISTRADOR(A)
+1	1	DIRECTOR
+3	1	CONTRALOR DE EXISTENCIAS
 \.
 
 
@@ -1646,6 +1650,7 @@ COPY hsdm.documentos (id, hospital_id, seccion_id, almacen_despacho_id, almacen_
 --
 
 COPY hsdm.firmantes (id, hospital_id, seccion_id, cargo_id, nombre_completo, cedula, fecha_inicio, fecha_fin, activo) FROM stdin;
+1	1	1	1	SANDER CUELLAR	18353858	2026-03-14	\N	t
 \.
 
 
@@ -1683,7 +1688,7 @@ COPY hsdm.hospitales (id, rif, nombre, direccion, estado) FROM stdin;
 --
 
 COPY hsdm.inicios (id, hospital_id, estado, fecha_ultimo_acceso) FROM stdin;
-1	1	1	2026-03-13 19:06:16.443608
+1	1	1	2026-03-14 17:22:46.626427
 \.
 
 
@@ -2921,7 +2926,7 @@ COPY public.unidades (cod_unidad, nombre, abreviatura) FROM stdin;
 -- Name: almacenes_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
 --
 
-SELECT pg_catalog.setval('hsdm.almacenes_id_seq', 1, false);
+SELECT pg_catalog.setval('hsdm.almacenes_id_seq', 1, true);
 
 
 --
@@ -2935,7 +2940,7 @@ SELECT pg_catalog.setval('hsdm.articulos_id_seq', 1, false);
 -- Name: cargos_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
 --
 
-SELECT pg_catalog.setval('hsdm.cargos_id_seq', 1, false);
+SELECT pg_catalog.setval('hsdm.cargos_id_seq', 3, true);
 
 
 --
@@ -2956,7 +2961,7 @@ SELECT pg_catalog.setval('hsdm.documentos_id_seq', 1, false);
 -- Name: firmantes_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
 --
 
-SELECT pg_catalog.setval('hsdm.firmantes_id_seq', 1, false);
+SELECT pg_catalog.setval('hsdm.firmantes_id_seq', 1, true);
 
 
 --

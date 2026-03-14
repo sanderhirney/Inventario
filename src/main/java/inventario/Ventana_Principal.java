@@ -320,8 +320,8 @@ public class Ventana_Principal extends javax.swing.JFrame {
                 log.severe(ex.toString());
             }
             if (hijo.equals("Unidades")) lanzarVentana(new Crear_Unidades(this, true));
-            if (hijo.equals("Firmantes")) lanzarVentana(new Crear_Firmantes(this, true));
-            if (hijo.equals("Cargos")) lanzarVentana(new VerCargos(this, true));
+            if (hijo.equals("Firmantes")) lanzarVentana(new Firmantes(this, true));
+            if (hijo.equals("Cargos")) lanzarVentana(new Cargos(this, true));
             if (hijo.equals("Conceptos")) lanzarVentana(new Crear_Conceptos(this, true));
             if (hijo.equals("Grupos")) lanzarVentana(new Crear_Grupos(this, true));
             if (hijo.equals("Decimales")) try {

@@ -6,7 +6,6 @@
 package inventario;
 
 import BaseDatos.ConexionCrearConceptos;
-import BaseDatos.ConexionVerHospitales;
 import Modelos.AlmacenDTO;
 import Modelos.HospitalDTO;
 import java.util.ArrayList;

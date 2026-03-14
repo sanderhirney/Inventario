@@ -209,6 +209,8 @@ CREATE TABLE hsdm.documentos (
     id integer NOT NULL,
     hospital_id integer,
     seccion_id integer,
+    almacen_despacho_id integer,
+    almacen_destino_id integer,
     concepto_id integer,
     tipo character varying(10) NOT NULL,
     numero_provisional character varying(50),
@@ -402,6 +404,7 @@ ALTER SEQUENCE hsdm.inicios_id_seq OWNED BY hsdm.inicios.id;
 CREATE TABLE hsdm.kardex (
     id integer NOT NULL,
     hospital_id integer,
+    almacen_id integer,
     documento_id integer,
     articulo_id integer,
     seccion_id integer,
@@ -1568,6 +1571,7 @@ ALTER TABLE ONLY public.unidades ALTER COLUMN cod_unidad SET DEFAULT nextval('pu
 --
 
 COPY hsdm.almacenes (id, codigo_almacen, hospital_id, denominacion, ubicacion, seccion_id, es_principal, es_despacho, es_destino, alias, fecha_creacion) FROM stdin;
+1	306-59B	1	HSDM	SAN ANTONIO	1	t	t	f	HS	2026-03-13 00:00:00
 \.
 
 
@@ -1584,6 +1588,9 @@ COPY hsdm.articulos (id, hospital_id, codigo_barra, nombre, unidad_id, grupo_cod
 --
 
 COPY hsdm.cargos (id, hospital_id, descripcion) FROM stdin;
+2	1	ADMINISTRADOR(A)
+1	1	DIRECTOR
+3	1	CONTRALOR DE EXISTENCIAS
 \.
 
 
@@ -1634,7 +1641,7 @@ COPY hsdm.configuraciones (id, hospital_id, seccion_id, decimales_costos, decima
 -- Data for Name: documentos; Type: TABLE DATA; Schema: hsdm; Owner: postgres
 --
 
-COPY hsdm.documentos (id, hospital_id, seccion_id, concepto_id, tipo, numero_provisional, correlativo_legal, mes_legal, anio_legal, fecha_emision, fecha_registro, estado, observaciones, valor_total) FROM stdin;
+COPY hsdm.documentos (id, hospital_id, seccion_id, almacen_despacho_id, almacen_destino_id, concepto_id, tipo, numero_provisional, correlativo_legal, mes_legal, anio_legal, fecha_emision, fecha_registro, estado, observaciones, valor_total) FROM stdin;
 \.
 
 
@@ -1651,8 +1658,8 @@ COPY hsdm.firmantes (id, hospital_id, seccion_id, cargo_id, nombre_completo, ced
 --
 
 COPY hsdm.flyway_schema_history (installed_rank, version, description, type, script, checksum, installed_by, installed_on, execution_time, success) FROM stdin;
-0	\N	<< Flyway Schema Creation >>	SCHEMA	"hsdm"	\N	postgres	2026-03-13 19:00:00.641464	0	t
-1	1	Esquema Maestro Inventario	SQL	V1__Esquema_Maestro_Inventario.sql	-567891250	postgres	2026-03-13 19:00:00.750961	158	t
+0	\N	<< Flyway Schema Creation >>	SCHEMA	"hsdm"	\N	postgres	2026-03-13 19:06:07.393698	0	t
+1	1	Esquema Maestro Inventario	SQL	V1__Esquema_Maestro_Inventario.sql	780794688	postgres	2026-03-13 19:06:07.501945	153	t
 \.
 
 
@@ -1680,7 +1687,7 @@ COPY hsdm.hospitales (id, rif, nombre, direccion, estado) FROM stdin;
 --
 
 COPY hsdm.inicios (id, hospital_id, estado, fecha_ultimo_acceso) FROM stdin;
-1	1	1	2026-03-13 19:00:11.043625
+1	1	1	2026-03-14 17:05:50.969875
 \.
 
 
@@ -1688,7 +1695,7 @@ COPY hsdm.inicios (id, hospital_id, estado, fecha_ultimo_acceso) FROM stdin;
 -- Data for Name: kardex; Type: TABLE DATA; Schema: hsdm; Owner: postgres
 --
 
-COPY hsdm.kardex (id, hospital_id, documento_id, articulo_id, seccion_id, cantidad, costo_unitario, saldo_cantidad_post, saldo_costo_prom_post) FROM stdin;
+COPY hsdm.kardex (id, hospital_id, almacen_id, documento_id, articulo_id, seccion_id, cantidad, costo_unitario, saldo_cantidad_post, saldo_costo_prom_post) FROM stdin;
 \.
 
 
@@ -2918,7 +2925,7 @@ COPY public.unidades (cod_unidad, nombre, abreviatura) FROM stdin;
 -- Name: almacenes_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
 --
 
-SELECT pg_catalog.setval('hsdm.almacenes_id_seq', 1, false);
+SELECT pg_catalog.setval('hsdm.almacenes_id_seq', 1, true);
 
 
 --
@@ -2932,7 +2939,7 @@ SELECT pg_catalog.setval('hsdm.articulos_id_seq', 1, false);
 -- Name: cargos_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
 --
 
-SELECT pg_catalog.setval('hsdm.cargos_id_seq', 1, false);
+SELECT pg_catalog.setval('hsdm.cargos_id_seq', 3, true);
 
 
 --
@@ -3693,6 +3700,22 @@ ALTER TABLE ONLY hsdm.configuraciones
 
 
 --
+-- Name: documentos documentos_almacen_despacho_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.documentos
+    ADD CONSTRAINT documentos_almacen_despacho_id_fkey FOREIGN KEY (almacen_despacho_id) REFERENCES hsdm.almacenes(id);
+
+
+--
+-- Name: documentos documentos_almacen_destino_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.documentos
+    ADD CONSTRAINT documentos_almacen_destino_id_fkey FOREIGN KEY (almacen_destino_id) REFERENCES hsdm.almacenes(id);
+
+
+--
 -- Name: documentos documentos_hospital_id_concepto_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
 --
 
@@ -3754,6 +3777,14 @@ ALTER TABLE ONLY hsdm.grupos
 
 ALTER TABLE ONLY hsdm.inicios
     ADD CONSTRAINT inicios_hospital_id_fkey FOREIGN KEY (hospital_id) REFERENCES hsdm.hospitales(id);
+
+
+--
+-- Name: kardex kardex_almacen_id_fkey; Type: FK CONSTRAINT; Schema: hsdm; Owner: postgres
+--
+
+ALTER TABLE ONLY hsdm.kardex
+    ADD CONSTRAINT kardex_almacen_id_fkey FOREIGN KEY (almacen_id) REFERENCES hsdm.almacenes(id);
 
 
 --

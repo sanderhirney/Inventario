@@ -26,13 +26,6 @@ public class Crear_Unidades extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
-        GestionDeAlmacenes.getInstance().llamarDatos();
-        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
-        if(almacenPrincipal != null){
-            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
-        }else{
-             etiquetaAlmacenActivo.setText("NO OBTENIDO");
-        }
          GestionDeAlmacenes.getInstance().llamarDatos();
         almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
         if(almacenPrincipal != null){
