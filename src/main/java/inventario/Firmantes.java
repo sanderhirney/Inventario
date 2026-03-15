@@ -76,7 +76,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
     }
       private void llenarTabla(){
           try{
-            
+        operacion=0;
         ConexionVerFirmantes firmantes= new ConexionVerFirmantes();
         firmantes.setSeccion(codigo_seccion);
         listaFirmantes=firmantes.consulta();
@@ -86,7 +86,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
     
         for(FirmantesDTO firma:listaFirmantes)
         {
-            modelo.addRow(new Object[]{firma.cedula(), firma.nombre(), firma.cargo(), firma.fechaInicio(), firma.fechaFin(), firma.activo()});
+            modelo.addRow(new Object[]{firma.cedula(), firma.nombre(), firma.nombreCargo(), firma.fechaInicio(), firma.fechaFin(), firma.activo()});
         }
            }
       catch(Exception ex){
@@ -208,11 +208,11 @@ int operacion=0;//1 para nuevo y 2 para actualizar
 
         panelFormulario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelFormulario.add(comboHospitales, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 12, 784, -1));
+        panelFormulario.add(comboHospitales, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 12, 780, -1));
 
         etiqDescripcion.setText("Nombre");
         panelFormulario.add(etiqDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
-        panelFormulario.add(campoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 784, -1));
+        panelFormulario.add(campoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 780, -1));
 
         etiqHospital.setText("Hospital: ");
         panelFormulario.add(etiqHospital, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 15, -1, -1));
@@ -311,11 +311,38 @@ int operacion=0;//1 para nuevo y 2 para actualizar
     private void BotonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonActualizarActionPerformed
         // TODO add your handling code here:
              operacion=2;
+             fechaFinFirma.setEnabled(true);
              int filaSeleccionada=TablaFirmas.getSelectedRow();
              if (filaSeleccionada != -1){
                  // (Importante por si el usuario ordenó la tabla haciendo clic en las cabeceras)
              int indiceReal = TablaFirmas.convertRowIndexToModel(filaSeleccionada);
              FirmantesDTO firmaSeleccionada=listaFirmantes.get(indiceReal);
+             campoCedula.setText(firmaSeleccionada.cedula());
+             campoNombre.setText(firmaSeleccionada.nombre());
+             fechaInicioFirma.setDate(firmaSeleccionada.fechaInicio());
+             fechaFinFirma.setDate(firmaSeleccionada.fechaFin());
+             if(firmaSeleccionada.activo()){
+             radioSi.setSelected(true);
+             }else{
+             radioNo.setSelected(true);
+             }
+             int cargoActual=firmaSeleccionada.idCargo();
+             int hospitalActual=firmaSeleccionada.idHospital();
+             for(int i=0; i< comboCargos.getItemCount(); i++){
+                 CargosDTO item=(CargosDTO)comboCargos.getItemAt(i);
+                 if(cargoActual==item.codigo()){
+                 comboCargos.setSelectedIndex(i);
+                 break;
+                 }
+             }
+             for(int i=0; i< comboHospitales.getItemCount(); i++){
+                 HospitalDTO item=(HospitalDTO)comboHospitales.getItemAt(i);
+                 if(hospitalActual==item.id()){
+                 comboHospitales.setSelectedIndex(i);
+                 break;
+                 }
+             }
+             
              panelFormulario.setVisible(true);
              panelBotones2.setVisible(true);
              panelBotones.setVisible(false);
@@ -380,6 +407,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                     firmas.setFechaFin(fechaFinSQL);
                     firmas.setActivo(activo);
                     firmas.setNombreCompleto(campoNombre.getText().trim().toUpperCase());
+                   
                     firmas.crearFirmante();
                     if(firmas.respuesta()==1){
                       JOptionPane.showMessageDialog(null, "Firmante creado exitosamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
@@ -387,11 +415,11 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                       campoNombre.setText("");
                       campoCedula.setText("");
                       fechaInicioFirma.setDate(null);
-                        fechaFinFirma.setDate(null);
+                      fechaFinFirma.setDate(null);
                       llenarTabla();
                       panelBotones2.setVisible(false);
                       panelBotones.setVisible(true);
-                      panelFormulario.setVerifyInputWhenFocusTarget(false);
+                      panelFormulario.setVisible(false);
                     }else{
                       JOptionPane.showMessageDialog(null, "Error al crear el firmante", "Error", JOptionPane.ERROR_MESSAGE);
 
@@ -399,28 +427,55 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                  }
                  if(operacion==2)//actualizar
                  {
+                      if(nombre.isBlank() || nombre.isEmpty() || cedula.isBlank() || cedula.isEmpty()){
+             JOptionPane.showMessageDialog(null, "Debe completar el campo", "Error", JOptionPane.ERROR_MESSAGE);
+
+             } else{
+                     java.sql.Date fechaInicioSQL=new java.sql.Date(fechaInicioFirma.getDate().getTime());
+                     java.sql.Date fechaFinSQL=null;
+                     boolean activo=true;
+                     if(radioSi.isSelected()){
+                     activo=true;
+                     }
+                     if(radioNo.isSelected()){
+                     activo=false;
+                     }
+                     if((fechaFinFirma.getDate()) != null){
+                          fechaFinSQL=new java.sql.Date(fechaFinFirma.getDate().getTime());
+                          activo=false;
+                     }
                     int filaSeleccionada=TablaFirmas.getSelectedRow();
                     // (Importante por si el usuario ordenó la tabla haciendo clic en las cabeceras)
                     int indiceReal = TablaFirmas.convertRowIndexToModel(filaSeleccionada);
-                    FirmantesDTO firmaSeleccionado=listaFirmantes.get(indiceReal);
-                    ConexionCrearConfigurarCargos cargos=new ConexionCrearConfigurarCargos();
-                    cargos.setDescripcion(campoNombre.getText().trim());
-                    //cargos.setCodigoCargo(cargoSeleccionado.codigo());
-                    cargos.actualizarCargo();
-                    if(cargos.respuesta()==1){
+                    FirmantesDTO firmaSeleccionada=listaFirmantes.get(indiceReal);
+                    CargosDTO cargoSeleccionado=(CargosDTO)comboCargos.getSelectedItem();
+                    ConexionCrearConfigurarFirmantes firmante=new ConexionCrearConfigurarFirmantes();
+                    firmante.setidFirmante(firmaSeleccionada.id());
+                    firmante.setFechaInicio(fechaInicioSQL);
+                    firmante.setFechaFin(fechaFinSQL);
+                    firmante.setNombreCompleto(campoNombre.getText().trim().toUpperCase());
+                    firmante.setCedula(campoCedula.getText().trim());
+                    firmante.setCodigoCargo(cargoSeleccionado.codigo());
+                    firmante.setIdHospital(firmaSeleccionada.idHospital());
+                    firmante.setIdSeccion(codigo_seccion);
+                    firmante.setActivo(activo);
+                    firmante.actualizarFirmante();
+                    if(firmante.respuesta()==1){
                       JOptionPane.showMessageDialog(null, "Cargo actualizado exitosamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
                       operacion=0;
                       campoNombre.setText("");
+                      campoCedula.setText("");
                       panelFormulario.setVisible(false);
                       llenarTabla();
                       panelBotones2.setVisible(false);
                       panelBotones.setVisible(true);
                     }else{
-                      JOptionPane.showMessageDialog(null, "Error al crear el cargo", "Error", JOptionPane.ERROR_MESSAGE);
+                      JOptionPane.showMessageDialog(null, "Error al actualizar el cargo", "Error", JOptionPane.ERROR_MESSAGE);
 
                     }
                      
                  }
+                 }//else
                  
             
              }

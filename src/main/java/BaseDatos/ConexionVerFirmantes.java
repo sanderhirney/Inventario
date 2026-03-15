@@ -19,8 +19,11 @@ public class ConexionVerFirmantes {
     List<FirmantesDTO> firmantes=new ArrayList<>();
     String consultaSQL="""
                        select a.id as id,
-                       b.descripcion as cargo, 
+                       b.descripcion as nombreCargo,
+                       a.cargo_id as idCargo,
                        a.cedula as cedula,
+                       a.hospital_id as idHospital,
+                       a.seccion_id as idSeccion,
                        a.nombre_completo as nombre,
                        a.fecha_inicio as inicio,
                        a.fecha_fin as fin,
@@ -47,7 +50,10 @@ public class ConexionVerFirmantes {
             {
                 FirmantesDTO miembro=new FirmantesDTO(
                 ejecutar.getInt("id"),
-                ejecutar.getString("cargo"),
+                ejecutar.getString("nombreCargo"),
+                ejecutar.getInt("idCargo"),
+                ejecutar.getInt("idSeccion"),
+                ejecutar.getInt("idHospital"),
                 ejecutar.getString("cedula"),
                 ejecutar.getString("nombre"),
                 ejecutar.getDate("inicio"),

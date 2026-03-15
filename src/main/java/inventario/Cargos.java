@@ -272,7 +272,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
 
     private void BotonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonNuevoActionPerformed
         // TODO add your handling code here:
-              comboHospitales.setVisible(false);
+              comboHospitales.setVisible(true);
               panelFormulario.setVisible(true);
               panelBotones2.setVisible(true);
               panelBotones.setVisible(false);
@@ -284,7 +284,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
         
         try{
             
-                String descripcion=campoDescripcion.getText().trim();
+                String descripcion=campoDescripcion.getText().trim().toUpperCase();
              if(descripcion.isBlank() || descripcion.isEmpty()){
              JOptionPane.showMessageDialog(null, "Debe completar el campo", "Error", JOptionPane.ERROR_MESSAGE);
 
@@ -303,7 +303,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                       llenarTabla();
                       panelBotones2.setVisible(false);
                       panelBotones.setVisible(true);
-                      panelFormulario.setVerifyInputWhenFocusTarget(false);
+                      panelFormulario.setVisible(false);
                     }else{
                       JOptionPane.showMessageDialog(null, "Error al crear el cargo", "Error", JOptionPane.ERROR_MESSAGE);
 
@@ -311,6 +311,10 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                  }
                  if(operacion==2)//actualizar
                  {
+                      if(descripcion.isBlank() || descripcion.isEmpty()){
+             JOptionPane.showMessageDialog(null, "Debe completar el campo", "Error", JOptionPane.ERROR_MESSAGE);
+
+             } else{
                     int filaSeleccionada=TablaCargos.getSelectedRow();
                     // (Importante por si el usuario ordenó la tabla haciendo clic en las cabeceras)
                     int indiceReal = TablaCargos.convertRowIndexToModel(filaSeleccionada);
@@ -333,6 +337,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                     }
                      
                  }
+                 }//else
                  
             
              }

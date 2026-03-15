@@ -13,10 +13,9 @@ public class ConexionCrearConfigurarFirmantes {
     Conexion conectar= new Conexion();
     int ejecutar;
     int resultado;
-    String descripcion;
     int idHospital;
     int idSeccion;
-    int codigoFirma;
+    int idFirmante;
     int codigoCargo;
     String nombreCompleto;
     String cedula;
@@ -77,10 +76,17 @@ public class ConexionCrearConfigurarFirmantes {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        try(PreparedStatement consulta=conex.prepareStatement("update cargos set descripcion=? where id=?"))
+        try(PreparedStatement consulta=conex.prepareStatement("update firmantes set cedula=?, nombre_completo=?, fecha_inicio=?, fecha_fin=?, activo=?, cargo_id=? where id=? and hospital_id=?  and seccion_id=?"))
         {
-            consulta.setString(1, descripcion);
-            consulta.setInt(2, codigoFirma);
+            consulta.setString(1, cedula);
+            consulta.setString(2, nombreCompleto);
+            consulta.setDate(3, fechaInicio);
+            consulta.setDate(4, fechaFin);
+            consulta.setBoolean(5, activo);
+            consulta.setInt(6, codigoCargo);
+            consulta.setInt(7, idFirmante );
+            consulta.setInt(8, idHospital);
+            consulta.setInt(9, idSeccion);
             ejecutar=consulta.executeUpdate();
             if( ejecutar> 0 )
             {
@@ -97,16 +103,15 @@ public class ConexionCrearConfigurarFirmantes {
     }//consulta
            catch(SQLException ex)
     {
-        JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de guardar la Firma.\n Ventana Crear Unidad \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
+        log.severe("ERROR AL ACTUALIZAR LA FIRMA");
+        log.severe(ex.toString());
+        JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de actualizar la Firma.\n Ventana Crear Unidad \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
     }finally{
           conectar.Cerrar();
           }
     }//consulta
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
+    
     public void setIdHospital(int idHospital) {
         this.idHospital = idHospital;
     }
@@ -115,8 +120,8 @@ public class ConexionCrearConfigurarFirmantes {
         this.idSeccion = idSeccion;
     }
 
-    public void setCodigoFirma(int codigoFirma) {
-        this.codigoFirma = codigoFirma;
+    public void setidFirmante(int idFirmante) {
+        this.idFirmante = idFirmante;
     }
 
     public void setCodigoCargo(int codigoCargo) {

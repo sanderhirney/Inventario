@@ -128,12 +128,6 @@ public class Ventana_Principal extends javax.swing.JFrame {
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Reportes");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Firmantes");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Nuevo");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Configurar");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Configuracion");
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Firmantes");
         treeNode2.add(treeNode3);

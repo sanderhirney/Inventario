@@ -12,7 +12,10 @@ import java.util.Date;
  */
 public record FirmantesDTO(
         int id,
-        String cargo,
+        String nombreCargo,
+        int idCargo,
+        int idSeccion,
+        int idHospital,
         String cedula,
         String nombre,
         Date fechaInicio,
