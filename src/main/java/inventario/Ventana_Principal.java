@@ -95,9 +95,7 @@ public class Ventana_Principal extends javax.swing.JFrame {
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Servicios");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Crear");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Consultar");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Servicios");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Almacenes");
@@ -271,6 +269,9 @@ public class Ventana_Principal extends javax.swing.JFrame {
         case "Proveedores" -> {
             if (hijo.equals("Crear")) lanzarVentana(new Crear_Proveedores(this, true));
             if (hijo.equals("Consultar")) lanzarVentana(new Consultar_Proveedores(this, true));
+               }
+        case "Servicios" -> {
+            if (hijo.equals("Servicios")) lanzarVentana(new Servicios(this, true));
                }
 
         case "Almacenes" -> {

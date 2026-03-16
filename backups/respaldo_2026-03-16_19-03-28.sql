@@ -1654,7 +1654,8 @@ COPY hsdm.documentos (id, hospital_id, seccion_id, almacen_despacho_id, almacen_
 COPY hsdm.firmantes (id, hospital_id, seccion_id, cargo_id, nombre_completo, cedula, fecha_inicio, fecha_fin, activo) FROM stdin;
 1	1	1	1	SANDER CUELLAR	18353858	2026-03-14	\N	t
 3	1	1	3	GLEIDY CUELLAR	18353859	2026-03-14	\N	t
-4	1	1	2	BREINER CUELLAR	26066486	2026-03-15	\N	t
+4	1	1	2	BREINER CUELLAR AGELVIS	26066486	2026-03-15	2026-03-15	f
+5	1	1	2	DEISY CUELLAR	14975883	2026-03-15	\N	t
 \.
 
 
@@ -1692,7 +1693,7 @@ COPY hsdm.hospitales (id, rif, nombre, direccion, estado) FROM stdin;
 --
 
 COPY hsdm.inicios (id, hospital_id, estado, fecha_ultimo_acceso) FROM stdin;
-1	1	1	2026-03-15 11:29:58.321145
+1	1	1	2026-03-16 19:03:28.35753
 \.
 
 
@@ -1734,6 +1735,8 @@ COPY hsdm.secciones (id, hospital_id, descripcion, seleccionada, estado) FROM st
 --
 
 COPY hsdm.servicios (id, hospital_id, nombre_servicio, seccion_id) FROM stdin;
+1	1	EMERGENCIAS	1
+2	1	SALA DE PARTO	1
 \.
 
 
@@ -2965,7 +2968,7 @@ SELECT pg_catalog.setval('hsdm.documentos_id_seq', 1, false);
 -- Name: firmantes_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
 --
 
-SELECT pg_catalog.setval('hsdm.firmantes_id_seq', 4, true);
+SELECT pg_catalog.setval('hsdm.firmantes_id_seq', 5, true);
 
 
 --
@@ -3007,7 +3010,7 @@ SELECT pg_catalog.setval('hsdm.secciones_id_seq', 1, true);
 -- Name: servicios_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
 --
 
-SELECT pg_catalog.setval('hsdm.servicios_id_seq', 1, false);
+SELECT pg_catalog.setval('hsdm.servicios_id_seq', 2, true);
 
 
 --

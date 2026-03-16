@@ -123,9 +123,10 @@ public class Salida_Inventario extends javax.swing.JDialog {
                     Combo_Conceptos.addItem(lista3.next()+"-"+lista1.next());
                     
                 }
-        servicios.consulta();
-        descripcion_servicios=servicios.descripcion();
-        codigo_servicios=servicios.codigo();
+        
+        //servicios.consulta();
+        //descripcion_servicios=servicios.descripcion();
+       // codigo_servicios=servicios.codigo();
         lista2=descripcion_servicios.iterator();
         while(lista2.hasNext())
         {
