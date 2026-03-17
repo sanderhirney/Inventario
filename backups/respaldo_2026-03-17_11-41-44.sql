@@ -1693,7 +1693,7 @@ COPY hsdm.hospitales (id, rif, nombre, direccion, estado) FROM stdin;
 --
 
 COPY hsdm.inicios (id, hospital_id, estado, fecha_ultimo_acceso) FROM stdin;
-1	1	1	2026-03-16 18:29:29.914528
+1	1	1	2026-03-17 11:41:44.112672
 \.
 
 
@@ -1735,6 +1735,9 @@ COPY hsdm.secciones (id, hospital_id, descripcion, seleccionada, estado) FROM st
 --
 
 COPY hsdm.servicios (id, hospital_id, nombre_servicio, seccion_id) FROM stdin;
+1	1	EMERGENCIAS	1
+2	1	SALA DE PARTO	1
+3	1	TRIAJE	1
 \.
 
 
@@ -3008,7 +3011,7 @@ SELECT pg_catalog.setval('hsdm.secciones_id_seq', 1, true);
 -- Name: servicios_id_seq; Type: SEQUENCE SET; Schema: hsdm; Owner: postgres
 --
 
-SELECT pg_catalog.setval('hsdm.servicios_id_seq', 1, false);
+SELECT pg_catalog.setval('hsdm.servicios_id_seq', 3, true);
 
 
 --

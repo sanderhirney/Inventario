@@ -1,6 +1,7 @@
 
 package BaseDatos;
 
+import Modelos.ProveedorDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,42 +11,53 @@ import java.util.List;
 import javax.swing.JOptionPane;
 public class ConexionVerProveedores {
     Connection conex;
-    PreparedStatement consulta;
     Conexion conectar= new Conexion();
-    ResultSet ejecutar;
     
-    List<String> nombres=new ArrayList<>();
-    List<String> rif=new ArrayList<>();
-    public void consulta()
+    List<ProveedorDTO> listaProveedores= new ArrayList<>();
+    private List<ProveedorDTO> consulta() throws SQLException
     {
           try
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select nombre, rif_proveedor from proveedores");
-        ejecutar=consulta.executeQuery();
-        while( ejecutar.next() )
+        try(PreparedStatement consulta= conex.prepareStatement("select id, hospital_id, rif, nombre, direccion, telefono from proveedores") ){
+        try(ResultSet  ejecutar=consulta.executeQuery()){
+            while( ejecutar.next() )
         {
-                     nombres.add(ejecutar.getString("nombre"));
-                     rif.add(ejecutar.getString("rif_proveedor"));
+                    ProveedorDTO proveedor=new ProveedorDTO(
+                    ejecutar.getInt("id"),
+                    ejecutar.getInt("hospital_id"),
+                    ejecutar.getString("rif"),
+                    ejecutar.getString("nombre"),
+                    ejecutar.getString("direccion"),
+                    ejecutar.getString("telefono")
+                    
+                    );
+                    
+                    listaProveedores.add(proveedor);
                      
                      
         }//if
-       conectar.Cerrar();
+      
+        }
+        }
+        
+      
+        
     }//consulta
            catch(SQLException ex)
     {
         JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de los proveedores.\n Ventana Ver Proveedores \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
-    }
+    }finally{
+           conectar.Cerrar();
+          }
+          
+          return listaProveedores;
     }//consulta
     
-    public List<String> nombres()
-    {
-        return nombres;
+    public List<ProveedorDTO> consultarProveedor() throws SQLException{
+     return consulta();
     }
     
-    public List<String> rif_proveedor()
-    {
-        return rif;
-    }
+    
 }//clase

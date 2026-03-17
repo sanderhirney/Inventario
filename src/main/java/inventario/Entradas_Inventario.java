@@ -99,11 +99,11 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
         nombre_seccion=secciones.nombre_seccion();
         conceptos.setTipo(1);
         conceptos.consulta();//obtengo los conceptos
-        proveedor.consulta();//obtengo los proveedores
+     //   proveedor.consulta();//obtengo los proveedores
         descripcion=conceptos.descripcion();
         codigo=conceptos.codigo();
-        nombre_proveedor=proveedor.nombres();
-        rif_proveedor=proveedor.rif_proveedor();
+     //   nombre_proveedor=proveedor.nombres();
+      //  rif_proveedor=proveedor.rif_proveedor();
         lista1=descripcion.iterator();
         lista3=codigo.iterator();
         listaAlmacenes=GestionDeAlmacenes.getInstance().almacenes();
