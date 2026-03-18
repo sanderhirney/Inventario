@@ -7,7 +7,9 @@ package inventario;
 
 import BaseDatos.ConexionValidarLogin;
 import java.awt.Dimension;
+import java.sql.SQLException;
 import java.util.Optional;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,6 +23,8 @@ public class Login extends javax.swing.JFrame {
         initComponents();
     
     }
+    
+      
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -141,16 +145,32 @@ public class Login extends javax.swing.JFrame {
          JOptionPane.showMessageDialog(null, "Usuario no encontrado. Verifique sus datos", "Error", JOptionPane.ERROR_MESSAGE);
 
         }else{
-        String rolReal = rolOpt.get();
+        if(login.isEstado()){
+            String rolReal = rolOpt.get();
         switch(rolReal){
             
             case "ADMIN" ->{
-                System.out.println("Hola Admin");
+               VentanaAdmin admin = new VentanaAdmin();
+               admin.setLocationRelativeTo(null);
+               admin.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+               admin.setVisible(true);
             }
-            case "USER" ->{}
-        }    
+            case "USER" ->{
+              Ventana_Principal ventana = new Ventana_Principal();
+              ventana.setLocationRelativeTo(null);
+              // ventana.setResizable(false);
+              ventana.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+              ventana.setVisible(true);
+            }
+        } 
+       }//if
+        else{
+        JOptionPane.showMessageDialog(null, "Usuario inactivo", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+           
         }
         }
+        
         
        
         

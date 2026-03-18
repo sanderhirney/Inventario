@@ -7634,3 +7634,103 @@ mar. 17, 2026 10:07:07 P. M. BaseDatos.Conexion Conectar
 INFORMACIÓN: CONEXION A BD
 mar. 17, 2026 10:07:07 P. M. BaseDatos.Conexion Conectar
 INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 18, 2026 6:22:16 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 18, 2026 6:22:22 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 18, 2026 6:22:22 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 18, 2026 6:22:22 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 18, 2026 6:22:30 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 18, 2026 6:22:30 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 18, 2026 6:22:30 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 18, 2026 6:23:59 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 18, 2026 6:24:05 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 18, 2026 6:24:05 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 18, 2026 6:24:05 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 18, 2026 6:24:05 P. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 18, 2026 6:24:05 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 18, 2026 6:24:05 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: null
+mar. 18, 2026 6:24:05 P. M. BaseDatos.ConexionVerUsuarios consulta
+GRAVE: ERROR AL CONSULTAR LOS USUARIOS DEL SISTEMA
+mar. 18, 2026 6:24:05 P. M. BaseDatos.ConexionVerUsuarios consulta
+GRAVE: org.postgresql.util.PSQLException: ERROR: error de sintaxis en o cerca de «null»
+  Position: 20
+mar. 18, 2026 6:24:11 P. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 18, 2026 6:24:11 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 18, 2026 6:24:11 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: null
+mar. 18, 2026 6:24:11 P. M. BaseDatos.ConexionVerConfigHospitales consulta
+GRAVE: ERROR AL CONSULTAR LOS HOSPITALES DE CONFIGURACION DEL SISTEMA
+mar. 18, 2026 6:24:11 P. M. BaseDatos.ConexionVerConfigHospitales consulta
+GRAVE: org.postgresql.util.PSQLException: ERROR: error de sintaxis en o cerca de «null»
+  Position: 20
+mar. 18, 2026 6:25:29 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 18, 2026 6:25:35 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 18, 2026 6:25:35 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 18, 2026 6:25:35 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 18, 2026 6:25:35 P. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 18, 2026 6:25:35 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 18, 2026 6:25:35 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 18, 2026 6:25:35 P. M. BaseDatos.ConexionVerUsuarios consulta
+GRAVE: ERROR AL CONSULTAR LOS USUARIOS DEL SISTEMA
+mar. 18, 2026 6:25:35 P. M. BaseDatos.ConexionVerUsuarios consulta
+GRAVE: org.postgresql.util.PSQLException: ERROR: no existe la columna «id_usuario»
+  Position: 8
+mar. 18, 2026 6:25:37 P. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 18, 2026 6:25:37 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 18, 2026 6:25:37 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 18, 2026 6:25:37 P. M. BaseDatos.ConexionVerConfigHospitales consulta
+GRAVE: ERROR AL CONSULTAR LOS HOSPITALES DE CONFIGURACION DEL SISTEMA
+mar. 18, 2026 6:25:37 P. M. BaseDatos.ConexionVerConfigHospitales consulta
+GRAVE: org.postgresql.util.PSQLException: ERROR: no existe la columna «id_hospital»
+  Position: 8
+mar. 18, 2026 6:26:35 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 18, 2026 6:26:45 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 18, 2026 6:26:45 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 18, 2026 6:26:45 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 18, 2026 6:26:54 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 18, 2026 6:26:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 18, 2026 6:26:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 18, 2026 6:26:54 P. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 18, 2026 6:26:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 18, 2026 6:26:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 18, 2026 6:26:54 P. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 18, 2026 6:26:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 18, 2026 6:26:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
