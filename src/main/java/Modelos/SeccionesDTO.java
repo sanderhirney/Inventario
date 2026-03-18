@@ -10,7 +10,8 @@ package Modelos;
  */
 public record SeccionesDTO(
         int codigo,
-        String descripcion
+        String descripcion,
+        int idHospital
         )
 
 {

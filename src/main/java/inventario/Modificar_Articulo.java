@@ -77,8 +77,8 @@ int codigoUnidadActual;
         ConexionVerArticulos articulos=new ConexionVerArticulos();
         articulos.setSeccion(codigo_seccion);
         articulos.consulta();
-        codigos=articulos.codigo();
-        nombres=articulos.nombre();
+        //codigos=articulos.codigo();
+        //nombres=articulos.nombre();
         modelo=(DefaultTableModel)Tabla_articulos.getModel();
         
         filtro=new TableRowSorter(Tabla_articulos.getModel());

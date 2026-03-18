@@ -270,8 +270,8 @@ public class Asignar_seccion_art extends javax.swing.JDialog {
         ConexionVerArticulos articulos=new ConexionVerArticulos();
         articulos.setSeccion(codigo_origen);
         articulos.consulta();
-        codigo_articulo=articulos.codigo();
-        nombre_articulo=articulos.nombre();
+        //codigo_articulo=articulos.codigo();
+       // nombre_articulo=articulos.nombre();
         modelo=(DefaultTableModel)Tabla_articulo.getModel();
         if(codigo_articulo.isEmpty())//para controlar que haya conseguido articulos
         {

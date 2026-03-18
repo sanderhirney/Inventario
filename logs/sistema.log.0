@@ -7500,3 +7500,137 @@ mar. 17, 2026 11:52:35 A. M. BaseDatos.Conexion Conectar
 INFORMACIÓN: CONEXION A BD
 mar. 17, 2026 11:52:45 A. M. BaseDatos.Conexion Conectar
 INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 3:21:37 P. M. shca.inventario.ConfiguracionBaseDatos migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 17, 2026 3:21:37 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 3:21:37 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 3:21:37 P. M. BaseDatos.ConexionRespaldos respaldar
+INFORMACIÓN: Iniciado el proceso de respaldo a BD
+mar. 17, 2026 3:21:37 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo iniciado: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-17_15-21-37.sql
+mar. 17, 2026 3:21:37 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 17, 2026 3:21:37 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 17, 2026 3:21:37 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 3:21:37 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Respaldo completado con éxito: D:\USER\Documents\GitHub\Inventario\backups\respaldo_2026-03-17_15-21-37.sql
+mar. 17, 2026 3:21:37 P. M. BaseDatos.ConexionRespaldos lambda$respaldar$1
+INFORMACIÓN: Backup antiguo eliminado: respaldo_2026-03-16_19-00-38.sql
+mar. 17, 2026 3:21:44 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 3:21:46 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 3:21:48 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 17, 2026 3:21:48 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 3:21:48 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 17, 2026 3:21:48 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 3:21:48 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 3:21:56 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 17, 2026 3:21:56 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 3:21:56 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 3:21:56 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 17, 2026 3:21:56 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 3:21:57 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 3:21:57 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 17, 2026 3:21:57 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 3:21:57 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 3:22:19 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 8:59:34 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 17, 2026 9:24:41 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 17, 2026 9:24:51 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 9:26:10 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 17, 2026 9:26:18 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 9:32:25 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 17, 2026 9:32:31 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 9:36:13 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 17, 2026 9:37:23 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+GRAVE: Cannot invoke "org.flywaydb.core.api.MigrationInfo.getVersion()" because the return value of "org.flywaydb.core.api.MigrationInfoService.current()" is null
+mar. 17, 2026 9:38:31 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 17, 2026 9:43:38 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 17, 2026 9:44:02 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 9:44:31 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 9:48:40 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 17, 2026 9:48:47 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 9:49:22 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 17, 2026 9:50:15 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 17, 2026 9:50:21 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 9:50:21 P. M. BaseDatos.ConexionValidarLogin consulta
+GRAVE: org.postgresql.util.PSQLException: ERROR: error de sintaxis en o cerca de «null»
+  Position: 20
+mar. 17, 2026 9:58:22 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 17, 2026 9:58:29 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 17, 2026 9:58:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 9:58:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: null
+mar. 17, 2026 9:58:29 P. M. BaseDatos.ConexionValidarLogin consulta
+GRAVE: org.postgresql.util.PSQLException: ERROR: error de sintaxis en o cerca de «null»
+  Position: 20
+mar. 17, 2026 10:01:12 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 17, 2026 10:01:34 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 17, 2026 10:01:34 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 10:01:34 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: null
+mar. 17, 2026 10:01:34 P. M. BaseDatos.ConexionValidarLogin consulta
+GRAVE: org.postgresql.util.PSQLException: ERROR: error de sintaxis en o cerca de «null»
+  Position: 20
+mar. 17, 2026 10:04:43 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 17, 2026 10:04:51 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 17, 2026 10:04:51 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 10:04:51 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: null
+mar. 17, 2026 10:04:51 P. M. BaseDatos.ConexionValidarLogin consulta
+GRAVE: org.postgresql.util.PSQLException: ERROR: error de sintaxis en o cerca de «null»
+  Position: 20
+mar. 17, 2026 10:07:01 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 17, 2026 10:07:07 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 17, 2026 10:07:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 17, 2026 10:07:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public

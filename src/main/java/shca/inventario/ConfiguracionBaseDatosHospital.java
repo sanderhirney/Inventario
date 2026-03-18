@@ -14,7 +14,7 @@ import org.flywaydb.core.Flyway;
  * @author USER
  */
 
-public class ConfiguracionBaseDatos {
+public class ConfiguracionBaseDatosHospital {
     private final String dataSource=Configuracion.get("db.url", "/");
     private final String usuario=Configuracion.get("db.usuario", "usuario");
      private final String password=Configuracion.get("db.password", "123");
@@ -26,7 +26,7 @@ public class ConfiguracionBaseDatos {
             .dataSource(dataSource, usuario, password)
             .schemas("hsdm")
             .baselineOnMigrate(true)//Esto le dice a Flyway: "Si encuentras tablas, crea tu bitácora y marca este punto como el inicio (baseline)".
-            .locations("classpath:db/migration")
+            .locations("classpath:db/migration/hospital")
             .load();
                 //carga
                 flyway.migrate();

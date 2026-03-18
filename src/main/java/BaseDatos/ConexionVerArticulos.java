@@ -5,17 +5,26 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 public class ConexionVerArticulos {
     Connection conex;
-    PreparedStatement consulta;
     Conexion conectar= new Conexion();
-    ResultSet ejecutar;
     int seccion;
-    List<String> nombres=new ArrayList<>();
-    List<Integer> codigos=new ArrayList<>();
+    String consultaSQL="""
+                select a.id as id,
+                a.hospital_id as idhospital,
+                a.codigo_barra as codigobarra,
+                a.nombre as nombre,
+                a.unidad_id as codigounidad,
+                a.grupo_cod as codigogrupo,
+                a.subgrupo_cod as codigosubgrupo,
+                b.nombre as nombreunidad
+                from hsdm.articulos a
+                inner join
+                hsdm.unidades b
+                on 
+                b.id = a.unidad_id
+                """;
     public void consulta()
     {
       
@@ -23,18 +32,22 @@ public class ConexionVerArticulos {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select * from articulos inner join existencias\n" +
-                                          "on articulos.codigo=existencias.codigo\n" +
-                                           "where seccion=? order by articulos.codigo");
-        consulta.setInt(1, seccion);
-        ejecutar=consulta.executeQuery();
-        while( ejecutar.next() )
-        {
+        try(PreparedStatement consulta= conex.prepareStatement(consultaSQL)){
+        try(ResultSet  ejecutar=consulta.executeQuery()){
             
-                     nombres.add(ejecutar.getString("nombre"));
-                     codigos.add(ejecutar.getInt("codigo"));
-                     
-                     
+             while( ejecutar.next() )
+                {
+                            //tengo que crear primero la forma
+                    //de que cuando entre al sistema elija el hospital
+
+
+                }
+        
+        }   
+       
+       
+        
+           
         }//if
         conectar.Cerrar();
        
@@ -44,16 +57,7 @@ public class ConexionVerArticulos {
         JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de los Articulos.\n Ventana Ver Articulos \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
     }
     }//consulta
-        
-    public List<Integer> codigo()
-    {
-        return codigos;
-    }
     
-    public List<String> nombre()
-    {
-        return nombres;
-    }
     public void setSeccion(int recibido)
     {
         seccion=recibido;

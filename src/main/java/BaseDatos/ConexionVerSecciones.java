@@ -23,13 +23,14 @@ public class ConexionVerSecciones {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        try(PreparedStatement consulta= conex.prepareStatement("select id, descripcion  from secciones") ){
+        try(PreparedStatement consulta= conex.prepareStatement("select id, descripcion, hospital_id  from secciones") ){
          try(ResultSet ejecutar=consulta.executeQuery()){
                  while( ejecutar.next() )
                  {
             SeccionesDTO empresas=new SeccionesDTO(
             ejecutar.getInt("id"),
-            ejecutar.getString("descripcion")
+            ejecutar.getString("descripcion"),
+            ejecutar.getInt("hospital_id")        
             
             );
             listaEmpresas.add(empresas);           

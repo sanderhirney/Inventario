@@ -15,18 +15,20 @@ public class Conexion {
      private final String usuario=Configuracion.get("db.usuario", "usuario");
      private final String password=Configuracion.get("db.password", "123");
      private final String url=Configuracion.get("db.url", "/");
+     private String esquema;
      Logger log=LoggerInfo.getLogger();
      Connection conexion;
     public void Conectar ()throws SQLException
     {
            log.info("CONEXION A BD");
+            log.info("ESQUEMA RECIBIDO EN CONEXION: "+esquema);
            try
       {
           Class.forName("org.postgresql.Driver");
           conexion= DriverManager.getConnection(url, usuario, password);
             if(conexion!=null)
                             {
-                                setEsquema("hsdm");
+                                setEsquema(esquema);
                                 System.out.println("Conexion exitosa");
                             }
                             else
@@ -58,8 +60,10 @@ public void Cerrar() throws SQLException
     }//if
 }//cerrar
     //Método auxiliar para cambiar de esquema en cualquier momento
-    private void setEsquema(String esquema) throws SQLException {
+    public void setEsquema(String esquema) throws SQLException {
+       this.esquema=esquema;
         if (conexion != null) {
+            
             try (Statement stmt = conexion.createStatement()) {
                 // Esto le dice a Postgres: "Busca el esquema DADO"
                 stmt.execute("SET search_path TO " + esquema +";");

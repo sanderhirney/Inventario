@@ -3,6 +3,7 @@ package shca.inventario;
 import BaseDatos.ConexionControlDeInicio;
 import BaseDatos.ConexionRespaldos;
 import inventario.LoggerInfo;
+import inventario.Login;
 import inventario.Ventana_Principal;
 import java.awt.HeadlessException;
 import java.sql.SQLException;
@@ -17,7 +18,9 @@ private final static Logger Log = Logger.getLogger("Inventario");
 public static void main(String[] args) throws SQLException {
     int estadoDeInicio=0;
     LoggerInfo.setup();
-    ConfiguracionBaseDatos configuracion=new ConfiguracionBaseDatos();
+    //ConfiguracionBaseDatosHospital configuracion=new ConfiguracionBaseDatosHospital();
+    ConfiguracionBaseDatosPublic configuracion=new ConfiguracionBaseDatosPublic();
+
     configuracion.migracion();
              try{
             /******eSTA SECCION ES PARA CAPTURAR LOS LOG DEL JASPER****/
@@ -36,6 +39,14 @@ public static void main(String[] args) throws SQLException {
             toolbarLogger.addHandler(miLogger.getHandlers()[0]);
             }
         /*fin de la seccion para capturar los log*/
+        
+        Login login=new Login();
+        login.setLocationRelativeTo(null);
+        login.setResizable(false);
+        login.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        login.setVisible(true);
+        /*
+        
             ConexionControlDeInicio inicio=new ConexionControlDeInicio();
             inicio.consulta();
             estadoDeInicio=inicio.getControl();
@@ -65,7 +76,7 @@ public static void main(String[] args) throws SQLException {
                          }//if
             }
            
-         
+         */
      
                     
         }catch(HeadlessException | SecurityException  e)

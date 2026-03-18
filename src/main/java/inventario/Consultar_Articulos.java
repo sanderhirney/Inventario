@@ -36,8 +36,8 @@ AlmacenDTO almacenPrincipal;
         seccion=secc.codigo_seccion();
         articulos.setSeccion(seccion);
         articulos.consulta();
-        codigos=articulos.codigo();
-        nombres=articulos.nombre();
+       // codigos=articulos.codigo();
+       // nombres=articulos.nombre();
         modelo=(DefaultTableModel)Tabla_articulos.getModel();
         filtro=new TableRowSorter<>(Tabla_articulos.getModel());
        

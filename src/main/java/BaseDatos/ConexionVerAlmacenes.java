@@ -13,21 +13,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 public class ConexionVerAlmacenes {
     Connection conex;
-    PreparedStatement consulta;
     Conexion conectar= new Conexion();
-    ResultSet ejecutar;
-    
-    List<String> nombres_almacenes=new ArrayList<>();
-    List<String> codigos_almacenes=new ArrayList<>();
-    List<String> nombres_almacenes_despacho=new ArrayList<>();
-    List<String> codigos_almacenes_despacho=new ArrayList<>(); 
-    List<String> nombres_almacenes_destino=new ArrayList<>();
-    List<String> codigos_almacenes_destino=new ArrayList<>();
-    List<Integer> tipo_almacenes=new ArrayList<>();
-    List<Integer> principal=new ArrayList<>();
-    String denominacionAlmacenPrincipal;
-    String ubicacionAlmacenPrincipal;
-    String codigoAlmacenPrincipal;
     int codigoSeccion;
     Logger log=LoggerInfo.getLogger();
     List<AlmacenDTO> listaAlmacenes=new ArrayList<>();

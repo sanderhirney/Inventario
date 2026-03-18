@@ -52,8 +52,8 @@ String almacenActivoMostrar;
         
         articulos.setSeccion(codigo_seccion);
         articulos.consulta();
-        codigos=articulos.codigo();
-        nombres=articulos.nombre();
+       // codigos=articulos.codigo();
+       // nombres=articulos.nombre();
         modelo=(DefaultTableModel)Tabla_articulos.getModel();
         modelo2=(DefaultTableModel)Tabla_resultados.getModel();
         filtro=new TableRowSorter(Tabla_articulos.getModel());
