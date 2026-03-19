@@ -18,13 +18,14 @@ public class ConfiguracionBaseDatosHospital {
     private final String dataSource=Configuracion.get("db.url", "/");
     private final String usuario=Configuracion.get("db.usuario", "usuario");
      private final String password=Configuracion.get("db.password", "123");
-    Logger log=LoggerInfo.getLogger();
+     String esquemas;
+     Logger log=LoggerInfo.getLogger();
      public void migracion(){
      try{
     Flyway flyway=Flyway.configure()
             //configuracion
             .dataSource(dataSource, usuario, password)
-            .schemas("hsdm")
+            .schemas(esquemas)
             .baselineOnMigrate(true)//Esto le dice a Flyway: "Si encuentras tablas, crea tu bitácora y marca este punto como el inicio (baseline)".
             .locations("classpath:db/migration/hospital")
             .load();
@@ -42,4 +43,10 @@ public class ConfiguracionBaseDatosHospital {
                 "Error Crítico", JOptionPane.ERROR_MESSAGE);
         }
      }
+
+    public void setEsquemas(String esquemas) {
+        this.esquemas = esquemas;
+    }
+     
+     
 }

@@ -7734,3 +7734,590 @@ mar. 18, 2026 6:26:54 P. M. BaseDatos.Conexion Conectar
 INFORMACIÓN: CONEXION A BD
 mar. 18, 2026 6:26:54 P. M. BaseDatos.Conexion Conectar
 INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 9:43:45 A. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 19, 2026 9:43:54 A. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 19, 2026 9:43:54 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 9:43:54 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 9:43:55 A. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 19, 2026 9:43:55 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 9:43:55 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 9:43:55 A. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 19, 2026 9:43:55 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 9:43:55 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:19:51 A. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 19, 2026 10:19:58 A. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 19, 2026 10:19:58 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:19:58 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:20:06 A. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 19, 2026 10:20:06 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:20:06 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:20:12 A. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 19, 2026 10:20:12 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:20:12 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:20:16 A. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 19, 2026 10:20:16 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:20:16 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:20:16 A. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 19, 2026 10:20:16 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:20:16 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:20:17 A. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 19, 2026 10:20:17 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:20:17 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:20:50 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:20:50 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 19, 2026 10:20:50 A. M. BaseDatos.ConexionCrearConfigHospitales crear
+GRAVE: NO SE PUDO CREAR EL HOSPITAL
+mar. 19, 2026 10:20:50 A. M. BaseDatos.ConexionCrearConfigHospitales crear
+GRAVE: org.postgresql.util.PSQLException: ERROR: no existe la relación «config_hospitales»
+  Position: 13
+mar. 19, 2026 10:24:48 A. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 19, 2026 10:24:55 A. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 19, 2026 10:24:55 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:24:55 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:24:55 A. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 19, 2026 10:24:55 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:24:55 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:24:55 A. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 19, 2026 10:24:55 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:24:55 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:25:57 A. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 19, 2026 10:26:05 A. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 19, 2026 10:26:05 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:26:05 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:26:05 A. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 19, 2026 10:26:05 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:26:05 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:26:05 A. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 19, 2026 10:26:05 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:26:05 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:26:27 A. M. BaseDatos.ConexionCrearConfigHospitales crear
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION CREAR HOSPITAL: hospital_central
+mar. 19, 2026 10:26:27 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:26:27 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 19, 2026 10:26:27 A. M. BaseDatos.ConexionCrearConfigHospitales crear
+GRAVE: NO SE PUDO CREAR EL HOSPITAL
+mar. 19, 2026 10:26:27 A. M. BaseDatos.ConexionCrearConfigHospitales crear
+GRAVE: org.postgresql.util.PSQLException: ERROR: no existe la relación «config_hospitales»
+  Position: 13
+mar. 19, 2026 10:28:46 A. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 19, 2026 10:28:54 A. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 19, 2026 10:28:54 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:28:54 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:28:54 A. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 19, 2026 10:28:54 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:28:54 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:28:54 A. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 19, 2026 10:28:54 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:28:54 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:29:13 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:29:13 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:29:14 A. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 19, 2026 10:29:14 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:29:14 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:29:14 A. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 19, 2026 10:29:14 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:29:14 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:30:03 A. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 19, 2026 10:30:10 A. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 19, 2026 10:30:10 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:30:10 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:30:11 A. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 19, 2026 10:30:11 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:30:11 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:30:11 A. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 19, 2026 10:30:11 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:30:11 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:30:21 A. M. BaseDatos.ConexionCrearConfigHospitales actualizar
+INFORMACIÓN: ACTUALIZAR HOSPITAL
+mar. 19, 2026 10:30:21 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:30:21 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:30:22 A. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 19, 2026 10:30:22 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:30:22 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:30:22 A. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 19, 2026 10:30:22 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:30:22 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:31:56 A. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 19, 2026 10:32:02 A. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 19, 2026 10:32:02 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:32:02 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:32:03 A. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 19, 2026 10:32:03 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:32:03 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:32:03 A. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 19, 2026 10:32:03 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:32:03 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:34:26 A. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 19, 2026 10:34:35 A. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 19, 2026 10:34:35 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:34:35 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:34:42 A. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 19, 2026 10:34:42 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:34:42 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:34:42 A. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 19, 2026 10:34:42 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:34:42 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:34:42 A. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 19, 2026 10:34:42 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:34:42 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:34:49 A. M. BaseDatos.ConexionCrearConfigHospitales actualizar
+INFORMACIÓN: ACTUALIZAR HOSPITAL
+mar. 19, 2026 10:34:49 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:34:49 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:34:50 A. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 19, 2026 10:34:50 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:34:50 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 10:34:50 A. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 19, 2026 10:34:50 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 10:34:50 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 11:25:13 A. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 19, 2026 11:25:29 A. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 19, 2026 11:25:39 A. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 19, 2026 11:25:39 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 11:25:39 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 11:25:39 A. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 19, 2026 11:25:39 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 11:25:39 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 11:25:39 A. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 19, 2026 11:25:39 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 11:25:39 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 11:25:57 A. M. shca.inventario.ConfiguracionBaseDatosHospital migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE BD CREADA
+mar. 19, 2026 11:25:57 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 11:25:57 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 11:25:57 A. M. BaseDatos.ConexionActualizarHospitalEsquema actualizar
+INFORMACIÓN: ACTUALIZAR HOSPITAL EN ESQUEMA
+mar. 19, 2026 11:25:57 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 11:25:57 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 19, 2026 11:25:58 A. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 19, 2026 11:25:58 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 11:25:58 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 11:25:58 A. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 19, 2026 11:25:58 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 11:25:58 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 11:32:02 A. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 19, 2026 11:32:08 A. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 19, 2026 11:32:08 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 11:32:08 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 11:32:09 A. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 19, 2026 11:32:09 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 11:32:09 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 11:32:09 A. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 19, 2026 11:32:09 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 11:32:09 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 11:32:23 A. M. BaseDatos.ConexionCrearConfigHospitales actualizar
+INFORMACIÓN: ACTUALIZAR HOSPITAL
+mar. 19, 2026 11:32:23 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 11:32:23 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 11:32:23 A. M. BaseDatos.ConexionActualizarHospitalEsquema actualizar
+INFORMACIÓN: ACTUALIZAR HOSPITAL EN ESQUEMA
+mar. 19, 2026 11:32:23 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 11:32:23 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 19, 2026 11:32:24 A. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 19, 2026 11:32:24 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 11:32:24 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 11:32:24 A. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 19, 2026 11:32:24 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 11:32:24 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 11:38:08 A. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 19, 2026 11:38:18 A. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 19, 2026 11:38:25 A. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 19, 2026 11:38:25 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 11:38:25 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 11:38:25 A. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 19, 2026 11:38:25 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 11:38:25 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 11:38:25 A. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 19, 2026 11:38:25 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 11:38:25 A. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 12:17:20 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 19, 2026 12:17:29 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 19, 2026 12:17:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 12:17:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 12:17:29 P. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 19, 2026 12:17:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 12:17:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 12:17:29 P. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 19, 2026 12:17:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 12:17:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 12:22:02 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 19, 2026 12:22:09 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 19, 2026 12:22:09 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 12:22:09 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 12:22:09 P. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 19, 2026 12:22:09 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 12:22:09 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 12:22:09 P. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 19, 2026 12:22:09 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 12:22:09 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:35:33 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 19, 2026 1:35:59 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 19, 2026 1:35:59 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:35:59 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:36:00 P. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 19, 2026 1:36:00 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:36:00 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:36:00 P. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 19, 2026 1:36:00 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:36:00 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:38:09 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 19, 2026 1:38:27 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 19, 2026 1:38:27 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:38:27 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:38:34 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 19, 2026 1:38:34 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:38:34 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:38:34 P. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 19, 2026 1:38:34 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:38:34 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:38:34 P. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 19, 2026 1:38:34 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:38:34 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:39:45 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 19, 2026 1:39:50 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 19, 2026 1:39:50 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:39:50 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:39:50 P. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 19, 2026 1:39:50 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:39:50 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:39:50 P. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 19, 2026 1:39:50 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:39:50 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:40:07 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 19, 2026 1:40:13 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 19, 2026 1:40:13 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:40:13 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:40:14 P. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 19, 2026 1:40:14 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:40:14 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:40:14 P. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 19, 2026 1:40:14 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:40:14 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:41:59 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 19, 2026 1:42:06 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 19, 2026 1:42:06 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:42:06 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:42:07 P. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 19, 2026 1:42:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:42:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:42:07 P. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 19, 2026 1:42:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:42:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:42:15 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:42:15 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:44:11 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 19, 2026 1:44:19 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 19, 2026 1:44:19 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:44:19 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:44:19 P. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 19, 2026 1:44:19 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:44:19 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:44:20 P. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 19, 2026 1:44:20 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:44:20 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:44:28 P. M. BaseDatos.ConexionCrearConfiguracionInicialUsuarios actualizar
+INFORMACIÓN: ACTUALIZAR USUARIO
+mar. 19, 2026 1:44:28 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:44:28 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:44:28 P. M. BaseDatos.ConexionCrearConfiguracionInicialUsuarios actualizar
+GRAVE: error al actualizar el usuario
+mar. 19, 2026 1:44:28 P. M. BaseDatos.ConexionCrearConfiguracionInicialUsuarios actualizar
+GRAVE: org.postgresql.util.PSQLException: ERROR: no existe la relación «usuario_sistema»
+  Position: 8
+mar. 19, 2026 1:45:00 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 19, 2026 1:45:06 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 19, 2026 1:45:06 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:45:06 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:45:06 P. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 19, 2026 1:45:06 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:45:06 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:45:06 P. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 19, 2026 1:45:06 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:45:06 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:45:11 P. M. BaseDatos.ConexionCrearConfiguracionInicialUsuarios actualizar
+INFORMACIÓN: ACTUALIZAR USUARIO
+mar. 19, 2026 1:45:11 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:45:11 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:45:11 P. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 19, 2026 1:45:11 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:45:11 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 19, 2026 1:45:11 P. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 19, 2026 1:45:11 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 19, 2026 1:45:11 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public

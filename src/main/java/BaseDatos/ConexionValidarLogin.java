@@ -18,14 +18,14 @@ public class ConexionValidarLogin {
     String loggin;
     String password;
          Logger log=LoggerInfo.getLogger();
-
-    private void consulta()
+ Conexion conectar= new Conexion();
+    private void consulta() throws SQLException
     {
       
           try
     {
         log.log(Level.INFO, "ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: {0}", esquema);
-        Conexion conectar= new Conexion();
+       
         conectar.setEsquema(esquema);
         conectar.Conectar();        
         conex= conectar.getConexion();
@@ -47,20 +47,22 @@ public class ConexionValidarLogin {
         
            
         }//if
-        conectar.Cerrar();
+        
        
     }//consulta
            catch(SQLException ex)
     {
         log.severe(ex.toString());
         JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de los Usuarios.\n Ventana Ver Usuarios \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
-    }
+    }finally{
+          conectar.Cerrar();
+          }
     }//consulta
 
     public boolean isEstado() {
         return estado;
     }
-    public void consultar(){
+    public void consultar() throws SQLException{
     consulta();
     }
     public void setLoggin(String loggin) {

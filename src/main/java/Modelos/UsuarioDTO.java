@@ -14,6 +14,7 @@ public record UsuarioDTO(
         String password,
         String rol,
         int idHospital,
+        String nombreHospital,
         boolean estado
         ) {
 

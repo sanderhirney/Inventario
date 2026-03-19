@@ -4,16 +4,21 @@
  */
 package inventario;
 
+import BaseDatos.ConexionActualizarHospitalEsquema;
+import BaseDatos.ConexionCrearConfiguracionInicialHospitales;
+import BaseDatos.ConexionCrearConfiguracionInicialUsuarios;
 import BaseDatos.ConexionVerConfigHospitales;
 import BaseDatos.ConexionVerUsuarios;
-import Modelos.CargosDTO;
 import Modelos.ConfigHospitalDTO;
 import Modelos.UsuarioDTO;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
+import shca.inventario.ConfiguracionBaseDatosHospital;
 
 /**
  *
@@ -30,9 +35,14 @@ public class VentanaAdmin extends javax.swing.JFrame {
     List<UsuarioDTO> listaUsuarios=new ArrayList<>();
     Logger log=LoggerInfo.getLogger();
     String esquema="public";//se hacen estas consultas al esquema public
+    int operacion=0;//1 para crear y 2 para actualizar
+    int idSeleccionado=0;
     public VentanaAdmin() {
         initComponents();
-     llenarTabla();
+        panelFormularioHospital.setVisible(false);
+        panelFormularioUsuario.setVisible(false);
+        botonSi.setSelected(true);
+        llenarTabla();
         
         
     }
@@ -40,9 +50,12 @@ public class VentanaAdmin extends javax.swing.JFrame {
     private void llenarTabla(){
             try{
                 
-        
+        idSeleccionado=0;
+        operacion=0;
         modelo=(DefaultTableModel)tablaHospitales.getModel();
         modelo2=(DefaultTableModel)tablaUsuarios.getModel();
+        modelo.setRowCount(0);
+        modelo2.setRowCount(0);
         ConexionVerUsuarios usuarios=new ConexionVerUsuarios();
         usuarios.setEsquema(esquema);
         listaUsuarios=usuarios.consultar();
@@ -51,9 +64,10 @@ public class VentanaAdmin extends javax.swing.JFrame {
         listaHospitales=hospitales.consultar();
         for(ConfigHospitalDTO hosps: listaHospitales ){
             modelo.addRow(new Object[]{hosps.idHospital(), hosps.rif(), hosps.nombreHospital(), hosps.nombreEsquema()});
+            comboHospital.addItem(hosps);
         }
         for(UsuarioDTO users: listaUsuarios ){
-            modelo2.addRow(new Object[]{users.id(), users.usuario(), users.password(), users.rol(), users.idHospital(), users.estado()});
+            modelo2.addRow(new Object[]{users.id(), users.usuario(), users.password(), users.rol(), users.nombreHospital(), users.estado()});
         }
         }catch(Exception ex){
         log.severe("ERROR AL LLENAR LAS TABLAS DEL ADMIN");
@@ -75,10 +89,7 @@ public class VentanaAdmin extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaHospitales = new javax.swing.JTable();
-        panelBoton2 = new javax.swing.JPanel();
-        botonCrear = new javax.swing.JButton();
-        botonActualizar = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
+        panelFormularioHospital = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -89,13 +100,16 @@ public class VentanaAdmin extends javax.swing.JFrame {
         campoNombre = new javax.swing.JTextField();
         campoEsquema = new javax.swing.JTextField();
         botonGuardarHospital = new javax.swing.JButton();
+        panelBoton2 = new javax.swing.JPanel();
+        botonCrearHospital = new javax.swing.JButton();
+        botonActualizarHospital = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaUsuarios = new javax.swing.JTable();
         panelBoton = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        panel2 = new javax.swing.JPanel();
+        botonCrearUsuario = new javax.swing.JButton();
+        botonActualizarUsuario = new javax.swing.JButton();
+        panelFormularioUsuario = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         campoUsername = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -107,7 +121,7 @@ public class VentanaAdmin extends javax.swing.JFrame {
         botonSi = new javax.swing.JRadioButton();
         botonNo = new javax.swing.JRadioButton();
         comboHospital = new javax.swing.JComboBox<>();
-        botonGuardar = new javax.swing.JButton();
+        botonGuardarUsuario = new javax.swing.JButton();
         panelBoton1 = new javax.swing.JPanel();
         botonSalir = new javax.swing.JButton();
 
@@ -131,83 +145,52 @@ public class VentanaAdmin extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tablaHospitales);
 
-        javax.swing.GroupLayout panelBoton2Layout = new javax.swing.GroupLayout(panelBoton2);
-        panelBoton2.setLayout(panelBoton2Layout);
-        panelBoton2Layout.setHorizontalGroup(
-            panelBoton2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        panelBoton2Layout.setVerticalGroup(
-            panelBoton2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 44, Short.MAX_VALUE)
-        );
-
-        botonCrear.setText("Crear");
-
-        botonActualizar.setText("Actualizar");
+        panelFormularioHospital.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setText("Rif:");
+        panelFormularioHospital.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 3, -1, -1));
 
         jLabel7.setText("Nombre:");
+        panelFormularioHospital.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 31, -1, -1));
 
         jLabel8.setText("Esquema:");
+        panelFormularioHospital.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 71, -1, -1));
 
         jLabel9.setText("Direccion:");
+        panelFormularioHospital.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 120, -1, -1));
 
         textDireccion.setColumns(20);
         textDireccion.setRows(5);
         jScrollPane3.setViewportView(textDireccion);
 
-        botonGuardarHospital.setText("Guardar");
+        panelFormularioHospital.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(77, 96, 850, -1));
+        panelFormularioHospital.add(campoRif, new org.netbeans.lib.awtextra.AbsoluteConstraints(77, 0, 850, -1));
+        panelFormularioHospital.add(campoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(77, 28, 850, -1));
+        panelFormularioHospital.add(campoEsquema, new org.netbeans.lib.awtextra.AbsoluteConstraints(77, 68, 850, -1));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3)
-                    .addComponent(campoRif)
-                    .addComponent(campoNombre)
-                    .addComponent(campoEsquema))
-                .addContainerGap())
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(339, 339, 339)
-                .addComponent(botonGuardarHospital)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(campoRif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(campoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(campoEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jLabel9)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(botonGuardarHospital))))
-        );
+        botonGuardarHospital.setText("Guardar");
+        botonGuardarHospital.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGuardarHospitalActionPerformed(evt);
+            }
+        });
+        panelFormularioHospital.add(botonGuardarHospital, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, -1, -1));
+
+        botonCrearHospital.setText("Crear");
+        botonCrearHospital.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCrearHospitalActionPerformed(evt);
+            }
+        });
+        panelBoton2.add(botonCrearHospital);
+
+        botonActualizarHospital.setText("Actualizar");
+        botonActualizarHospital.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonActualizarHospitalActionPerformed(evt);
+            }
+        });
+        panelBoton2.add(botonActualizarHospital);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -217,38 +200,21 @@ public class VentanaAdmin extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 927, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(222, 222, 222)
-                        .addComponent(botonCrear)
-                        .addGap(18, 18, 18)
-                        .addComponent(botonActualizar)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 932, Short.MAX_VALUE))
+                    .addComponent(panelFormularioHospital, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelBoton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(panelBoton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonCrear)
-                    .addComponent(botonActualizar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelBoton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelFormularioHospital, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(144, 144, 144)
-                    .addComponent(panelBoton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(224, Short.MAX_VALUE)))
         );
 
         panelPrincipal.addTab("Hospitales", jPanel2);
@@ -271,110 +237,61 @@ public class VentanaAdmin extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaUsuarios);
 
-        jButton1.setText("Crear");
+        botonCrearUsuario.setText("Crear");
+        botonCrearUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCrearUsuarioActionPerformed(evt);
+            }
+        });
+        panelBoton.add(botonCrearUsuario);
 
-        jButton2.setText("Actualizar");
+        botonActualizarUsuario.setText("Actualizar");
+        botonActualizarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonActualizarUsuarioActionPerformed(evt);
+            }
+        });
+        panelBoton.add(botonActualizarUsuario);
 
-        javax.swing.GroupLayout panelBotonLayout = new javax.swing.GroupLayout(panelBoton);
-        panelBoton.setLayout(panelBotonLayout);
-        panelBotonLayout.setHorizontalGroup(
-            panelBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBotonLayout.createSequentialGroup()
-                .addGap(225, 225, 225)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        panelBotonLayout.setVerticalGroup(
-            panelBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBotonLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        panelFormularioUsuario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Username: ");
+        panelFormularioUsuario.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 9, -1, -1));
+        panelFormularioUsuario.add(campoUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 6, 850, -1));
 
         jLabel2.setText("Password:");
+        panelFormularioUsuario.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 43, -1, -1));
+        panelFormularioUsuario.add(campoPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 40, 850, -1));
 
         jLabel3.setText("Rol:");
+        panelFormularioUsuario.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 71, -1, -1));
 
         comboRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "USER", "ADMIN" }));
+        panelFormularioUsuario.add(comboRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 68, 313, -1));
 
         jLabel4.setText("Activo:");
+        panelFormularioUsuario.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 98, -1, -1));
 
         jLabel5.setText("Hospital:");
+        panelFormularioUsuario.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
         grupoBoton.add(botonSi);
         botonSi.setText("Si");
+        panelFormularioUsuario.add(botonSi, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 96, -1, -1));
 
         grupoBoton.add(botonNo);
         botonNo.setText("No");
+        panelFormularioUsuario.add(botonNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 96, -1, -1));
 
-        javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
-        panel2.setLayout(panel2Layout);
-        panel2Layout.setHorizontalGroup(
-            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel2Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(comboHospital, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(panel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoUsername))
-                    .addGroup(panel2Layout.createSequentialGroup()
-                        .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(28, 28, 28)
-                        .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panel2Layout.createSequentialGroup()
-                                .addComponent(botonSi)
-                                .addGap(26, 26, 26)
-                                .addComponent(botonNo))
-                            .addComponent(comboRol, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(panel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(campoPassword)))
-                .addContainerGap())
-        );
-        panel2Layout.setVerticalGroup(
-            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(campoUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(campoPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(comboRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(botonSi)
-                    .addComponent(botonNo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(comboHospital, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
+        panelFormularioUsuario.add(comboHospital, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 862, -1));
 
-        botonGuardar.setText("Guardar");
+        botonGuardarUsuario.setText("Guardar");
+        botonGuardarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGuardarUsuarioActionPerformed(evt);
+            }
+        });
+        panelFormularioUsuario.add(botonGuardarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(321, 200, -1, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -383,14 +300,10 @@ public class VentanaAdmin extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 927, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addComponent(panelBoton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panelFormularioUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(334, 334, 334)
-                .addComponent(botonGuardar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -400,10 +313,8 @@ public class VentanaAdmin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelBoton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(botonGuardar)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addComponent(panelFormularioUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         panelPrincipal.addTab("Usuarios", jPanel1);
@@ -447,6 +358,289 @@ public class VentanaAdmin extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_botonSalirActionPerformed
 
+    private void botonGuardarHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarHospitalActionPerformed
+        // TODO add your handling code here:
+        String rif=campoRif.getText().trim();
+        String hospital=campoNombre.getText().trim().toUpperCase();
+        String escheme=campoEsquema.getText().trim();
+        String direccion=textDireccion.getText().trim();
+        if (
+              rif.isBlank() || rif.isEmpty() ||
+              hospital.isBlank() || hospital.isEmpty()||
+              escheme.isBlank() || escheme.isEmpty()||
+              direccion.isBlank() || direccion.isEmpty()
+                
+                
+            ){
+        JOptionPane.showMessageDialog(null, "Debe completar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            
+                if(operacion==1)//es decir crear
+                {
+                    try{
+                           //creo el esquema en BD
+                              ConfiguracionBaseDatosHospital configurarEsquema=new ConfiguracionBaseDatosHospital();
+                              configurarEsquema.setEsquemas(escheme);
+                              configurarEsquema.migracion();
+                              
+                              //el esquema existe asi procedo a crear el hospital
+                            ConexionCrearConfiguracionInicialHospitales crearConfig=new ConexionCrearConfiguracionInicialHospitales();
+                            crearConfig.setEsquemaConexion(esquema);
+                            crearConfig.setRif(rif);
+                            crearConfig.setDireccion(direccion);
+                            crearConfig.setNombre(hospital);
+                            crearConfig.setEsquemaCreado(escheme);
+                            crearConfig.crearHospital();
+                            if(crearConfig.respuesta()==1){
+                                
+                              //actualizo el hospital a ese esquema que le asigne
+                              ConexionActualizarHospitalEsquema actualizarHospital= new ConexionActualizarHospitalEsquema();
+                              actualizarHospital.setEsquema(escheme);
+                              actualizarHospital.setRif(rif);
+                              actualizarHospital.setNombre(hospital);
+                              actualizarHospital.setDireccion(direccion);
+                              actualizarHospital.actualizarHospital();
+                              
+                              JOptionPane.showMessageDialog(null, "Hospital creado exitosamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                              
+                              operacion=0;
+                              campoNombre.setText("");
+                              campoRif.setText("");
+                              campoEsquema.setText("");
+                              textDireccion.setText("");
+                              llenarTabla();
+                              panelFormularioHospital.setVisible(false);
+                             
+                              
+                            }else{
+                              JOptionPane.showMessageDialog(null, "Error al crear el hospital", "Error", JOptionPane.ERROR_MESSAGE);
+
+                        }
+                    }catch(Exception ex){
+                    log.severe("ERROR AL CREAR HOSPITAL EN BD PUBLIC");
+                    log.severe(ex.toString());
+                    }
+                
+                }
+                if(operacion==2){
+                
+                    try{
+                        
+                            ConexionCrearConfiguracionInicialHospitales crearConfig=new ConexionCrearConfiguracionInicialHospitales();
+                            crearConfig.setEsquemaConexion(esquema);
+                            crearConfig.setRif(rif);
+                            crearConfig.setDireccion(direccion);
+                            crearConfig.setNombre(hospital);
+                            crearConfig.setEsquemaCreado(escheme);
+                            crearConfig.setIdHospital(idSeleccionado);
+                            crearConfig.actualizarHospital();
+                            
+                            if(crearConfig.respuesta()==1){
+                                 //actualizo el hospital a ese esquema que le asigne
+                              ConexionActualizarHospitalEsquema actualizarHospital= new ConexionActualizarHospitalEsquema();
+                              actualizarHospital.setEsquema(escheme);
+                              actualizarHospital.setRif(rif);
+                              actualizarHospital.setNombre(hospital);
+                              actualizarHospital.setDireccion(direccion);
+                              actualizarHospital.actualizarHospital();
+                                
+                              JOptionPane.showMessageDialog(null, "Hospital actualizado exitosamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                              operacion=0;
+                              campoNombre.setText("");
+                              campoRif.setText("");
+                              campoEsquema.setText("");
+                              textDireccion.setText("");
+                              llenarTabla();
+                              panelFormularioHospital.setVisible(false);
+                            }else{
+                              JOptionPane.showMessageDialog(null, "Error al actualizar el hospital", "Error", JOptionPane.ERROR_MESSAGE);
+
+                        }
+                    }catch(Exception ex){
+                    log.severe("ERROR AL ACTUALIZAR HOSPITAL EN BD PUBLIC");
+                    log.severe(ex.toString());
+                    }
+                
+                
+                }
+                
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_botonGuardarHospitalActionPerformed
+
+    private void botonCrearHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearHospitalActionPerformed
+        // TODO add your handling code here:
+        operacion=1;
+        panelFormularioHospital.setVisible(true);
+    }//GEN-LAST:event_botonCrearHospitalActionPerformed
+
+    private void botonActualizarHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarHospitalActionPerformed
+        // TODO add your handling code here:
+        operacion=2;
+        int filaSeleccionada=tablaHospitales.getSelectedRow();
+             if (filaSeleccionada != -1){
+                 // (Importante por si el usuario ordenó la tabla haciendo clic en las cabeceras)
+             int indiceReal = tablaHospitales.convertRowIndexToModel(filaSeleccionada);
+             ConfigHospitalDTO hospitalSeleccionado=listaHospitales.get(indiceReal);
+             campoRif.setText(hospitalSeleccionado.rif());
+             campoNombre.setText(hospitalSeleccionado.nombreHospital());
+             campoEsquema.setText(hospitalSeleccionado.nombreEsquema());
+             campoEsquema.setEditable(false);
+             textDireccion.setText(hospitalSeleccionado.direccion());
+             idSeleccionado=hospitalSeleccionado.idHospital();
+             panelFormularioHospital.setVisible(true);
+             
+             }else{
+                 JOptionPane.showMessageDialog(null, "Debe seleccionar una fila", "Error", JOptionPane.ERROR_MESSAGE);
+
+               }
+        
+    }//GEN-LAST:event_botonActualizarHospitalActionPerformed
+
+    private void botonCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearUsuarioActionPerformed
+        // TODO add your handling code here:
+        operacion=1;
+        panelFormularioUsuario.setVisible(true);
+    }//GEN-LAST:event_botonCrearUsuarioActionPerformed
+
+    private void botonGuardarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarUsuarioActionPerformed
+        // TODO add your handling code here:
+        
+        String username=campoUsername.getText().trim();
+        String password=campoPassword.getText().trim();
+        String rol=(String) comboRol.getSelectedItem();
+        boolean estado=true;
+        if(botonSi.isSelected()){estado=true;}
+        if(botonNo.isSelected()){estado=false;}
+        ConfigHospitalDTO hospitalSeleccionado=(ConfigHospitalDTO)comboHospital.getSelectedItem();
+        int idHospital=hospitalSeleccionado.idHospital();
+        
+        if(
+           username.isBlank()|| username.isEmpty()||
+           password.isBlank() || password.isEmpty()
+                )
+        
+        
+        {
+           JOptionPane.showMessageDialog(null, "debe completar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+
+        
+        }else{
+            if(operacion==1){
+                try {
+                    ConexionCrearConfiguracionInicialUsuarios usuarios=new ConexionCrearConfiguracionInicialUsuarios();
+                    usuarios.setEsquemaConexion(esquema);
+                    usuarios.setUsername(username);
+                    usuarios.setPassword(password);
+                    usuarios.setRol(rol);
+                    usuarios.setIdHospital(idHospital);
+                    usuarios.setEstado(estado);
+                    usuarios.crearUsuario();
+                    if(usuarios.respuesta()==1){
+                     JOptionPane.showMessageDialog(null, "Usuario creado exitosamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                     campoUsername.setText("");
+                     campoPassword.setText("");
+                     comboRol.setSelectedIndex(0);
+                     botonSi.setSelected(true);
+                     panelFormularioUsuario.setVisible(false);
+                     llenarTabla();
+                    
+                    }else{
+                     JOptionPane.showMessageDialog(null, "error al crear el usuario", "Error", JOptionPane.ERROR_MESSAGE);
+
+                    }
+                } catch (SQLException ex) {
+                    log.severe("ERROR AL CREAR EL USUARIO");
+                    log.severe(ex.toString());
+                }
+
+
+                    }
+            
+            
+            if(operacion==2){
+            
+             try {
+                    ConexionCrearConfiguracionInicialUsuarios usuarios=new ConexionCrearConfiguracionInicialUsuarios();
+                    usuarios.setEsquemaConexion(esquema);
+                    usuarios.setUsername(username);
+                    usuarios.setPassword(password);
+                    usuarios.setRol(rol);
+                    usuarios.setIdUsuario(idSeleccionado);
+                    usuarios.setIdHospital(idHospital);
+                    usuarios.setEstado(estado);
+                    usuarios.actualizarUsuario();
+                    if(usuarios.respuesta()==1){
+                     JOptionPane.showMessageDialog(null, "Usuario actualizado exitosamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                   
+                     campoUsername.setText("");
+                     campoPassword.setText("");
+                     comboRol.setSelectedIndex(0);
+                     botonSi.setSelected(true);
+                     panelFormularioUsuario.setVisible(false);
+                     llenarTabla();
+                    }else{
+                     JOptionPane.showMessageDialog(null, "error al actualizar el usuario", "Error", JOptionPane.ERROR_MESSAGE);
+
+                    }
+                } catch (SQLException ex) {
+                    log.severe("ERROR AL CREAR EL USUARIO");
+                    log.severe(ex.toString());
+                }
+            }
+        
+        }
+        
+        
+        
+    }//GEN-LAST:event_botonGuardarUsuarioActionPerformed
+
+    private void botonActualizarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarUsuarioActionPerformed
+        // TODO add your handling code here:
+         operacion=2;
+        int filaSeleccionada=tablaUsuarios.getSelectedRow();
+             if (filaSeleccionada != -1){
+              
+                 // (Importante por si el usuario ordenó la tabla haciendo clic en las cabeceras)
+             int indiceReal = tablaUsuarios.convertRowIndexToModel(filaSeleccionada);
+             UsuarioDTO usuarioSeleccionado=listaUsuarios.get(indiceReal);
+             idSeleccionado=usuarioSeleccionado.id();
+             campoUsername.setText(usuarioSeleccionado.usuario());
+             campoPassword.setText(usuarioSeleccionado.password());
+             if(usuarioSeleccionado.estado()){
+             botonSi.setSelected(true);
+             }else{
+             botonNo.setSelected(true);
+             }
+             if(usuarioSeleccionado.rol().equals("USER")){
+             comboRol.setSelectedItem("USER");
+             }else{
+             comboRol.setSelectedItem("ADMIN");
+             }
+             int hospitalSeleccionado=usuarioSeleccionado.idHospital();
+             for(int i=0; i<comboHospital.getItemCount(); i++){
+                  ConfigHospitalDTO hospital=(ConfigHospitalDTO)comboHospital.getItemAt(i);
+                  if(hospitalSeleccionado==hospital.idHospital()){
+                      
+                      comboHospital.setSelectedIndex(i);
+                      break;
+                  }
+                  
+             }
+             panelFormularioUsuario.setVisible(true);
+             }
+             
+            
+            
+             else{
+                 JOptionPane.showMessageDialog(null, "Debe seleccionar una fila", "Error", JOptionPane.ERROR_MESSAGE);
+
+               }
+    }//GEN-LAST:event_botonActualizarUsuarioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -483,10 +677,12 @@ public class VentanaAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonActualizar;
-    private javax.swing.JButton botonCrear;
-    private javax.swing.JButton botonGuardar;
+    private javax.swing.JButton botonActualizarHospital;
+    private javax.swing.JButton botonActualizarUsuario;
+    private javax.swing.JButton botonCrearHospital;
+    private javax.swing.JButton botonCrearUsuario;
     private javax.swing.JButton botonGuardarHospital;
+    private javax.swing.JButton botonGuardarUsuario;
     private javax.swing.JRadioButton botonNo;
     private javax.swing.JButton botonSalir;
     private javax.swing.JRadioButton botonSi;
@@ -495,11 +691,9 @@ public class VentanaAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField campoPassword;
     private javax.swing.JTextField campoRif;
     private javax.swing.JTextField campoUsername;
-    private javax.swing.JComboBox<String> comboHospital;
+    private javax.swing.JComboBox<ConfigHospitalDTO> comboHospital;
     private javax.swing.JComboBox<String> comboRol;
     private javax.swing.ButtonGroup grupoBoton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -511,14 +705,14 @@ public class VentanaAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JPanel panel2;
     private javax.swing.JPanel panelBoton;
     private javax.swing.JPanel panelBoton1;
     private javax.swing.JPanel panelBoton2;
+    private javax.swing.JPanel panelFormularioHospital;
+    private javax.swing.JPanel panelFormularioUsuario;
     private javax.swing.JTabbedPane panelPrincipal;
     private javax.swing.JTable tablaHospitales;
     private javax.swing.JTable tablaUsuarios;

@@ -2,8 +2,6 @@
 package BaseDatos;
 
 import Modelos.ConfigHospitalDTO;
-import Modelos.ServicioDTO;
-import Modelos.UsuarioDTO;
 import inventario.LoggerInfo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

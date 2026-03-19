@@ -17,4 +17,10 @@ public record ConfigHospitalDTO(
         
         ) {
 
+    @Override
+    public String toString() {
+        return  nombreHospital ;
+    }
+    
+
 }

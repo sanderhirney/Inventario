@@ -9,7 +9,7 @@ import BaseDatos.ConexionValidarLogin;
 import java.awt.Dimension;
 import java.sql.SQLException;
 import java.util.Optional;
-import javax.swing.JDialog;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  * @author Informatic HSDM
  */
 public class Login extends javax.swing.JFrame {
-   
+    Logger log=LoggerInfo.getLogger();
     public Dimension resolucion;
     public Login() {
         initComponents();
@@ -134,41 +134,46 @@ public class Login extends javax.swing.JFrame {
         if(usuario.isBlank() || usuario.isEmpty() || password.isBlank() || password.isEmpty()){
         JOptionPane.showMessageDialog(null, "Debe completar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
         }else{
-        ConexionValidarLogin login=new ConexionValidarLogin();
-        login.setEsquema("public");
-        login.setLoggin(usuario);
-        login.setPassword(password);
-        login.consultar();
-        Optional<String> rolOpt = Optional.ofNullable(login.getRol());
-        if(rolOpt.isEmpty()){
-         
-         JOptionPane.showMessageDialog(null, "Usuario no encontrado. Verifique sus datos", "Error", JOptionPane.ERROR_MESSAGE);
-
-        }else{
-        if(login.isEstado()){
-            String rolReal = rolOpt.get();
-        switch(rolReal){
-            
-            case "ADMIN" ->{
-               VentanaAdmin admin = new VentanaAdmin();
-               admin.setLocationRelativeTo(null);
-               admin.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-               admin.setVisible(true);
-            }
-            case "USER" ->{
-              Ventana_Principal ventana = new Ventana_Principal();
-              ventana.setLocationRelativeTo(null);
-              // ventana.setResizable(false);
-              ventana.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-              ventana.setVisible(true);
-            }
-        } 
-       }//if
-        else{
-        JOptionPane.showMessageDialog(null, "Usuario inactivo", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-           
-        }
+            try {
+                ConexionValidarLogin login=new ConexionValidarLogin();
+                login.setEsquema("public");
+                login.setLoggin(usuario);
+                login.setPassword(password);
+                login.consultar();
+                Optional<String> rolOpt = Optional.ofNullable(login.getRol());
+                if(rolOpt.isEmpty()){
+                    
+                    JOptionPane.showMessageDialog(null, "Usuario no encontrado. Verifique sus datos", "Error", JOptionPane.ERROR_MESSAGE);
+                    
+                }else{
+                    if(login.isEstado()){
+                        String rolReal = rolOpt.get();
+                        switch(rolReal){
+                            
+                            case "ADMIN" ->{
+                                VentanaAdmin admin = new VentanaAdmin();
+                                admin.setLocationRelativeTo(null);
+                                admin.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+                                admin.setVisible(true);
+                            }
+                            case "USER" ->{
+                                Ventana_Principal ventana = new Ventana_Principal();
+                                ventana.setLocationRelativeTo(null);
+                                // ventana.setResizable(false);
+                                ventana.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+                                ventana.setVisible(true);
+                            }
+                        }
+                    }//if
+                    else{
+                        JOptionPane.showMessageDialog(null, "Usuario inactivo", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    
+                }   
+            } catch (SQLException ex) {
+                  log.severe("ERROR AL VALIDAR EL LOGIN");
+                  log.severe(ex.toString());
+                }
         }
         
         

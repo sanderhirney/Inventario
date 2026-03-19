@@ -1,7 +1,6 @@
 
 package BaseDatos;
 
-import Modelos.ServicioDTO;
 import Modelos.UsuarioDTO;
 import inventario.LoggerInfo;
 import java.sql.Connection;
@@ -18,6 +17,21 @@ public class ConexionVerUsuarios {
     Logger log=LoggerInfo.getLogger();
     String esquema;
     List<UsuarioDTO> listaUsuarios=new ArrayList<>();
+    String consultaSQL="""
+                      select a.id_usuario, 
+                      a.username, 
+                      a.password, 
+                      a.rol, 
+                      a.id_hospital,
+                      b.nombre_hospital,
+                      a.estado
+                      from 
+                      usuarios_sistema a
+                      left join
+                      config_hospitales b
+                      on
+                      a.id_hospital=b.id_hospital
+                      """;
     private List<UsuarioDTO> consulta() throws SQLException
     {
        
@@ -27,7 +41,7 @@ public class ConexionVerUsuarios {
         conectar.setEsquema(esquema);
         conectar.Conectar();
         conex= conectar.getConexion();
-        try(PreparedStatement  consulta= conex.prepareStatement("select id_usuario, username, password, rol, id_hospital, estado from usuarios_sistema")){
+        try(PreparedStatement  consulta= conex.prepareStatement(consultaSQL)){
         try(ResultSet  ejecutar=consulta.executeQuery()){
             
             while( ejecutar.next() )
@@ -38,6 +52,7 @@ public class ConexionVerUsuarios {
                 ejecutar.getString("password"),
                 ejecutar.getString("rol"),
                 ejecutar.getInt("id_hospital"),
+                ejecutar.getString("nombre_hospital"),
                 ejecutar.getBoolean("estado")        
                 );
                 
