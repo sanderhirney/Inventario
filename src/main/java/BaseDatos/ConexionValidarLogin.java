@@ -12,11 +12,22 @@ import javax.swing.JOptionPane;
 public class ConexionValidarLogin {
     Connection conex;
     
-    String esquema;
+    String esquemaConexion;
+    String esquemaRespuesta="";
     String rol;
     boolean estado;
     String loggin;
     String password;
+    String consultaSQL="""
+                       select a.estado, a.rol, b.nombre_esquema  from usuarios_sistema a
+                       left join
+                       config_hospitales b
+                       on
+                       a.id_hospital=b.id_hospital
+                       where
+                       a.username=?
+                       and a.password=?
+                       """;
          Logger log=LoggerInfo.getLogger();
  Conexion conectar= new Conexion();
     private void consulta() throws SQLException
@@ -24,21 +35,22 @@ public class ConexionValidarLogin {
       
           try
     {
-        log.log(Level.INFO, "ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: {0}", esquema);
+        log.log(Level.INFO, "ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: {0}", esquemaConexion);
        
-        conectar.setEsquema(esquema);
+        conectar.setEsquema(esquemaConexion);
         conectar.Conectar();        
         conex= conectar.getConexion();
-        try(PreparedStatement consulta= conex.prepareStatement("select rol, estado from usuarios_sistema where username=? and password=? ")){
+        try(PreparedStatement consulta= conex.prepareStatement(consultaSQL)){
         consulta.setString(1, loggin);
         consulta.setString(2, password);
             try(ResultSet  ejecutar=consulta.executeQuery()){
             
             if( ejecutar.next() )
                 {
-                         
+                    estado=ejecutar.getBoolean("estado");   
                     rol=ejecutar.getString("rol");
-                    estado=ejecutar.getBoolean("estado");
+                    esquemaRespuesta=ejecutar.getString("nombre_esquema");
+                    
                 }
         
         }   
@@ -74,7 +86,11 @@ public class ConexionValidarLogin {
     }
     
     public void setEsquema(String esquema) {
-        this.esquema = esquema;
+        this.esquemaConexion = esquema;
+    }
+
+    public String getEsquemaRespuesta() {
+        return esquemaRespuesta;
     }
 
     public String getRol() {

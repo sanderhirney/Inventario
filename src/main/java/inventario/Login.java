@@ -6,6 +6,7 @@
 package inventario;
 
 import BaseDatos.ConexionValidarLogin;
+import BaseDatos.SesionUsuario;
 import java.awt.Dimension;
 import java.sql.SQLException;
 import java.util.Optional;
@@ -19,6 +20,7 @@ import javax.swing.JOptionPane;
 public class Login extends javax.swing.JFrame {
     Logger log=LoggerInfo.getLogger();
     public Dimension resolucion;
+    String esquemaUsuario;
     public Login() {
         initComponents();
     
@@ -140,6 +142,7 @@ public class Login extends javax.swing.JFrame {
                 login.setLoggin(usuario);
                 login.setPassword(password);
                 login.consultar();
+                esquemaUsuario=login.getEsquemaRespuesta();
                 Optional<String> rolOpt = Optional.ofNullable(login.getRol());
                 if(rolOpt.isEmpty()){
                     
@@ -155,8 +158,10 @@ public class Login extends javax.swing.JFrame {
                                 admin.setLocationRelativeTo(null);
                                 admin.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
                                 admin.setVisible(true);
+                                this.dispose();
                             }
                             case "USER" ->{
+                                SesionUsuario.inicializarSesion(esquemaUsuario, usuario, rolReal);
                                 Ventana_Principal ventana = new Ventana_Principal();
                                 ventana.setLocationRelativeTo(null);
                                 // ventana.setResizable(false);

@@ -21,6 +21,12 @@ public class Conexion {
     public void Conectar ()throws SQLException
     {
            log.info("CONEXION A BD");
+           if (this.esquema == null) {
+        this.esquema = SesionUsuario.getEsquema();
+                log.info("Usando esquema de SESIÓN AUTOMÁTICA: " + this.esquema);
+            } else {
+                log.info("Usando esquema DEFINIDO MANUALMENTE: " + this.esquema);
+            }
             log.info("ESQUEMA RECIBIDO EN CONEXION: "+esquema);
            try
       {

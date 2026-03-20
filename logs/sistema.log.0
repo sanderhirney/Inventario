@@ -8321,3 +8321,215 @@ mar. 19, 2026 1:45:11 P. M. BaseDatos.Conexion Conectar
 INFORMACIÓN: CONEXION A BD
 mar. 19, 2026 1:45:11 P. M. BaseDatos.Conexion Conectar
 INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 20, 2026 6:17:17 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 20, 2026 6:17:30 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 20, 2026 6:17:30 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 20, 2026 6:17:30 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 20, 2026 6:17:30 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 20, 2026 6:17:30 P. M. BaseDatos.ConexionValidarLogin consulta
+GRAVE: org.postgresql.util.PSQLException: The column name esquema was not found in this ResultSet.
+mar. 20, 2026 6:17:35 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 20, 2026 6:17:35 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 20, 2026 6:17:35 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 20, 2026 6:17:35 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: null
+mar. 20, 2026 6:17:35 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: null
+mar. 20, 2026 6:17:35 P. M. BaseDatos.ConexionSecciones consulta
+GRAVE: ERROR: error de sintaxis en o cerca de «null»
+  Position: 20
+mar. 20, 2026 6:17:36 P. M. inventario.Ventana_Principal <init>
+GRAVE: NO SE PUDO OBTENER INFORMACION DE LA SECCION EN CUAL TRABAJAR
+mar. 20, 2026 6:18:10 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 20, 2026 6:18:15 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 20, 2026 6:18:15 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 20, 2026 6:18:15 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 20, 2026 6:18:15 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 20, 2026 6:18:21 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 20, 2026 6:18:21 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 20, 2026 6:18:21 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 20, 2026 6:18:21 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 20, 2026 6:18:30 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 20, 2026 6:18:30 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 20, 2026 6:18:30 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 20, 2026 6:18:30 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 20, 2026 6:18:30 P. M. BaseDatos.ConexionValidarLogin consulta
+GRAVE: org.postgresql.util.PSQLException: The column name nombre_esquema was not found in this ResultSet.
+mar. 20, 2026 6:18:33 P. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 20, 2026 6:18:33 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 20, 2026 6:18:33 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 20, 2026 6:18:33 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 20, 2026 6:18:33 P. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 20, 2026 6:18:33 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 20, 2026 6:18:33 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 20, 2026 6:18:33 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 20, 2026 6:19:01 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 20, 2026 6:19:07 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 20, 2026 6:19:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 20, 2026 6:19:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 20, 2026 6:19:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 20, 2026 6:19:07 P. M. BaseDatos.ConexionValidarLogin consulta
+GRAVE: org.postgresql.util.PSQLException: The column name nombre_esquema was not found in this ResultSet.
+mar. 20, 2026 6:19:08 P. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 20, 2026 6:19:08 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 20, 2026 6:19:08 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 20, 2026 6:19:08 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 20, 2026 6:19:08 P. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 20, 2026 6:19:08 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 20, 2026 6:19:08 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 20, 2026 6:19:08 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 20, 2026 6:19:24 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 20, 2026 6:19:38 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 20, 2026 6:19:38 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 20, 2026 6:19:38 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 20, 2026 6:19:38 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 20, 2026 6:19:47 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 20, 2026 6:19:47 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 20, 2026 6:19:47 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 20, 2026 6:19:47 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 20, 2026 6:19:47 P. M. BaseDatos.ConexionValidarLogin consulta
+GRAVE: org.postgresql.util.PSQLException: The column name nombre_esquema was not found in this ResultSet.
+mar. 20, 2026 6:19:49 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 20, 2026 6:19:49 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 20, 2026 6:19:49 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 20, 2026 6:19:49 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: 
+mar. 20, 2026 6:19:49 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: 
+mar. 20, 2026 6:19:49 P. M. BaseDatos.ConexionSecciones consulta
+GRAVE: ERROR: error de sintaxis al final de la entrada
+  Position: 20
+mar. 20, 2026 6:19:51 P. M. inventario.Ventana_Principal <init>
+GRAVE: NO SE PUDO OBTENER INFORMACION DE LA SECCION EN CUAL TRABAJAR
+mar. 20, 2026 6:20:27 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 20, 2026 6:20:33 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 20, 2026 6:20:33 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 20, 2026 6:20:33 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 20, 2026 6:20:33 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 20, 2026 6:20:42 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 20, 2026 6:20:42 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 20, 2026 6:20:42 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 20, 2026 6:20:42 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 20, 2026 6:20:56 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 20, 2026 6:20:56 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 20, 2026 6:20:56 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 20, 2026 6:20:56 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 20, 2026 6:22:41 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 20, 2026 6:22:47 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 20, 2026 6:22:47 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 20, 2026 6:22:47 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 20, 2026 6:22:47 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 20, 2026 6:22:47 P. M. BaseDatos.ConexionVerUsuarios consulta
+INFORMACIÓN: CONSULTA DE USUARIOS
+mar. 20, 2026 6:22:47 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 20, 2026 6:22:47 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 20, 2026 6:22:47 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 20, 2026 6:22:48 P. M. BaseDatos.ConexionVerConfigHospitales consulta
+INFORMACIÓN: CONSULTA DE HOSPITALES CONFIGURACION
+mar. 20, 2026 6:22:48 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 20, 2026 6:22:48 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 20, 2026 6:22:48 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 20, 2026 6:22:56 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 20, 2026 6:23:12 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 20, 2026 6:23:12 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 20, 2026 6:23:12 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 20, 2026 6:23:12 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 20, 2026 6:23:12 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 20, 2026 6:23:12 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 20, 2026 6:23:12 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 20, 2026 6:23:12 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 20, 2026 6:23:12 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 20, 2026 6:23:21 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 20, 2026 6:23:21 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 20, 2026 6:23:21 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
