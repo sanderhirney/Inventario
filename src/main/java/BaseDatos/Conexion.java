@@ -22,7 +22,7 @@ public class Conexion {
     {
            log.info("CONEXION A BD");
            if (this.esquema == null) {
-        this.esquema = SesionUsuario.getEsquema();
+              this.esquema = SesionUsuario.getEsquema();
                 log.info("Usando esquema de SESIÓN AUTOMÁTICA: " + this.esquema);
             } else {
                 log.info("Usando esquema DEFINIDO MANUALMENTE: " + this.esquema);

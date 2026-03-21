@@ -8,7 +8,7 @@ package Modelos;
  *
  * @author USER
  */
-public record HospitalDTO(int id, String nombre) {
+public record HospitalDTO(int id, String rif, String nombre) {
 
     @Override
     public String toString() {

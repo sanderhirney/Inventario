@@ -34,12 +34,13 @@ public class ConexionVerHospitales {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        try(PreparedStatement consulta=conex.prepareStatement("select id, nombre from hospitales")){
+        try(PreparedStatement consulta=conex.prepareStatement("select id, rif, nombre from hospitales")){
          try(ResultSet ejecutar=consulta.executeQuery()){
                  while( ejecutar.next() )
                 {
                     HospitalDTO hospital = new HospitalDTO(
                             ejecutar.getInt(("id")),
+                            ejecutar.getString("rif"),
                             ejecutar.getString("nombre")
                     );
                     hospitales.add(hospital);

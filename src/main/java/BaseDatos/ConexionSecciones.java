@@ -13,6 +13,7 @@ public class ConexionSecciones {
     Conexion conectar= new Conexion();
     Logger log=LoggerInfo.getLogger();
     int codigo_seccion;
+    int codigo_hospital;
     String nombre_seccion;
     public void consulta() throws SQLException
     { log.info("CONEXION LEER SECCIONES");
@@ -20,11 +21,12 @@ public class ConexionSecciones {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        try(PreparedStatement consulta= conex.prepareStatement("select hospital_id, descripcion from secciones where seleccionada=true")){
+        try(PreparedStatement consulta= conex.prepareStatement("select id, hospital_id, descripcion from secciones where seleccionada=true")){
           try(ResultSet ejecutar=consulta.executeQuery()){
                 if( ejecutar.next() )
                 {
-                     codigo_seccion=ejecutar.getInt("hospital_id");
+                     codigo_seccion=ejecutar.getInt("id");
+                     codigo_hospital=ejecutar.getInt("hospital_id");
                      nombre_seccion=ejecutar.getString("descripcion");
                                        
                   }//if
@@ -47,6 +49,10 @@ public class ConexionSecciones {
     public int codigo_seccion()
     {
         return codigo_seccion;
+    }
+
+    public int getCodigo_hospital() {
+        return codigo_hospital;
     }
     
     public String nombre_seccion()

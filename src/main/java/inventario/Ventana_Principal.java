@@ -106,7 +106,7 @@ public class Ventana_Principal extends javax.swing.JFrame {
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Hospitales");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Crear");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Consultar");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Articulos");
@@ -282,7 +282,7 @@ public class Ventana_Principal extends javax.swing.JFrame {
             if (hijo.equals("Tipos")) lanzarVentana(new ConfigurarTiposAlmacenes(this, true));
                }
         case "Hospitales" -> {
-            if (hijo.equals("Crear")) lanzarVentana(new Crear_Hospital(this, true));
+            if (hijo.equals("Consultar")) lanzarVentana(new Consultar_Hospital(this, true));
 
         
         }
