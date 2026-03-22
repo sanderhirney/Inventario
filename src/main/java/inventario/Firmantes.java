@@ -25,7 +25,7 @@ int codigo_seccion;
 TableRowSorter filtro;
 AlmacenDTO almacenPrincipal;
 Logger log=LoggerInfo.getLogger();
-List<HospitalDTO> hospitales=new ArrayList<>();
+HospitalDTO hospital;
 List<FirmantesDTO> listaFirmantes=new ArrayList<>();
 List<CargosDTO> listaCargos=new ArrayList<>();
 int operacion=0;//1 para nuevo y 2 para actualizar
@@ -38,10 +38,8 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                panelBotones2.setVisible(false);
                panelFormulario.setVisible(false);
                 GestionDeHospitales.getInstance().llamarDatos();
-                hospitales=GestionDeHospitales.getInstance().hospitales();
-                for(HospitalDTO lista: hospitales){
-                    comboHospitales.addItem(lista);
-                }
+                hospital=GestionDeHospitales.getInstance().hospitales();
+                etiqNombreHospital.setText(hospital.nombre());
                 GestionDeCargos.getInstance().llamarDatos();
                 listaCargos=GestionDeCargos.getInstance().cargos();
                 for(CargosDTO cargo: listaCargos){
@@ -115,7 +113,6 @@ int operacion=0;//1 para nuevo y 2 para actualizar
         botonGuardarCambios = new javax.swing.JButton();
         Boton_cancelar1 = new javax.swing.JButton();
         panelFormulario = new javax.swing.JPanel();
-        comboHospitales = new javax.swing.JComboBox<>();
         etiqDescripcion = new javax.swing.JLabel();
         campoNombre = new javax.swing.JTextField();
         etiqHospital = new javax.swing.JLabel();
@@ -130,6 +127,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
         campoCedula = new javax.swing.JTextField();
         etiqCargo = new javax.swing.JLabel();
         comboCargos = new javax.swing.JComboBox<>();
+        etiqNombreHospital = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -206,8 +204,6 @@ int operacion=0;//1 para nuevo y 2 para actualizar
 
         panelFormulario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelFormulario.add(comboHospitales, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 12, 780, -1));
-
         etiqDescripcion.setText("Nombre");
         panelFormulario.add(etiqDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
         panelFormulario.add(campoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 780, -1));
@@ -246,6 +242,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
         panelFormulario.add(etiqCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
 
         panelFormulario.add(comboCargos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 780, -1));
+        panelFormulario.add(etiqNombreHospital, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 780, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -333,18 +330,12 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                  break;
                  }
              }
-             for(int i=0; i< comboHospitales.getItemCount(); i++){
-                 HospitalDTO item=(HospitalDTO)comboHospitales.getItemAt(i);
-                 if(hospitalActual==item.id()){
-                 comboHospitales.setSelectedIndex(i);
-                 break;
-                 }
-             }
+             
              
              panelFormulario.setVisible(true);
              panelBotones2.setVisible(true);
              panelBotones.setVisible(false);
-             comboHospitales.setVisible(false);
+             etiqNombreHospital.setVisible(false);
              etiqHospital.setVisible(false);
              campoNombre.setText(firmaSeleccionada.nombre());
              }else{
@@ -386,7 +377,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                           fechaFinSQL=new java.sql.Date(fechaFinFirma.getDate().getTime());
                      }
                             
-                    HospitalDTO hospitalSeleccionado=(HospitalDTO)comboHospitales.getSelectedItem();
+                  
                     CargosDTO cargoSeleccionado=(CargosDTO)comboCargos.getSelectedItem();
                     boolean activo=false;
                     if(radioSi.isSelected()){
@@ -397,7 +388,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                     }
         
                     ConexionCrearConfigurarFirmantes firmas=new ConexionCrearConfigurarFirmantes();
-                    firmas.setIdHospital(hospitalSeleccionado.id());
+                    firmas.setIdHospital(hospital.id());
                     firmas.setIdSeccion(codigo_seccion);
                     firmas.setCedula(campoCedula.getText().trim());
                     firmas.setCodigoCargo(cargoSeleccionado.codigo());
@@ -591,7 +582,6 @@ public int getCodigo()
     private javax.swing.JTextField campoCedula;
     private javax.swing.JTextField campoNombre;
     private javax.swing.JComboBox<CargosDTO> comboCargos;
-    private javax.swing.JComboBox<HospitalDTO> comboHospitales;
     private javax.swing.JLabel etiqActivo;
     private javax.swing.JLabel etiqCargo;
     private javax.swing.JLabel etiqCedula;
@@ -599,6 +589,7 @@ public int getCodigo()
     private javax.swing.JLabel etiqFechaFin;
     private javax.swing.JLabel etiqFechaInicio1;
     private javax.swing.JLabel etiqHospital;
+    private javax.swing.JLabel etiqNombreHospital;
     private javax.swing.JLabel etiquetaAlmacenActivo;
     private javax.swing.JLabel etiquetaExistencia;
     private com.toedter.calendar.JDateChooser fechaFinFirma;

@@ -8989,3 +8989,361 @@ mar. 21, 2026 3:21:35 P. M. BaseDatos.Conexion Conectar
 INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
 mar. 21, 2026 3:21:35 P. M. BaseDatos.Conexion Conectar
 INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:55:19 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 22, 2026 12:55:26 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 22, 2026 12:55:26 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:26 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 22, 2026 12:55:26 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 22, 2026 12:55:26 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 22, 2026 12:55:26 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 22, 2026 12:55:26 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:26 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:55:26 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:55:29 P. M. BaseDatos.ConexionVerCargos consultar
+INFORMACIÓN: CONSULTAR CARGOS
+mar. 22, 2026 12:55:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:55:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:55:29 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 22, 2026 12:55:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:55:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:55:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:55:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:55:29 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 22, 2026 12:55:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:55:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:55:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:55:29 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:55:37 P. M. BaseDatos.ConexionCrearConfigurarCargos crear
+INFORMACIÓN: CREAR CARGO
+mar. 22, 2026 12:55:37 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:37 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:55:37 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:55:38 P. M. BaseDatos.ConexionVerCargos consultar
+INFORMACIÓN: CONSULTAR CARGOS
+mar. 22, 2026 12:55:38 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:38 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:55:38 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:55:44 P. M. BaseDatos.ConexionCrearConfigurarCargos crear
+INFORMACIÓN: CREAR CARGO
+mar. 22, 2026 12:55:44 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:44 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:55:44 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:55:45 P. M. BaseDatos.ConexionVerCargos consultar
+INFORMACIÓN: CONSULTAR CARGOS
+mar. 22, 2026 12:55:45 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:45 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:55:45 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:55:49 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 22, 2026 12:55:49 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:49 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:55:49 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:55:49 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:49 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:55:49 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:55:49 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 22, 2026 12:55:49 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:49 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:55:49 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:55:49 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:49 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:55:49 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:55:54 P. M. BaseDatos.ConexionVerCargos consultar
+INFORMACIÓN: CONSULTAR CARGOS
+mar. 22, 2026 12:55:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:55:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:55:54 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 22, 2026 12:55:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:55:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:55:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:55:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:55:54 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 22, 2026 12:55:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:55:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:55:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:55:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:55:58 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 22, 2026 12:55:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:55:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:55:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:55:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:55:58 P. M. BaseDatos.ConexionVerCargos consultar
+INFORMACIÓN: CONSULTAR CARGOS
+mar. 22, 2026 12:55:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:55:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:55:58 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 22, 2026 12:55:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:55:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:55:58 P. M. BaseDatos.ConexionVerFirmantes consultar
+INFORMACIÓN: CONSULTAR FIRMANTES
+mar. 22, 2026 12:55:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:55:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:55:58 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 22, 2026 12:55:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:55:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:55:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:55:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:55:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:56:05 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:56:05 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hospital_central
+mar. 22, 2026 12:56:05 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hospital_central
+mar. 22, 2026 12:57:45 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 22, 2026 12:57:52 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 22, 2026 12:57:52 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:57:52 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 22, 2026 12:57:52 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 22, 2026 12:57:52 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 22, 2026 12:57:52 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 22, 2026 12:57:52 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:57:52 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 22, 2026 12:57:52 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 22, 2026 12:57:58 P. M. BaseDatos.ConexionVerCargos consultar
+INFORMACIÓN: CONSULTAR CARGOS
+mar. 22, 2026 12:57:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:57:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 22, 2026 12:57:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 22, 2026 12:57:58 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 22, 2026 12:57:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:57:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 22, 2026 12:57:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 22, 2026 12:57:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:57:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 22, 2026 12:57:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 22, 2026 12:57:58 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 22, 2026 12:57:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:57:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 22, 2026 12:57:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 22, 2026 12:57:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:57:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 22, 2026 12:57:58 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 22, 2026 12:58:05 P. M. BaseDatos.ConexionCrearConfigurarCargos crear
+INFORMACIÓN: CREAR CARGO
+mar. 22, 2026 12:58:05 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:58:05 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 22, 2026 12:58:05 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 22, 2026 12:58:06 P. M. BaseDatos.ConexionVerCargos consultar
+INFORMACIÓN: CONSULTAR CARGOS
+mar. 22, 2026 12:58:06 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:58:06 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 22, 2026 12:58:06 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 22, 2026 12:58:10 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 22, 2026 12:58:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:58:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 22, 2026 12:58:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 22, 2026 12:58:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:58:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 22, 2026 12:58:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 22, 2026 12:58:10 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 22, 2026 12:58:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:58:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 22, 2026 12:58:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 22, 2026 12:58:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:58:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 22, 2026 12:58:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 22, 2026 12:58:17 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:58:17 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 22, 2026 12:58:17 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 22, 2026 12:58:20 P. M. BaseDatos.ConexionVerCargos consultar
+INFORMACIÓN: CONSULTAR CARGOS
+mar. 22, 2026 12:58:20 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:58:20 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 22, 2026 12:58:20 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 22, 2026 12:58:20 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 22, 2026 12:58:20 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:58:20 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 22, 2026 12:58:20 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 22, 2026 12:58:20 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:58:20 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 22, 2026 12:58:20 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 22, 2026 12:58:21 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 22, 2026 12:58:21 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:58:21 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 22, 2026 12:58:21 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 22, 2026 12:58:21 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:58:21 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 22, 2026 12:58:21 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 22, 2026 12:58:24 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 22, 2026 12:58:24 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 22, 2026 12:58:24 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm

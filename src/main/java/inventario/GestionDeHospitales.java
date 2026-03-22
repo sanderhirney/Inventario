@@ -4,13 +4,9 @@
  */
 package inventario;
 
-import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerHospitales;
-import Modelos.AlmacenDTO;
 import Modelos.HospitalDTO;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -20,7 +16,7 @@ import java.util.logging.Logger;
 public class GestionDeHospitales {
     Logger log=LoggerInfo.getLogger();
     private static GestionDeHospitales instancia;
-    private List<HospitalDTO> listaHospitales=new ArrayList<>();
+    HospitalDTO hospitalEsquema;
   
     //Singleton
     private GestionDeHospitales(){}//constructorprivado
@@ -36,7 +32,7 @@ public class GestionDeHospitales {
     public void llamarDatos(){
         try {
            ConexionVerHospitales hospital=new ConexionVerHospitales();
-             listaHospitales=hospital.consultar();
+             hospitalEsquema=hospital.consultar();
         } catch (SQLException ex) {
             log.severe("ERROR AL CONSULTAR LOS HOSPITALES");
             log.severe(ex.toString());
@@ -46,8 +42,8 @@ public class GestionDeHospitales {
     
     
     
-    public List<HospitalDTO> hospitales(){
+    public HospitalDTO hospitales(){
     
-            return listaHospitales; 
+            return hospitalEsquema; 
     }
 }

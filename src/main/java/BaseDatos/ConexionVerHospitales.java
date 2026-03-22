@@ -15,7 +15,7 @@ public class ConexionVerHospitales {
     Connection conex;
     Conexion conectar= new Conexion();
     Logger log=LoggerInfo.getLogger();
-    List<HospitalDTO> hospitales=new ArrayList<>();
+    HospitalDTO hospital;
     private void consultarSeccion(){
         try {
             ConexionSecciones seccion= new ConexionSecciones();
@@ -26,7 +26,7 @@ public class ConexionVerHospitales {
             log.severe(ex.toString());
         }
     }
-    private List<HospitalDTO> consulta() throws SQLException
+    private HospitalDTO consulta() throws SQLException
     {
         consultarSeccion();
         /*************/
@@ -38,12 +38,13 @@ public class ConexionVerHospitales {
          try(ResultSet ejecutar=consulta.executeQuery()){
                  while( ejecutar.next() )
                 {
-                    HospitalDTO hospital = new HospitalDTO(
+                            hospital = new HospitalDTO(
                             ejecutar.getInt(("id")),
                             ejecutar.getString("rif"),
                             ejecutar.getString("nombre")
+                            
                     );
-                    hospitales.add(hospital);
+                    
                 }//if
            }
             
@@ -59,10 +60,10 @@ public class ConexionVerHospitales {
     }finally{
           conectar.Cerrar();
           }
-        return hospitales;
+        return hospital;
     }
     
-    public List<HospitalDTO> consultar() throws SQLException{
+    public HospitalDTO consultar() throws SQLException{
      return consulta();
     }
     

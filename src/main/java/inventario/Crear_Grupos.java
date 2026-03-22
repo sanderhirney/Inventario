@@ -6,7 +6,6 @@
 package inventario;
 
 import BaseDatos.ConexionCrearGrupos;
-import BaseDatos.ConexionVerHospitales;
 import Modelos.AlmacenDTO;
 import Modelos.HospitalDTO;
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class Crear_Grupos extends javax.swing.JDialog {
      * Creates new form Crear_Servicio
      */
      
-      List<HospitalDTO> hospitales=new ArrayList<>();
+      HospitalDTO hospital;
       AlmacenDTO almacenPrincipal;
       private static final Logger log=LoggerInfo.getLogger();
     public Crear_Grupos(java.awt.Frame parent, boolean modal) {
@@ -39,10 +38,8 @@ public class Crear_Grupos extends javax.swing.JDialog {
              etiquetaAlmacenActivo.setText("NO OBTENIDO");
         }
         GestionDeHospitales.getInstance().llamarDatos();
-        hospitales=GestionDeHospitales.getInstance().hospitales();
-        for(HospitalDTO lista: hospitales){
-            comboHospitales.addItem(lista);
-        }
+        hospital=GestionDeHospitales.getInstance().hospitales();
+        etiqNombreHospital.setText(hospital.nombre());
         }catch(Exception e){
         log.severe("ERROR AL CARGAR ELEMENTOS DE LA VENTANA DE CREACION DE GRUPOS");
         log.severe(e.toString());
@@ -72,7 +69,7 @@ public class Crear_Grupos extends javax.swing.JDialog {
         Combo_grupo = new javax.swing.JComboBox();
         Etiq_codigoGrupo = new javax.swing.JLabel();
         etiqHospital = new javax.swing.JLabel();
-        comboHospitales = new javax.swing.JComboBox<>();
+        etiqNombreHospital = new javax.swing.JLabel();
         etiquetaAlmacenActivo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -129,16 +126,16 @@ public class Crear_Grupos extends javax.swing.JDialog {
                     .addComponent(Campo_Nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                     .addComponent(Combo_grupo, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Campo_Subgrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboHospitales, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(etiqNombreHospital, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         Panel2Layout.setVerticalGroup(
             Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel2Layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
-                .addGroup(Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(etiqHospital)
-                    .addComponent(comboHospitales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addGroup(Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(etiqHospital, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(etiqNombreHospital, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Combo_grupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -220,8 +217,7 @@ public class Crear_Grupos extends javax.swing.JDialog {
                         crear.setCodigoGrupo((String) Combo_grupo.getSelectedItem());
                         crear.setCodigoSubgrupo(Campo_Subgrupo.getText().trim());
                         crear.setDescripcion(Campo_Nombre.getText().trim());
-                        HospitalDTO seleccionado=(HospitalDTO)comboHospitales.getSelectedItem();
-                        crear.setHospital_id(seleccionado.id());
+                        crear.setHospital_id(hospital.id());
                         crear.ejecutar();
                         if(crear.respuesta()==1)
                         {
@@ -310,8 +306,8 @@ public class Crear_Grupos extends javax.swing.JDialog {
     private javax.swing.JLabel Etiq_encabezado;
     private javax.swing.JPanel Panel1;
     private javax.swing.JPanel Panel2;
-    private javax.swing.JComboBox<HospitalDTO> comboHospitales;
     private javax.swing.JLabel etiqHospital;
+    private javax.swing.JLabel etiqNombreHospital;
     private javax.swing.JLabel etiquetaAlmacenActivo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
 public class Crear_Conceptos extends javax.swing.JDialog {
 
     AlmacenDTO almacenPrincipal;
-    List<HospitalDTO> hospitales=new ArrayList<>();
+    HospitalDTO hospital;
     private static final Logger log=LoggerInfo.getLogger();
 
     public Crear_Conceptos(java.awt.Frame parent, boolean modal) {
@@ -36,10 +36,8 @@ public class Crear_Conceptos extends javax.swing.JDialog {
              etiquetaAlmacenActivo.setText("NO OBTENIDO");
         }
         GestionDeHospitales.getInstance().llamarDatos();
-        hospitales=GestionDeHospitales.getInstance().hospitales();
-        for(HospitalDTO lista: hospitales){
-            comboHospitales.addItem(lista);
-        }
+        hospital=GestionDeHospitales.getInstance().hospitales();
+        etiqNombreHospital.setText(hospital.nombre());
         }catch(Exception e){
         log.severe("ERROR AL CARGAR ELEMENTOS DE LA VENTANA DE CREACION DE GRUPOS");
         log.severe(e.toString());
@@ -69,7 +67,7 @@ public class Crear_Conceptos extends javax.swing.JDialog {
         Boton_aceptar = new javax.swing.JButton();
         etiquetaAlmacenActivo = new javax.swing.JLabel();
         etiq_hospital = new javax.swing.JLabel();
-        comboHospitales = new javax.swing.JComboBox<>();
+        etiqNombreHospital = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -134,7 +132,7 @@ public class Crear_Conceptos extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Combo_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboHospitales, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(etiqNombreHospital, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(94, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -166,7 +164,7 @@ public class Crear_Conceptos extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(etiq_hospital)
-                    .addComponent(comboHospitales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(etiqNombreHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Etiq_codigo)
@@ -179,7 +177,7 @@ public class Crear_Conceptos extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Etiq_tipo)
                     .addComponent(Combo_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Boton_Salir)
                     .addComponent(Boton_aceptar))
@@ -223,12 +221,11 @@ public class Crear_Conceptos extends javax.swing.JDialog {
         {
             int seleccion;
             seleccion= Integer.parseInt( Combo_Codigo.getSelectedItem().toString() );
-            HospitalDTO hospitalSeleccionado=(HospitalDTO)comboHospitales.getSelectedItem();
             ConexionCrearConceptos crear= new ConexionCrearConceptos();
             crear.setCodigo(seleccion);   
             crear.setDescripcion(Campo_nombre.getText().trim().toUpperCase());
             crear.setTipo(tipo);
-            crear.setHospital_id(hospitalSeleccionado.id());
+            crear.setHospital_id(hospital.id());
             crear.ejecutar();
                     if(crear.respuesta()==1)
                     {
@@ -301,7 +298,7 @@ public class Crear_Conceptos extends javax.swing.JDialog {
     private javax.swing.JLabel Etiq_encabezado;
     private javax.swing.JLabel Etiq_nombre;
     private javax.swing.JLabel Etiq_tipo;
-    private javax.swing.JComboBox<HospitalDTO> comboHospitales;
+    private javax.swing.JLabel etiqNombreHospital;
     private javax.swing.JLabel etiq_hospital;
     private javax.swing.JLabel etiquetaAlmacenActivo;
     private javax.swing.JLabel jLabel1;

@@ -8,8 +8,6 @@ package inventario;
 import BaseDatos.ConexionCrearUnidades;
 import Modelos.AlmacenDTO;
 import Modelos.HospitalDTO;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
@@ -20,7 +18,7 @@ import javax.swing.JOptionPane;
 public class Crear_Unidades extends javax.swing.JDialog {
 
     AlmacenDTO almacenPrincipal;
-    List<HospitalDTO> hospitales=new ArrayList<>();
+    HospitalDTO hospital;
     private static final Logger log=LoggerInfo.getLogger();
     public Crear_Unidades(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -34,10 +32,9 @@ public class Crear_Unidades extends javax.swing.JDialog {
              etiquetaAlmacenActivo.setText("NO OBTENIDO");
         }
         GestionDeHospitales.getInstance().llamarDatos();
-        hospitales=GestionDeHospitales.getInstance().hospitales();
-        for(HospitalDTO lista: hospitales){
-            comboHospitales.addItem(lista);
-        }
+        hospital=GestionDeHospitales.getInstance().hospitales();
+        etiqNombreHospital.setText(hospital.nombre());
+        
     }
 
     /**
@@ -61,7 +58,7 @@ public class Crear_Unidades extends javax.swing.JDialog {
         Etiq_abreviatura = new javax.swing.JLabel();
         Campo_abreviacion = new javax.swing.JTextField();
         etiqHospital = new javax.swing.JLabel();
-        comboHospitales = new javax.swing.JComboBox<>();
+        etiqNombreHospital = new javax.swing.JLabel();
         etiquetaAlmacenActivo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -107,16 +104,16 @@ public class Crear_Unidades extends javax.swing.JDialog {
                     .addGroup(Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(Campo_abreviacion, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(Campo_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(comboHospitales, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(etiqNombreHospital, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         Panel2Layout.setVerticalGroup(
             Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Panel2Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(etiqHospital)
-                    .addComponent(comboHospitales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(etiqHospital, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(etiqNombreHospital, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Campo_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -193,11 +190,10 @@ public class Crear_Unidades extends javax.swing.JDialog {
             
         {
             try{
-            HospitalDTO hospitalSeleccionado=(HospitalDTO)comboHospitales.getSelectedItem();
             ConexionCrearUnidades conexion= new ConexionCrearUnidades();
             conexion.setNombre(Campo_nombre.getText().toUpperCase());
             conexion.setAbreviatura(Campo_abreviacion.getText());
-            conexion.setIdHospital(hospitalSeleccionado.id());
+            conexion.setIdHospital(hospital.id());
             conexion.ejecutar();
             if(conexion.respuesta()==1)
             {
@@ -267,8 +263,8 @@ public class Crear_Unidades extends javax.swing.JDialog {
     private javax.swing.JLabel Etiq_encabezado;
     private javax.swing.JPanel Panel2;
     private javax.swing.JButton boton_aceptar;
-    private javax.swing.JComboBox<HospitalDTO> comboHospitales;
     private javax.swing.JLabel etiqHospital;
+    private javax.swing.JLabel etiqNombreHospital;
     private javax.swing.JLabel etiquetaAlmacenActivo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -1,13 +1,10 @@
 
 package inventario;
 
-import BaseDatos.ConexionCrearConfigurarCargos;
 import BaseDatos.ConexionCrearConfigurarServicios;
 import BaseDatos.ConexionSecciones;
 import Modelos.AlmacenDTO;
-import Modelos.CargosDTO;
 import Modelos.HospitalDTO;
-import Modelos.SeccionesDTO;
 import Modelos.ServicioDTO;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +23,7 @@ int codigo_seccion;
 TableRowSorter filtro;
 AlmacenDTO almacenPrincipal;
 Logger log=LoggerInfo.getLogger();
-List<HospitalDTO> hospitales=new ArrayList<>();
+HospitalDTO hospital;
 List<ServicioDTO> listaServicios=new ArrayList<>();
 int operacion=0;//1 para nuevo y 2 para actualizar
     public Servicios(java.awt.Frame parent, boolean modal) {
@@ -37,10 +34,8 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                panelBotones2.setVisible(false);
                panelFormulario.setVisible(false);
                 GestionDeHospitales.getInstance().llamarDatos();
-                hospitales=GestionDeHospitales.getInstance().hospitales();
-                for(HospitalDTO lista: hospitales){
-                    comboHospitales.addItem(lista);
-                }
+                hospital=GestionDeHospitales.getInstance().hospitales();
+                etiqNombreHospital.setText(hospital.nombre());
                 GestionDeAlmacenes.getInstance().llamarDatos();
                 almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
                 if(almacenPrincipal != null){
@@ -107,9 +102,9 @@ int operacion=0;//1 para nuevo y 2 para actualizar
         Boton_cancelar1 = new javax.swing.JButton();
         panelFormulario = new javax.swing.JPanel();
         etiqHospital = new javax.swing.JLabel();
-        comboHospitales = new javax.swing.JComboBox<>();
         etiqDescripcion = new javax.swing.JLabel();
         campoDescripcion = new javax.swing.JTextField();
+        etiqNombreHospital = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -189,11 +184,10 @@ int operacion=0;//1 para nuevo y 2 para actualizar
         etiqHospital.setText("Hospital: ");
         panelFormulario.add(etiqHospital, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 15, -1, -1));
 
-        panelFormulario.add(comboHospitales, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 12, 784, -1));
-
         etiqDescripcion.setText("Descripcion:");
         panelFormulario.add(etiqDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 55, -1, -1));
         panelFormulario.add(campoDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 52, 784, -1));
+        panelFormulario.add(etiqNombreHospital, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 780, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -265,7 +259,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
              panelFormulario.setVisible(true);
              panelBotones2.setVisible(true);
              panelBotones.setVisible(false);
-             comboHospitales.setVisible(false);
+             etiqNombreHospital.setVisible(false);
              etiqHospital.setVisible(false);
              campoDescripcion.setText(servicioSeleccionado.nombre_servicio());
              }else{
@@ -280,7 +274,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
 
     private void BotonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonNuevoActionPerformed
         // TODO add your handling code here:
-              comboHospitales.setVisible(true);
+              etiqNombreHospital.setVisible(true);
               panelFormulario.setVisible(true);
               panelBotones2.setVisible(true);
               panelBotones.setVisible(false);
@@ -299,9 +293,8 @@ int operacion=0;//1 para nuevo y 2 para actualizar
              } else{
                  if(operacion==1)//nuevo
                  {
-                    HospitalDTO hospitalSeleccionado=(HospitalDTO)comboHospitales.getSelectedItem();
                     ConexionCrearConfigurarServicios servicios=new ConexionCrearConfigurarServicios();
-                    servicios.setIdHospital(hospitalSeleccionado.id());
+                    servicios.setIdHospital(hospital.id());
                     servicios.setIdSeccion(codigo_seccion);
                     servicios.setNombreServicio(descripcion);
                     servicios.crearServicio();
@@ -464,9 +457,9 @@ public int getCodigo()
     private javax.swing.JTable TablaServicios;
     private javax.swing.JButton botonGuardarCambios;
     private javax.swing.JTextField campoDescripcion;
-    private javax.swing.JComboBox<HospitalDTO> comboHospitales;
     private javax.swing.JLabel etiqDescripcion;
     private javax.swing.JLabel etiqHospital;
+    private javax.swing.JLabel etiqNombreHospital;
     private javax.swing.JLabel etiquetaAlmacenActivo;
     private javax.swing.JLabel etiquetaExistencia;
     private javax.swing.JLabel jLabel1;

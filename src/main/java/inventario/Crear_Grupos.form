@@ -119,7 +119,7 @@
                       <Component id="Campo_Nombre" pref="296" max="32767" attributes="0"/>
                       <Component id="Combo_grupo" min="-2" pref="116" max="-2" attributes="0"/>
                       <Component id="Campo_Subgrupo" min="-2" pref="122" max="-2" attributes="0"/>
-                      <Component id="comboHospitales" alignment="0" max="32767" attributes="0"/>
+                      <Component id="etiqNombreHospital" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -128,10 +128,10 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="19" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="etiqHospital" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="comboHospitales" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="22" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="etiqHospital" max="32767" attributes="0"/>
+                      <Component id="etiqNombreHospital" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -194,15 +194,7 @@
             <Property name="text" type="java.lang.String" value="Hospital:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="comboHospitales">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;HospitalDTO&gt;"/>
-          </AuxValues>
+        <Component class="javax.swing.JLabel" name="etiqNombreHospital">
         </Component>
       </SubComponents>
     </Container>

@@ -2,7 +2,6 @@
 package inventario;
 
 import BaseDatos.ConexionCrearSecciones;
-import BaseDatos.ConexionVerHospitales;
 import Modelos.AlmacenDTO;
 import Modelos.HospitalDTO;
 import java.sql.SQLException;
@@ -13,7 +12,7 @@ import javax.swing.JOptionPane;
 
 
 public class Crear_Secciones extends javax.swing.JDialog {
-List<HospitalDTO> hospitales=new ArrayList<>();
+HospitalDTO hospital;
 AlmacenDTO almacenPrincipal;
  private static final Logger log=LoggerInfo.getLogger();
     public Crear_Secciones(java.awt.Frame parent, boolean modal) throws SQLException {
@@ -27,11 +26,8 @@ AlmacenDTO almacenPrincipal;
              etiquetaAlmacenActivo.setText("NO OBTENIDO");
         }
         GestionDeHospitales.getInstance().llamarDatos();
-        hospitales=GestionDeHospitales.getInstance().hospitales();
-        for(HospitalDTO lista: hospitales){
-            comboHospitales.addItem(lista);
-        }
-        
+        hospital=GestionDeHospitales.getInstance().hospitales();
+        etiqNombreHospital.setText(hospital.nombre());
       
     }
 
@@ -58,7 +54,7 @@ AlmacenDTO almacenPrincipal;
         etiqSimbolo = new javax.swing.JLabel();
         campoSimbolo = new javax.swing.JTextField();
         etiqHospital = new javax.swing.JLabel();
-        comboHospitales = new javax.swing.JComboBox<>();
+        etiqNombreHospital = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -140,31 +136,30 @@ AlmacenDTO almacenPrincipal;
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(Panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(etiquetaAlmacenActivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(etiqHospital)
-                            .addGap(18, 18, 18)
-                            .addComponent(comboHospitales, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(etiqSimbolo)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(campoSimbolo))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(etiquetaDecimales)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(etiquetaCostos, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(campoDecimalCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGap(18, 18, 18)
-                                    .addComponent(etiquetaCostos1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(campoDecimalCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(etiqHospital)
+                                .addGap(18, 18, 18)
+                                .addComponent(etiqNombreHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(etiqSimbolo)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(campoSimbolo))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(etiquetaDecimales)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(etiquetaCostos, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(campoDecimalCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addComponent(etiquetaCostos1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(campoDecimalCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -174,15 +169,15 @@ AlmacenDTO almacenPrincipal;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Etiq_encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(etiquetaAlmacenActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Separador1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(etiqHospital)
-                    .addComponent(comboHospitales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
+                    .addComponent(etiqNombreHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,7 +224,6 @@ AlmacenDTO almacenPrincipal;
             int decimalCosto;
             int decimalCantidad;
             String simbolo;
-            HospitalDTO hospitalSeleccionado=(HospitalDTO)comboHospitales.getSelectedItem();
             campo=Campo_nombre.getText().toUpperCase();
             decimalCosto=Integer.parseInt(campoDecimalCosto.getText().trim());
             decimalCantidad=Integer.parseInt(campoDecimalCantidad.getText().trim());
@@ -238,7 +232,7 @@ AlmacenDTO almacenPrincipal;
             crear.setDecimalCosto(decimalCosto);
             crear.setDecimalCantidad(decimalCantidad);
             crear.setSimbolo(simbolo);
-            crear.setHospital_id(hospitalSeleccionado.id());
+            crear.setHospital_id(hospital.id());
             crear.crearSeccion();
             
             
@@ -355,8 +349,8 @@ AlmacenDTO almacenPrincipal;
     private javax.swing.JTextField campoDecimalCantidad;
     private javax.swing.JTextField campoDecimalCosto;
     private javax.swing.JTextField campoSimbolo;
-    private javax.swing.JComboBox<HospitalDTO> comboHospitales;
     private javax.swing.JLabel etiqHospital;
+    private javax.swing.JLabel etiqNombreHospital;
     private javax.swing.JLabel etiqSimbolo;
     private javax.swing.JLabel etiquetaAlmacenActivo;
     private javax.swing.JLabel etiquetaCostos;

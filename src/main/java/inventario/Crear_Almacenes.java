@@ -13,8 +13,6 @@ import Modelos.HospitalDTO;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
@@ -29,7 +27,7 @@ Date fecha_creacion=Date.valueOf(fecha);
 int seccion_actual;
 AlmacenDTO almacenPrincipal;
     private static final Logger log=LoggerInfo.getLogger();
-    List<HospitalDTO> hospitales=new ArrayList<>();
+    HospitalDTO hospital;
     public Crear_Almacenes(java.awt.Frame parent, boolean modal) throws SQLException {
         super(parent, modal);
         initComponents();
@@ -44,11 +42,9 @@ AlmacenDTO almacenPrincipal;
         }else{
              etiquetaAlmacenActivo.setText("NO OBTENIDO");
         }
-        ConexionVerHospitales hospital=new ConexionVerHospitales();
-        hospitales=hospital.consultar();
-        for(HospitalDTO lista: hospitales){
-            comboHospitales.addItem(lista);
-        }
+        GestionDeHospitales.getInstance().llamarDatos();
+        hospital=GestionDeHospitales.getInstance().hospitales();
+        etiqNombreHospital.setText(hospital.nombre());
         
     }
 
@@ -81,7 +77,7 @@ AlmacenDTO almacenPrincipal;
         campo_alias = new javax.swing.JTextField();
         etiquetaAlmacenActivo = new javax.swing.JLabel();
         etiquetaHospital = new javax.swing.JLabel();
-        comboHospitales = new javax.swing.JComboBox<>();
+        etiqNombreHospital = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -180,7 +176,7 @@ AlmacenDTO almacenPrincipal;
                                 .addGap(18, 18, 18)
                                 .addComponent(radio_recibe)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(comboHospitales, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(etiqNombreHospital, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -216,12 +212,12 @@ AlmacenDTO almacenPrincipal;
                     .addComponent(etiqueta_alias)
                     .addComponent(campo_alias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(etiquetaHospital)
-                    .addComponent(comboHospitales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                    .addComponent(etiqNombreHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(panel_boton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 33, Short.MAX_VALUE))
+                .addGap(0, 34, Short.MAX_VALUE))
         );
 
         pack();
@@ -242,7 +238,6 @@ AlmacenDTO almacenPrincipal;
         String temp_codigo=campo_codigo.getText().trim();
         String temp_denominacion=campo_denominacion.getText().trim();
         String temp_ubicacion=campo_ubicacion.getText().trim();
-        HospitalDTO hospitalSeleccionado=(HospitalDTO)comboHospitales.getSelectedItem();
         
         boolean temp_recibe=false;
         boolean temp_despacho=false;
@@ -268,7 +263,7 @@ AlmacenDTO almacenPrincipal;
                 crear.setAliasAlmacen(temp_alias);
                 crear.setTFechaCreacionAlmacen(fecha_creacion);
                 crear.setTipoAlmacenRecibe(temp_recibe);
-                crear.setIdHospital(hospitalSeleccionado.id()
+                crear.setIdHospital(hospital.id()
                 
                 );
                 crear.setTipoAlmacenDespacho(temp_despacho);
@@ -389,7 +384,7 @@ AlmacenDTO almacenPrincipal;
     private javax.swing.JTextField campo_codigo;
     private javax.swing.JTextField campo_denominacion;
     private javax.swing.JTextField campo_ubicacion;
-    private javax.swing.JComboBox<HospitalDTO> comboHospitales;
+    private javax.swing.JLabel etiqNombreHospital;
     private javax.swing.JLabel etiquetaAlmacenActivo;
     private javax.swing.JLabel etiquetaHospital;
     private javax.swing.JLabel etiqueta_alias;

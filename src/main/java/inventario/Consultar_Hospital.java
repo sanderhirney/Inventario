@@ -27,7 +27,7 @@ LocalDate fecha=LocalDate.now();
 Date fecha_creacion=Date.valueOf(fecha);
 //int seccion_actual;
     Logger log=LoggerInfo.getLogger();
-    List<HospitalDTO> listaHospitales=new ArrayList<>();
+    HospitalDTO hospital;
 AlmacenDTO almacenPrincipal=null;
 DefaultTableModel modelo;
     public Consultar_Hospital(java.awt.Frame parent, boolean modal) {
@@ -46,13 +46,12 @@ DefaultTableModel modelo;
         }
         
         GestionDeHospitales.getInstance().llamarDatos();
-        listaHospitales=GestionDeHospitales.getInstance().hospitales();
+        hospital=GestionDeHospitales.getInstance().hospitales();
         modelo=(DefaultTableModel)tablaHospitales.getModel();
         modelo.setRowCount(0);
-        for(HospitalDTO hospitales:listaHospitales){
-          modelo.addRow(new Object[]{hospitales.id(), hospitales.rif(), hospitales.nombre()});
+          modelo.addRow(new Object[]{hospital.id(), hospital.rif(), hospital.nombre()});
 
-        }
+        
         }catch(Exception e){
             log.severe("ERROR AL CREAR HOSPITAL");
             log.severe(e.toString());

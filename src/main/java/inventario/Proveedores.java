@@ -1,13 +1,9 @@
 
 package inventario;
 
-import BaseDatos.ConexionCrearConfigurarFirmantes;
 import BaseDatos.ConexionCrearConfigurarProveedores;
 import BaseDatos.ConexionSecciones;
-import BaseDatos.ConexionVerFirmantes;
 import Modelos.AlmacenDTO;
-import Modelos.CargosDTO;
-import Modelos.FirmantesDTO;
 import Modelos.HospitalDTO;
 import Modelos.ProveedorDTO;
 import java.util.ArrayList;
@@ -27,7 +23,7 @@ int codigo_seccion;
 TableRowSorter filtro;
 AlmacenDTO almacenPrincipal;
 Logger log=LoggerInfo.getLogger();
-List<HospitalDTO> hospitales=new ArrayList<>();
+HospitalDTO hospital;
 List<ProveedorDTO> listaProveedores=new ArrayList<>();
 
 int operacion=0;//1 para nuevo y 2 para actualizar
@@ -40,10 +36,8 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                panelBotones2.setVisible(false);
                panelFormulario.setVisible(false);
                 GestionDeHospitales.getInstance().llamarDatos();
-                hospitales=GestionDeHospitales.getInstance().hospitales();
-                for(HospitalDTO lista: hospitales){
-                    comboHospitales.addItem(lista);
-                }
+                hospital=GestionDeHospitales.getInstance().hospitales();
+                etiqHospital.setText(hospital.nombre());
                 
                  ConexionSecciones secciones=new ConexionSecciones();
                  secciones.consulta();
@@ -112,7 +106,6 @@ int operacion=0;//1 para nuevo y 2 para actualizar
         botonGuardarCambios = new javax.swing.JButton();
         Boton_cancelar1 = new javax.swing.JButton();
         panelFormulario = new javax.swing.JPanel();
-        comboHospitales = new javax.swing.JComboBox<>();
         etiqTelefono = new javax.swing.JLabel();
         campoNombre = new javax.swing.JTextField();
         etiqHospital = new javax.swing.JLabel();
@@ -123,6 +116,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
         etiqDireccion = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         textDireccion = new javax.swing.JTextArea();
+        etiqNombreHospital = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -199,8 +193,6 @@ int operacion=0;//1 para nuevo y 2 para actualizar
 
         panelFormulario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelFormulario.add(comboHospitales, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 12, 780, -1));
-
         etiqTelefono.setText("Telefono: ");
         panelFormulario.add(etiqTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
         panelFormulario.add(campoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 780, -1));
@@ -224,6 +216,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
         jScrollPane2.setViewportView(textDireccion);
 
         panelFormulario.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 780, 50));
+        panelFormulario.add(etiqNombreHospital, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 780, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -298,20 +291,12 @@ int operacion=0;//1 para nuevo y 2 para actualizar
              campoTelefono.setText(proveedorSeleccionado.telefono());
              textDireccion.setText(proveedorSeleccionado.direccion());
             
-             int hospitalActual=proveedorSeleccionado.hospital_id();
              
-             for(int i=0; i< comboHospitales.getItemCount(); i++){
-                 HospitalDTO item=(HospitalDTO)comboHospitales.getItemAt(i);
-                 if(hospitalActual==item.id()){
-                 comboHospitales.setSelectedIndex(i);
-                 break;
-                 }
-             }
              
              panelFormulario.setVisible(true);
              panelBotones2.setVisible(true);
              panelBotones.setVisible(false);
-             comboHospitales.setVisible(false);
+             etiqNombreHospital.setVisible(false);
              etiqHospital.setVisible(false);
              campoNombre.setText(proveedorSeleccionado.nombre());
              }else{
@@ -350,9 +335,8 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                  {
                      
                             
-                    HospitalDTO hospitalSeleccionado=(HospitalDTO)comboHospitales.getSelectedItem();
                     ConexionCrearConfigurarProveedores proveedor=new ConexionCrearConfigurarProveedores();
-                    proveedor.setIdHospital(hospitalSeleccionado.id());
+                    proveedor.setIdHospital(hospital.id());
                     proveedor.setRif(rif);
                     proveedor.setNombreProveedor(nombre);
                     proveedor.setDireccion(direccion);
@@ -545,10 +529,10 @@ public int getCodigo()
     private javax.swing.JTextField campoNombre;
     private javax.swing.JTextField campoRif;
     private javax.swing.JTextField campoTelefono;
-    private javax.swing.JComboBox<HospitalDTO> comboHospitales;
     private javax.swing.JLabel etiqDireccion;
     private javax.swing.JLabel etiqHospital;
     private javax.swing.JLabel etiqNombre;
+    private javax.swing.JLabel etiqNombreHospital;
     private javax.swing.JLabel etiqRif;
     private javax.swing.JLabel etiqTelefono;
     private javax.swing.JLabel etiquetaAlmacenActivo;
