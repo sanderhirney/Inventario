@@ -6,10 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import Modelos.ArticuloDTO;
+import java.util.ArrayList;
+import java.util.List;
 public class ConexionVerArticulos {
     Connection conex;
     Conexion conectar= new Conexion();
-    int seccion;
+    int codigoHospitalConsulta;
+    List<ArticuloDTO> listaArticulos=new ArrayList<>();
     String consultaSQL="""
                 select a.id as id,
                 a.hospital_id as idhospital,
@@ -19,13 +23,14 @@ public class ConexionVerArticulos {
                 a.grupo_cod as codigogrupo,
                 a.subgrupo_cod as codigosubgrupo,
                 b.nombre as nombreunidad
-                from hsdm.articulos a
+                from articulos a
                 inner join
-                hsdm.unidades b
+                unidades b
                 on 
                 b.id = a.unidad_id
+                where a.hospital_id=?
                 """;
-    public void consulta()
+    private List<ArticuloDTO> consulta() throws SQLException
     {
       
           try
@@ -33,12 +38,25 @@ public class ConexionVerArticulos {
         conectar.Conectar();
         conex= conectar.getConexion();
         try(PreparedStatement consulta= conex.prepareStatement(consultaSQL)){
-        try(ResultSet  ejecutar=consulta.executeQuery()){
+           consulta.setInt(1, codigoHospitalConsulta);
+            try(ResultSet  ejecutar=consulta.executeQuery()){
             
              while( ejecutar.next() )
                 {
-                            //tengo que crear primero la forma
-                    //de que cuando entre al sistema elija el hospital
+                           ArticuloDTO articulo= new ArticuloDTO(
+                           ejecutar.getInt("id"),
+                                   ejecutar.getInt("idhospital"),
+                                   ejecutar.getString("codigobarra"),
+                                   ejecutar.getString("nombre"),
+                                   ejecutar.getInt("cogiounidad"),
+                                   ejecutar.getString("codigogrupo"),
+                                   ejecutar.getString("codigosubgrupo"),
+                                   ejecutar.getString("nombrunidad")
+                           
+                           
+                           );
+                           
+                           listaArticulos.add(articulo);
 
 
                 }
@@ -49,17 +67,24 @@ public class ConexionVerArticulos {
         
            
         }//if
-        conectar.Cerrar();
+        
        
     }//consulta
            catch(SQLException ex)
     {
         JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de los Articulos.\n Ventana Ver Articulos \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
-    }
+    }finally{
+          conectar.Cerrar();
+          }
+          
+          return listaArticulos;
     }//consulta
+
+    public void setCodigoHospitalConsulta(int codigoHospitalConsulta) {
+        this.codigoHospitalConsulta = codigoHospitalConsulta;
+    }
     
-    public void setSeccion(int recibido)
-    {
-        seccion=recibido;
+    public List<ArticuloDTO> consultaArticulo() throws SQLException{
+    return consulta();
     }
 }//clase

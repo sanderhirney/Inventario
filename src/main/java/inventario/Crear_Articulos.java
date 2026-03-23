@@ -2,7 +2,7 @@
 package inventario;
 
 import BaseDatos.ConexionComprobarGrupos;
-import BaseDatos.ConexionConsultarUnidades;
+import BaseDatos.ConexionVerUnidades;
 import BaseDatos.ConexionCrearArticulo;
 import BaseDatos.ConexionDeshacerArt;
 import BaseDatos.ConexionSecciones;
@@ -43,7 +43,7 @@ public class Crear_Articulos extends javax.swing.JDialog {
         codigoGrupo=grupo.grupos();
         codigoSubGrupo=grupo.codigos();
         descripcionGrupo=grupo.descripciones();
-        ConexionConsultarUnidades unidades=new ConexionConsultarUnidades();
+        ConexionVerUnidades unidades=new ConexionVerUnidades();
         unidades.validar();
         codigoUnidad=unidades.codigos();
         descripcionUnidad= unidades.nombre();

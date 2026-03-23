@@ -50,8 +50,8 @@ String almacenActivoMostrar;
         codigo_seccion=secciones.codigo_seccion();
         ConexionVerArticulos articulos=new ConexionVerArticulos();
         
-        articulos.setSeccion(codigo_seccion);
-        articulos.consulta();
+       // articulos.setSeccion(codigo_seccion);
+       // articulos.consulta();
        // codigos=articulos.codigo();
        // nombres=articulos.nombre();
         modelo=(DefaultTableModel)Tabla_articulos.getModel();

@@ -172,8 +172,8 @@ public void InformacionArticulos(){
             botonCrearArticulo.setEnabled(false);
         }
       ConexionVerArticulos articulos=new ConexionVerArticulos();
-        articulos.setSeccion(codigo_seccion);
-        articulos.consulta();
+      //  articulos.setSeccion(codigo_seccion);
+       // articulos.consulta();
   //      codigos=articulos.codigo();
        // nombres=articulos.nombre();
         modelo=(DefaultTableModel)Tabla_articulos.getModel();

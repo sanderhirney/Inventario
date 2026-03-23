@@ -2,7 +2,7 @@
 package inventario;
 
 import BaseDatos.ConexionComprobarGrupos;
-import BaseDatos.ConexionConsultarUnidades;
+import BaseDatos.ConexionVerUnidades;
 import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionModificarArticulos;
 import BaseDatos.ConexionVerAlmacenes;
@@ -53,7 +53,7 @@ int codigoUnidadActual;
         codigoGrupo=grupo.grupos();
         codigoSubGrupo=grupo.codigos();
         descripcionGrupo=grupo.descripciones();
-        ConexionConsultarUnidades unidades=new ConexionConsultarUnidades();
+        ConexionVerUnidades unidades=new ConexionVerUnidades();
         unidades.validar();
         codigoUnidad=unidades.codigos();
         descripcionUnidad= unidades.nombre();
@@ -75,8 +75,8 @@ int codigoUnidadActual;
         secciones.consulta();
         codigo_seccion=secciones.codigo_seccion();
         ConexionVerArticulos articulos=new ConexionVerArticulos();
-        articulos.setSeccion(codigo_seccion);
-        articulos.consulta();
+      //  articulos.setSeccion(codigo_seccion);
+     //   articulos.consulta();
         //codigos=articulos.codigo();
         //nombres=articulos.nombre();
         modelo=(DefaultTableModel)Tabla_articulos.getModel();
