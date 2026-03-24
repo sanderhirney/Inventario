@@ -14,10 +14,15 @@ public record ArticuloDTO(
         String codigoBarra,
         String nombre,
         int codigoUnidad,
-        String nombreUnidad,
         String codigoGrupo,
-        String codigoSubGrupo
+        String codigoSubGrupo,
+        String nombreUnidad
         
         ) {
+
+    @Override
+    public String toString() {
+        return "ArticuloDTO{" + "id=" + id + ", hospital_id=" + hospital_id + ", codigoBarra=" + codigoBarra + ", nombre=" + nombre + ", codigoUnidad=" + codigoUnidad + ", codigoGrupo=" + codigoGrupo + ", codigoSubGrupo=" + codigoSubGrupo + ", nombreUnidad=" + nombreUnidad + '}';
+    }
 
 }

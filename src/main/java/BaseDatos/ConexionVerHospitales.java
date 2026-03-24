@@ -16,20 +16,9 @@ public class ConexionVerHospitales {
     Conexion conectar= new Conexion();
     Logger log=LoggerInfo.getLogger();
     HospitalDTO hospital;
-    private void consultarSeccion(){
-        try {
-            ConexionSecciones seccion= new ConexionSecciones();
-            seccion.consulta();
-            seccion.codigo_seccion();
-        } catch (SQLException ex) {
-            log.severe("ERROR EN LA CONEXION A BD DE CREAR HOSPITALES");
-            log.severe(ex.toString());
-        }
-    }
+   
     private HospitalDTO consulta() throws SQLException
     {
-        consultarSeccion();
-        /*************/
           try
     {
         conectar.Conectar();

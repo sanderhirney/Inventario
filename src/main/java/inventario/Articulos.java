@@ -1,9 +1,11 @@
 
 package inventario;
 
+import BaseDatos.ConexionCrearConfigurarArticulos;
 import BaseDatos.ConexionCrearConfigurarFirmantes;
 import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionVerFirmantes;
+import BaseDatos.ConexionVerGruposSubgrupos;
 import BaseDatos.ConexionVerUnidades;
 import Modelos.AlmacenDTO;
 import Modelos.ArticuloDTO;
@@ -53,9 +55,27 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                 codigo_seccion=secciones.codigo_seccion();
                 
                 ConexionVerUnidades unidades=new ConexionVerUnidades();
+                unidades.setIdhospital(hospital.id());
                 listaUnidades=unidades.consulta();
                 for(UnidadDTO unidad: listaUnidades){
                 comboUnidades.addItem(unidad);
+                }
+                GestionDeAlmacenes.getInstance().llamarDatos();
+                almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+                if(almacenPrincipal != null){
+                    etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+                }else{
+                     etiquetaAlmacenActivo.setText("NO OBTENIDO");
+                }
+                ConexionVerGruposSubgrupos calificaciones=new ConexionVerGruposSubgrupos();
+                calificaciones.setIdhospital(hospital.id());
+                listaGrupos=calificaciones.consultarGrupo();
+                listaSubgrupos=calificaciones.consultarSubgrupo();
+                for(GrupoDTO grupo:listaGrupos){
+                comboGrupos.addItem(grupo);
+                }
+                for(SubgrupoDTO subgrupo:listaSubgrupos){
+                comboSubgrupo.addItem(subgrupo);
                 }
                 llenarTabla();
                 
@@ -68,13 +88,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
             log.severe(e.getMessage());
             JOptionPane.showMessageDialog(null, "Error: "+e, "Error Grave", JOptionPane.ERROR_MESSAGE);
         }
-         GestionDeAlmacenes.getInstance().llamarDatos();
-        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
-        if(almacenPrincipal != null){
-            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
-        }else{
-             etiquetaAlmacenActivo.setText("NO OBTENIDO");
-        }
+         
           
         
         
@@ -83,20 +97,22 @@ int operacion=0;//1 para nuevo y 2 para actualizar
       private void llenarTabla(){
           try{
         operacion=0;
-        ConexionVerFirmantes firmantes= new ConexionVerFirmantes();
-        firmantes.setSeccion(codigo_seccion);
+        
+        GestionDeArticulos.getInstance().setIdhospital(hospital.id());
+        GestionDeArticulos.getInstance().llamarDatos();
+        listaArticulos=GestionDeArticulos.getInstance().articulos();
         
         modelo=(DefaultTableModel)TablaArticulos.getModel();
         modelo.setRowCount(0);
         filtro=new TableRowSorter(TablaArticulos.getModel());
     
-       // for(FirmantesDTO firma:listaFirmantes)
+        for(ArticuloDTO articulo:listaArticulos)
         {
-          //  modelo.addRow(new Object[]{firma.cedula(), firma.nombre(), firma.nombreCargo(), firma.fechaInicio(), firma.fechaFin(), firma.activo()});
+            modelo.addRow(new Object[]{articulo.nombre(), articulo.codigoGrupo(), articulo.codigoSubGrupo(), articulo.nombreUnidad()});
         }
            }
       catch(Exception ex){
-       log.severe("ERROR AL LLENAR LA TABLA DE CARGOS");
+       log.severe("ERROR AL LLENAR LA TABLA DE ARTICULOS");
        log.severe(ex.toString());
      }
     }
@@ -124,23 +140,23 @@ int operacion=0;//1 para nuevo y 2 para actualizar
         Boton_cancelar1 = new javax.swing.JButton();
         panelFormulario = new javax.swing.JPanel();
         etiqDescripcion = new javax.swing.JLabel();
-        campoNombre = new javax.swing.JTextField();
+        campoCodigoBarras = new javax.swing.JTextField();
         etiqHospital = new javax.swing.JLabel();
         etiqCedula = new javax.swing.JLabel();
         etiqSubGrupo = new javax.swing.JLabel();
-        campoCedula = new javax.swing.JTextField();
+        campoNombre = new javax.swing.JTextField();
         etiqCargo = new javax.swing.JLabel();
         comboUnidades = new javax.swing.JComboBox<>();
         etiqNombreHospital = new javax.swing.JLabel();
         etiqGrupo = new javax.swing.JLabel();
-        comboGrupo = new javax.swing.JComboBox<>();
+        comboGrupos = new javax.swing.JComboBox<>();
         comboSubgrupo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Etiq_encabezado.setText("<html><body><center>Sistema Administrativo de Inventario </body></html>");
 
-        jLabel1.setText("Cargos");
+        jLabel1.setText("Articulos");
 
         Campo_buscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -167,7 +183,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
         jScrollPane1.setViewportView(TablaArticulos);
 
         etiquetaExistencia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        etiquetaExistencia.setText("Cargos existentes en el Sistema");
+        etiquetaExistencia.setText("Articulos existentes en el Sistema");
 
         BotonNuevo.setText("Nuevo");
         BotonNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -213,7 +229,13 @@ int operacion=0;//1 para nuevo y 2 para actualizar
 
         etiqDescripcion.setText("Codigo Barras:");
         panelFormulario.add(etiqDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
-        panelFormulario.add(campoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 780, -1));
+
+        campoCodigoBarras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoCodigoBarrasActionPerformed(evt);
+            }
+        });
+        panelFormulario.add(campoCodigoBarras, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 780, -1));
 
         etiqHospital.setText("Hospital:");
         panelFormulario.add(etiqHospital, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
@@ -223,18 +245,18 @@ int operacion=0;//1 para nuevo y 2 para actualizar
 
         etiqSubGrupo.setText("Sub Grupo:");
         panelFormulario.add(etiqSubGrupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
-        panelFormulario.add(campoCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 770, -1));
+        panelFormulario.add(campoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 780, -1));
 
         etiqCargo.setText("Unidad:");
         panelFormulario.add(etiqCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
 
         panelFormulario.add(comboUnidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 780, -1));
-        panelFormulario.add(etiqNombreHospital, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 760, 20));
+        panelFormulario.add(etiqNombreHospital, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 760, 20));
 
         etiqGrupo.setText("Grupo:");
         panelFormulario.add(etiqGrupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
 
-        panelFormulario.add(comboGrupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 780, -1));
+        panelFormulario.add(comboGrupos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 780, -1));
 
         panelFormulario.add(comboSubgrupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 780, -1));
 
@@ -248,7 +270,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(etiquetaAlmacenActivo, javax.swing.GroupLayout.DEFAULT_SIZE, 848, Short.MAX_VALUE)
+                                .addComponent(etiquetaAlmacenActivo, javax.swing.GroupLayout.DEFAULT_SIZE, 843, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel1))
                             .addComponent(Etiq_encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -261,7 +283,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                                 .addComponent(etiquetaExistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 827, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 875, Short.MAX_VALUE)
                                 .addComponent(Campo_buscar)))))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(7, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(panelFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -305,9 +327,34 @@ int operacion=0;//1 para nuevo y 2 para actualizar
              if (filaSeleccionada != -1){
                  // (Importante por si el usuario ordenó la tabla haciendo clic en las cabeceras)
              int indiceReal = TablaArticulos.convertRowIndexToModel(filaSeleccionada);
-             
-           
             
+             ArticuloDTO articuloSeleccionado=listaArticulos.get(indiceReal);
+             campoNombre.setText(articuloSeleccionado.nombre());
+             campoCodigoBarras.setText(articuloSeleccionado.codigoBarra());
+             int unidadActual=articuloSeleccionado.codigoUnidad();
+             String grupoActual=articuloSeleccionado.codigoGrupo();
+             String subgrupoActual=articuloSeleccionado.codigoSubGrupo();
+             for(int i=0; i<comboUnidades.getItemCount(); i++){
+             UnidadDTO item=(UnidadDTO)comboUnidades.getItemAt(i);
+             if(unidadActual==item.id()){
+             comboUnidades.setSelectedIndex(i);
+             break;
+             }
+             
+             }//for
+             for(int i=0; i<comboGrupos.getItemCount(); i++){
+             GrupoDTO item=(GrupoDTO)comboGrupos.getItemAt(i);
+                if(grupoActual.equals(item.codigo())){
+                comboGrupos.setSelectedIndex(i);
+                }
+             }
+             for(int i=0; i<comboSubgrupo.getItemCount(); i++){
+             SubgrupoDTO item=(SubgrupoDTO)comboSubgrupo.getItemAt(i);
+                if(subgrupoActual.equals(item.codigoSubgrupo())){
+                comboSubgrupo.setSelectedIndex(i);
+                }
+             }
+             
              
              
              panelFormulario.setVisible(true);
@@ -315,7 +362,6 @@ int operacion=0;//1 para nuevo y 2 para actualizar
              panelBotones.setVisible(false);
              etiqNombreHospital.setVisible(false);
              etiqHospital.setVisible(false);
-             campoNombre.setText("");
              }else{
                  JOptionPane.showMessageDialog(null, "Debe seleccionar una fila", "Error", JOptionPane.ERROR_MESSAGE);
 
@@ -341,63 +387,69 @@ int operacion=0;//1 para nuevo y 2 para actualizar
         try{
             
                 String nombre=campoNombre.getText().trim().toUpperCase();
-                String cedula=campoCedula.getText().trim();
-             if(nombre.isBlank() || nombre.isEmpty() || cedula.isBlank() || cedula.isEmpty()){
-             JOptionPane.showMessageDialog(null, "Debe completar el campo", "Error", JOptionPane.ERROR_MESSAGE);
+                String codigoBarras=campoCodigoBarras.getText().trim();
+                UnidadDTO unidadSeleccionada=(UnidadDTO)comboUnidades.getSelectedItem();
+                GrupoDTO grupoSeleccionado=(GrupoDTO)comboGrupos.getSelectedItem();
+                SubgrupoDTO subgrupoSeleccionado=(SubgrupoDTO) comboSubgrupo.getSelectedItem();
+             if(nombre.isBlank() || nombre.isEmpty()){
+             JOptionPane.showMessageDialog(null, "Debe indicar el nombre", "Error", JOptionPane.ERROR_MESSAGE);
 
              } else{
                  if(operacion==1)//nuevo
                  {
-                       
-                  
-                  
-        
-                    ConexionCrearConfigurarFirmantes firmas=new ConexionCrearConfigurarFirmantes();
-                    firmas.setIdHospital(hospital.id());
-                    firmas.setIdSeccion(codigo_seccion);
-                    firmas.setCedula(campoCedula.getText().trim());
-                    
-                    firmas.setNombreCompleto(campoNombre.getText().trim().toUpperCase());
-                   
-                    firmas.crearFirmante();
-                    if(firmas.respuesta()==1){
-                      JOptionPane.showMessageDialog(null, "Firmante creado exitosamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                    ConexionCrearConfigurarArticulos articulos=new ConexionCrearConfigurarArticulos();
+                    articulos.setIdHospital(hospital.id());
+                    articulos.setNombre(nombre);
+                    articulos.setCodigodebarra(codigoBarras);
+                    articulos.setIdUnidad(unidadSeleccionada.id());
+                    articulos.setCodigoGrupo(grupoSeleccionado.codigo());
+                    articulos.setCodigoSubgrupo(subgrupoSeleccionado.codigoSubgrupo());
+                    articulos.crearArticulo();
+                    if(articulos.respuesta()==1){
+                      JOptionPane.showMessageDialog(null, "Articulo creado exitosamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
                       operacion=0;
+                      campoCodigoBarras.setText("");
                       campoNombre.setText("");
-                      campoCedula.setText("");
                       llenarTabla();
                       panelBotones2.setVisible(false);
                       panelBotones.setVisible(true);
                       panelFormulario.setVisible(false);
                     }else{
-                      JOptionPane.showMessageDialog(null, "Error al crear el firmante", "Error", JOptionPane.ERROR_MESSAGE);
+                      JOptionPane.showMessageDialog(null, "Error al crear el articulo", "Error", JOptionPane.ERROR_MESSAGE);
 
                     }
                  }
                  if(operacion==2)//actualizar
                  {
-                      if(nombre.isBlank() || nombre.isEmpty() || cedula.isBlank() || cedula.isEmpty()){
+                      if(nombre.isBlank() || nombre.isEmpty() ){
              JOptionPane.showMessageDialog(null, "Debe completar el campo", "Error", JOptionPane.ERROR_MESSAGE);
 
              } else{
-                    
-                    int filaSeleccionada=TablaArticulos.getSelectedRow();
-                    // (Importante por si el usuario ordenó la tabla haciendo clic en las cabeceras)
+                    int filaSeleccionada=TablaArticulos.getSelectedRow();      
                     int indiceReal = TablaArticulos.convertRowIndexToModel(filaSeleccionada);
-                    CargosDTO cargoSeleccionado=(CargosDTO)comboUnidades.getSelectedItem();
-                    ConexionCrearConfigurarFirmantes firmante=new ConexionCrearConfigurarFirmantes();
+                    ArticuloDTO articuloSeleccionado=(ArticuloDTO)listaArticulos.get(indiceReal);
+                    ConexionCrearConfigurarArticulos articulos=new ConexionCrearConfigurarArticulos();
+                    articulos.setIdHospital(hospital.id());
+                    articulos.setIdArticulo(articuloSeleccionado.id());
+                    articulos.setNombre(nombre);
+                    articulos.setCodigodebarra(codigoBarras);
+                    articulos.setIdUnidad(unidadSeleccionada.id());
+                    articulos.setCodigoGrupo(grupoSeleccionado.codigo());
+                    articulos.setCodigoSubgrupo(subgrupoSeleccionado.codigoSubgrupo());
+                    articulos.actualizarArticulo();                  
+                    
                  
-                    if(firmante.respuesta()==1){
-                      JOptionPane.showMessageDialog(null, "Cargo actualizado exitosamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                    if(articulos.respuesta()==1){
+                      JOptionPane.showMessageDialog(null, "Articulo actualizado exitosamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
                       operacion=0;
+                      campoCodigoBarras.setText("");
                       campoNombre.setText("");
-                      campoCedula.setText("");
                       panelFormulario.setVisible(false);
                       llenarTabla();
                       panelBotones2.setVisible(false);
                       panelBotones.setVisible(true);
                     }else{
-                      JOptionPane.showMessageDialog(null, "Error al actualizar el cargo", "Error", JOptionPane.ERROR_MESSAGE);
+                      JOptionPane.showMessageDialog(null, "Error al actualizar el articulo", "Error", JOptionPane.ERROR_MESSAGE);
 
                     }
                      
@@ -407,7 +459,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
             
              }
          }catch(Exception ex){
-        log.severe("ERROR CREANDO EL CARGO");
+        log.severe("ERROR CREANDO EL ARTICULO");
         log.severe(ex.toString());
          
         }
@@ -438,6 +490,10 @@ int operacion=0;//1 para nuevo y 2 para actualizar
          TablaArticulos.setRowSorter(filtro);
         filtro.setRowFilter(RowFilter.regexFilter(Campo_buscar.getText().toUpperCase(), 1));
     }//GEN-LAST:event_Campo_buscarKeyReleased
+
+    private void campoCodigoBarrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCodigoBarrasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoCodigoBarrasActionPerformed
 public int getEstado()
 {
     System.out.println("Estado: "+estado);
@@ -533,10 +589,10 @@ public int getCodigo()
     private javax.swing.JSeparator Separador1;
     private javax.swing.JTable TablaArticulos;
     private javax.swing.JButton botonGuardarCambios;
-    private javax.swing.JTextField campoCedula;
+    private javax.swing.JTextField campoCodigoBarras;
     private javax.swing.JTextField campoNombre;
-    private javax.swing.JComboBox<String> comboGrupo;
-    private javax.swing.JComboBox<String> comboSubgrupo;
+    private javax.swing.JComboBox<GrupoDTO> comboGrupos;
+    private javax.swing.JComboBox<SubgrupoDTO> comboSubgrupo;
     private javax.swing.JComboBox<UnidadDTO> comboUnidades;
     private javax.swing.JLabel etiqCargo;
     private javax.swing.JLabel etiqCedula;

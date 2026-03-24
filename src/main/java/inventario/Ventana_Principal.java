@@ -110,13 +110,7 @@ public class Ventana_Principal extends javax.swing.JFrame {
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Articulos");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Crear");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Consultar");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Modificar");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Asignar");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Articulos");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Reportes");
@@ -287,12 +281,8 @@ public class Ventana_Principal extends javax.swing.JFrame {
         
         }
         case "Articulos" ->{
-            if (hijo.equals("Crear")) lanzarVentana(new Crear_Articulos(this, true));
-            if (hijo.equals("Consultar")) lanzarVentana(new Consultar_Articulos(this, true));
-            if (hijo.equals("Asignar")) lanzarVentana(new Asignar_seccion_art(this, true));
-            if (hijo.equals("Modificar")) lanzarVentana(new Modificar_Articulo(this, true));
-
-        
+            if (hijo.equals("Articulos")) lanzarVentana(new Articulos(this, true));
+                   
         }
         case "Firmantes" -> {
             if (hijo.equals("Configurar")) lanzarVentana(new VerFirmantes(this, true));

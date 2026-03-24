@@ -48,10 +48,10 @@ public class ConexionVerArticulos {
                                    ejecutar.getInt("idhospital"),
                                    ejecutar.getString("codigobarra"),
                                    ejecutar.getString("nombre"),
-                                   ejecutar.getInt("cogiounidad"),
+                                   ejecutar.getInt("codigounidad"),
                                    ejecutar.getString("codigogrupo"),
                                    ejecutar.getString("codigosubgrupo"),
-                                   ejecutar.getString("nombrunidad")
+                                   ejecutar.getString("nombreunidad")
                            
                            
                            );

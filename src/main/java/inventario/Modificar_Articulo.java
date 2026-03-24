@@ -54,9 +54,9 @@ int codigoUnidadActual;
         codigoSubGrupo=grupo.codigos();
         descripcionGrupo=grupo.descripciones();
         ConexionVerUnidades unidades=new ConexionVerUnidades();
-        unidades.validar();
-        codigoUnidad=unidades.codigos();
-        descripcionUnidad= unidades.nombre();
+        //unidades.validar();
+       // codigoUnidad=unidades.codigos();
+        //descripcionUnidad= unidades.nombre();
         lista1= descripcionUnidad.iterator();
         while(lista1.hasNext())
         {

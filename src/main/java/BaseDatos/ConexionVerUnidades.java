@@ -26,7 +26,7 @@ public class ConexionVerUnidades {
         conectar.Conectar();
         conex= conectar.getConexion();
         
-        try(PreparedStatement consulta= conex.prepareStatement("select cod_unidad, nombre from unidades where hospital_id=?")){
+        try(PreparedStatement consulta= conex.prepareStatement("select id, hospital_id, nombre, abreviatura from unidades where hospital_id=?")){
         consulta.setInt(1, idhospital);
         try(ResultSet ejecutar=consulta.executeQuery() ){
             
@@ -62,6 +62,10 @@ public class ConexionVerUnidades {
           
           return listaUnidades;
     }//consulta
+
+    public void setIdhospital(int idhospital) {
+        this.idhospital = idhospital;
+    }
     
     public List<UnidadDTO> consulta() throws SQLException{
     return consultar();
