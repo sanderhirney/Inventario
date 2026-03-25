@@ -89,24 +89,6 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
         super(parent, modal);
         initComponents();
         GestionDeAlmacenes.getInstance().llamarDatos();
-        try{
-        resolucion=super.getToolkit().getScreenSize();
-        this.setSize(resolucion);
-        modelo= (DefaultTableModel)Tabla_datos.getModel();//para poder manipular la tabla
-        Etiq_Fecha_Oper.setText(sql.toString());
-         secciones.consulta();
-        codigo_seccion=secciones.codigo_seccion();
-        nombre_seccion=secciones.nombre_seccion();
-        conceptos.setTipo(1);
-        conceptos.consulta();//obtengo los conceptos
-     //   proveedor.consulta();//obtengo los proveedores
-        descripcion=conceptos.descripcion();
-        codigo=conceptos.codigo();
-     //   nombre_proveedor=proveedor.nombres();
-      //  rif_proveedor=proveedor.rif_proveedor();
-        lista1=descripcion.iterator();
-        lista3=codigo.iterator();
-        listaAlmacenes=GestionDeAlmacenes.getInstance().almacenes();
         for(AlmacenDTO almacen: listaAlmacenes){
             if(almacen.despacho()){
                 codigo_almacenes.add(almacen.codigo());
@@ -116,6 +98,25 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
             
            
         }
+        try{
+        resolucion=super.getToolkit().getScreenSize();
+        this.setSize(resolucion);
+        modelo= (DefaultTableModel)Tabla_datos.getModel();//para poder manipular la tabla
+        Etiq_Fecha_Oper.setText(sql.toString());
+         secciones.consulta();
+        codigo_seccion=secciones.codigo_seccion();
+        nombre_seccion=secciones.nombre_seccion();
+        //conceptos.setTipo(1);
+       //conceptos.consulta();//obtengo los conceptos
+     //   proveedor.consulta();//obtengo los proveedores
+       // descripcion=conceptos.descripcion();
+      //  codigo=conceptos.codigo();
+     //   nombre_proveedor=proveedor.nombres();
+      //  rif_proveedor=proveedor.rif_proveedor();
+        lista1=descripcion.iterator();
+        lista3=codigo.iterator();
+        listaAlmacenes=GestionDeAlmacenes.getInstance().almacenes();
+        
         lista4=codigo_almacenes.iterator();
         lista5=nombre_almacenes.iterator();
         while(lista1.hasNext())

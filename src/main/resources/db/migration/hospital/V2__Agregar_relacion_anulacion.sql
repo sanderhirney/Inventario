@@ -1,0 +1,2 @@
+ALTER TABLE documentos ADD COLUMN documento_origen_id INTEGER REFERENCES documentos(id);
+COMMENT ON COLUMN documentos.documento_origen_id IS 'Referencia al documento original que fue anulado o corregido';

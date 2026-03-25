@@ -95,11 +95,11 @@ public class Salida_Inventario extends javax.swing.JDialog {
         codigo_seccion=secciones.codigo_seccion();
         nombre_seccion=secciones.nombre_seccion();
         modelo= (DefaultTableModel)Tabla_datos.getModel();//para poder manipular la tabla
-        conceptos.setTipo(0);//1 cuando es concepto de entrada y 0 cuando es concepto de salida
-        conceptos.consulta();
-        descripcion_concepto=conceptos.descripcion();
-        codigo_concepto=conceptos.codigo();
-        listaAlmacenes=GestionDeAlmacenes.getInstance().almacenes();
+       // conceptos.setTipo(0);//1 cuando es concepto de entrada y 0 cuando es concepto de salida
+       // conceptos.consulta();
+       // descripcion_concepto=conceptos.descripcion();
+       // codigo_concepto=conceptos.codigo();
+      //  listaAlmacenes=GestionDeAlmacenes.getInstance().almacenes();
         for(AlmacenDTO almacen: listaAlmacenes){
           if(almacen.despacho()){
               codigo_almacenes_despacho.add(almacen.codigo());
