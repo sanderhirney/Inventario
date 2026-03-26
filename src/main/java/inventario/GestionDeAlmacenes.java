@@ -20,6 +20,8 @@ public class GestionDeAlmacenes {
     private static GestionDeAlmacenes instancia;
     private List<AlmacenDTO> listaAlmacenes=new ArrayList<>();
     private AlmacenDTO almacenPrincipal;
+    int codigoSeccion;
+    int idHospital;
     //Singleton
     private GestionDeAlmacenes(){}//constructorprivado
     public static GestionDeAlmacenes getInstance(){
@@ -34,7 +36,9 @@ public class GestionDeAlmacenes {
     public void llamarDatos(){
         try {
             ConexionVerAlmacenes almacenes=new ConexionVerAlmacenes();
-             almacenes.consultarAlmacenes();
+             almacenes.setCodigoSeccion(codigoSeccion);
+             almacenes.setIdHospital(idHospital);
+            almacenes.consultarAlmacenes();
              listaAlmacenes=almacenes.obtenerAlmacenes();
              almacenPrincipal=almacenes.obtenerAlmacenPrincipal();
         } catch (SQLException ex) {
@@ -52,4 +56,13 @@ public class GestionDeAlmacenes {
     
             return listaAlmacenes; 
     }
+
+    public void setCodigoSeccion(int codigoSeccion) {
+        this.codigoSeccion = codigoSeccion;
+    }
+
+    public void setIdHospital(int idHospital) {
+        this.idHospital = idHospital;
+    }
+    
 }

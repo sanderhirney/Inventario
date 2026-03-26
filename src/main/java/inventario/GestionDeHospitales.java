@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 public class GestionDeHospitales {
     Logger log=LoggerInfo.getLogger();
     private static GestionDeHospitales instancia;
-    HospitalDTO hospitalEsquema;
+    private HospitalDTO hospitalEsquema;
   
     //Singleton
     private GestionDeHospitales(){}//constructorprivado

@@ -11,6 +11,9 @@ import BaseDatos.ConexionVerConceptos;
 import BaseDatos.ConexionVerProveedores;
 import BaseDatos.ConexionVerificarDocumentoEntrada;
 import Modelos.AlmacenDTO;
+import Modelos.HospitalDTO;
+import Modelos.ProveedorDTO;
+import Modelos.SeccionesDTO;
 import Reportes.ReporteEntrada;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -20,12 +23,18 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Entradas_Inventario extends javax.swing.JDialog {
+JFrame ventanaPrincipal;
 AlmacenDTO almacenPrincipal;
 List<AlmacenDTO> listaAlmacenes=new ArrayList<>();
+List<SeccionesDTO> seccionActual=new ArrayList<>();
+List<ProveedorDTO> listaProveedores=new ArrayList<>();
+HospitalDTO hospitalActual;
+int codigoSeccionActual;
 List<String> descripcion=new ArrayList<>();
 List<Integer> codigo=new ArrayList<>();  
 List<String> nombre_proveedor=new ArrayList<>();
@@ -88,15 +97,37 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
  public Entradas_Inventario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        GestionDeHospitales.getInstance().llamarDatos();
+        hospitalActual=GestionDeHospitales.getInstance().hospitales();
+        GestionDeSecciones.getInstance().setIdHospital(hospitalActual.id());
+        GestionDeSecciones.getInstance().llamarDatos();
+        seccionActual=GestionDeSecciones.getInstance().secciones();
+        for(SeccionesDTO busquedaActivo:seccionActual){
+          if(busquedaActivo.seleccionado()){
+          codigoSeccionActual=busquedaActivo.codigo();
+          break;
+          }
+        }
+        GestionDeAlmacenes.getInstance().setIdHospital(hospitalActual.id());
+        GestionDeAlmacenes.getInstance().setCodigoSeccion(codigoSeccionActual);
         GestionDeAlmacenes.getInstance().llamarDatos();
+        listaAlmacenes=GestionDeAlmacenes.getInstance().almacenes();
         for(AlmacenDTO almacen: listaAlmacenes){
             if(almacen.despacho()){
+                
                 codigo_almacenes.add(almacen.codigo());
                 nombre_almacenes.add(almacen.denominacion());
-                Combo_Almacen.addItem(almacen.codigo()+" - "+almacen.denominacion());
-            }
+                Combo_Almacen.addItem(almacen);
+                
+                }
             
            
+        }
+        GestionDeProveedores.getInstance().setIdHospital(hospitalActual.id());
+        GestionDeProveedores.getInstance().llamarDatos();
+        listaProveedores=GestionDeProveedores.getInstance().proveedores();
+        for(ProveedorDTO proveedores:listaProveedores){
+        Combo_Proveedor.addItem(proveedores);
         }
         try{
         resolucion=super.getToolkit().getScreenSize();
@@ -126,7 +157,7 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
         lista2=nombre_proveedor.iterator();
         while(lista2.hasNext())
         {
-        Combo_Proveedor.addItem(lista2.next());
+        //Combo_Proveedor.addItem(lista2.next());
         }//while
         
        
@@ -181,7 +212,7 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
         Etiq_Fecha_Oper = new javax.swing.JLabel();
         Etiq_Fecha2 = new javax.swing.JLabel();
         Campo_factura = new javax.swing.JTextField();
-        Combo_Proveedor = new javax.swing.JComboBox();
+        Combo_Proveedor = new javax.swing.JComboBox<>();
         Boton_Buscar = new javax.swing.JButton();
         Etiq_codigo = new javax.swing.JLabel();
         Etiq_nombre = new javax.swing.JLabel();
@@ -1070,6 +1101,9 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
             }
         });
     }
+    public void PrincipalFrame(JFrame ventana){
+    ventanaPrincipal=ventana;
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Boton_Buscar;
@@ -1081,9 +1115,9 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
     private javax.swing.JTextField Campo_Cantidad;
     private javax.swing.JTextField Campo_Precio;
     private javax.swing.JTextField Campo_factura;
-    private javax.swing.JComboBox<String> Combo_Almacen;
+    private javax.swing.JComboBox<AlmacenDTO> Combo_Almacen;
     private javax.swing.JComboBox Combo_Concepto;
-    private javax.swing.JComboBox Combo_Proveedor;
+    private javax.swing.JComboBox<ProveedorDTO> Combo_Proveedor;
     private javax.swing.JLabel Etiq_Almacen;
     private javax.swing.JLabel Etiq_Cantidad;
     private javax.swing.JLabel Etiq_Codigo;

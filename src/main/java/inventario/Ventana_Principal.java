@@ -248,8 +248,9 @@ public class Ventana_Principal extends javax.swing.JFrame {
     switch (padre) {
         case "Inventario" -> {
             if (hijo.equals("Entradas")) {
-                Consultar_Entradas v = new Consultar_Entradas(this, true);
-                v.PrincipalFrame(this);
+              //  Consultar_Entradas v = new Consultar_Entradas(this, true);
+              Entradas_Inventario v = new Entradas_Inventario(this, true);
+              v.PrincipalFrame(this);
                 lanzarVentana(v);
             } else if (hijo.equals("Salidas")) {
                 Consultar_Salidas v = new Consultar_Salidas(this, true);

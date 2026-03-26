@@ -19,7 +19,7 @@ public class GestionDeProveedores {
     Logger log=LoggerInfo.getLogger();
     private static GestionDeProveedores instancia;
     private List<ProveedorDTO> listaProveedores=new ArrayList<>();
-  
+    private int idHospital;
     //Singleton
     private GestionDeProveedores(){}//constructorprivado
     public static GestionDeProveedores getInstance(){
@@ -34,12 +34,17 @@ public class GestionDeProveedores {
     public void llamarDatos(){
         try {
            ConexionVerProveedores proveedores=new ConexionVerProveedores();
+           proveedores.setIdHospital(idHospital);
            listaProveedores=proveedores.consultarProveedor();
         } catch (SQLException ex) {
             log.severe("ERROR AL CONSULTAR LOS PROVEEDORES");
             log.severe(ex.toString());
         }
         
+    }
+
+    public void setIdHospital(int idHospital) {
+        this.idHospital = idHospital;
     }
     
     

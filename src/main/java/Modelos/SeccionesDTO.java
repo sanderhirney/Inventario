@@ -11,7 +11,9 @@ package Modelos;
 public record SeccionesDTO(
         int codigo,
         String descripcion,
-        int idHospital
+        int idHospital,
+        boolean seleccionado,
+        boolean estado
         )
 
 {

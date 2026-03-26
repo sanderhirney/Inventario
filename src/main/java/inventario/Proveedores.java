@@ -41,7 +41,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                 
                  ConexionSecciones secciones=new ConexionSecciones();
                  secciones.consulta();
-                  codigo_seccion=secciones.codigo_seccion();
+                 codigo_seccion=secciones.codigo_seccion();
                   
                 llenarTabla();
              

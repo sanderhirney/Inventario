@@ -13,9 +13,10 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 public class ConexionVerSecciones {
     Logger log=LoggerInfo.getLogger();
+    int idHospital;
     Connection conex;
     Conexion conectar= new Conexion();
-    List<SeccionesDTO> listaEmpresas=new ArrayList<>();;
+    List<SeccionesDTO> listaSecciones=new ArrayList<>();;
     private List<SeccionesDTO> consulta() throws SQLException
     {
         log.info("CONSULTA DE SECCIONES");
@@ -23,17 +24,20 @@ public class ConexionVerSecciones {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        try(PreparedStatement consulta= conex.prepareStatement("select id, descripcion, hospital_id  from secciones") ){
-         try(ResultSet ejecutar=consulta.executeQuery()){
+        try(PreparedStatement consulta= conex.prepareStatement("select id, descripcion, seleccionada, estado  from secciones where hospital_id=?") ){
+        consulta.setInt(1, idHospital);
+            try(ResultSet ejecutar=consulta.executeQuery()){
                  while( ejecutar.next() )
                  {
-            SeccionesDTO empresas=new SeccionesDTO(
+            SeccionesDTO secciones=new SeccionesDTO(
             ejecutar.getInt("id"),
             ejecutar.getString("descripcion"),
-            ejecutar.getInt("hospital_id")        
+            idHospital,
+            ejecutar.getBoolean("seleccionada"),
+            ejecutar.getBoolean("estado")        
             
             );
-            listaEmpresas.add(empresas);           
+            listaSecciones.add(secciones);           
             
                 }//while
          }
@@ -51,8 +55,12 @@ public class ConexionVerSecciones {
            conectar.Cerrar();
           }
           
-          return listaEmpresas;
+          return listaSecciones;
     }//consulta
+
+    public void setIdHospital(int idHospital) {
+        this.idHospital = idHospital;
+    }
     
     public List<SeccionesDTO> consultaSeccion() throws SQLException
     {

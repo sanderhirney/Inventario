@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 public class ConexionVerProveedores {
     Connection conex;
     Conexion conectar= new Conexion();
-    
+    int idHospital;
     List<ProveedorDTO> listaProveedores= new ArrayList<>();
     private List<ProveedorDTO> consulta() throws SQLException
     {
@@ -20,8 +20,9 @@ public class ConexionVerProveedores {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        try(PreparedStatement consulta= conex.prepareStatement("select id, hospital_id, rif, nombre, direccion, telefono from proveedores") ){
-        try(ResultSet  ejecutar=consulta.executeQuery()){
+        try(PreparedStatement consulta= conex.prepareStatement("select id, hospital_id, rif, nombre, direccion, telefono from proveedores where hospital_id=?") ){
+      consulta.setInt(1, idHospital);
+            try(ResultSet  ejecutar=consulta.executeQuery()){
             while( ejecutar.next() )
         {
                     ProveedorDTO proveedor=new ProveedorDTO(
@@ -57,6 +58,10 @@ public class ConexionVerProveedores {
     
     public List<ProveedorDTO> consultarProveedor() throws SQLException{
      return consulta();
+    }
+
+    public void setIdHospital(int idHospital) {
+        this.idHospital = idHospital;
     }
     
     

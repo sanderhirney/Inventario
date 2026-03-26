@@ -4,9 +4,7 @@
  */
 package inventario;
 
-import BaseDatos.ConexionVerHospitales;
 import BaseDatos.ConexionVerSecciones;
-import Modelos.HospitalDTO;
 import Modelos.SeccionesDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,6 +17,7 @@ import java.util.logging.Logger;
  */
 public class GestionDeSecciones {
     Logger log=LoggerInfo.getLogger();
+    private int idHospital;
     private static GestionDeSecciones instancia;
     private List<SeccionesDTO> listaSecciones=new ArrayList<>();
   
@@ -36,12 +35,17 @@ public class GestionDeSecciones {
     public void llamarDatos(){
         try {
            ConexionVerSecciones secciones=new ConexionVerSecciones();
+           secciones.setIdHospital(idHospital);
              listaSecciones=secciones.consultaSeccion();
         } catch (SQLException ex) {
             log.severe("ERROR AL CONSULTAR LAS SECCIONES");
             log.severe(ex.toString());
         }
         
+    }
+
+    public void setIdHospital(int idHospital) {
+        this.idHospital = idHospital;
     }
     
     

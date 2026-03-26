@@ -1,19 +1,18 @@
 
 package BaseDatos;
 
+import Modelos.SeccionesDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 public class ConexionVerSeccionActiva {
     Connection conex;
     PreparedStatement consulta;
     Conexion conectar= new Conexion();
     ResultSet ejecutar;
-    
+    SeccionesDTO seccionActiva;
     String nombre;
     int codigo;
     public void consulta()
@@ -22,6 +21,7 @@ public class ConexionVerSeccionActiva {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
+        
         consulta= conex.prepareStatement("select cod_empresas, descripcion from empresas where seleccionado=1");
         ejecutar=consulta.executeQuery();
         while( ejecutar.next() )

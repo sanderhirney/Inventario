@@ -10646,3 +10646,585 @@ mar. 25, 2026 4:50:09 P. M. BaseDatos.Conexion Conectar
 INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
 mar. 25, 2026 4:50:09 P. M. BaseDatos.Conexion Conectar
 INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 3:56:59 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 26, 2026 3:57:06 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 26, 2026 3:57:06 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 3:57:06 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 26, 2026 3:57:06 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 26, 2026 3:57:06 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 26, 2026 3:57:06 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 26, 2026 3:57:06 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 3:57:06 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 3:57:06 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 3:57:08 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 3:57:08 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 3:57:08 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 3:57:08 P. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE SECCIONES
+mar. 26, 2026 3:57:08 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 3:57:08 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 3:57:08 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 3:57:09 P. M. BaseDatos.ConexionVerSecciones consulta
+GRAVE: ERROR: no existe la columna «seleccionado»
+  Hint: Probablemente quiera hacer referencia a la columna «secciones.seleccionada».
+  Position: 25
+mar. 26, 2026 3:57:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 3:57:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 3:57:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 3:57:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 3:57:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 3:57:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 3:57:10 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 26, 2026 3:57:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 3:57:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 3:57:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 3:57:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 3:57:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 3:57:10 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 3:57:18 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 3:57:18 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 3:57:18 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 3:57:18 P. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE SECCIONES
+mar. 26, 2026 3:57:18 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 3:57:18 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 3:57:18 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 3:57:18 P. M. BaseDatos.ConexionVerSecciones consulta
+GRAVE: ERROR: no existe la columna «seleccionado»
+  Hint: Probablemente quiera hacer referencia a la columna «secciones.seleccionada».
+  Position: 25
+mar. 26, 2026 3:57:25 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 3:57:25 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 3:57:25 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 3:57:27 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 3:57:27 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 3:57:27 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 3:57:27 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 26, 2026 3:57:27 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 3:57:27 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 3:57:27 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 3:57:27 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 3:57:27 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 3:57:27 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 3:57:35 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 3:57:35 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 3:57:35 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 3:58:09 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 26, 2026 3:58:14 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 26, 2026 3:58:14 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 3:58:14 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 26, 2026 3:58:14 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 26, 2026 3:58:14 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 26, 2026 3:58:14 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 26, 2026 3:58:14 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 3:58:14 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 3:58:14 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 3:58:16 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 3:58:16 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 3:58:16 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 3:58:16 P. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE SECCIONES
+mar. 26, 2026 3:58:16 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 3:58:16 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 3:58:16 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 3:58:16 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 3:58:16 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 3:58:16 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 3:58:50 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 3:58:50 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 3:58:50 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 3:58:50 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 26, 2026 3:58:50 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 3:58:50 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 3:58:50 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 3:58:50 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 3:58:50 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 3:58:50 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 3:59:01 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 3:59:01 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 3:59:01 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:03:57 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 26, 2026 4:04:05 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 26, 2026 4:04:05 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:04:05 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 26, 2026 4:04:05 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 26, 2026 4:04:05 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 26, 2026 4:04:05 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 26, 2026 4:04:05 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:04:05 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:04:05 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:04:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:04:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:04:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:04:07 P. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE SECCIONES
+mar. 26, 2026 4:04:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:04:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:04:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:04:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:04:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:04:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:04:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:04:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:04:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:04:07 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 26, 2026 4:04:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:04:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:04:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:04:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:04:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:04:07 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:04:18 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:04:18 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:04:18 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:04:18 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 26, 2026 4:04:18 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:04:18 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:04:18 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:04:18 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:04:18 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:04:18 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:04:18 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:04:18 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:04:18 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:04:31 P. M. BaseDatos.ConexionCrearConfigurarProveedores crear
+INFORMACIÓN: CREAR PROVEEDOR
+mar. 26, 2026 4:04:31 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:04:31 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:04:31 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:04:32 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:04:32 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:04:32 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:04:36 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 26, 2026 4:04:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:04:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:04:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:04:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:04:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:04:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:04:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:04:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:04:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:04:51 P. M. BaseDatos.ConexionCrearAlmacen crear
+INFORMACIÓN: CREAR ALMACEN
+mar. 26, 2026 4:04:51 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:04:51 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:04:51 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:04:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:04:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:04:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:04:54 P. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE SECCIONES
+mar. 26, 2026 4:04:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:04:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:04:54 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:04:55 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:04:55 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:04:55 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:04:55 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:04:55 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:04:55 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:04:55 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 26, 2026 4:04:55 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:04:55 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:04:55 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:04:55 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:04:55 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:04:55 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:06:27 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:06:27 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:06:27 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:07:05 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 26, 2026 4:07:11 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 26, 2026 4:07:11 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:07:11 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 26, 2026 4:07:11 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 26, 2026 4:07:16 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 26, 2026 4:07:16 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:07:16 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 26, 2026 4:07:16 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 26, 2026 4:07:24 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 26, 2026 4:07:24 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:07:24 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 26, 2026 4:07:24 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 26, 2026 4:07:24 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 26, 2026 4:07:24 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 26, 2026 4:07:24 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:07:24 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:07:24 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:07:26 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:07:26 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:07:26 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:07:26 P. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE SECCIONES
+mar. 26, 2026 4:07:26 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:07:26 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:07:26 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:07:26 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:07:26 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:07:26 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:07:26 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:07:26 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:07:26 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:07:26 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 26, 2026 4:07:26 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:07:26 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:07:26 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:07:26 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:07:26 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:07:26 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:07:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:07:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:07:37 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:08:29 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 26, 2026 4:08:34 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 26, 2026 4:08:34 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:08:34 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 26, 2026 4:08:34 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 26, 2026 4:08:34 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 26, 2026 4:08:34 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 26, 2026 4:08:34 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:08:34 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:08:34 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:08:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:08:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:08:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:08:36 P. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE SECCIONES
+mar. 26, 2026 4:08:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:08:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:08:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:08:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:08:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:08:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:08:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:08:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:08:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:08:36 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 26, 2026 4:08:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:08:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:08:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:08:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:08:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:08:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:08:44 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 26, 2026 4:08:44 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:08:44 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:08:44 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:08:44 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:08:44 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:08:44 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:08:51 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:08:51 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:08:51 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:09:27 P. M. shca.inventario.ConfiguracionBaseDatosPublic migracion
+INFORMACIÓN: CONFIGURACION INICIAL DE ADMIN BD CREADA
+mar. 26, 2026 4:09:32 P. M. BaseDatos.ConexionValidarLogin consulta
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION VALIDAR LOGIN: public
+mar. 26, 2026 4:09:32 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:09:32 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema DEFINIDO MANUALMENTE: public
+mar. 26, 2026 4:09:32 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: public
+mar. 26, 2026 4:09:32 P. M. inventario.Ventana_Principal <init>
+INFORMACIÓN: VENTANA PRINCIPAL CARGADA
+mar. 26, 2026 4:09:32 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 26, 2026 4:09:32 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:09:32 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:09:32 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:09:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:09:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:09:36 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:09:37 P. M. BaseDatos.ConexionVerSecciones consulta
+INFORMACIÓN: CONSULTA DE SECCIONES
+mar. 26, 2026 4:09:37 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:09:37 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:09:37 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:09:37 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:09:37 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:09:37 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:09:37 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:09:37 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:09:37 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:09:37 P. M. BaseDatos.ConexionSecciones consulta
+INFORMACIÓN: CONEXION LEER SECCIONES
+mar. 26, 2026 4:09:37 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:09:37 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:09:37 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:09:37 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:09:37 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:09:37 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
+mar. 26, 2026 4:09:45 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: CONEXION A BD
+mar. 26, 2026 4:09:45 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: Usando esquema de SESIÓN AUTOMÁTICA: hsdm
+mar. 26, 2026 4:09:45 P. M. BaseDatos.Conexion Conectar
+INFORMACIÓN: ESQUEMA RECIBIDO EN CONEXION: hsdm
