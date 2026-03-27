@@ -25,19 +25,21 @@ import javax.swing.JOptionPane;
  */
 public class Configurar_Decimal extends javax.swing.JDialog {
  Logger log=LoggerInfo.getLogger();
- List<SeccionesDTO> empresas=new ArrayList<>();
+ List<SeccionesDTO> secciones=new ArrayList<>();
  HospitalDTO hospital;
  AlmacenDTO almacenPrincipal;
- 
+ HospitalDTO hospitalActual;
     public Configurar_Decimal(java.awt.Frame parent, boolean modal) throws SQLException {
         super(parent, modal);
         initComponents();
         log.info("CREAR / CONFIGURAR DECIMALES");
-        
+        GestionDeHospitales.getInstance().llamarDatos();
+        hospitalActual=GestionDeHospitales.getInstance().hospitales();
+        GestionDeSecciones.getInstance().setIdHospital(hospitalActual.id());
         GestionDeSecciones.getInstance().llamarDatos();
-        empresas=GestionDeSecciones.getInstance().secciones();
+        secciones=GestionDeSecciones.getInstance().secciones();
         
-        for(SeccionesDTO seccion: empresas){
+        for(SeccionesDTO seccion: secciones){
             Combo_Secciones.addItem(seccion);
         }
          GestionDeAlmacenes.getInstance().llamarDatos();

@@ -4,13 +4,12 @@ package inventario;
 import BaseDatos.ConexionActualizarTempEntrada;
 import BaseDatos.ConexionConsultarDecimales;
 import BaseDatos.ConexionCrearEntrada;
-import BaseDatos.ConexionSecciones;
 import BaseDatos.ConexionOperacionesEntrada;
 import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerConceptos;
-import BaseDatos.ConexionVerProveedores;
 import BaseDatos.ConexionVerificarDocumentoEntrada;
 import Modelos.AlmacenDTO;
+import Modelos.ConfiguracionDTO;
 import Modelos.HospitalDTO;
 import Modelos.ProveedorDTO;
 import Modelos.SeccionesDTO;
@@ -35,6 +34,10 @@ List<SeccionesDTO> seccionActual=new ArrayList<>();
 List<ProveedorDTO> listaProveedores=new ArrayList<>();
 HospitalDTO hospitalActual;
 int codigoSeccionActual;
+ConfiguracionDTO configuracionActual;
+int decimalCostos=0;
+int decimalCantidad=0;
+///////
 List<String> descripcion=new ArrayList<>();
 List<Integer> codigo=new ArrayList<>();  
 List<String> nombre_proveedor=new ArrayList<>();
@@ -54,8 +57,6 @@ List<Double> existencia_promedio=new ArrayList<>();
  //tabla
 DefaultTableModel modelo;
 ConexionVerConceptos conceptos= new ConexionVerConceptos();
-ConexionVerProveedores proveedor= new ConexionVerProveedores();
-ConexionSecciones secciones=new ConexionSecciones();
 ConexionConsultarDecimales decimales=new ConexionConsultarDecimales();
 ConexionVerAlmacenes almacenes=new ConexionVerAlmacenes();
 Iterator lista1;
@@ -73,8 +74,7 @@ int numero_art;
 //0= Salida
 int tipo=1;
 //variables para la cantidad de decimales
-int decimalPrecioUnitario=0;
-int decimalCalculoTotal=0;
+
 int estado_decimal=0;
 int cantidad_numero_campo=0; //variable que suma la cantidad de enteros+el punto+cantidad de decimales programadas
 //variables para recibir datos cuando se va a llenar el formulario
@@ -129,14 +129,25 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
         for(ProveedorDTO proveedores:listaProveedores){
         Combo_Proveedor.addItem(proveedores);
         }
+        GestionDeConfiguraciones.getInstance().setIdHospital(hospitalActual.id());
+        GestionDeConfiguraciones.getInstance().setIdSeccion(codigoSeccionActual);
+        GestionDeConfiguraciones.getInstance().llamarDatos();
+        configuracionActual=GestionDeConfiguraciones.getInstance().getConfiguracion();
+        decimalCostos=configuracionActual.decimalCosto();
+        decimalCantidad=configuracionActual.decimaCantidad();
+        if(decimalCostos==0 || decimalCantidad==0)
+        {
+            JOptionPane.showMessageDialog(null, "La configuracion de decimales estan en cero(0) y con ellos los campos muestran todos los digitos", "Precaucion", JOptionPane.WARNING_MESSAGE);
+        }
+         
+        
+        
+        
         try{
         resolucion=super.getToolkit().getScreenSize();
         this.setSize(resolucion);
         modelo= (DefaultTableModel)Tabla_datos.getModel();//para poder manipular la tabla
         Etiq_Fecha_Oper.setText(sql.toString());
-         secciones.consulta();
-        codigo_seccion=secciones.codigo_seccion();
-        nombre_seccion=secciones.nombre_seccion();
         //conceptos.setTipo(1);
        //conceptos.consulta();//obtengo los conceptos
      //   proveedor.consulta();//obtengo los proveedores
@@ -160,16 +171,6 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
         //Combo_Proveedor.addItem(lista2.next());
         }//while
         
-       
-        decimales.setSeccion(codigo_seccion);
-        decimales.consulta();
-        decimalPrecioUnitario=decimales.getDecimalCampo();
-        decimalCalculoTotal=decimales.getDecimalTotal();
-        if(decimalPrecioUnitario==0 || decimalCalculoTotal==0)
-        {
-            JOptionPane.showMessageDialog(null, "La configuracion de decimales estan en cero(0) y con ellos los campos muestran todos los digitos", "Precaucion", JOptionPane.WARNING_MESSAGE);
-        }
-         
         almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
         if(almacenPrincipal != null){
             etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
@@ -662,7 +663,7 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
             for(int f=0; f<CostosNuevos.size(); f++)
                 {
                 
-            calculofinal_operacion.add((Double)(Math.round (CostosNuevos.get(f)*Math.pow(10, decimalCalculoTotal)) / Math.pow(10, decimalCalculoTotal))) ;
+            calculofinal_operacion.add((Double)(Math.round (CostosNuevos.get(f)*Math.pow(10, decimalCostos)) / Math.pow(10, decimalCantidad))) ;
                 }
                 
                 
@@ -800,7 +801,7 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
             String mascaraPrecioUnitario="#.";//para la mascara
             String formateadoPrecioUnitario="";//para escribir el numero en base a la mascara
             
-            for(int i=0; i<decimalPrecioUnitario; i++)
+            for(int i=0; i<decimalCostos; i++)
             {
                 mascaraPrecioUnitario=mascaraPrecioUnitario+("0");
                 
@@ -811,7 +812,7 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
             String mascaraCalculoTotal="#.";
             String formateadoCalculoTotal="";
             double calculoTotal;
-            for(int i=0; i<decimalCalculoTotal; i++)
+            for(int i=0; i<decimalCantidad; i++)
             {
                 mascaraCalculoTotal=mascaraCalculoTotal+("0");
                 
@@ -877,7 +878,7 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
              if(caracter=='.')
              {
                  cantidad_numero_campo=Campo_Precio.getText().length()+1;//le sumo 1 por el caracter punto
-                 cantidad_numero_campo=cantidad_numero_campo+decimalPrecioUnitario;
+                 cantidad_numero_campo=cantidad_numero_campo+decimalCostos;
                  estado_decimal=1;
              }
         }//else
@@ -1002,12 +1003,12 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
             String formato_campo="";//para escribir el numero en base a la mascara
             String formato_total="";
             campo_observaciones.setText(observaciones_rec);
-            for(int i=0; i<decimalPrecioUnitario; i++)
+            for(int i=0; i<decimalCostos; i++)
             {
                 mascara_campo=mascara_campo+("0");
                 
             }
-            for(int i=0; i<decimalCalculoTotal; i++)
+            for(int i=0; i<decimalCantidad; i++)
             {
                 mascara_total=mascara_total+("0");
                 
