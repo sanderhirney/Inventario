@@ -1,7 +1,6 @@
 
 package inventario;
 
-import BaseDatos.ConexionVerArticulos;
 import Modelos.AlmacenDTO;
 import Modelos.ArticuloDTO;
 import Modelos.HospitalDTO;
@@ -26,7 +25,6 @@ int codigo_seccion;
 AlmacenDTO almacenPrincipal;
 TableRowSorter filtro;
 int habilitarBoton=1;//1 para si y 0 cero para no. si es entrada si. si es salida No lo habilita
-String almacenActivoMostrar;
 Logger log=LoggerInfo.getLogger();
     public Ver_Articulos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -35,10 +33,7 @@ Logger log=LoggerInfo.getLogger();
         GestionDeHospitales.getInstance().llamarDatos();
         hospitalActual=GestionDeHospitales.getInstance().hospitales();
         
-        GestionDeArticulos.getInstance().setIdhospital(hospitalActual.id());
-        GestionDeArticulos.getInstance().llamarDatos();
-        listaArticulos=GestionDeArticulos.getInstance().articulos();
-        
+      
         GestionDeAlmacenes.getInstance().llamarDatos();
         almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
         if(almacenPrincipal != null){
@@ -46,13 +41,7 @@ Logger log=LoggerInfo.getLogger();
         }else{
              etiquetaAlmacenActivo.setText("NO OBTENIDO");
         }
-        modelo=(DefaultTableModel)Tabla_articulos.getModel();
-        filtro=new TableRowSorter(Tabla_articulos.getModel());
-       
-        for(ArticuloDTO articulo: listaArticulos)
-        {
-            modelo.addRow(new Object[]{articulo.id(), articulo.nombre()});
-        }
+        llenarTabla();
        
         }catch(Exception e){
         log.severe("ERROR AL VER ARTICULOS");
@@ -62,6 +51,21 @@ Logger log=LoggerInfo.getLogger();
         
         }
       
+    }
+    public void llenarTabla(){
+      
+         GestionDeArticulos.getInstance().setIdhospital(hospitalActual.id());
+         GestionDeArticulos.getInstance().llamarDatos();
+         listaArticulos=GestionDeArticulos.getInstance().articulos();
+         modelo=(DefaultTableModel)Tabla_articulos.getModel();
+         modelo.setRowCount(0);
+         filtro=new TableRowSorter(Tabla_articulos.getModel());
+       
+        for(ArticuloDTO articulo: listaArticulos)
+        {
+            modelo.addRow(new Object[]{articulo.id(), articulo.nombre()});
+        }
+        
     }
 
    
@@ -210,15 +214,12 @@ Logger log=LoggerInfo.getLogger();
     }//GEN-LAST:event_Boton_guardarActionPerformed
 
     private void botonCrearArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearArticuloActionPerformed
-              Crear_Articulos crearArticulo= new Crear_Articulos(null, true);
+              Articulos crearArticulo= new Articulos(null, true);
               crearArticulo.setResizable(false);
               crearArticulo.setLocationRelativeTo(null);
               crearArticulo.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
               crearArticulo.setVisible(true);
-              if(crearArticulo.getResultado()==1){
-                  modelo.setRowCount(0);
-                  
-              }
+              llenarTabla();
               
         
     }//GEN-LAST:event_botonCrearArticuloActionPerformed

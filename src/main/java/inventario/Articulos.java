@@ -2,15 +2,11 @@
 package inventario;
 
 import BaseDatos.ConexionCrearConfigurarArticulos;
-import BaseDatos.ConexionCrearConfigurarFirmantes;
 import BaseDatos.ConexionSecciones;
-import BaseDatos.ConexionVerFirmantes;
 import BaseDatos.ConexionVerGruposSubgrupos;
 import BaseDatos.ConexionVerUnidades;
 import Modelos.AlmacenDTO;
 import Modelos.ArticuloDTO;
-import Modelos.CargosDTO;
-import Modelos.FirmantesDTO;
 import Modelos.GrupoDTO;
 import Modelos.HospitalDTO;
 import Modelos.SubgrupoDTO;
