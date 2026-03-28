@@ -831,9 +831,8 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
 
     private void Boton_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_BuscarActionPerformed
         // TODO add your handling code here:
-        Ver_Articulos ventana=new Ver_Articulos(null, true);
+       Ver_Articulos ventana=new Ver_Articulos(null, true);
        ventana.setHabilitacion(1);
-       ventana.InformacionArticulos();
        ventana.setResizable(false);
        ventana.setLocationRelativeTo(null);
        ventana.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -919,16 +918,23 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
 
     private void Campo_facturaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Campo_facturaFocusLost
         // TODO add your handling code here:
-        ConexionVerificarDocumentoEntrada numero=new ConexionVerificarDocumentoEntrada();
-        numero.setNumeroDoc(Campo_factura.getText().trim());
-        numero.setCodigoSeccion(codigo_seccion);
-        numero.consulta();
-        if(numero.resultado()==1)
+      String factura=Campo_factura.getText().trim();
+      // 1. Validamos que no esté vacío
+    if (factura.isEmpty()) {
+        Boton_Buscar.setEnabled(false);
+        Boton_Guardar.setEnabled(false);
+        return; 
+    }
+        ConexionVerificarDocumentoEntrada documento=new ConexionVerificarDocumentoEntrada();
+        documento.setIdHospital(hospitalActual.id());
+        documento.setIdSeccion(codigoSeccionActual);
+        if(documento.getResultado()==1)
         {
             JOptionPane.showMessageDialog(null, "Numero de documento ya existente", "Error", JOptionPane.ERROR_MESSAGE);
             Campo_factura.setText("");
             Boton_Buscar.setEnabled(false);
             Boton_Guardar.setEnabled(false);
+            Campo_factura.requestFocus();//devolvemos el foco
         }else{
             Boton_Buscar.setEnabled(true);
             Boton_Guardar.setEnabled(true);

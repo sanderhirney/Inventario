@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import shca.inventario.ConfiguracionBaseDatosHospital;
 
 /**
  *
@@ -161,6 +162,11 @@ public class Login extends javax.swing.JFrame {
                                 this.dispose();
                             }
                             case "USER" ->{
+                                // 1. ANTES de abrir la ventana, mandamos a actualizar el esquema del hospital
+                                ConfiguracionBaseDatosHospital configHospital = new ConfiguracionBaseDatosHospital();
+                                configHospital.setEsquemas(esquemaUsuario); // El esquema que viene de la tabla login (ej: hsdm)
+                                configHospital.migracion(); // <--- Flyway revisará y aplicara
+                               // 2. Ahora sí, iniciamos sesión normal
                                 SesionUsuario.inicializarSesion(esquemaUsuario, usuario, rolReal);
                                 Ventana_Principal ventana = new Ventana_Principal();
                                 ventana.setLocationRelativeTo(null);

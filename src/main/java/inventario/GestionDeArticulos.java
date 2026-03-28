@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class GestionDeArticulos {
     Logger log=LoggerInfo.getLogger();
     private static GestionDeArticulos instancia;
-    int idhospital;
+    private int idhospital;
     private List<ArticuloDTO> listaArticulos=new ArrayList<>();
   
     //Singleton

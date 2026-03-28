@@ -1,10 +1,10 @@
 
 package inventario;
 
-import BaseDatos.ConexionSecciones;
-import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerArticulos;
 import Modelos.AlmacenDTO;
+import Modelos.ArticuloDTO;
+import Modelos.HospitalDTO;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,8 +15,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 public class Ver_Articulos extends javax.swing.JDialog {
-List<Integer> codigos=new ArrayList<>();
-List<String> nombres=new ArrayList<>();
+HospitalDTO hospitalActual;
+List<ArticuloDTO> listaArticulos=new ArrayList<>();
 DefaultTableModel modelo;
 Iterator lista1;
 Iterator lista2;
@@ -32,19 +32,34 @@ Logger log=LoggerInfo.getLogger();
         super(parent, modal);
         initComponents();
         try{
-        ConexionSecciones secciones=new ConexionSecciones();
-        secciones.consulta();
-        codigo_seccion=secciones.codigo_seccion();
-         GestionDeAlmacenes.getInstance().llamarDatos();
+        GestionDeHospitales.getInstance().llamarDatos();
+        hospitalActual=GestionDeHospitales.getInstance().hospitales();
+        
+        GestionDeArticulos.getInstance().setIdhospital(hospitalActual.id());
+        GestionDeArticulos.getInstance().llamarDatos();
+        listaArticulos=GestionDeArticulos.getInstance().articulos();
+        
+        GestionDeAlmacenes.getInstance().llamarDatos();
         almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
         if(almacenPrincipal != null){
             etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
         }else{
              etiquetaAlmacenActivo.setText("NO OBTENIDO");
         }
+        modelo=(DefaultTableModel)Tabla_articulos.getModel();
+        filtro=new TableRowSorter(Tabla_articulos.getModel());
+       
+        for(ArticuloDTO articulo: listaArticulos)
+        {
+            modelo.addRow(new Object[]{articulo.id(), articulo.nombre()});
+        }
+       
         }catch(Exception e){
         log.severe("ERROR AL VER ARTICULOS");
         log.severe(e.toString());
+        JOptionPane.showMessageDialog(null, "Error al llenar la tabla de articulos: "+e, "Error Grave", JOptionPane.ERROR_MESSAGE);
+
+        
         }
       
     }
@@ -167,30 +182,7 @@ Logger log=LoggerInfo.getLogger();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-public void InformacionArticulos(){
-    if(habilitarBoton==0){
-            botonCrearArticulo.setEnabled(false);
-        }
-      ConexionVerArticulos articulos=new ConexionVerArticulos();
-      //  articulos.setSeccion(codigo_seccion);
-       // articulos.consulta();
-  //      codigos=articulos.codigo();
-       // nombres=articulos.nombre();
-        modelo=(DefaultTableModel)Tabla_articulos.getModel();
-        filtro=new TableRowSorter(Tabla_articulos.getModel());
-        try{
-        lista1=codigos.iterator();
-        lista2=nombres.iterator();
-        while(lista1.hasNext())
-        {
-            modelo.addRow(new Object[]{lista1.next(), lista2.next()});
-        }
-        }
-        catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(null, "Error: "+e, "Error Grave", JOptionPane.ERROR_MESSAGE);
-        }
-}
+
     private void Boton_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_cancelarActionPerformed
         // TODO add your handling code here:
         int opcion= JOptionPane.showConfirmDialog(null," ¿Seguro desea Salir?. ¡No se conservara nada que no haya guardado!", "Confirmacion de Cancelar", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
@@ -225,7 +217,7 @@ public void InformacionArticulos(){
               crearArticulo.setVisible(true);
               if(crearArticulo.getResultado()==1){
                   modelo.setRowCount(0);
-                  InformacionArticulos();
+                  
               }
               
         

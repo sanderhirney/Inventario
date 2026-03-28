@@ -697,7 +697,6 @@ public class Salida_Inventario extends javax.swing.JDialog {
         // TODO add your handling code here:
        Ver_Articulos ventana=new Ver_Articulos(null, true);
        ventana.setHabilitacion(0);
-       ventana.InformacionArticulos();
        ventana.setResizable(false);
        ventana.setLocationRelativeTo(null);
        ventana.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);

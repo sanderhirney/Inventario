@@ -25,12 +25,13 @@ public class ConfiguracionBaseDatosHospital {
     Flyway flyway=Flyway.configure()
             //configuracion
             .dataSource(dataSource, usuario, password)
-            .schemas(esquemas)
-            .baselineOnMigrate(true)//Esto le dice a Flyway: "Si encuentras tablas, crea tu bitácora y marca este punto como el inicio (baseline)".
+            .schemas(esquemas)            
             .locations("classpath:db/migration/hospital")
-            .load();
+            .baselineOnMigrate(true)//Esto le dice a Flyway: "Si encuentras tablas, crea tu bitácora y marca este punto como el inicio (baseline)".
+            .baselineVersion("1")
+           .load();
                 //carga
-                flyway.migrate();
+              flyway.migrate();
                 
                 log.info("CONFIGURACION INICIAL DE BD CREADA");
                     System.out.println("Carga de BD verificada y creada");
