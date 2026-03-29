@@ -9,13 +9,17 @@ import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerConceptos;
 import BaseDatos.ConexionVerificarDocumentoEntrada;
 import Modelos.AlmacenDTO;
+import Modelos.ConceptoDTO;
 import Modelos.ConfiguracionDTO;
+import Modelos.DetalleArticuloDTO;
+import Modelos.DocumentoDTO;
 import Modelos.HospitalDTO;
 import Modelos.ProveedorDTO;
 import Modelos.SeccionesDTO;
 import Reportes.ReporteEntrada;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,6 +29,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.time.LocalDate;
 
 public class Entradas_Inventario extends javax.swing.JDialog {
 JFrame ventanaPrincipal;
@@ -37,6 +42,8 @@ int codigoSeccionActual;
 ConfiguracionDTO configuracionActual;
 int decimalCostos=0;
 int decimalCantidad=0;
+List<ConceptoDTO> listaConceptos=new ArrayList<>();
+LocalDate fechaActual=LocalDate.now();
 ///////
 List<String> descripcion=new ArrayList<>();
 List<Integer> codigo=new ArrayList<>();  
@@ -49,7 +56,7 @@ String convertir;
 String nombre_recibido;
 String codigo_recibido;
 Date fecha= new Date();
-java.sql.Date sql = new java.sql.Date(fecha.getTime());
+
 java.sql.Date fecha_doc;
 long fechalong;
 List<Double> CostosActuales=new ArrayList<>();
@@ -59,11 +66,6 @@ DefaultTableModel modelo;
 ConexionVerConceptos conceptos= new ConexionVerConceptos();
 ConexionConsultarDecimales decimales=new ConexionConsultarDecimales();
 ConexionVerAlmacenes almacenes=new ConexionVerAlmacenes();
-Iterator lista1;
-Iterator lista2;
-Iterator lista3;
-Iterator lista4;
-Iterator lista5;
 //variables que seran usadas para enviar datos
 String id_documento;
 String nombre_seccion;
@@ -93,10 +95,12 @@ String documento_rec;
 public Dimension resolucion;//variable para leer el ancho y alto de la ventana
 //para darle formato al campo al momento de realizar la multiplicacion de cantidad*costo unitaroio
 
- Logger log=LoggerInfo.getLogger();
+private Logger log=LoggerInfo.getLogger();
  public Entradas_Inventario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+         try{
+        
         GestionDeHospitales.getInstance().llamarDatos();
         hospitalActual=GestionDeHospitales.getInstance().hospitales();
         GestionDeSecciones.getInstance().setIdHospital(hospitalActual.id());
@@ -139,37 +143,14 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
         {
             JOptionPane.showMessageDialog(null, "La configuracion de decimales estan en cero(0) y con ellos los campos muestran todos los digitos", "Precaucion", JOptionPane.WARNING_MESSAGE);
         }
-         
-        
-        
-        
-        try{
-        resolucion=super.getToolkit().getScreenSize();
-        this.setSize(resolucion);
-        modelo= (DefaultTableModel)Tabla_datos.getModel();//para poder manipular la tabla
-        Etiq_Fecha_Oper.setText(sql.toString());
-        //conceptos.setTipo(1);
-       //conceptos.consulta();//obtengo los conceptos
-     //   proveedor.consulta();//obtengo los proveedores
-       // descripcion=conceptos.descripcion();
-      //  codigo=conceptos.codigo();
-     //   nombre_proveedor=proveedor.nombres();
-      //  rif_proveedor=proveedor.rif_proveedor();
-        lista1=descripcion.iterator();
-        lista3=codigo.iterator();
-        listaAlmacenes=GestionDeAlmacenes.getInstance().almacenes();
-        
-        lista4=codigo_almacenes.iterator();
-        lista5=nombre_almacenes.iterator();
-        while(lista1.hasNext())
-        {
-        Combo_Concepto.addItem(lista3.next()+"-"+lista1.next());
-        }//while
-        lista2=nombre_proveedor.iterator();
-        while(lista2.hasNext())
-        {
-        //Combo_Proveedor.addItem(lista2.next());
-        }//while
+        GestionDeConceptos.getInstance().setIdHospital(hospitalActual.id());
+        GestionDeConceptos.getInstance().llamarDatos();
+        listaConceptos=GestionDeConceptos.getInstance().getListaConceptos();
+        for(ConceptoDTO concepto:listaConceptos){
+        if(concepto.tipo().equals("E")){
+        Combo_Concepto.addItem(concepto);
+        }
+        }
         
         almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
         if(almacenPrincipal != null){
@@ -177,7 +158,15 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
         }else{
              etiquetaAlmacenActivo.setText("NO OBTENIDO");
         }
-         
+        modelo= (DefaultTableModel)tablaDatosArticulos.getModel();//para poder manipular la tabla
+        Etiq_Fecha_Oper.setText(fechaActual.toString());
+        
+        
+       
+        resolucion=super.getToolkit().getScreenSize();
+        this.setSize(resolucion);
+        
+        
         }catch(Exception e){
             log.severe("ERROR AL CREAR LA ENTRADA");
             log.severe(e.toString());
@@ -206,13 +195,13 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
         Etiq_Conceptos = new javax.swing.JLabel();
         Combo_Concepto = new javax.swing.JComboBox();
         Etiq_proveedor = new javax.swing.JLabel();
-        Fecha_documento = new com.toedter.calendar.JDateChooser();
+        Fecha_Documento = new com.toedter.calendar.JDateChooser();
         Etiq_fecha1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        Tabla_datos = new javax.swing.JTable();
+        tablaDatosArticulos = new javax.swing.JTable();
         Etiq_Fecha_Oper = new javax.swing.JLabel();
         Etiq_Fecha2 = new javax.swing.JLabel();
-        Campo_factura = new javax.swing.JTextField();
+        Campo_Documento = new javax.swing.JTextField();
         Combo_Proveedor = new javax.swing.JComboBox<>();
         Boton_Buscar = new javax.swing.JButton();
         Etiq_codigo = new javax.swing.JLabel();
@@ -227,7 +216,7 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
         Etiq_Almacen = new javax.swing.JLabel();
         Combo_Almacen = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        campo_observaciones = new javax.swing.JTextArea();
+        Campo_Observaciones = new javax.swing.JTextArea();
         Etiq_Observaciones = new javax.swing.JLabel();
         etiquetaAlmacenActivo = new javax.swing.JLabel();
 
@@ -286,11 +275,11 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
 
         Etiq_proveedor.setText("Proveedor:");
 
-        Fecha_documento.setDateFormatString("yyyy/MM/dd");
+        Fecha_Documento.setDateFormatString("yyyy/MM/dd");
 
         Etiq_fecha1.setText("Año/Mes/Dia");
 
-        Tabla_datos.setModel(new javax.swing.table.DefaultTableModel(
+        tablaDatosArticulos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -306,23 +295,23 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
                 return canEdit [columnIndex];
             }
         });
-        Tabla_datos.addMouseListener(new java.awt.event.MouseAdapter() {
+        tablaDatosArticulos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Tabla_datosMouseClicked(evt);
+                tablaDatosArticulosMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(Tabla_datos);
+        jScrollPane2.setViewportView(tablaDatosArticulos);
 
         Etiq_Fecha2.setText("Año/Mes/Dia");
 
-        Campo_factura.addFocusListener(new java.awt.event.FocusAdapter() {
+        Campo_Documento.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                Campo_facturaFocusLost(evt);
+                Campo_DocumentoFocusLost(evt);
             }
         });
-        Campo_factura.addActionListener(new java.awt.event.ActionListener() {
+        Campo_Documento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Campo_facturaActionPerformed(evt);
+                Campo_DocumentoActionPerformed(evt);
             }
         });
 
@@ -382,10 +371,10 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
 
         Etiq_Almacen.setText("Almacen Despachador:");
 
-        campo_observaciones.setColumns(20);
-        campo_observaciones.setRows(5);
-        campo_observaciones.setText("N/A");
-        jScrollPane1.setViewportView(campo_observaciones);
+        Campo_Observaciones.setColumns(20);
+        Campo_Observaciones.setRows(5);
+        Campo_Observaciones.setText("N/A");
+        jScrollPane1.setViewportView(Campo_Observaciones);
 
         Etiq_Observaciones.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Etiq_Observaciones.setText("Observaciones");
@@ -394,37 +383,6 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 897, Short.MAX_VALUE)
-                    .addComponent(Separador2)
-                    .addComponent(Separador1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Etiq_Codigo)
-                                .addGap(23, 23, 23)
-                                .addComponent(Boton_Buscar)
-                                .addGap(429, 429, 429))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Etiq_Cantidad)
-                                    .addComponent(Etiq_Conceptos))
-                                .addGap(37, 37, 37)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Combo_Concepto, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(Campo_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(12, 12, 12)
-                                        .addComponent(Etiq_Precio)
-                                        .addGap(30, 30, 30)
-                                        .addComponent(Campo_Precio))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Etiq_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(Etiq_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -450,9 +408,9 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
                                     .addComponent(Etiq_Fecha_Op))
                                 .addGap(28, 28, 28)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(Fecha_documento, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                                    .addComponent(Fecha_Documento, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                                     .addComponent(Etiq_Fecha_Oper, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(Campo_factura)
+                                    .addComponent(Campo_Documento)
                                     .addComponent(Combo_Proveedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(Combo_Almacen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -465,6 +423,40 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(Etiq_Observaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2))
+                    .addComponent(Separador2, javax.swing.GroupLayout.DEFAULT_SIZE, 897, Short.MAX_VALUE)
+                    .addComponent(Separador1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Etiq_Codigo)
+                                .addGap(23, 23, 23)
+                                .addComponent(Boton_Buscar)
+                                .addGap(429, 429, 429))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Etiq_Cantidad)
+                                    .addComponent(Etiq_Conceptos))
+                                .addGap(37, 37, 37)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Combo_Concepto, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(Campo_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(12, 12, 12)
+                                        .addComponent(Etiq_Precio)
+                                        .addGap(30, 30, 30)
+                                        .addComponent(Campo_Precio))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Etiq_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(Etiq_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -483,7 +475,7 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
                         .addComponent(Etiq_Fecha_Op, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Etiq_Fecha_Oper, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(Etiq_fecha1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Etiq_Fecha2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -495,12 +487,12 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Etiq_Fecha_Fac)
-                            .addComponent(Fecha_documento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Fecha_Documento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Etiq_Num_Doc)
-                            .addComponent(Campo_factura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(Campo_Documento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Etiq_proveedor)
                             .addComponent(Combo_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -533,247 +525,99 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
                 .addGap(26, 26, 26)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void Boton_RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_RegistrarActionPerformed
-    ConexionOperacionesEntrada operaciones=new ConexionOperacionesEntrada();
-    ConexionCrearEntrada entrada= new ConexionCrearEntrada();  
-    List<Integer> codigo_art = new ArrayList<>();
-    List<String> nombre_art= new ArrayList<>();
-    List<Double> cantidad_art=new ArrayList<>();
-    List<Double> valor_pedido=new ArrayList<>();
-    List<Double> precio_art=new ArrayList<>();
-    List<Double> total_linea=new ArrayList<>(); 
-    int cod_concepto_entrada;
-    String codigo_almacen;
-    String observacion;
-    String documento;
-    String codigo_proveedor;
-    Date fecha_documento;
-    Double total_operacion=0.0;//variable usada para guardar el total del valor movido por concepto
-    //////***para hacer los calculos****//
-    List<Double> costo_total= new ArrayList<>();
-    List<Double> existencia_total=new ArrayList<>();
-    List<Double> costo_promedio=new ArrayList<>();
-    int cantidad_articulos=0;  
-    //actualizar costos y existencias
-    List<Double> ExistenciasNuevas=new ArrayList<>();
-    List<Double> CostosNuevos=new ArrayList<>();   
-    try
-   {
-        
-        fecha_documento=Fecha_documento.getDate();//obtengo la fecha del jdtachooser y lo guardo en un date
-        fechalong=fecha_documento.getTime();//guardo la fecha en un long para poder pasarlo al sqldate
-        fecha_doc=new java.sql.Date(fechalong);//guardo la fecha en un sql date  
-        //la variable a enviar para la fecha de operacion es la que se llama sql
-        documento=Campo_factura.getText().trim();
-        int filas= modelo.getRowCount();
-        cod_concepto_entrada=codigo.get(Combo_Concepto.getSelectedIndex());
-        codigo_proveedor=(rif_proveedor.get(Combo_Proveedor.getSelectedIndex()));
-        codigo_almacen=codigo_almacenes.get(Combo_Almacen.getSelectedIndex());
-        observacion=campo_observaciones.getText().trim();
-        for(int i=0; i<filas; i++)
-        {
-            codigo_art.add(Integer.valueOf ((modelo.getValueAt(i, 0)).toString() ));
-            nombre_art.add( (modelo.getValueAt(i, 1)).toString() );
-            cantidad_art.add(Double.valueOf( (modelo.getValueAt(i, 2)).toString() ) );
-            precio_art.add(  (Double.valueOf((modelo.getValueAt(i, 3)).toString())));
-            total_linea.add(Double.valueOf ((modelo.getValueAt(i, 4)).toString()));
-            valor_pedido.add(0d);
-            cantidad_articulos++;
-        }//aqui leo todas las variables
-        for(int i=0; i<filas; i++)
-        {      
-        total_operacion=total_operacion+total_linea.get(i);
-        }
-        if(cantidad_articulos<=0)
-        {
-            JOptionPane.showMessageDialog(null, "Debe tener por lo menos un(1) articulos para registrar", "Error", JOptionPane.ERROR_MESSAGE);
-            
-        }
-        if(cantidad_articulos>=1)
-        {
-        //para ingresa informacion del documento a la entrada
-        
-        entrada.setFechaDocumento(fecha_doc);
-        entrada.setFechaOperacion(sql);
-        entrada.setCodigo(documento);
-        entrada.setProveedor(codigo_proveedor);
-        entrada.setSeccion(codigo_seccion);
-        entrada.setCantidad(cantidad_articulos);
-        entrada.setPedidoArticulo(valor_pedido);
-        entrada.setConcepto(cod_concepto_entrada);
-        entrada.setCodigoArticulo(codigo_art);
-        entrada.setCantidadArticulo(cantidad_art);
-        entrada.setPrecioArticulo(precio_art);
-        entrada.setTotalOperacion(total_operacion);
-        entrada.setConsecutivo(consecutivo);
-        entrada.setCodigoAlmacen(codigo_almacen);
-        entrada.setObservaciones(observacion);
-        entrada.documento();
-        
-        
-        if(entrada.respuesta()==1)
-        {
-            entrada.historial();
-            if(entrada.getResultFinal()==1){
-             //actualizo las existencias y costos con la tabla
-              List<Double> ExistenciasActuales=new ArrayList<>();
-                operaciones.setCodigo(codigo_art);
-                operaciones.setDocumento(documento);
-                operaciones.setFecha(fecha_doc);
-                operaciones.setSeccion(codigo_seccion);
-                operaciones.existencias();
-                operaciones.precios();
-                
-                ExistenciasActuales=operaciones.obtenerExistencia();
-                CostosActuales=operaciones.obtenerPrecio();
-                
-                try//aqui aplico la formula del inventario promedio ponderado en si es costo total / existencia total
-                {//esta operacion debe hacerse cada vez que hay una nueva entrada
-                for(int i=0; i<ExistenciasActuales.size(); i++)
-                {
-                    
-                    costo_total.add( (CostosActuales.get(i)*ExistenciasActuales.get(i))+(   precio_art.get(i)*cantidad_art.get(i)    )  );//total de costo del que hay mas el costo total del que llega
-                    existencia_total.add(ExistenciasActuales.get(i)+cantidad_art.get(i));//las que hay mas la que llegan
-                    costo_promedio.add(costo_total.get(i) /existencia_total.get(i));//costo ponderado
-                    ExistenciasNuevas.add(existencia_total.get(i));
-                    CostosNuevos.add(costo_promedio.get(i));
-                   
-                }
-                }//try
-                catch(Exception E)
-                {
-                    JOptionPane.showMessageDialog(null,"Se ha producido el siguiente error en el calculo de costos promedios: \n" + E +"cantidad: "+ExistenciasActuales.size()+"\nVentana Entradas de Inventario", "Error", JOptionPane.ERROR_MESSAGE );
-                }
-                //le vuelvo a enviar los datos que va a actualizar
-               // operaciones.setCodigo(codigo_art);
-                 //debo volver a ajustar los decimales
-                //ya que al recalcular 
-                //toma todos los decimales del float
-                
-            List<Double> calculofinal_operacion=new ArrayList<>();//estas dos variables serviran para formatear bien el costo del articulo
-            for(int f=0; f<CostosNuevos.size(); f++)
-                {
-                
-            calculofinal_operacion.add((Double)(Math.round (CostosNuevos.get(f)*Math.pow(10, decimalCostos)) / Math.pow(10, decimalCantidad))) ;
-                }
-                
-                
-                ConexionOperacionesEntrada operaciones2=new ConexionOperacionesEntrada();//instancio nuevamente todo ya que ya las llame en primer momento
-                operaciones2.setCodigo(codigo_art);
-                operaciones2.setDocumento(documento);
-                operaciones2.setFecha(fecha_doc);
-                operaciones2.setSeccion(codigo_seccion);
-                operaciones2.precios();
-                operaciones2.existencias();
-                operaciones2.setCostoNuevo(calculofinal_operacion);
-                operaciones2.setExistenciaNuevo(ExistenciasNuevas);
-                operaciones2.Actualizarexistencias();
-                operaciones2.ActualizarCostos();
-                //aqui debo ejecutar un metodo que revise la bd de temporal
-                //temporal documento y temporal articulo
-                //vaciar la misma ya que si fue modificada quedara alli
-               
-              
-               if(entrada.getResultFinal()==1 && entrada.respuesta()==1 && operaciones2.getResultadoOperacion()==1)
-            {
-                         
+   
+        int filas=modelo.getRowCount();
+         if(filas==0){
+         JOptionPane.showMessageDialog(null, "Debe agregar al menos un(01) articulo ", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
                  
-                           ConexionActualizarTempEntrada temp=new ConexionActualizarTempEntrada();
-                           temp.setDocumento(documento_rec);
-                           temp.setSeccion(codigo_seccion);
-                           temp.actualizarTemporalEntrada();
-                           if(temp.resultado()>=0)
-                               {
-                                   //limpio los campos
-                                   
-                                    Campo_factura.setText("");
-                                    Etiq_codigo.setText("");
-                                    Etiq_nombre.setText("");
-                                    Campo_Cantidad.setText("");
-                                    Campo_Precio.setText("");
-                                    //
-                                    modelo.setRowCount(0);//limpio la tabla
-                                    
-                                    cantidad_articulos=0;
-                                    JOptionPane.showMessageDialog(null, "Informacion Registrada, Exitosamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-                              
-                                    
-                                    ReporteEntrada jasper=new ReporteEntrada();
-                                    jasper.llamarReporte();
-                
-                                 }//if temp resultado
-            }//if entrada resultado final//si pudo realizar correctamente las operaciones de calculos de existencias y costos
-            }//si pudo ingresar al historial
-            else{
-                JOptionPane.showMessageDialog(null, "Ocurrio un error al ingresar la entrada a los historiales", "Informacion", JOptionPane.ERROR_MESSAGE);
-            }            
-            }//entrada.respuesta==1  si pudo ingreaar al documetno
-            if(entrada.respuesta()==0 || entrada.getResultFinal()==0)
-            {
-                Campo_factura.setText("");
-                Etiq_codigo.setText("");
-                Etiq_nombre.setText("");
-                Campo_Cantidad.setText("");
-                Campo_Precio.setText("");
-                //ExistenciasActuales.clear();
-                modelo.setRowCount(0);//limpio la tabla
-                
-                cantidad_articulos=0;
-                JOptionPane.showMessageDialog(null,"Error al registrar la entrada, No se conservo informacion", "Error grave", JOptionPane.ERROR_MESSAGE);
-             /*   JOptionPane.showMessageDialog(null,"Error al registrar la entrada, Deshaciendo cambios", "Error grave", JOptionPane.ERROR_MESSAGE);
+        }else{
+                    try{
+                    List<DetalleArticuloDTO> listaArticulos = new ArrayList<>();
+                    for(int i=0; i<modelo.getRowCount(); i++){
+                    int idArticulo=Integer.parseInt(modelo.getValueAt(i,0).toString());
+                    String nombreArticulo=(String)modelo.getValueAt(i,1);
+                    BigDecimal cantidadArticulo = transformarABigDecimal(modelo.getValueAt(i, 2));
+                    BigDecimal costoArticulo = transformarABigDecimal(modelo.getValueAt(i, 3));
+                    listaArticulos.add(new DetalleArticuloDTO(idArticulo, nombreArticulo, cantidadArticulo, costoArticulo));
+
+                    }
+                   AlmacenDTO almacenDespachoSeleccionado=(AlmacenDTO)Combo_Almacen.getSelectedItem();
+                   ConceptoDTO conceptoSeleccionado=(ConceptoDTO)Combo_Concepto.getSelectedItem();
+                   DocumentoDTO documento=new DocumentoDTO(
+                   0,
+                   hospitalActual.id(),
+                   codigoSeccionActual,
+                   almacenDespachoSeleccionado.id(),
+                   0,//porque en entradas el almacen de destino no aplica
+                   conceptoSeleccionado.codigo(),
+                   "ENTRADA",//es un documento de tipo entrada 
+                   Campo_Documento.getText().trim(),
+                   0,//el correlativo legal a plica solo a salidas
+                   fechaActual.getMonthValue(),
+                   fechaActual.getYear(),
+                   Fecha_Documento.getDate(),
+                   0,//siempre se guarda en borrador primero
+                   Campo_Observaciones.getText().trim(),
+                   BigDecimal.ZERO,//lo obtenemos luego en el dto del detalle articulo
+                   0,//este es el del documento origen el cual es 0 porque es nuevo el documento     
+                   listaArticulos
+                   ); 
+                   
+                   ConexionCrearEntrada entrada = new ConexionCrearEntrada();
+                   entrada.setDocumento(documento);
+                   if(entrada.crearEntrada()){
+                   JOptionPane.showMessageDialog(null, "Entrada registrada satisfactoriamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                   modelo.setRowCount(0);
+                   }else{
+                   JOptionPane.showMessageDialog(null, "Se encontro un error y no se creo la entrada", "error", JOptionPane.ERROR_MESSAGE);
+                   }
+
+
+
+               }
+               catch(Exception ex)
+               {
+                   log.severe("ERROR AL CREAR LA ENTRADA");
+                   log.severe(ex.toString());
+                   //limpio los campos
+                            Campo_Documento.setText("");
+                            Etiq_codigo.setText("");
+                            Etiq_nombre.setText("");
+                            Campo_Cantidad.setText("");
+                            Campo_Precio.setText("");
+
+                            modelo.setRowCount(0);//limpio la tabla
+
+                            JOptionPane.showMessageDialog(null, "se ha producido el siguiente error general: "+ex+" Ventana Entradas Inventario", "Error", JOptionPane.ERROR_MESSAGE);
+
+
+               }
+                    System.out.println("si aqui estoy con el enter del else");
            
-                //borrar el ultimo registro del documento de entrada
-                ConexionDeshacerDocEntradas borrar=new ConexionDeshacerDocEntradas();
-                borrar.ejecutar();
-                if(borrar.resultado()> 0)
-                {
-                    JOptionPane.showMessageDialog(null,"Se han borrado los cambios hechos, satisfactoriamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-                }
-                if(borrar.resultado()==0)
-                {
-                    JOptionPane.showMessageDialog(null,"No se ha podido borrar los cambios efectuados. \n Contacte al desarrollador", "Error Grave", JOptionPane.INFORMATION_MESSAGE);
-                    
-                }*/
-            }
-            
-       
-        
-        
-        }//if
-        
-   }
-   catch(Exception E)
-   {
-       //limpio los campos
-                Campo_factura.setText("");
-                Etiq_codigo.setText("");
-                Etiq_nombre.setText("");
-                Campo_Cantidad.setText("");
-                Campo_Precio.setText("");
-                
-                modelo.setRowCount(0);//limpio la tabla
-                codigo_art.clear();
-                nombre_art.clear();
-                cantidad_art.clear();
-                precio_art.clear();
-                cantidad_articulos=0;
-                JOptionPane.showMessageDialog(null, "se ha producido el siguiente error general: "+E +" Ventana Entradas Inventario", "Error", JOptionPane.ERROR_MESSAGE);
-                  
-                  
-   } 
-        
+  } 
         
     }//GEN-LAST:event_Boton_RegistrarActionPerformed
-
+     private BigDecimal transformarABigDecimal(Object valor) {
+            if (valor == null) return BigDecimal.ZERO;
+            if (valor instanceof BigDecimal bd) return bd;
+            // 1. Convertimos a String y quitamos espacios
+             String texto = valor.toString().trim();
+        
+               // 2. IMPORTANTE: Reemplazamos la coma por punto 
+              // BigDecimal solo entiende el punto (.) como separador decimal
+               texto = texto.replace(",", ".");
+            return new BigDecimal(texto.toString());
+            }
     private void Boton_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_CancelarActionPerformed
         // TODO add your handling code here:
          int opcion= JOptionPane.showConfirmDialog(null," ¿Seguro desea Salir?. ¡No se conservara nada que no haya guardado!", "Confirmacion de Cancelar", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
@@ -787,11 +631,9 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
     private void Boton_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_GuardarActionPerformed
         // TODO add your handling code here:
        
-        int posicion_proveedor;
-        posicion_proveedor=Combo_Proveedor.getSelectedIndex();
-        
-        
-        if( (Etiq_nombre.getText().isEmpty()) || (Etiq_codigo.getText().isEmpty()) || (Campo_Precio.getText().isEmpty()) || (Campo_Cantidad.getText().isEmpty()) || (Fecha_documento.getDate()==null))
+        if( (Etiq_nombre.getText().isEmpty()) || (Etiq_codigo.getText().isEmpty()) || (Campo_Precio.getText().isEmpty()) || (Campo_Cantidad.getText().isEmpty()) || (Fecha_Documento.getDate()==null)
+                ||(Campo_Precio.getText().isBlank()) || (Campo_Cantidad.getText().isBlank())
+                )
         {
             JOptionPane.showMessageDialog(null, "Revise lo siguiente \n Debe seleccionar un articulo \n Indique cantidad, Precio y Fecha del documento", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -906,19 +748,19 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
 
     private void Boton_Eliminar_FilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_Eliminar_FilaActionPerformed
         // TODO add your handling code here:
-        if (Tabla_datos.getSelectedRow()== -1)
+        if (tablaDatosArticulos.getSelectedRow()== -1)
         {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla para borrar la linea", "Revisar", JOptionPane.ERROR_MESSAGE);
         }
         else
         {
-       modelo.removeRow(Tabla_datos.getSelectedRow());
+       modelo.removeRow(tablaDatosArticulos.getSelectedRow());
         }
     }//GEN-LAST:event_Boton_Eliminar_FilaActionPerformed
 
-    private void Campo_facturaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Campo_facturaFocusLost
+    private void Campo_DocumentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Campo_DocumentoFocusLost
         // TODO add your handling code here:
-      String factura=Campo_factura.getText().trim();
+      String factura=Campo_Documento.getText().trim();
       // 1. Validamos que no esté vacío
     if (factura.isEmpty()) {
         Boton_Buscar.setEnabled(false);
@@ -931,27 +773,27 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
         if(documento.getResultado()==1)
         {
             JOptionPane.showMessageDialog(null, "Numero de documento ya existente", "Error", JOptionPane.ERROR_MESSAGE);
-            Campo_factura.setText("");
+            Campo_Documento.setText("");
             Boton_Buscar.setEnabled(false);
             Boton_Guardar.setEnabled(false);
-            Campo_factura.requestFocus();//devolvemos el foco
+            Campo_Documento.requestFocus();//devolvemos el foco
         }else{
             Boton_Buscar.setEnabled(true);
             Boton_Guardar.setEnabled(true);
         }
-    }//GEN-LAST:event_Campo_facturaFocusLost
+    }//GEN-LAST:event_Campo_DocumentoFocusLost
 
-    private void Tabla_datosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla_datosMouseClicked
+    private void tablaDatosArticulosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDatosArticulosMouseClicked
         // TODO add your handling code here:
         if(evt.getClickCount()==2)
         {
-            System.out.println("se hizo click en el codigo: "+Tabla_datos.getValueAt(0, 0).toString());
+            System.out.println("se hizo click en el codigo: "+tablaDatosArticulos.getValueAt(0, 0).toString());
         }
-    }//GEN-LAST:event_Tabla_datosMouseClicked
+    }//GEN-LAST:event_tablaDatosArticulosMouseClicked
 
-    private void Campo_facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Campo_facturaActionPerformed
+    private void Campo_DocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Campo_DocumentoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Campo_facturaActionPerformed
+    }//GEN-LAST:event_Campo_DocumentoActionPerformed
 
     private void Campo_CantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Campo_CantidadActionPerformed
         // TODO add your handling code here:
@@ -1008,7 +850,7 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
             String mascara_total="#.";//para la mascara
             String formato_campo="";//para escribir el numero en base a la mascara
             String formato_total="";
-            campo_observaciones.setText(observaciones_rec);
+            Campo_Observaciones.setText(observaciones_rec);
             for(int i=0; i<decimalCostos; i++)
             {
                 mascara_campo=mascara_campo+("0");
@@ -1061,8 +903,8 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
             }
         }//for
         
-        Fecha_documento.setDate(fecha_doc_rec);
-        Campo_factura.setText(documento_rec);
+        Fecha_Documento.setDate(fecha_doc_rec);
+        Campo_Documento.setText(documento_rec);
         
         
     }
@@ -1120,8 +962,9 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
     private javax.swing.JButton Boton_Limpiar;
     private javax.swing.JButton Boton_Registrar;
     private javax.swing.JTextField Campo_Cantidad;
+    private javax.swing.JTextField Campo_Documento;
+    private javax.swing.JTextArea Campo_Observaciones;
     private javax.swing.JTextField Campo_Precio;
-    private javax.swing.JTextField Campo_factura;
     private javax.swing.JComboBox<AlmacenDTO> Combo_Almacen;
     private javax.swing.JComboBox Combo_Concepto;
     private javax.swing.JComboBox<ProveedorDTO> Combo_Proveedor;
@@ -1142,17 +985,16 @@ public Dimension resolucion;//variable para leer el ancho y alto de la ventana
     private javax.swing.JLabel Etiq_fecha1;
     private javax.swing.JLabel Etiq_nombre;
     private javax.swing.JLabel Etiq_proveedor;
-    private com.toedter.calendar.JDateChooser Fecha_documento;
+    private com.toedter.calendar.JDateChooser Fecha_Documento;
     private javax.swing.JPanel Panel2;
     private javax.swing.JSeparator Separador1;
     private javax.swing.JSeparator Separador2;
-    private javax.swing.JTable Tabla_datos;
-    private javax.swing.JTextArea campo_observaciones;
     private javax.swing.JLabel etiquetaAlmacenActivo;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPanel panel1;
+    private javax.swing.JTable tablaDatosArticulos;
     // End of variables declaration//GEN-END:variables
 }

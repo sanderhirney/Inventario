@@ -9,6 +9,7 @@ package Modelos;
  * @author USER
  */
 public record AlmacenDTO(
+        int id,
         String codigo,
         int idHospital,
         String denominacion,

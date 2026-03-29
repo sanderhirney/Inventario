@@ -4,22 +4,17 @@
  */
 package Modelos;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author USER
  */
-public record ConceptoDTO(
-        int codigo,
-        int idHospital,
-        String descripcion,
-        String tipo
+public record DetalleArticuloDTO(
+        int idArticulo,
+        String nombreArticulo,
+        BigDecimal cantidadArticulo,
+        BigDecimal precioUnitarioArticulo
         ) {
-
-    @Override
-    public String toString() {
-        return descripcion ;
-    }
-    
-    
 
 }

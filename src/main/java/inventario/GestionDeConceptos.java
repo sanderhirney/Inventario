@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  */
 public class GestionDeConceptos {
     Logger log=LoggerInfo.getLogger();
-    int idHospital;
+    private int idHospital;
     private static GestionDeConceptos instancia;
     private List<ConceptoDTO> listaConceptos=new ArrayList<>();
     //Singleton

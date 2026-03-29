@@ -2,241 +2,110 @@
 //clase para actualizar costos 
 package BaseDatos;
 
+import Modelos.DetalleArticuloDTO;
+import Modelos.DocumentoDTO;
+import inventario.LoggerInfo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.Year;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Statement;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 public class ConexionCrearEntrada {
-    Connection conex;
-    PreparedStatement consulta;
+    private Logger log=LoggerInfo.getLogger();
+    
+    
+    Connection conexion;
     Conexion conectar= new Conexion();
-    ResultSet ResultadoConsulta;
-    int ejecutar;
-    int resultadoDocumento;//recoge el valor de resultado de ingresar a BD tabla doc_entradas
-    int resultadoHistorial;//recoge el valor de resultado de ingresar a BD tabla historiales
-    String id_documento;
-    //int codigo_articulo;
-    java.sql.Date fecha_operacion;
-    java.sql.Date fecha_documento;
-    String proveedor;
-    String observaciones;
-    String codigo_almacen;
-    int seccion;
-    int cantidad;
-    int concepto_entrada;
-       Double total_operacion;//variable que recoge el total de valor monetario por concepto
-    
-    int valor_salida=0;//en este caso es 0 porque es entrada
-    int consecutivo=0;//para guardar el consecutivo del documento
-    //teniendo en cuenta que que cada mes debe iniciar en 1 
-    //por cada concepto
-    
-    ////
-   // List<Integer> codigo_articulo = new ArrayList<>();
- List<String> nombre_articulo= new ArrayList<>();
- List<Double> cantidad_articulo=new ArrayList<>();
- List<Double> valor_pedido=new ArrayList<>();
- List<Double> precio_articulo=new ArrayList<>();
- List<Integer> codigo_articulo=new ArrayList<>();  
+    DocumentoDTO documento;
+    private final String sqlDoc = "INSERT INTO documentos (hospital_id, seccion_id, almacen_despacho_id, " +
+                    "almacen_destino_id, concepto_id, tipo, numero_provisional, fecha_emision, " +
+                    "estado, observaciones, valor_total) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+    private final String sqlKardex = "INSERT INTO kardex (hospital_id, almacen_id, documento_id, articulo_id, " +
+                       "seccion_id, cantidad, costo_unitario) VALUES (?, ?, ?, ?, ?, ?, ?)";
     
     //ingreso a historiales
     
-    public void historial()
+    private boolean entrada() throws SQLException
     {
-        
+        log.info("CREAR ENTRADA");
         
         try
     {
         conectar.Conectar();
-        conex= conectar.getConexion();
-        for(int i=0; i<codigo_articulo.size(); i++)
-        {
-        
-        consulta= conex.prepareStatement("insert into historiales values (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        consulta.setDate(1, fecha_documento);
-        consulta.setInt(2, codigo_articulo.get(i));
-        consulta.setDouble(3, cantidad_articulo.get(i));
-        consulta.setInt(4, valor_salida);
-        consulta.setInt(5, seccion);
-        consulta.setDouble(6, precio_articulo.get(i));
-        consulta.setString(7, id_documento);
-        consulta.setDouble(8, valor_pedido.get(i));
-        consulta.setInt(9, concepto_entrada);
-        consulta.setInt(10, 0);//al ser una entrada el concepto de salida es 0
-        consulta.addBatch();
-        consulta.executeBatch();
-            
+        conexion= conectar.getConexion();
+        conexion.setAutoCommit(false);
+        // 1. Insertar Cabecera y obtener el ID generado (SERIAL)
+        int idGenerado;
+        try (PreparedStatement psDoc = conexion.prepareStatement(sqlDoc, Statement.RETURN_GENERATED_KEYS)) {
+            psDoc.setInt(1, documento.idHospital());
+            psDoc.setInt(2, documento.idSeccion());
+            psDoc.setObject(3, documento.idAlmacenDespacho() > 0 ? documento.idAlmacenDespacho() : null);
+            psDoc.setObject(4, documento.idAlmacenDestino() > 0 ? documento.idAlmacenDestino() : null);
+            psDoc.setInt(5, documento.concepto());
+            psDoc.setString(6, documento.tipoDocumento());
+            psDoc.setString(7, documento.numeroDocumento());
+            psDoc.setDate(8, new java.sql.Date(documento.fechaEmisionDocumento().getTime()));
+            psDoc.setInt(9, documento.estado()); // 0 = Borrador
+            psDoc.setString(10, documento.observaciones());
+            psDoc.setBigDecimal(11, documento.valorTotalCalculado()); // Usamos tu método del Record
+
+            psDoc.executeUpdate();
+
+            // Recuperamos el ID que Postgres le asignó al documento
+            var rs = psDoc.getGeneratedKeys();
+            if (rs.next()) {
+                idGenerado = rs.getInt(1);
+            } else {
+                log.severe("No se pudo obtener el ID del documento.");
+                throw new SQLException("No se pudo obtener el ID del documento.");
+            }
         }
+
+        // 2. Insertar las 400 líneas con BATCH
+        try (PreparedStatement psKar = conexion.prepareStatement(sqlKardex)) {
+            for (DetalleArticuloDTO art : documento.articulos()) {
+                psKar.setInt(1, documento.idHospital());
+                psKar.setInt(2, documento.idAlmacenDespacho());//despcho porque es entrada
+                psKar.setInt(3, idGenerado); // El ID que acabamos de obtener
+                psKar.setInt(4, art.idArticulo());
+                psKar.setInt(5, documento.idSeccion());
+                psKar.setBigDecimal(6, art.cantidadArticulo());
+                psKar.setBigDecimal(7, art.precioUnitarioArticulo());
+                
+                psKar.addBatch(); // Lo agrega al "paquete" en memoria
+            }
+            psKar.executeBatch(); // Envía todo el paquete de un solo golpe
+        }
+
+        conexion.commit(); // Si llegamos aquí sin errores, se guarda TODO
+       
         
 
-        if( consulta!=null )
-        {
-           resultadoHistorial=1;
-        }
-        if( consulta==null )
-        {
-            resultadoHistorial=0;
-        }//else
-       conectar.Cerrar();
+      
     }//consulta
            catch(SQLException ex)
     {
+        log.severe("ERROR AL CREAR LA ENTRADA");
+        log.severe(ex.toString());
         JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de entrada de historiales.\n Ventana Crear Entradas \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
-    }
-    }//consulta
-    
-    
-    public void documento()
-    { 
-        if(consecutivo==0){
-            
-          
-           Month mesOperacion =(LocalDate.now().getMonth());
-           int mesDeCreacionDocumento=mesOperacion.getValue();
-           int anioCreacionDocumento=(LocalDate.now().getYear());
-        try
-    {
-        
-        conectar.Conectar();
-        conex= conectar.getConexion();
-        consulta= conex.prepareStatement("select max(consecutivo) as consecutivo from doc_entradas where extract(month from fecha_operacion)=? and extract(year from fecha_operacion)=? and seccion=? and concepto_entrada=?");
-        consulta.setInt(1, mesDeCreacionDocumento);
-        consulta.setInt(2, anioCreacionDocumento);
-        consulta.setInt(3, seccion);
-        consulta.setInt(4, concepto_entrada);
-        ResultadoConsulta=consulta.executeQuery();
-        if(ResultadoConsulta.next())
-        {
-        consecutivo=ResultadoConsulta.getInt("consecutivo");
-        consecutivo++;
-        }else{
-            consecutivo=1;
+    }finally{
+         conectar.Cerrar();
         }
-       
-        conectar.Cerrar();
         
-    } catch(SQLException ex)
-    {
-        JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de lectura del consecutivo.\n Ventana Consecutivo del Documento \n Contacte al Desarrollador \n "+ex ,  "ADVERTENCIA GRAVE", JOptionPane.WARNING_MESSAGE);
-    }
-   }//realiza el calculo de si la variable consecutivo vale 0 es decir si no es una modificacion
-    //ya que al ser modificacion el consecutivo debera conservarse
-    try
-        {
-        conectar.Conectar();
-        conex=conectar.getConexion();
-        consulta= conex.prepareStatement("insert into doc_entradas values (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        consulta.setDate(1, fecha_documento);
-        consulta.setDate(2, fecha_operacion);
-        consulta.setString(3, id_documento);
-        consulta.setInt(4, seccion);
-        consulta.setFloat(5, cantidad);//cantidad total de articulo
-        consulta.setInt(6, concepto_entrada);
-        consulta.setInt(7, consecutivo);
-        consulta.setString(8, proveedor);
-        consulta.setDouble(9, total_operacion);
-        consulta.setString(10, observaciones);
-        consulta.setString(11, codigo_almacen);//en la entrada el almancen destino No Aplica por lo tanto coloco el mismo en ambos
-        consulta.setString(12, codigo_almacen);
-        ejecutar=consulta.executeUpdate();
-        if( ejecutar>0 )
-        {
-           resultadoDocumento=1;
-         
-        }
-        else
-        {
-            resultadoDocumento=0;
-        }//else
-       conectar.Cerrar();
-    }//try
-           catch(SQLException ex)
-    {
-        JOptionPane.showMessageDialog(null, "No se pudo procesar la operacion de Entrada de documento.\n Ventana CrearDocumento de Entradas \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
-    }
+         return true;
     }//consulta
-   
-    
-    
-    public int respuesta()
-    {
-        return resultadoDocumento;
-    }
-    public int getResultFinal()
-    {
-        return resultadoHistorial;
+
+    public void setDocumento(DocumentoDTO documento) {
+        this.documento = documento;
     }
     
-    public void setCodigo(String id)
-    {
-        id_documento=id;
-    }
-    public void setFechaDocumento(java.sql.Date recibido)
-    {
-        fecha_documento=recibido;
-    }
-    public void setFechaOperacion(java.sql.Date recibido)
-    {
-        fecha_operacion=recibido;
+    public boolean crearEntrada() throws SQLException{
+    return entrada();
     }
     
-    public void setProveedor(String recibido)
-    {
-        proveedor=recibido;
-    }
-    public void setSeccion(int recibido)
-    {
-        seccion=recibido;
-    }
-    public void setCantidad(int recibido)
-    {
-        cantidad=recibido;
-    }
-    public void setConcepto(int recibido)
-    {
-        concepto_entrada=recibido;
-    }
-    public void setConsecutivo(int recibido){
-        consecutivo=recibido;
-    }
     
-    public void setCodigoArticulo(List<Integer> recibido)
-    {
-        codigo_articulo=recibido;
-    }
-    public void setNombreArticulo(List<String> recibido)
-    {
-        nombre_articulo=recibido;
-    }
-    public void setCantidadArticulo(List<Double> recibido)
-    {
-        cantidad_articulo=recibido;
-    }
-    public void setPedidoArticulo(List<Double> recibido)
-   {
-                valor_pedido=recibido;
-   }
-    public void setPrecioArticulo(List<Double> recibido)
-    {
-        precio_articulo=recibido;
-    }
     
-    public void setTotalOperacion(Double recibido)
-    {
-        total_operacion=recibido;
-    }
-    public void setCodigoAlmacen(String recibido)
-    {
-        codigo_almacen=recibido;
-    }
-    public void setObservaciones(String recibido)
-    {
-        observaciones=recibido;
-    }
+    
 }//clase

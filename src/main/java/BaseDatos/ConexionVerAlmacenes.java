@@ -28,12 +28,13 @@ public class ConexionVerAlmacenes {
     {
         conectar.Conectar();
         conex= conectar.getConexion();
-        try(PreparedStatement consulta2=conex.prepareStatement("select codigo_almacen, denominacion,ubicacion,  seccion_id, es_principal, es_despacho, es_destino, alias from almacenes where seccion_id=? and hospital_id=? order by codigo_almacen")){
+        try(PreparedStatement consulta2=conex.prepareStatement("select id, codigo_almacen, denominacion,ubicacion,  seccion_id, es_principal, es_despacho, es_destino, alias from almacenes where seccion_id=? and hospital_id=? order by codigo_almacen")){
             consulta2.setInt(1, codigoSeccion);
             consulta2.setInt(2, idHospital);
             try(ResultSet ejecutar2=consulta2.executeQuery()){
                 while(ejecutar2.next()){
                 AlmacenDTO almacen=new AlmacenDTO(
+                ejecutar2.getInt("id"),
                 ejecutar2.getString("codigo_almacen"),
                 idHospital,
                 ejecutar2.getString("denominacion"),
