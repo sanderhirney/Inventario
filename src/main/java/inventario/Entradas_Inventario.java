@@ -1,12 +1,7 @@
 
 package inventario;
 
-import BaseDatos.ConexionActualizarTempEntrada;
-import BaseDatos.ConexionConsultarDecimales;
 import BaseDatos.ConexionCrearEntrada;
-import BaseDatos.ConexionOperacionesEntrada;
-import BaseDatos.ConexionVerAlmacenes;
-import BaseDatos.ConexionVerConceptos;
 import BaseDatos.ConexionVerificarDocumentoEntrada;
 import Modelos.AlmacenDTO;
 import Modelos.ConceptoDTO;
@@ -16,14 +11,11 @@ import Modelos.DocumentoDTO;
 import Modelos.HospitalDTO;
 import Modelos.ProveedorDTO;
 import Modelos.SeccionesDTO;
-import Reportes.ReporteEntrada;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -44,61 +36,36 @@ int decimalCostos=0;
 int decimalCantidad=0;
 List<ConceptoDTO> listaConceptos=new ArrayList<>();
 LocalDate fechaActual=LocalDate.now();
-///////
-List<String> descripcion=new ArrayList<>();
-List<Integer> codigo=new ArrayList<>();  
-List<String> nombre_proveedor=new ArrayList<>();
-List<String> rif_proveedor=new ArrayList<>();
 List<String> codigo_almacenes=new ArrayList<>();
 List<String> nombre_almacenes=new ArrayList<>();
-int consecutivoDocumento=0;
-String convertir;
 String nombre_recibido;
 String codigo_recibido;
-Date fecha= new Date();
-
-java.sql.Date fecha_doc;
-long fechalong;
-List<Double> CostosActuales=new ArrayList<>();
-List<Double> existencia_promedio=new ArrayList<>();
  //tabla
 DefaultTableModel modelo;
-ConexionVerConceptos conceptos= new ConexionVerConceptos();
-ConexionConsultarDecimales decimales=new ConexionConsultarDecimales();
-ConexionVerAlmacenes almacenes=new ConexionVerAlmacenes();
-//variables que seran usadas para enviar datos
-String id_documento;
-String nombre_seccion;
-int codigo_seccion;
-int numero_art;
-//Variable de tipo de documento
-//1=Entrada
-//0= Salida
-int tipo=1;
-//variables para la cantidad de decimales
 
 int estado_decimal=0;
 int cantidad_numero_campo=0; //variable que suma la cantidad de enteros+el punto+cantidad de decimales programadas
-//variables para recibir datos cuando se va a llenar el formulario
-int consecutivo=0;
-List<Integer> codigo_articulo_rec=new ArrayList<>();
-List<Double> precio_articulo_rec=new ArrayList<>();
-List<Double> cantidad_articulo_rec=new ArrayList<>();
-List<String> nombre_articulos_rec=new ArrayList<>();
-String cod_proveedor_rec;
-String observaciones_rec;
-String codigo_almacen_rec;
-List<Double> costo_doc_rec=new ArrayList<>();//variable para recibir los costos        
-int codigo_concepto_rec;
-java.sql.Date fecha_doc_rec;
-String documento_rec;
+
 public Dimension resolucion;//variable para leer el ancho y alto de la ventana
 //para darle formato al campo al momento de realizar la multiplicacion de cantidad*costo unitaroio
-
+int idDocumentoEdicion;
 private Logger log=LoggerInfo.getLogger();
  public Entradas_Inventario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        configurarEntorno();
+        idDocumentoEdicion=0;
+        
+    }//constructor
+ // CONSTRUCTOR 2: Para editar borrador o ver asentado
+public Entradas_Inventario(java.awt.Frame parent, boolean modal, int idDocumento) {
+    this(parent, modal); // Llama al constructor de arriba (reúsa la configuración)
+    this.idDocumentoEdicion = idDocumento;
+    cargarDocumentoExistente(idDocumento); // Método nuevo para llenar la tabla
+}
+
+   
+    private void configurarEntorno(){
          try{
         
         GestionDeHospitales.getInstance().llamarDatos();
@@ -171,9 +138,11 @@ private Logger log=LoggerInfo.getLogger();
             log.severe("ERROR AL CREAR LA ENTRADA");
             log.severe(e.toString());
         }
-    }//constructor
-   
+    }
     
+    private void cargarDocumentoExistente(int idDocumento){
+    //aqui aplico el metodo de cargar informacion DTO del documento que seleccionen
+    }
       @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -541,47 +510,59 @@ private Logger log=LoggerInfo.getLogger();
          JOptionPane.showMessageDialog(null, "Debe agregar al menos un(01) articulo ", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
                  
         }else{
+             
                     try{
-                    List<DetalleArticuloDTO> listaArticulos = new ArrayList<>();
-                    for(int i=0; i<modelo.getRowCount(); i++){
-                    int idArticulo=Integer.parseInt(modelo.getValueAt(i,0).toString());
-                    String nombreArticulo=(String)modelo.getValueAt(i,1);
-                    BigDecimal cantidadArticulo = transformarABigDecimal(modelo.getValueAt(i, 2));
-                    BigDecimal costoArticulo = transformarABigDecimal(modelo.getValueAt(i, 3));
-                    listaArticulos.add(new DetalleArticuloDTO(idArticulo, nombreArticulo, cantidadArticulo, costoArticulo));
+                        
+                        if(this.idDocumentoEdicion==0){
+                                 List<DetalleArticuloDTO> listaArticulos = new ArrayList<>();
+                                for(int i=0; i<modelo.getRowCount(); i++){
+                                int idArticulo=Integer.parseInt(modelo.getValueAt(i,0).toString());
+                                String nombreArticulo=(String)modelo.getValueAt(i,1);
+                                BigDecimal cantidadArticulo = transformarABigDecimal(modelo.getValueAt(i, 2));
+                                BigDecimal costoArticulo = transformarABigDecimal(modelo.getValueAt(i, 3));
+                                listaArticulos.add(new DetalleArticuloDTO(idArticulo, nombreArticulo, cantidadArticulo, costoArticulo));
 
-                    }
-                   AlmacenDTO almacenDespachoSeleccionado=(AlmacenDTO)Combo_Almacen.getSelectedItem();
-                   ConceptoDTO conceptoSeleccionado=(ConceptoDTO)Combo_Concepto.getSelectedItem();
-                   DocumentoDTO documento=new DocumentoDTO(
-                   0,
-                   hospitalActual.id(),
-                   codigoSeccionActual,
-                   almacenDespachoSeleccionado.id(),
-                   0,//porque en entradas el almacen de destino no aplica
-                   conceptoSeleccionado.codigo(),
-                   "ENTRADA",//es un documento de tipo entrada 
-                   Campo_Documento.getText().trim(),
-                   0,//el correlativo legal a plica solo a salidas
-                   fechaActual.getMonthValue(),
-                   fechaActual.getYear(),
-                   Fecha_Documento.getDate(),
-                   0,//siempre se guarda en borrador primero
-                   Campo_Observaciones.getText().trim(),
-                   BigDecimal.ZERO,//lo obtenemos luego en el dto del detalle articulo
-                   0,//este es el del documento origen el cual es 0 porque es nuevo el documento     
-                   listaArticulos
-                   ); 
+                                }
+                               AlmacenDTO almacenDespachoSeleccionado=(AlmacenDTO)Combo_Almacen.getSelectedItem();
+                               ConceptoDTO conceptoSeleccionado=(ConceptoDTO)Combo_Concepto.getSelectedItem();
+                               ProveedorDTO proveedorSeleccionado=(ProveedorDTO)Combo_Proveedor.getSelectedItem();
+                               DocumentoDTO documento=new DocumentoDTO(
+                               0,
+                               hospitalActual.id(),
+                               codigoSeccionActual,
+                               almacenDespachoSeleccionado.id(),
+                               0,//porque en entradas el almacen de destino no aplica
+                               proveedorSeleccionado.id(),
+                                0,//servicio es cero porque es una salida
+                               conceptoSeleccionado.codigo(),
+                               "ENTRADA",//es un documento de tipo entrada 
+                               Campo_Documento.getText().trim(),
+                               0,//el correlativo legal a plica solo a salidas
+                               fechaActual.getMonthValue(),
+                               fechaActual.getYear(),
+                               Fecha_Documento.getDate(),
+                               0,//siempre se guarda en borrador primero
+                               Campo_Observaciones.getText().trim(),
+                               BigDecimal.ZERO,//lo obtenemos luego en el dto del detalle articulo
+                               0,//este es el del documento origen el cual es 0 porque es nuevo el documento     
+                               listaArticulos
+                               ); 
+
+                               ConexionCrearEntrada entrada = new ConexionCrearEntrada();
+                               entrada.setDocumento(documento);
+                               if(entrada.crearEntrada()){
+                               JOptionPane.showMessageDialog(null, "Entrada registrada satisfactoriamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                               modelo.setRowCount(0);
+                               }else{
+                               JOptionPane.showMessageDialog(null, "Se encontro un error y no se creo la entrada", "error", JOptionPane.ERROR_MESSAGE);
+                               }
+
+                         }else{
+                        //actualizar el documento
+                        }
+                 
+                  
                    
-                   ConexionCrearEntrada entrada = new ConexionCrearEntrada();
-                   entrada.setDocumento(documento);
-                   if(entrada.crearEntrada()){
-                   JOptionPane.showMessageDialog(null, "Entrada registrada satisfactoriamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-                   modelo.setRowCount(0);
-                   }else{
-                   JOptionPane.showMessageDialog(null, "Se encontro un error y no se creo la entrada", "error", JOptionPane.ERROR_MESSAGE);
-                   }
-
 
 
                }
@@ -799,116 +780,7 @@ private Logger log=LoggerInfo.getLogger();
         // TODO add your handling code here:
     }//GEN-LAST:event_Campo_CantidadActionPerformed
     
-     public void setCodigoArticuloRec(List<Integer> recibido)
-     {
-         codigo_articulo_rec=recibido;
-     }
-     public void setNombreArticuloRec(List<String> recibido)
-     {
-        nombre_articulos_rec=recibido;
-     }
-     public void setCantidadArticuloRec(List<Double> recibido)
-     {
-         cantidad_articulo_rec=recibido;
-     }
-     public void setCodProveedorRec(String recibido)
-     {
-         cod_proveedor_rec=recibido;
-     }
-     public void setCostosDoc(List<Double> recibido)
-     {
-         costo_doc_rec=recibido;
-     }
-     public void setCodConceptoRec(int recibido)
-     {
-         codigo_concepto_rec=recibido;
-     }
-     public void setFechaDocRec(java.sql.Date recibido)
-     {
-         fecha_doc_rec=recibido;
-     }
-     public void setDocumentoRec(String recibido)
-     {
-         documento_rec=recibido;
-     }
-     public void setConsecutivo(int recibido){
-         consecutivo=recibido;
-     }
-     public void setObservacionesRec(String recibido)
-     {
-         observaciones_rec=recibido;
-     }
-     public void setAlmacenRec(String recibido)
-     {
-         codigo_almacen_rec=recibido;
-     }
-    
-    public void llenar_formulario()
-    {
-        //para formatear el campo
-            String mascara_campo="#.";//para la mascara
-            String mascara_total="#.";//para la mascara
-            String formato_campo="";//para escribir el numero en base a la mascara
-            String formato_total="";
-            Campo_Observaciones.setText(observaciones_rec);
-            for(int i=0; i<decimalCostos; i++)
-            {
-                mascara_campo=mascara_campo+("0");
-                
-            }
-            for(int i=0; i<decimalCantidad; i++)
-            {
-                mascara_total=mascara_total+("0");
-                
-            }
-            DecimalFormat formatoCampo=new DecimalFormat(mascara_campo);
-            DecimalFormat formatoTotal=new DecimalFormat(mascara_total);
-        //esta clase llena los datos en el formulario de las entradas
-       // ComboBoxModel mod = Combo_Proveedor.getModel();
-            
-        for(int i=0; i<codigo_articulo_rec.size(); i++)
-        {
-            System.out.println("voy en: "+codigo_articulo_rec.get(i));
-            System.out.println("cantidad es: "+cantidad_articulo_rec.size());
-            try{
-            formato_campo=(formatoCampo.format(costo_doc_rec.get(i)));
-            formato_total=(formatoTotal.format((cantidad_articulo_rec.get(i)) *(costo_doc_rec.get(i))));
-            formato_campo=formato_campo.replaceAll(",", ".");
-            formato_total=formato_total.replaceAll(",", ".");
-            modelo.addRow(new Object[] {codigo_articulo_rec.get(i), nombre_articulos_rec.get(i) , cantidad_articulo_rec.get(i),(formato_campo),(formato_total)});
-            }catch(Exception Ex){
-              JOptionPane.showMessageDialog(null, "Se ha producido el siguiente error \n al cargar los datos: "+Ex, "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-        for(int a=0; a<rif_proveedor.size(); a++)
-        {
-        if(rif_proveedor.get(a).equals(cod_proveedor_rec))
-        {
-        Combo_Proveedor.setSelectedIndex(a);
-        }//if
-    
-        }//for
-        for(int b=0; b<codigo.size(); b++)
-        {
-            if(codigo.get(b).equals(codigo_concepto_rec))
-            {
-                Combo_Concepto.setSelectedIndex(b);
-            }
-        }//for
-        for(int c=0; c<codigo_almacenes.size(); c++)
-        {
-            if(codigo_almacenes.get(c).equals(codigo_almacen_rec))
-            {
-                Combo_Almacen.setSelectedIndex(c);
-            }
-        }//for
-        
-        Fecha_Documento.setDate(fecha_doc_rec);
-        Campo_Documento.setText(documento_rec);
-        
-        
-    }
-    
+     
     /**
      * @param args the command line arguments
      */

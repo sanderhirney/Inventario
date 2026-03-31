@@ -18,6 +18,8 @@ import java.util.List;
         int idSeccion,
         int idAlmacenDespacho,
         int idAlmacenDestino,
+        int idProveedor,   
+        int idServicio,
         int concepto,
         String tipoDocumento,
         String numeroDocumento,

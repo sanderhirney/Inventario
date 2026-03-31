@@ -23,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 public class Consultar_Entradas extends javax.swing.JDialog {
+    /////////AQUI QUEDE PARA CONSULTAR LAS ENTRADAS
 List<Integer> cantidad_articulos=new ArrayList<>();
 List<String> documento=new ArrayList<>();
 List<Date> fecha=new ArrayList<>();
@@ -57,6 +58,7 @@ Logger log=LoggerInfo.getLogger();
         initComponents();
          try
          {
+             
          //valido si hay errores con las entradas
         ConexionValidadorErroresRegistro errores=new ConexionValidadorErroresRegistro();
         errores.consulta(1);//la consulta de ver las entradas
@@ -65,19 +67,8 @@ Logger log=LoggerInfo.getLogger();
          codigo_seccion=seccion.codigo_seccion();
          nombre_seccion=seccion.nombre_seccion();
          //consulto las entradas
-         ConexionVerEntradas entradas=new ConexionVerEntradas();
-         entradas.setSeccion(codigo_seccion);
-         entradas.consulta();
-         entradas.temporal();
-         entradas.conceptos();
+       
          
-         fecha=entradas.getFecha();
-         documento=entradas.getDocumento();
-         concepto=entradas.getConcepto();
-         cantidad_articulos=entradas.getCantidadArticulos();
-         valor=entradas.getValorOperacion();
-         consecutivos=entradas.getConsecutivos();
-         estado=entradas.getEstado();
          ConexionConsultarDecimales decimales=new ConexionConsultarDecimales();
          decimales.setSeccion(codigo_seccion);
          decimales.consulta();
@@ -154,7 +145,7 @@ Logger log=LoggerInfo.getLogger();
 
             },
             new String [] {
-                "Fecha", "Documento", "Concepto", "Cant. Artic.", "Monto", "Estado"
+                "Id", "Fecha", "Concepto", "Proveedor", "Total", "Estado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -256,153 +247,8 @@ Logger log=LoggerInfo.getLogger();
     }//GEN-LAST:event_boton_salirActionPerformed
 
     private void boton_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_editActionPerformed
-        // TODO add your handling code here:
-        if(tabla_entradas.getSelectedRow()== -1)
-        {
-                        JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla", "Revisar", JOptionPane.ERROR_MESSAGE);
-
-        }
-        else
-        {
-            //aqui leo los datos del documento seleccionado para realizar todas las operaciones 
-            //1 .- calculo el costo total de cada articulo del documento antes de reversar 
-            //2.- luego del paso 1, le resto el costo total del articulo al costo del que estoy reversando
-            //3.- teniendo en cuenta que se reversa con el mismo costo que se compro
-            //4.- luego de este nuevo costo obtenido junto a la existencia que queda luego de reversar calculo costo actualizado luego de reversar
-            //5.- almaceno los datos en variables correspondientes para pasarlas a la ventana de entrada
-            //6.- elimino la informacion de las tablas de documento_entrada, historiales y actualizo para cada articulo reversado existencia y costo.
-          //llamo primero a los codigos de los articulos que estan en el historial del documento llamado
-            //ojo busco los datos a pasar a a entrada una vez que esta todo listo
-            //en buscar entrada y buscar articulos del historial
-            //si esta en temporal solo leo los datos
-            //ya que las validaciones previas se ejecutan antes de que la informacion
-            //vaya a temporal
-            if( modelo.getValueAt(tabla_entradas.getSelectedRow(), 5).toString().equals("Guardado") )
-            {
-                ConexionBuscarArtHistorial buscar=new ConexionBuscarArtHistorial();
-                buscar.setquien_llama(1);//porque es una entrada
-                buscar.setSeccion(codigo_seccion);
-                buscar.setDocumento((modelo.getValueAt(tabla_entradas.getSelectedRow(), 1)).toString());
-                buscar.buscar_codigos_articulos();
-                buscar.buscar_nombre_articulos();
-                documento_seleccionado=(modelo.getValueAt(tabla_entradas.getSelectedRow(), 1)).toString();
-                
-                ConexionModifEntradas entrada= new ConexionModifEntradas();
-                entrada.setSeccion(codigo_seccion);
-                entrada.setDocumento(documento_seleccionado);
-                entrada.setCodigoArticulo(buscar.getCodigoArticulos());
-                entrada.costo_unitario();
-                entrada.existencia_unitaria();
-                entrada.costos_totales();
-                entrada.documento();
-                entrada.setCantidadDoc(buscar.getCantidadesDoc());
-                entrada.setCostosDoc(buscar.getCostosDoc());
-
-                entrada.EstadoExistencias();
-                entrada.actualizar();//actualizo eixstencia y costo, este se ejecuta siempre y cuando no haya error
-                if(entrada.getEstadoExistencia()==0)
-                {
-                    //hubo error porque al reversar quedaria negativo
-                     lista7=entrada.getArtCodError().iterator();
-                    StringBuilder s=new StringBuilder();
-                    while(lista7.hasNext())
-                    {
-                    s.append(lista7.next());
-                    }
-
-                    JOptionPane.showMessageDialog(null, "Error: no se puede modificar el documento seleccionado\n el o los articulos: "+s+"\n"+"\nposeen movimientos", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                if(entrada.getEstadoExistencia()==1)
-                {
-                   
-                    //no hubo error
-                    //procedo a borrar los movimientos de la base de datos
-                    //ya que se va a modificar
-                    //y me traigo los datos a la ventana
-                      //entrada.imprimir();
-                int yo_llamo=1;//porque es una entrada
-                
-                ConexionGuardarTemporal temp=new ConexionGuardarTemporal(yo_llamo);
-               //OJO AQUI ESTA EL ERROR QUE DEBO CORREGIR
-                 int seleccionado=tabla_entradas.getSelectedRow();
-                temp.setDocumentoEntrada(documento_seleccionado);
-                temp.setSeccion(codigo_seccion);
-                temp.setFechaDocDespacho((Date)(modelo.getValueAt(tabla_entradas.getSelectedRow(), 0)));
-                temp.setProveedores(entrada.getCodProveedor());
-                temp.setConcepto(entrada.getConceptoEntrada());
-                temp.setSumaArticulos(Double.valueOf(modelo.getValueAt(tabla_entradas.getSelectedRow(), 3).toString()));
-                temp.settotaloperacion(valor.get(seleccionado) );
-                temp.setCodigoAlmacen(entrada.getCodigoAlmacen());
-                temp.setObservaciones(entrada.getObservaciones());
-                temp.setCodArticulos(buscar.getCodigoArticulos());
-                temp.setCostosArticulos(buscar.getCostosDoc());
-                temp.setArticulosIndividual(buscar.getCantidadesDoc());
-                temp.temp_doc();
-                temp.temp_articulo();
-            
-                    Entradas_Inventario ventana=new Entradas_Inventario(null, true);
-                    ventana.setCantidadArticuloRec(buscar.getCantidadesDoc());
-                    ventana.setCodigoArticuloRec(buscar.getCodigoArticulos());
-                    ventana.setNombreArticuloRec(buscar.getNombreArticulos());
-                    ventana.setCodProveedorRec(entrada.getCodProveedor());
-                    ventana.setCostosDoc(buscar.getCostosDoc());
-                    ventana.setCodConceptoRec(entrada.getConceptoEntrada());
-                    ventana.setFechaDocRec(entrada.getFechaDoc());
-                    ventana.setAlmacenRec(entrada.getCodigoAlmacen());
-                    ventana.setObservacionesRec(entrada.getObservaciones());
-                    ventana.setAlmacenRec(entrada.getCodigoAlmacen());
-                    //una vez que llego aqu procedo a borrar en bd para mostrar
-                    ventana.setDocumentoRec(documento_seleccionado);
-                    entrada.borrarDocumento();
-                    entrada.borrarHistorial();
-                    if(entrada.getResulatdo()==1)
-                    {
-                        //es decir fueron positivas 1 para si y 0 para no
-                        this.dispose();//cierro la ventana donde aparece el listado de documentos
-                        ventana.llenar_formulario();
-                        ventana.setResizable(false);
-                        ventana.setLocationRelativeTo(null);
-                        ventana.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                        ventana.setVisible(true); 
-                    }
-                    if(entrada.getResulatdo()==0)
-                    {
-                        JOptionPane.showMessageDialog(null,"Ocurrio un error al llamar la entrada seleccionada. \n pudo haber sido ocasionado por un error al leer datos de la base de datos \n o por un error al actualizar la informacion en la base de datos.\n Contacte al desarrollador", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-
-                    }
-          
-            }//IF DE QUE SI ESTA GUARDADO
-            if( modelo.getValueAt(tabla_entradas.getSelectedRow(), 5).toString().equals("No Guardado") )
-            {
-                documento_seleccionado=((String)(modelo.getValueAt(tabla_entradas.getSelectedRow(), 1)));
-                
-                ConexionVerTempEntradas temp=new ConexionVerTempEntradas();
-                temp.setSeccion(codigo_seccion);
-                temp.setDocumento(documento_seleccionado);
-                temp.documento();
-                temp.conceptos();
-                temp.articulo();
-                temp.nombre_articulos();
-                if(documento_seleccionado.equals("")){documento_seleccionado="NO SUMINISTRADO";}
-                Entradas_Inventario ventana=new Entradas_Inventario(null, true);
-                ventana.setCantidadArticuloRec(temp.getCantidadArtDoc());
-                ventana.setCodigoArticuloRec(temp.getCodArticulos());
-                ventana.setNombreArticuloRec(temp.getNombreArticulos());
-                ventana.setCodProveedorRec(temp.getProveedor());
-                ventana.setCostosDoc(temp.getCostosArtDoc());
-                ventana.setCodConceptoRec(temp.getCodConcepto());
-                ventana.setDocumentoRec(documento_seleccionado);
-                ventana.setFechaDocRec(temp.getFecha());
-                this.dispose();//cierro la ventana donde aparece el listado de documentos
-                ventana.llenar_formulario();
-                ventana.setResizable(false);
-                ventana.setLocationRelativeTo(null);
-                ventana.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                ventana.setVisible(true); 
-            }//IF DE QUE ESTA EN TEMPORAL
-           
-        }
+       
+        
     }//GEN-LAST:event_boton_editActionPerformed
 
     private void boton_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_nuevoActionPerformed
