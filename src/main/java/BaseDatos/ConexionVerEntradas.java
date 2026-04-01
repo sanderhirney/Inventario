@@ -40,7 +40,7 @@ public class ConexionVerEntradas {
                    ejecutar.getInt("concepto_id"),
                    ejecutar.getInt("proveedor_id"),
                    ejecutar.getInt("servicio_id"),
-                   ejecutar.getBigDecimal("total"),
+                   ejecutar.getBigDecimal("valor_total"),
                    ejecutar.getInt("estado")
                            
                            

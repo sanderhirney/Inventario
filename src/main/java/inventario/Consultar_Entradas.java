@@ -1,101 +1,77 @@
 
 package inventario;
 
-import BaseDatos.ConexionBuscarArtHistorial;
-import BaseDatos.ConexionConsultarDecimales;
-import BaseDatos.ConexionSecciones;
-import BaseDatos.ConexionGuardarTemporal;
-import BaseDatos.ConexionModifEntradas;
-import BaseDatos.ConexionValidadorErroresRegistro;
 import BaseDatos.ConexionVerEntradas;
-import BaseDatos.ConexionVerTempEntradas;
 import Modelos.AlmacenDTO;
-import java.math.BigDecimal;
-import java.sql.Date;
-import java.text.DecimalFormat;
+import Modelos.ConfiguracionDTO;
+import Modelos.ConsultaDocumentosDTO;
+import Modelos.HospitalDTO;
+import Modelos.SeccionesDTO;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 
 public class Consultar_Entradas extends javax.swing.JDialog {
-    /////////AQUI QUEDE PARA CONSULTAR LAS ENTRADAS
-List<Integer> cantidad_articulos=new ArrayList<>();
-List<String> documento=new ArrayList<>();
-List<Date> fecha=new ArrayList<>();
-List<String> concepto=new ArrayList<>();
-List<Double> valor=new ArrayList<>();
-List<String> estado=new ArrayList<>();
-List<Integer> consecutivos=new ArrayList<>();
+    
+
 DefaultTableModel modelo;
-Iterator lista1;
-Iterator lista2;
-Iterator lista3;
-Iterator lista4;
-Iterator lista5;
-Iterator lista6;
-Iterator lista7;
-Iterator lista8;
-String nombre_seleccion;
-String codigo_seleccion;
-int codigo_seccion;
-String nombre_seccion;
-String documento_seleccionado;
-TableRowSorter filtro;
-List<BigDecimal>formateado=new ArrayList<>();
-List<String> calculoFormateado=new ArrayList<>();
-int decimal_unitario;
+
 int decimal_totales;
 JFrame ventanaPrincipal;
 AlmacenDTO almacenPrincipal;
-Logger log=LoggerInfo.getLogger();
+ConfiguracionDTO configuracionActual;
+int decimalCostos=0;
+int decimalCantidad=0;
+HospitalDTO hospitalActual;
+int codigoSeccionActual;
+List<SeccionesDTO> seccionActual=new ArrayList<>();
+List<ConsultaDocumentosDTO> listaDocumentos=new ArrayList<>();
+private Logger log=LoggerInfo.getLogger();
     public Consultar_Entradas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
          try
          {
              
-         //valido si hay errores con las entradas
-        ConexionValidadorErroresRegistro errores=new ConexionValidadorErroresRegistro();
-        errores.consulta(1);//la consulta de ver las entradas
-         ConexionSecciones seccion=new ConexionSecciones();
-         seccion.consulta();
-         codigo_seccion=seccion.codigo_seccion();
-         nombre_seccion=seccion.nombre_seccion();
-         //consulto las entradas
-       
-         
-         ConexionConsultarDecimales decimales=new ConexionConsultarDecimales();
-         decimales.setSeccion(codigo_seccion);
-         decimales.consulta();
-         decimal_unitario=decimales.getDecimalCampo();
-         decimal_totales=decimales.getDecimalTotal();
-         for(int i=0; i<documento.size(); i++)
-           {
-              calculoFormateado.add(decimalesCalculoTotal(i));
-               
-         
-           }//for
-         //los meto al iterador para poder mostrarlos en la tabla
-         //lo coloco en un bloque try catch para poder tomar cualquier excepcion en este proceso
-         
+                log.info("CONSULTAR ENTRADAS");
+                GestionDeHospitales.getInstance().llamarDatos();
+                hospitalActual=GestionDeHospitales.getInstance().hospitales();
+                GestionDeSecciones.getInstance().setIdHospital(hospitalActual.id());
+                GestionDeSecciones.getInstance().llamarDatos();
+                seccionActual=GestionDeSecciones.getInstance().secciones();
+                for(SeccionesDTO busquedaActivo:seccionActual){
+                  if(busquedaActivo.seleccionado()){
+                  codigoSeccionActual=busquedaActivo.codigo();
+                  break;
+                  }
+                }
+              GestionDeConfiguraciones.getInstance().setIdHospital(hospitalActual.id());
+              GestionDeConfiguraciones.getInstance().setIdSeccion(codigoSeccionActual);
+              GestionDeConfiguraciones.getInstance().llamarDatos();
+              configuracionActual=GestionDeConfiguraciones.getInstance().getConfiguracion();
+              decimalCostos=configuracionActual.decimalCosto();
+              decimalCantidad=configuracionActual.decimaCantidad();
         
-         lista1=fecha.iterator();
-         lista2=documento.iterator();
-         lista3=concepto.iterator();
-         lista4=cantidad_articulos.iterator();
-         lista5=calculoFormateado.iterator();
-         lista6=estado.iterator();
-         //lista5=valor.iterator();
-         //llamo al modelo de la tabla para luego colocar alli la informacion
+              GestionDeAlmacenes.getInstance().llamarDatos();
+                almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
+                if(almacenPrincipal != null){
+                    etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
+                }else{
+                     etiquetaAlmacenActivo.setText("NO OBTENIDO");
+                }
+         
+         ConexionVerEntradas consulta=new ConexionVerEntradas();
+         consulta.setIdHospital(hospitalActual.id());
+         consulta.setIdSeccion(codigoSeccionActual);
+         listaDocumentos=consulta.consultaDocumento();
+        
          modelo=(DefaultTableModel)tabla_entradas.getModel();
-         while(lista1.hasNext())
+         for(ConsultaDocumentosDTO documento:listaDocumentos)
          {
-             modelo.addRow(new Object[]{lista1.next(), lista2.next(), lista3.next(), lista4.next(), lista5.next(), lista6.next()});
+             modelo.addRow(new Object[]{documento.id(), documento.fechaDocumento(), documento.concepto(), documento.idProveedor(), documento.total(), documento.estado()});
          }
          }
          catch(Exception e)
@@ -105,13 +81,7 @@ Logger log=LoggerInfo.getLogger();
              JOptionPane.showMessageDialog(null, "No se puede desplegar informacion por: "+e+"\n Consulte al desarrollador", "Error Grave", JOptionPane.ERROR_MESSAGE);
          }
          
-         GestionDeAlmacenes.getInstance().llamarDatos();
-        almacenPrincipal= GestionDeAlmacenes.getInstance().almacenPrincipal();
-        if(almacenPrincipal != null){
-            etiquetaAlmacenActivo.setText(almacenPrincipal.denominacion());
-        }else{
-             etiquetaAlmacenActivo.setText("NO OBTENIDO");
-        }
+        
          
     }
 
@@ -222,12 +192,12 @@ Logger log=LoggerInfo.getLogger();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private String decimalesCalculoTotal(int index){
+   /* private String decimalesCalculoTotal(int index){
         String calculoTotalFinal;
         String mascaraCalculoTotal="###,###.";//para la mascara
         Double temporal;
         
-            temporal=valor.get(index);
+          //  temporal=valor.get(index);
             for(int i=0; i<decimal_totales; i++)
             {
                 mascaraCalculoTotal=mascaraCalculoTotal+("0");
@@ -235,10 +205,10 @@ Logger log=LoggerInfo.getLogger();
             }
             DecimalFormat formatoPrecioUnitario=new DecimalFormat(mascaraCalculoTotal);
             //calculoTotalFinal=(formatoPrecioUnitario.format(temporal).replace(',','.'));
-            calculoTotalFinal=(formatoPrecioUnitario.format(temporal));
+          //  calculoTotalFinal=(formatoPrecioUnitario.format(temporal));
         
         return calculoTotalFinal;
-    }
+    }*/
     private void boton_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_salirActionPerformed
         // TODO add your handling code here:
            

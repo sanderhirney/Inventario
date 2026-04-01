@@ -20,11 +20,12 @@ public class ConexionCrearEntrada {
     DocumentoDTO documento;
     private final String sqlDoc = """
                                  INSERT INTO documentos (
-                                             hospital_id, seccion_id, almacen_despacho_id, 
-                                             almacen_destino_id, proveedor_id, servicio_id, 
-                                             concepto_id, tipo, numero_provisional, 
-                                             fecha_emision, estado, observaciones, valor_total
-                                         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                                         hospital_id, seccion_id, almacen_despacho_id, 
+                                         almacen_destino_id, proveedor_id, servicio_id, 
+                                         concepto_id, tipo, numero_provisional, 
+                                         correlativo_legal, mes_legal, anio_legal, 
+                                         fecha_emision, estado, observaciones, valor_total
+                                     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                                   """;
 
     private final String sqlKardex = "INSERT INTO kardex (hospital_id, almacen_id, documento_id, articulo_id, " +
@@ -44,37 +45,30 @@ public class ConexionCrearEntrada {
         // 1. Insertar Cabecera y obtener el ID generado (SERIAL)
         int idGenerado;
       try (PreparedStatement psDoc = conexion.prepareStatement(sqlDoc, Statement.RETURN_GENERATED_KEYS)) {
-             // 1 y 2: IDs Directos
-            psDoc.setInt(1, documento.idHospital());
-             psDoc.setInt(2, documento.idSeccion());
+           psDoc.setInt(1, documento.idHospital());
+    psDoc.setInt(2, documento.idSeccion());
+    
+    // Almacenes, Proveedor, Servicio (Índices 3 al 6)
+    psDoc.setObject(3, (documento.idAlmacenDespacho() > 0) ? documento.idAlmacenDespacho() : null);
+    psDoc.setObject(4, (documento.idAlmacenDestino() > 0) ? documento.idAlmacenDestino() : null);
+    psDoc.setObject(5, (documento.idProveedor() > 0) ? documento.idProveedor() : null);
+    psDoc.setObject(6, (documento.idServicio() > 0) ? documento.idServicio() : null);
 
-             // 3 y 4: Almacenes (Usamos setNull para evitar errores de tipo con int)
-             if (documento.idAlmacenDespacho() > 0) psDoc.setInt(3, documento.idAlmacenDespacho()); 
-             else psDoc.setNull(3, java.sql.Types.INTEGER);
+    // Concepto, Tipo, Número (Índices 7 al 9)
+    psDoc.setInt(7, documento.concepto());
+    psDoc.setString(8, documento.tipoDocumento());
+    psDoc.setString(9, documento.numeroDocumento());
 
-             if (documento.idAlmacenDestino() > 0) psDoc.setInt(4, documento.idAlmacenDestino()); 
-             else psDoc.setNull(4, java.sql.Types.INTEGER);
+    // --- correlativos legales---
+    psDoc.setInt(10, documento.correlativoLegal());
+    psDoc.setInt(11, documento.mesLegal());
+    psDoc.setInt(12, documento.anioLegal());
 
-             // 5 y 6: Proveedor y Servicio (Nuevos campos V5)
-             if (documento.idProveedor() > 0) psDoc.setInt(5, documento.idProveedor()); 
-             else psDoc.setNull(5, java.sql.Types.INTEGER);
-
-             if (documento.idServicio() > 0) psDoc.setInt(6, documento.idServicio()); 
-             else psDoc.setNull(6, java.sql.Types.INTEGER);
-
-             // 7 al 13: Resto de campos según tu Record
-             psDoc.setInt(7, documento.concepto());
-             psDoc.setString(8, documento.tipoDocumento());
-             psDoc.setString(9, documento.numeroDocumento());
-
-             // Fecha: Asegúrate de que documento.fechaEmisionDocumento() no sea null
-             psDoc.setDate(10, new java.sql.Date(documento.fechaEmisionDocumento().getTime()));
-
-             psDoc.setInt(11, documento.estado());
-             psDoc.setString(12, documento.observaciones());
-
-             // Total calculado desde el método de tu Record
-             psDoc.setBigDecimal(13, documento.valorTotalCalculado());
+    // Fecha, Estado, Obs, Total (Índices 13 al 16)
+    psDoc.setDate(13, new java.sql.Date(documento.fechaEmisionDocumento().getTime()));
+    psDoc.setInt(14, documento.estado());
+    psDoc.setString(15, documento.observaciones());
+    psDoc.setBigDecimal(16, documento.valorTotalCalculado());
 
     psDoc.executeUpdate();
 
