@@ -18,7 +18,28 @@ public class ConexionVerEntradas {
     private int idHospital;
     private List<ConsultaDocumentosDTO> listaDocumentos=new ArrayList<>();
     private Logger log=LoggerInfo.getLogger();
-
+    private String sql="""
+                       select a.id, a.fecha_emision, a.concepto_id, 
+                       b.nombre as proveedor, c.nombre_servicio as servicio, 
+                       a.valor_total, a.estado,
+                       case a.estado
+                        when 0 then 'BORRADOR'
+                        when 1 then 'ASENTADO'
+                        when 2 then 'ANULADO'
+                        else
+                        'NO DEFINIDO'
+                       end as nombreestado 
+                       from documentos a
+                       left join
+                       proveedores b
+                       on
+                       a.proveedor_id=b.id
+                       left join
+                       servicios c
+                       on 
+                       a.servicio_id=c.id
+                       where a.hospital_id=? and a.seccion_id=?
+                       """;
     private List<ConsultaDocumentosDTO> consulta() throws SQLException
     {
         log.info("CONSULTA DE DOCUMENTOS DE ENTRADA");
@@ -26,7 +47,7 @@ public class ConexionVerEntradas {
       {
           conectar.Conectar();
           conex= conectar.getConexion();
-          try(PreparedStatement consulta=conex.prepareStatement("select id, fecha_emision, concepto_id, proveedor_id, servicio_id, valor_total, estado from documentos where hospital_id=? and seccion_id=?")){
+          try(PreparedStatement consulta=conex.prepareStatement(sql)){
           consulta.setInt(1, idHospital);
           consulta.setInt(2, idSeccion);
           try(ResultSet ejecutar=consulta.executeQuery()){
@@ -38,13 +59,11 @@ public class ConexionVerEntradas {
                    idSeccion,
                    ejecutar.getDate("fecha_emision"),
                    ejecutar.getInt("concepto_id"),
-                   ejecutar.getInt("proveedor_id"),
-                   ejecutar.getInt("servicio_id"),
+                   ejecutar.getString("proveedor"),
+                   ejecutar.getString("servicio"),
                    ejecutar.getBigDecimal("valor_total"),
-                   ejecutar.getInt("estado")
-                           
-                           
-                   
+                   ejecutar.getInt("estado"),
+                   ejecutar.getString("nombreestado")
                    );
                         
                     listaDocumentos.add(documento);

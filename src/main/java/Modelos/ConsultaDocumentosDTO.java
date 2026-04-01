@@ -17,10 +17,11 @@ public record ConsultaDocumentosDTO(
         int idSeccion,
         Date fechaDocumento,
         int concepto,
-        int idProveedor,
-        int idServicio,
+        String proveedor,
+        String servicio,
         BigDecimal total,
-        int estado
+        int estado,
+        String nombreestado
         
         ) {
 

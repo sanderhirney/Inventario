@@ -18,8 +18,6 @@ public class Consultar_Entradas extends javax.swing.JDialog {
     
 
 DefaultTableModel modelo;
-
-int decimal_totales;
 JFrame ventanaPrincipal;
 AlmacenDTO almacenPrincipal;
 ConfiguracionDTO configuracionActual;
@@ -30,6 +28,7 @@ int codigoSeccionActual;
 List<SeccionesDTO> seccionActual=new ArrayList<>();
 List<ConsultaDocumentosDTO> listaDocumentos=new ArrayList<>();
 private Logger log=LoggerInfo.getLogger();
+
     public Consultar_Entradas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -67,11 +66,11 @@ private Logger log=LoggerInfo.getLogger();
          consulta.setIdHospital(hospitalActual.id());
          consulta.setIdSeccion(codigoSeccionActual);
          listaDocumentos=consulta.consultaDocumento();
-        
+         String formato="%." + decimalCantidad + "f";
          modelo=(DefaultTableModel)tabla_entradas.getModel();
          for(ConsultaDocumentosDTO documento:listaDocumentos)
          {
-             modelo.addRow(new Object[]{documento.id(), documento.fechaDocumento(), documento.concepto(), documento.idProveedor(), documento.total(), documento.estado()});
+             modelo.addRow(new Object[]{documento.id(), documento.fechaDocumento(), documento.concepto(), documento.proveedor(), String.format(formato, documento.total()), documento.nombreestado()});
          }
          }
          catch(Exception e)
@@ -192,23 +191,7 @@ private Logger log=LoggerInfo.getLogger();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-   /* private String decimalesCalculoTotal(int index){
-        String calculoTotalFinal;
-        String mascaraCalculoTotal="###,###.";//para la mascara
-        Double temporal;
-        
-          //  temporal=valor.get(index);
-            for(int i=0; i<decimal_totales; i++)
-            {
-                mascaraCalculoTotal=mascaraCalculoTotal+("0");
-                
-            }
-            DecimalFormat formatoPrecioUnitario=new DecimalFormat(mascaraCalculoTotal);
-            //calculoTotalFinal=(formatoPrecioUnitario.format(temporal).replace(',','.'));
-          //  calculoTotalFinal=(formatoPrecioUnitario.format(temporal));
-        
-        return calculoTotalFinal;
-    }*/
+ 
     private void boton_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_salirActionPerformed
         // TODO add your handling code here:
            
@@ -223,7 +206,7 @@ private Logger log=LoggerInfo.getLogger();
 
     private void boton_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_nuevoActionPerformed
         // TODO add your handling code here:
-                dispose();//cierro la ventana de consulta una vez culmino de abrir la ventana de entradas
+              dispose();//cierro la ventana de consulta una vez culmino de abrir la ventana de entradas
               Entradas_Inventario entrada= new Entradas_Inventario(ventanaPrincipal,false);
               entrada.setResizable(false);
               entrada.setLocationRelativeTo(null);

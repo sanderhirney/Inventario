@@ -173,6 +173,7 @@ public class Login extends javax.swing.JFrame {
                                 // ventana.setResizable(false);
                                 ventana.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
                                 ventana.setVisible(true);
+                                this.dispose();
                             }
                         }
                     }//if

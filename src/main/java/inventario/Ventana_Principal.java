@@ -2,6 +2,7 @@ package inventario;
 
 import BaseDatos.ConexionControlDeInicio;
 import BaseDatos.ConexionSecciones;
+import BaseDatos.SesionUsuario;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Logger;
@@ -221,6 +222,7 @@ public class Ventana_Principal extends javax.swing.JFrame {
          {
             
                  try {
+                     SesionUsuario.cerrarSesion();
                      inicio.cerrar();
                  } catch (SQLException ex) {
                      log.severe(ex.toString());
