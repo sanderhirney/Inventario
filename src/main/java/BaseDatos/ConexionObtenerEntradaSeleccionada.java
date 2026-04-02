@@ -19,7 +19,7 @@ public class ConexionObtenerEntradaSeleccionada {
     Date fecha;
     private Logger log=LoggerInfo.getLogger();
     List<DetalleArticuloDTO> listaArticulos=new ArrayList<>();
-    List<DocumentoDTO> listaDocumentos=new ArrayList<>();
+    DocumentoDTO documentoRetornar;
     int idHospital;
     int idSeccion;
     int idDocumento;
@@ -67,10 +67,10 @@ public class ConexionObtenerEntradaSeleccionada {
                             seccion_id=?
                             
                             """;
-    private List<DocumentoDTO> consulta() throws SQLException
+    private DocumentoDTO consulta() throws SQLException
     {
        listaArticulos.clear();
-      listaDocumentos.clear();
+      
        
             try
       {
@@ -99,7 +99,7 @@ public class ConexionObtenerEntradaSeleccionada {
             if (listaArticulos.isEmpty()) {
                 log.warning("Se intentó editar un documento sin artículos. ID: " + idDocumento);
                 JOptionPane.showMessageDialog(null, "El documento no tiene artículos registrados o no se pudieron cargar.", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
-                return listaDocumentos; // Cortamos la ejecución aquí, no intentamos crear el DTO
+                return documentoRetornar; // Cortamos la ejecución aquí, no intentamos crear el DTO
             }
         
         try(PreparedStatement consulta= conex.prepareStatement(consultaDocumento)){
@@ -131,7 +131,7 @@ public class ConexionObtenerEntradaSeleccionada {
                           listaArticulos
                   
                   );
-                  listaDocumentos.add(documento);
+                  
                   
                 }//while
              }
@@ -149,13 +149,26 @@ public class ConexionObtenerEntradaSeleccionada {
               conectar.Cerrar();
             }
             
-            return listaDocumentos;
+            return documentoRetornar;
         
     }//consulta
     
     
-    public List<DocumentoDTO> consultar() throws SQLException{
+    public DocumentoDTO consultar() throws SQLException{
     return consulta();
     }
+
+    public void setIdHospital(int idHospital) {
+        this.idHospital = idHospital;
+    }
+
+    public void setIdSeccion(int idSeccion) {
+        this.idSeccion = idSeccion;
+    }
+
+    public void setIdDocumento(int idDocumento) {
+        this.idDocumento = idDocumento;
+    }
+    
 
 }//clase

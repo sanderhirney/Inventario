@@ -1,14 +1,18 @@
 
 package inventario;
 
+import BaseDatos.ConexionObtenerEntradaSeleccionada;
 import BaseDatos.ConexionVerEntradas;
 import Modelos.AlmacenDTO;
 import Modelos.ConfiguracionDTO;
 import Modelos.ConsultaDocumentosDTO;
+import Modelos.DocumentoDTO;
 import Modelos.HospitalDTO;
 import Modelos.SeccionesDTO;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -27,6 +31,7 @@ HospitalDTO hospitalActual;
 int codigoSeccionActual;
 List<SeccionesDTO> seccionActual=new ArrayList<>();
 List<ConsultaDocumentosDTO> listaDocumentos=new ArrayList<>();
+DocumentoDTO documento;
 private Logger log=LoggerInfo.getLogger();
 
     public Consultar_Entradas(java.awt.Frame parent, boolean modal) {
@@ -67,7 +72,7 @@ private Logger log=LoggerInfo.getLogger();
          consulta.setIdSeccion(codigoSeccionActual);
          listaDocumentos=consulta.consultaDocumento();
          String formato="%." + decimalCantidad + "f";
-         modelo=(DefaultTableModel)tabla_entradas.getModel();
+         modelo=(DefaultTableModel)TablaDocumentos.getModel();
          for(ConsultaDocumentosDTO documento:listaDocumentos)
          {
              modelo.addRow(new Object[]{documento.id(), documento.fechaDocumento(), documento.concepto(), documento.proveedor(), String.format(formato, documento.total()), documento.nombreestado()});
@@ -94,7 +99,7 @@ private Logger log=LoggerInfo.getLogger();
         jLabel1 = new javax.swing.JLabel();
         Separador1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabla_entradas = new javax.swing.JTable();
+        TablaDocumentos = new javax.swing.JTable();
         PanelLayout = new javax.swing.JPanel();
         boton_nuevo = new javax.swing.JButton();
         boton_edit = new javax.swing.JButton();
@@ -109,7 +114,7 @@ private Logger log=LoggerInfo.getLogger();
 
         jLabel1.setText("Entradas");
 
-        tabla_entradas.setModel(new javax.swing.table.DefaultTableModel(
+        TablaDocumentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -125,7 +130,7 @@ private Logger log=LoggerInfo.getLogger();
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tabla_entradas);
+        jScrollPane1.setViewportView(TablaDocumentos);
 
         boton_nuevo.setText("Nuevo");
         boton_nuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -200,7 +205,31 @@ private Logger log=LoggerInfo.getLogger();
     }//GEN-LAST:event_boton_salirActionPerformed
 
     private void boton_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_editActionPerformed
-       
+             int filaSeleccionada=TablaDocumentos.getSelectedRow();
+             if (filaSeleccionada != -1){
+                 try {
+                     // (Importante por si el usuario ordenó la tabla haciendo clic en las cabeceras)
+                     int indiceReal = TablaDocumentos.convertRowIndexToModel(filaSeleccionada);
+                     ConsultaDocumentosDTO documentoSeleccionado=(ConsultaDocumentosDTO)listaDocumentos.get(indiceReal);
+                     ConexionObtenerEntradaSeleccionada seleccion=new ConexionObtenerEntradaSeleccionada();
+                     seleccion.setIdDocumento(documentoSeleccionado.id());
+                     seleccion.setIdHospital(hospitalActual.id());
+                     seleccion.setIdSeccion(codigoSeccionActual);
+                     documento=seleccion.consultar();
+                      dispose();//cierro la ventana de consulta una vez culmino de abrir la ventana de entradas
+                        Entradas_Inventario entrada= new Entradas_Inventario(ventanaPrincipal,false, documento);
+                        entrada.setResizable(false);
+                        entrada.setLocationRelativeTo(null);
+                        entrada.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+                        entrada.setVisible(true);
+                     
+                 } catch (SQLException ex) {
+                log.severe("ERROR AL OBTENER EL DOCUMENTO SELECCIONADO");
+                log.severe(ex.toString());  
+                 }
+             
+             }
+        
         
     }//GEN-LAST:event_boton_editActionPerformed
 
@@ -264,6 +293,7 @@ public void PrincipalFrame(JFrame ventana){
     private javax.swing.JLabel Etiq_encabezado;
     private javax.swing.JPanel PanelLayout;
     private javax.swing.JSeparator Separador1;
+    private javax.swing.JTable TablaDocumentos;
     private javax.swing.JButton boton_edit;
     private javax.swing.JButton boton_nuevo;
     private javax.swing.JButton boton_salir;
@@ -271,6 +301,5 @@ public void PrincipalFrame(JFrame ventana){
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabla_entradas;
     // End of variables declaration//GEN-END:variables
 }

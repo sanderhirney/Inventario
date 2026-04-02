@@ -5,16 +5,17 @@
 package inventario;
 
 import BaseDatos.ConexionActualizarHospitalEsquema;
+import BaseDatos.ConexionControlDeInicio;
 import BaseDatos.ConexionCrearConfiguracionInicialHospitales;
 import BaseDatos.ConexionCrearConfiguracionInicialUsuarios;
 import BaseDatos.ConexionVerConfigHospitales;
 import BaseDatos.ConexionVerUsuarios;
+import BaseDatos.SesionUsuario;
 import Modelos.ConfigHospitalDTO;
 import Modelos.UsuarioDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -29,22 +30,21 @@ public class VentanaAdmin extends javax.swing.JFrame {
     /**
      * Creates new form VentanaAdmin
      */
+    ConexionControlDeInicio inicio=new ConexionControlDeInicio();
     DefaultTableModel modelo;
     DefaultTableModel modelo2;
     List<ConfigHospitalDTO> listaHospitales=new ArrayList<>();
     List<UsuarioDTO> listaUsuarios=new ArrayList<>();
-    Logger log=LoggerInfo.getLogger();
+    private static Logger log=LoggerInfo.getLogger();
     String esquema="public";//se hacen estas consultas al esquema public
     int operacion=0;//1 para crear y 2 para actualizar
     int idSeleccionado=0;
-    public VentanaAdmin() {
-        initComponents();
+    public VentanaAdmin() throws SQLException {
+             initComponents();
         panelFormularioHospital.setVisible(false);
         panelFormularioUsuario.setVisible(false);
         botonSi.setSelected(true);
-        llenarTabla();
-        
-        
+        llenarTabla(); 
     }
     
     private void llenarTabla(){
@@ -355,7 +355,15 @@ public class VentanaAdmin extends javax.swing.JFrame {
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        try{
+       
+             System.exit(0);
+                    
+        }catch(Exception ex){
+        log.severe("HA OCURRIDO UN ERROR AL CERRAR LA APLICACION EN ADMIN");
+        log.severe(ex.toString());
+        }
+        
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void botonGuardarHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarHospitalActionPerformed
@@ -671,7 +679,12 @@ public class VentanaAdmin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaAdmin().setVisible(true);
+                try {
+                    new VentanaAdmin().setVisible(true);
+                } catch (SQLException ex) {
+log.severe("ERROR AL CARGAR VENTANA ADMIN");
+log.severe(ex.toString());
+                }
             }
         });
     }

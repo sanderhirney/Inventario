@@ -11,29 +11,24 @@ import javax.swing.JOptionPane;
 public class ConexionControlDeInicio {
     Connection conex;
     Conexion conectar= new Conexion();
-    ResultSet ejecutar;
-    int control=0;
-    int resultado=0;
-    Logger log=LoggerInfo.getLogger();
+    private int control=0;
+    private int resultado=0;
+    private Logger log=LoggerInfo.getLogger();
       
-    public void consulta() throws SQLException
+    private int consulta() throws SQLException
     {
           try
     {
         conectar.Conectar();
         conex= conectar.getConexion();
         try(PreparedStatement consulta= conex.prepareStatement("select estado from inicios")){
-            
-                ejecutar=consulta.executeQuery();
-                if( ejecutar.next() )
+         try(ResultSet ejecutar=consulta.executeQuery() ){
+              if( ejecutar.next() )
                 {
                     control=ejecutar.getInt("estado");
                             }//if
-         
-        
+         }
         }
-        
-        
     }//consulta
            catch(SQLException ex)
     {   log.severe("Error leyendo el estado de apertura o cierre de la aplicacion");
@@ -43,9 +38,11 @@ public class ConexionControlDeInicio {
      finally{
           conectar.Cerrar();
           }
+          
+          return control;
     }//consulta
     
-    public void abrir() throws SQLException{
+    private int abrir() throws SQLException{
           try
     {
         conectar.Conectar();
@@ -66,8 +63,10 @@ public class ConexionControlDeInicio {
           finally{
            conectar.Cerrar();
           }
+          
+          return resultado;
     }//abrir
-    public void cerrar() throws SQLException{
+    private int cerrar() throws SQLException{
                 try
     {
         conectar.Conectar();
@@ -87,6 +86,8 @@ public class ConexionControlDeInicio {
                 finally{
                  conectar.Cerrar();
                 }
+                
+                return resultado;
     }//cerrar
     
     public int getControl()
@@ -97,7 +98,17 @@ public class ConexionControlDeInicio {
     {
          return resultado;       
     }
+    public int verificarInicio() throws SQLException{
+    return consulta();
+    }
     
+    public int abrirAplicacion() throws SQLException{
+    return abrir();
+    }
+    
+    public int cerrarAplicacion() throws SQLException{
+    return cerrar();
+    }
     
     
 }//clase

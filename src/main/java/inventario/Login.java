@@ -24,6 +24,7 @@ public class Login extends javax.swing.JFrame {
     String esquemaUsuario;
     public Login() {
         initComponents();
+        
     
     }
     
@@ -155,6 +156,7 @@ public class Login extends javax.swing.JFrame {
                         switch(rolReal){
                             
                             case "ADMIN" ->{
+                                
                                 VentanaAdmin admin = new VentanaAdmin();
                                 admin.setLocationRelativeTo(null);
                                 admin.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);

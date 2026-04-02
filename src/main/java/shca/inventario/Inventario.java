@@ -1,10 +1,7 @@
 package shca.inventario;
 
-import BaseDatos.ConexionControlDeInicio;
-import BaseDatos.ConexionRespaldos;
 import inventario.LoggerInfo;
 import inventario.Login;
-import inventario.Ventana_Principal;
 import java.awt.HeadlessException;
 import java.sql.SQLException;
 import java.util.logging.Handler;

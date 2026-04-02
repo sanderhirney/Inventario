@@ -14,16 +14,21 @@ import javax.swing.tree.DefaultMutableTreeNode;
        
 public class Ventana_Principal extends javax.swing.JFrame {
    
-    String nombre;//nombre tomado al iniciar el programa
-    Logger log=LoggerInfo.getLogger();
+    private String nombre;//nombre tomado al iniciar el programa
+    private static Logger log=LoggerInfo.getLogger();
     ConexionControlDeInicio inicio=new ConexionControlDeInicio();
-  
+   
       
     
-    public Ventana_Principal() {
-      
-        initComponents();
+    public Ventana_Principal() throws SQLException {
+        int control=inicio.verificarInicio();
+        if(control==0){
+            inicio.abrirAplicacion();
+            initComponents();
         try{
+            
+
+       
             log.info("VENTANA PRINCIPAL CARGADA");
        
         this.getContentPane().setBackground(Color.WHITE);
@@ -58,6 +63,28 @@ public class Ventana_Principal extends javax.swing.JFrame {
         log.severe("ERROR AL EJECUTAR LA VENTANA PRINCIPAL");
         log.severe(e.toString());
         }
+        }else{
+                
+            int opcion= JOptionPane.showConfirmDialog(null," Se detecta la aplicacion abierta. Para evitar errores solo ejecute una ventana principal ¿forzar cierre?. \n¡No se conservara nada que no haya guardado! \n si presiona 'SI' se recomienda reinicar el sistema ", "Confirmacion de Cancelar", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                        //opcion 0= Si, 1=No
+                         if (opcion==0)
+                         {
+                            try {
+
+                            int respuesta= inicio.cerrarAplicacion();
+                            if(respuesta==0){
+                            log.severe("HA OCURRIDO UN ERROR AL CAMBIAR EL ESTADO DE LA APLIACION A CERRADO EN VENTANA PRINCIPAL");
+
+                            }else{
+                            SesionUsuario.cerrarSesion();
+                            System.exit(0);
+                            }
+                         } catch (SQLException ex) {
+                             log.severe(ex.toString());
+                         }
+                         }//if
+        }
+        
       
     }
 
@@ -222,8 +249,14 @@ public class Ventana_Principal extends javax.swing.JFrame {
          {
             
                  try {
-                     SesionUsuario.cerrarSesion();
-                     inicio.cerrar();
+                    
+                    int respuesta= inicio.cerrarAplicacion();
+                    if(respuesta==0){
+                    log.severe("HA OCURRIDO UN ERROR AL CAMBIAR EL ESTADO DE LA APLIACION A CERRADO EN VENTANA PRINCIPAL");
+                    
+                    }else{
+                    SesionUsuario.cerrarSesion();
+                    }
                  } catch (SQLException ex) {
                      log.severe(ex.toString());
                  }
@@ -374,7 +407,12 @@ public class Ventana_Principal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Ventana_Principal().setVisible(true);
+                try {
+                    new Ventana_Principal().setVisible(true);
+                } catch (SQLException ex) {
+log.severe("ERROR AL CARGAR VENTANA PRINCIPAL");
+log.severe(ex.toString());
+                }
             }
         });
     }

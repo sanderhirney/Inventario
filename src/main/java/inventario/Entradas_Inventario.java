@@ -48,20 +48,21 @@ int cantidad_numero_campo=0; //variable que suma la cantidad de enteros+el punto
 
 public Dimension resolucion;//variable para leer el ancho y alto de la ventana
 //para darle formato al campo al momento de realizar la multiplicacion de cantidad*costo unitaroio
-int idDocumentoEdicion;
+int edicion=0;
 private Logger log=LoggerInfo.getLogger();
  public Entradas_Inventario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         configurarEntorno();
-        idDocumentoEdicion=0;
+        edicion=0;
+        
         
     }//constructor
  // CONSTRUCTOR 2: Para editar borrador o ver asentado
-public Entradas_Inventario(java.awt.Frame parent, boolean modal, int idDocumento) {
+public Entradas_Inventario(java.awt.Frame parent, boolean modal, DocumentoDTO documentoSeleccionado) {
     this(parent, modal); // Llama al constructor de arriba (reúsa la configuración)
-    this.idDocumentoEdicion = idDocumento;
-    cargarDocumentoExistente(idDocumento); // Método nuevo para llenar la tabla
+    edicion=1;
+    cargarDocumentoExistente(documentoSeleccionado); // Método nuevo para llenar la tabla
 }
 
    
@@ -140,7 +141,7 @@ public Entradas_Inventario(java.awt.Frame parent, boolean modal, int idDocumento
         }
     }
     
-    private void cargarDocumentoExistente(int idDocumento){
+    private void cargarDocumentoExistente(DocumentoDTO documento){
     //aqui aplico el metodo de cargar informacion DTO del documento que seleccionen
     }
       @SuppressWarnings("unchecked")
@@ -513,7 +514,7 @@ public Entradas_Inventario(java.awt.Frame parent, boolean modal, int idDocumento
              
                     try{
                         
-                        if(this.idDocumentoEdicion==0){
+                        if(this.edicion==0){
                                  List<DetalleArticuloDTO> listaArticulos = new ArrayList<>();
                                 for(int i=0; i<modelo.getRowCount(); i++){
                                 int idArticulo=Integer.parseInt(modelo.getValueAt(i,0).toString());
