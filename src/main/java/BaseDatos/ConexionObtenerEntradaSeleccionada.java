@@ -43,10 +43,10 @@ public class ConexionObtenerEntradaSeleccionada {
                              from documentos
                              where
                              id=? and
-                             hospial_id=?
+                             hospital_id=?
                              and
                              seccion_id=?
-                             and tipo="ENTRADA"
+                             and tipo='ENTRADA'
                              """;
     String consultaArticulo="""
                             
@@ -60,11 +60,11 @@ public class ConexionObtenerEntradaSeleccionada {
                             on
                             a.articulo_id=b.id
                             where
-                            documento_id=?
+                            a.documento_id=?
                             and
-                            hospital_id=?
+                            a.hospital_id=?
                             and
-                            seccion_id=?
+                            a.seccion_id=?
                             
                             """;
     private DocumentoDTO consulta() throws SQLException
@@ -109,7 +109,7 @@ public class ConexionObtenerEntradaSeleccionada {
              try(ResultSet ejecutar=consulta.executeQuery()){
                   if( ejecutar.next() )
                 {
-                  DocumentoDTO documento=new DocumentoDTO(
+                  this.documentoRetornar=new DocumentoDTO(
                           idDocumento,
                           idHospital,
                           idSeccion,
@@ -143,6 +143,8 @@ public class ConexionObtenerEntradaSeleccionada {
             }//try
                     catch(SQLException ex)
              {
+                 log.severe("ERROR AL RECUPERAR LA ENTRADA");
+                 log.severe(ex.toString());
                  JOptionPane.showMessageDialog(null, "No se pudo recuperar informacion de los Documento de entrada.\n Ventana Ver Documentos de entrada \n Contacte al Desarrollador \n "+ex ,  "ERROR GRAVE", JOptionPane.ERROR_MESSAGE);
              }
             finally{

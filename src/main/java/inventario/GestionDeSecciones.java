@@ -33,6 +33,9 @@ public class GestionDeSecciones {
     
     //Metodo que llama a BD consultar Almacenes
     public void llamarDatos(){
+         if(!listaSecciones.isEmpty()){
+            return;
+        }
         try {
            ConexionVerSecciones secciones=new ConexionVerSecciones();
            secciones.setIdHospital(idHospital);
@@ -43,7 +46,11 @@ public class GestionDeSecciones {
         }
         
     }
-
+     // MÉTODO NUEVO: Para cuando el usuario cree/edite una sección en otra ventana
+    public void refrescarDatos() {
+        this.listaSecciones.clear(); // Forzamos que quede vacía
+        llamarDatos();               // Al estar vacía, llamarDatos() irá a la BD sí o sí
+    }
     public void setIdHospital(int idHospital) {
         this.idHospital = idHospital;
     }

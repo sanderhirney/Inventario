@@ -4,9 +4,7 @@
  */
 package inventario;
 
-import BaseDatos.ConexionVerAlmacenes;
 import BaseDatos.ConexionVerConceptos;
-import Modelos.AlmacenDTO;
 import Modelos.ConceptoDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -34,6 +32,9 @@ public class GestionDeConceptos {
     
     //Metodo que llama a BD consultar Almacenes
     public void llamarDatos(){
+        if(!listaConceptos.isEmpty()){
+            return;
+        }
         try {
             ConexionVerConceptos conceptos=new ConexionVerConceptos();
              conceptos.setIdHospital(idHospital);
@@ -44,7 +45,11 @@ public class GestionDeConceptos {
         }
         
     }
-
+    // MÉTODO NUEVO: Para cuando el usuario cree/edite una sección en otra ventana
+    public void refrescarDatos() {
+        this.listaConceptos.clear(); // Forzamos que quede vacía
+        llamarDatos();               // Al estar vacía, llamarDatos() irá a la BD sí o sí
+    }
     public void setIdHospital(int idHospital) {
         this.idHospital = idHospital;
     }

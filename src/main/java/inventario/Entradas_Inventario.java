@@ -42,27 +42,66 @@ String nombre_recibido;
 String codigo_recibido;
  //tabla
 DefaultTableModel modelo;
-
+private int idDocumentoEdicion = 0; // Por defecto 0 (Nuevo)
 int estado_decimal=0;
 int cantidad_numero_campo=0; //variable que suma la cantidad de enteros+el punto+cantidad de decimales programadas
 
 public Dimension resolucion;//variable para leer el ancho y alto de la ventana
 //para darle formato al campo al momento de realizar la multiplicacion de cantidad*costo unitaroio
-int edicion=0;
-private Logger log=LoggerInfo.getLogger();
+
+private static Logger log=LoggerInfo.getLogger();
  public Entradas_Inventario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         configurarEntorno();
-        edicion=0;
+       
         
         
     }//constructor
  // CONSTRUCTOR 2: Para editar borrador o ver asentado
 public Entradas_Inventario(java.awt.Frame parent, boolean modal, DocumentoDTO documentoSeleccionado) {
+  
     this(parent, modal); // Llama al constructor de arriba (reúsa la configuración)
-    edicion=1;
+ try{   
+    this.idDocumentoEdicion = documentoSeleccionado.idDocumento();    
+    modelo.setRowCount(0);
     cargarDocumentoExistente(documentoSeleccionado); // Método nuevo para llenar la tabla
+    Fecha_Documento.setDate(documentoSeleccionado.fechaEmisionDocumento());
+    Campo_Documento.setText(documentoSeleccionado.numeroDocumento());
+    Campo_Observaciones.setText(documentoSeleccionado.observaciones());
+    for(int i=0; i<Combo_Proveedor.getItemCount(); i++){
+      ProveedorDTO item=(ProveedorDTO)Combo_Proveedor.getItemAt(i);
+      if(item.id()==documentoSeleccionado.idProveedor()){
+      Combo_Proveedor.setSelectedIndex(i);
+      break;
+      }
+    }
+    for(int i=0; i<Combo_Concepto.getItemCount(); i++){
+    ConceptoDTO item=(ConceptoDTO)Combo_Concepto.getItemAt(i);
+    if(item.codigo()==documentoSeleccionado.concepto()){
+    Combo_Concepto.setSelectedIndex(i);
+    break;
+    }
+    }
+    for(int i=0; i<Combo_Almacen.getItemCount(); i++){
+    AlmacenDTO item=(AlmacenDTO)Combo_Almacen.getItemAt(i);
+    if(item.id()==documentoSeleccionado.idAlmacenDespacho()){
+    Combo_Almacen.setSelectedIndex(i);
+    break;
+    }
+    }
+    String formato="%." + decimalCantidad + "f";
+    for(DetalleArticuloDTO articulo:documentoSeleccionado.articulos()){
+        BigDecimal total=articulo.cantidadArticulo().multiply(articulo.precioUnitarioArticulo());
+        modelo.addRow(new Object[] {articulo.idArticulo(), articulo.nombreArticulo(), articulo.precioUnitarioArticulo(), String.format(formato, total)});
+    
+    }
+   }catch(Exception ex){
+       this.dispose();
+   log.severe("ERROR AL OBTENER DATOS DE ENTRADA A MODIFICAR");
+   log.severe(ex.toString());
+   
+   }
 }
 
    
@@ -514,7 +553,7 @@ public Entradas_Inventario(java.awt.Frame parent, boolean modal, DocumentoDTO do
              
                     try{
                         
-                        if(this.edicion==0){
+                    
                                  List<DetalleArticuloDTO> listaArticulos = new ArrayList<>();
                                 for(int i=0; i<modelo.getRowCount(); i++){
                                 int idArticulo=Integer.parseInt(modelo.getValueAt(i,0).toString());
@@ -528,7 +567,7 @@ public Entradas_Inventario(java.awt.Frame parent, boolean modal, DocumentoDTO do
                                ConceptoDTO conceptoSeleccionado=(ConceptoDTO)Combo_Concepto.getSelectedItem();
                                ProveedorDTO proveedorSeleccionado=(ProveedorDTO)Combo_Proveedor.getSelectedItem();
                                DocumentoDTO documento=new DocumentoDTO(
-                               0,
+                               this.idDocumentoEdicion, // Si es nuevo será 0, si es edición será el ID real
                                hospitalActual.id(),
                                codigoSeccionActual,
                                almacenDespachoSeleccionado.id(),
@@ -558,9 +597,6 @@ public Entradas_Inventario(java.awt.Frame parent, boolean modal, DocumentoDTO do
                                JOptionPane.showMessageDialog(null, "Se encontro un error y no se creo la entrada", "error", JOptionPane.ERROR_MESSAGE);
                                }
 
-                         }else{
-                        //actualizar el documento
-                        }
                  
                   
                    

@@ -9,6 +9,7 @@ import Modelos.AlmacenDTO;
 import Modelos.ArticuloDTO;
 import Modelos.GrupoDTO;
 import Modelos.HospitalDTO;
+import Modelos.SeccionesDTO;
 import Modelos.SubgrupoDTO;
 import Modelos.UnidadDTO;
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ List<ArticuloDTO> listaArticulos=new ArrayList<>();
 List<GrupoDTO> listaGrupos=new ArrayList<>();
 List<SubgrupoDTO> listaSubgrupos=new ArrayList<>();
 List<UnidadDTO> listaUnidades=new ArrayList<>();
+List<SeccionesDTO> listaSecciones=new ArrayList<>();
 int operacion=0;//1 para nuevo y 2 para actualizar
     public Articulos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -45,10 +47,14 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                 hospital=GestionDeHospitales.getInstance().hospitales();
                 etiqNombreHospital.setText(hospital.nombre());
                 
-                
-                ConexionSecciones secciones=new ConexionSecciones();
-                secciones.consulta();
-                codigo_seccion=secciones.codigo_seccion();
+                GestionDeSecciones.getInstance().setIdHospital(hospital.id());
+                GestionDeSecciones.getInstance().llamarDatos();
+                listaSecciones=GestionDeSecciones.getInstance().secciones();
+                for(SeccionesDTO seccion:listaSecciones){
+                  if(seccion.seleccionado()){
+                  codigo_seccion=seccion.codigo();
+                  }
+                }
                 
                 ConexionVerUnidades unidades=new ConexionVerUnidades();
                 unidades.setIdhospital(hospital.id());
@@ -73,7 +79,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                 for(SubgrupoDTO subgrupo:listaSubgrupos){
                 comboSubgrupo.addItem(subgrupo);
                 }
-                llenarTabla();
+                llenarTabla(false);
                 
                 
              
@@ -90,12 +96,18 @@ int operacion=0;//1 para nuevo y 2 para actualizar
         
         
     }
-      private void llenarTabla(){
+      private void llenarTabla(boolean actualizar){
           try{
+              
         operacion=0;
         
         GestionDeArticulos.getInstance().setIdhospital(hospital.id());
+        if(actualizar){
+        GestionDeArticulos.getInstance().refrescarDatos();
+        }else{
         GestionDeArticulos.getInstance().llamarDatos();
+        }
+        
         listaArticulos=GestionDeArticulos.getInstance().articulos();
         
         modelo=(DefaultTableModel)TablaArticulos.getModel();
@@ -406,7 +418,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                       operacion=0;
                       campoCodigoBarras.setText("");
                       campoNombre.setText("");
-                      llenarTabla();
+                      llenarTabla(true);
                       panelBotones2.setVisible(false);
                       panelBotones.setVisible(true);
                       panelFormulario.setVisible(false);
@@ -441,7 +453,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                       campoCodigoBarras.setText("");
                       campoNombre.setText("");
                       panelFormulario.setVisible(false);
-                      llenarTabla();
+                      llenarTabla(true);
                       panelBotones2.setVisible(false);
                       panelBotones.setVisible(true);
                     }else{

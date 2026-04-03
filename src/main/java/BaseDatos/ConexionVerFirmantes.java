@@ -15,7 +15,8 @@ public class ConexionVerFirmantes {
      Logger log=LoggerInfo.getLogger();
     Connection conexion;
     Conexion conectar= new Conexion();
-    int seccion;
+    private int seccion;
+    private int idHospital;
     List<FirmantesDTO> firmantes=new ArrayList<>();
     String consultaSQL="""
                        select a.id as id,
@@ -34,7 +35,9 @@ public class ConexionVerFirmantes {
                        cargos b
                        on
                        a.cargo_id=b.id
-                       where a.seccion_id=?
+                       where a.seccion_id=? and
+                       a.hospital_id=?
+                     
                        """;
     public List<FirmantesDTO> consultar() throws SQLException
     {
@@ -45,6 +48,7 @@ public class ConexionVerFirmantes {
         conexion= conectar.getConexion();
         try(PreparedStatement consulta=conexion.prepareStatement(consultaSQL)){
             consulta.setInt(1, seccion);
+            consulta.setInt(2, idHospital);
             try(ResultSet ejecutar=consulta.executeQuery()){
                 while( ejecutar.next() )
             {
@@ -85,6 +89,10 @@ public class ConexionVerFirmantes {
 
     public void setSeccion(int seccion) {
         this.seccion = seccion;
+    }
+
+    public void setIdHospital(int idHospital) {
+        this.idHospital = idHospital;
     }
     
     public List<FirmantesDTO> consulta() throws SQLException{

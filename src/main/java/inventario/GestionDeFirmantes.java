@@ -4,26 +4,30 @@
  */
 package inventario;
 
-import BaseDatos.ConexionVerConfiguraciones;
-import Modelos.ConfiguracionDTO;
+import BaseDatos.ConexionVerConceptos;
+import BaseDatos.ConexionVerFirmantes;
+import Modelos.ConceptoDTO;
+import Modelos.FirmantesDTO;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 /**
  *
  * @author USER
  */
-public class GestionDeConfiguraciones {
+public class GestionDeFirmantes {
     Logger log=LoggerInfo.getLogger();
     private int idHospital;
     private int idSeccion;
-    private static GestionDeConfiguraciones instancia;
-    ConfiguracionDTO configuraciones;
+    private static GestionDeFirmantes instancia;
+    private List<FirmantesDTO> listaFirmantes=new ArrayList<>();
     //Singleton
-    private GestionDeConfiguraciones(){}//constructorprivado
-    public static GestionDeConfiguraciones getInstance(){
+    private GestionDeFirmantes(){}//constructorprivado
+    public static GestionDeFirmantes getInstance(){
     if(instancia==null){
-    instancia=new GestionDeConfiguraciones();
+    instancia=new GestionDeFirmantes();
    
     }
      return instancia;
@@ -31,23 +35,23 @@ public class GestionDeConfiguraciones {
     
     //Metodo que llama a BD consultar Almacenes
     public void llamarDatos(){
-        if(configuraciones!=null){
+        if(!listaFirmantes.isEmpty()){
             return;
         }
         try {
-            ConexionVerConfiguraciones configuracion=new ConexionVerConfiguraciones();
-             configuracion.setIdHospital(idHospital);
-             configuracion.setIdSeccion(idSeccion);
-             configuraciones=configuracion.consultarConfiguracion();
+            ConexionVerFirmantes firmantes= new ConexionVerFirmantes();
+            firmantes.setSeccion(idSeccion);
+            firmantes.setIdHospital(idHospital);
+            listaFirmantes=firmantes.consulta();
         } catch (SQLException ex) {
-            log.severe("ERROR AL CONSULTAR LAS CONFIGURACIONES");
+            log.severe("ERROR AL CONSULTAR LOS CONCEPTOS");
             log.severe(ex.toString());
         }
         
     }
     // MÉTODO NUEVO: Para cuando el usuario cree/edite una sección en otra ventana
     public void refrescarDatos() {
-        configuraciones=null; // Forzamos que quede vacía
+        this.listaFirmantes.clear(); // Forzamos que quede vacía
         llamarDatos();               // Al estar vacía, llamarDatos() irá a la BD sí o sí
     }
     public void setIdHospital(int idHospital) {
@@ -57,10 +61,9 @@ public class GestionDeConfiguraciones {
     public void setIdSeccion(int idSeccion) {
         this.idSeccion = idSeccion;
     }
-
     
-    public ConfiguracionDTO getConfiguracion() {
-        return configuraciones;
+    public List<FirmantesDTO> getListaFirmantes() {
+        return listaFirmantes;
     }
     
     

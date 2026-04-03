@@ -5,6 +5,7 @@ import BaseDatos.ConexionCrearConfigurarServicios;
 import BaseDatos.ConexionSecciones;
 import Modelos.AlmacenDTO;
 import Modelos.HospitalDTO;
+import Modelos.SeccionesDTO;
 import Modelos.ServicioDTO;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ AlmacenDTO almacenPrincipal;
 Logger log=LoggerInfo.getLogger();
 HospitalDTO hospital;
 List<ServicioDTO> listaServicios=new ArrayList<>();
+List<SeccionesDTO> listaSecciones=new ArrayList<>();
 int operacion=0;//1 para nuevo y 2 para actualizar
     public Servicios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -44,9 +46,15 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                      etiquetaAlmacenActivo.setText("NO OBTENIDO");
                 }
 
-                ConexionSecciones secciones=new ConexionSecciones();
-                secciones.consulta();
-                codigo_seccion=secciones.codigo_seccion();
+                GestionDeSecciones.getInstance().setIdHospital(hospital.id());
+                GestionDeSecciones.getInstance().llamarDatos();
+                listaSecciones=GestionDeSecciones.getInstance().secciones();
+                for(SeccionesDTO seccion:listaSecciones){
+                  if(seccion.seleccionado()){
+                  codigo_seccion=seccion.codigo();
+                  }
+                }
+                
                 
              
         

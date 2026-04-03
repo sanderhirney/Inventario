@@ -6,7 +6,6 @@ package inventario;
 
 import BaseDatos.ConexionVerCargos;
 import Modelos.CargosDTO;
-import Modelos.SeccionesDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +32,10 @@ public class GestionDeCargos {
     
     //Metodo que llama a BD consultar Almacenes
     public void llamarDatos(){
+        if(!listaCargos.isEmpty()){
+            return;
+        }
+        
         try {
            ConexionVerCargos cargos=new ConexionVerCargos();
              listaCargos=cargos.consulta();
@@ -42,7 +45,11 @@ public class GestionDeCargos {
         }
         
     }
-    
+     // MÉTODO NUEVO: Para cuando el usuario cree/edite una sección en otra ventana
+    public void refrescarDatos() {
+        this.listaCargos.clear(); // Forzamos que quede vacía
+        llamarDatos();               // Al estar vacía, llamarDatos() irá a la BD sí o sí
+    }
     
     
     public List<CargosDTO> cargos(){

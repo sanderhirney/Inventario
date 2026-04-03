@@ -6,6 +6,7 @@ import BaseDatos.ConexionSecciones;
 import Modelos.AlmacenDTO;
 import Modelos.HospitalDTO;
 import Modelos.ProveedorDTO;
+import Modelos.SeccionesDTO;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -25,7 +26,7 @@ AlmacenDTO almacenPrincipal;
 Logger log=LoggerInfo.getLogger();
 HospitalDTO hospital;
 List<ProveedorDTO> listaProveedores=new ArrayList<>();
-
+List<SeccionesDTO> listaSecciones=new ArrayList<>();
 int operacion=0;//1 para nuevo y 2 para actualizar
     public Proveedores(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -39,9 +40,15 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                 hospital=GestionDeHospitales.getInstance().hospitales();
                 etiqHospital.setText(hospital.nombre());
                 
-                 ConexionSecciones secciones=new ConexionSecciones();
-                 secciones.consulta();
-                 codigo_seccion=secciones.codigo_seccion();
+                GestionDeSecciones.getInstance().setIdHospital(hospital.id());
+                GestionDeSecciones.getInstance().llamarDatos();
+                listaSecciones=GestionDeSecciones.getInstance().secciones();
+                for(SeccionesDTO seccion:listaSecciones){
+                  if(seccion.seleccionado()){
+                  codigo_seccion=seccion.codigo();
+                  }
+                }
+                
                   
                 llenarTabla();
              

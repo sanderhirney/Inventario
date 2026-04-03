@@ -3,11 +3,11 @@ package inventario;
 
 import BaseDatos.ConexionCrearConfigurarFirmantes;
 import BaseDatos.ConexionSecciones;
-import BaseDatos.ConexionVerFirmantes;
 import Modelos.AlmacenDTO;
 import Modelos.CargosDTO;
 import Modelos.FirmantesDTO;
 import Modelos.HospitalDTO;
+import Modelos.SeccionesDTO;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -28,6 +28,7 @@ Logger log=LoggerInfo.getLogger();
 HospitalDTO hospital;
 List<FirmantesDTO> listaFirmantes=new ArrayList<>();
 List<CargosDTO> listaCargos=new ArrayList<>();
+List<SeccionesDTO> listaSecciones=new ArrayList<>();
 int operacion=0;//1 para nuevo y 2 para actualizar
     public Firmantes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -45,11 +46,16 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                 for(CargosDTO cargo: listaCargos){
                     comboCargos.addItem(cargo);
                 }
+                GestionDeSecciones.getInstance().setIdHospital(hospital.id());
+                GestionDeSecciones.getInstance().llamarDatos();
+                listaSecciones=GestionDeSecciones.getInstance().secciones();
+                for(SeccionesDTO seccion:listaSecciones){
+                  if(seccion.seleccionado()){
+                  codigo_seccion=seccion.codigo();
+                  }
+                }
                 
-                 ConexionSecciones secciones=new ConexionSecciones();
-                 secciones.consulta();
-                  codigo_seccion=secciones.codigo_seccion();
-                llenarTabla();
+                llenarTabla(false);
              
         
         }
@@ -70,12 +76,18 @@ int operacion=0;//1 para nuevo y 2 para actualizar
         
         
     }
-      private void llenarTabla(){
+      private void llenarTabla(boolean actualizar){
           try{
+              
         operacion=0;
-        ConexionVerFirmantes firmantes= new ConexionVerFirmantes();
-        firmantes.setSeccion(codigo_seccion);
-        listaFirmantes=firmantes.consulta();
+        GestionDeFirmantes.getInstance().setIdHospital(hospital.id());
+        GestionDeFirmantes.getInstance().setIdSeccion(codigo_seccion);
+        if(actualizar){
+        GestionDeFirmantes.getInstance().refrescarDatos();
+        }else{
+        GestionDeFirmantes.getInstance().llamarDatos();
+        }
+        listaFirmantes=GestionDeFirmantes.getInstance().getListaFirmantes();
         modelo=(DefaultTableModel)TablaFirmas.getModel();
         modelo.setRowCount(0);
         filtro=new TableRowSorter(TablaFirmas.getModel());
@@ -405,7 +417,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                       campoCedula.setText("");
                       fechaInicioFirma.setDate(null);
                       fechaFinFirma.setDate(null);
-                      llenarTabla();
+                      llenarTabla(true);
                       panelBotones2.setVisible(false);
                       panelBotones.setVisible(true);
                       panelFormulario.setVisible(false);
@@ -455,7 +467,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                       campoNombre.setText("");
                       campoCedula.setText("");
                       panelFormulario.setVisible(false);
-                      llenarTabla();
+                      llenarTabla(true);
                       panelBotones2.setVisible(false);
                       panelBotones.setVisible(true);
                     }else{

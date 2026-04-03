@@ -32,6 +32,9 @@ public class GestionDeServicios {
     
     //Metodo que llama a BD consultar Almacenes
     public void llamarDatos(){
+        if(!listaServicios.isEmpty()){
+            return;
+        }
         try {
            ConexionVerServicios servicios=new ConexionVerServicios();
              listaServicios=servicios.consultar();
@@ -41,7 +44,11 @@ public class GestionDeServicios {
         }
         
     }
-    
+     // MÉTODO NUEVO: Para cuando el usuario cree/edite una sección en otra ventana
+    public void refrescarDatos() {
+        this.listaServicios.clear(); // Forzamos que quede vacía
+        llamarDatos();               // Al estar vacía, llamarDatos() irá a la BD sí o sí
+    }
     
     
     public List<ServicioDTO> servicios(){

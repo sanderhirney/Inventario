@@ -32,6 +32,9 @@ public class GestionDeProveedores {
     
     //Metodo que llama a BD consultar Almacenes
     public void llamarDatos(){
+         if(!listaProveedores.isEmpty()){
+            return;
+        }
         try {
            ConexionVerProveedores proveedores=new ConexionVerProveedores();
            proveedores.setIdHospital(idHospital);
@@ -46,7 +49,11 @@ public class GestionDeProveedores {
     public void setIdHospital(int idHospital) {
         this.idHospital = idHospital;
     }
-    
+     // MÉTODO NUEVO: Para cuando el usuario cree/edite una sección en otra ventana
+    public void refrescarDatos() {
+        this.listaProveedores.clear(); // Forzamos que quede vacía
+        llamarDatos();               // Al estar vacía, llamarDatos() irá a la BD sí o sí
+    }
     
     
     public List<ProveedorDTO> proveedores(){

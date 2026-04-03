@@ -14,7 +14,8 @@ import javax.swing.JOptionPane;
 public class ConexionCrearEntrada {
     private Logger log=LoggerInfo.getLogger();
     boolean exito=false;
-    
+    private final String sqlDeleteKardex = "DELETE FROM kardex WHERE documento_id = ? AND hospital_id = ? AND seccion_id = ?";
+    private final String sqlDeleteDoc = "DELETE FROM documentos WHERE id = ? AND hospital_id = ? AND seccion_id = ?";
     Connection conexion;
     Conexion conectar= new Conexion();
     DocumentoDTO documento;
@@ -44,6 +45,31 @@ public class ConexionCrearEntrada {
         conexion.setAutoCommit(false);
         // 1. Insertar Cabecera y obtener el ID generado (SERIAL)
         int idGenerado;
+        
+        int idDocumentoActivo = documento.idDocumento();
+        // --- PASO 0: SI ES EDICIÓN, BORRAMOS LO VIEJO ---
+        if (idDocumentoActivo > 0) {
+            log.info("Modo Edición: Limpiando datos previos...");
+            
+            // Borrar Kardex
+            try (PreparedStatement psDelK = conexion.prepareStatement(sqlDeleteKardex)) {
+                psDelK.setInt(1, idDocumentoActivo);
+                psDelK.setInt(2, documento.idHospital());
+                psDelK.setInt(3, documento.idSeccion());
+                psDelK.executeUpdate();
+            }
+            
+            // Borrar Cabecera
+            try (PreparedStatement psDelD = conexion.prepareStatement(sqlDeleteDoc)) {
+                psDelD.setInt(1, idDocumentoActivo);
+                psDelD.setInt(2, documento.idHospital());
+                psDelD.setInt(3, documento.idSeccion());
+                psDelD.executeUpdate();
+            }
+            // Nota: Al borrar y re-insertar, el ID puede cambiar si usas SERIAL. 
+            // Si quieres mantener el MISMO ID exacto, habría que usar UPDATE, 
+            // pero Borrar/Insertar es más seguro para evitar artículos huérfanos.
+        }
       try (PreparedStatement psDoc = conexion.prepareStatement(sqlDoc, Statement.RETURN_GENERATED_KEYS)) {
            psDoc.setInt(1, documento.idHospital());
     psDoc.setInt(2, documento.idSeccion());

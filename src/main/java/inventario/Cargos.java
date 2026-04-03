@@ -29,7 +29,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
         super(parent, modal);
         initComponents();
            try{
-               llenarTabla();
+               llenarTabla(false);
                panelBotones2.setVisible(false);
                panelFormulario.setVisible(false);
                 GestionDeHospitales.getInstance().llamarDatos();
@@ -55,10 +55,14 @@ int operacion=0;//1 para nuevo y 2 para actualizar
         
         
     }
-      private void llenarTabla(){
+      private void llenarTabla(boolean actualizar){
           try{
-        
-              GestionDeCargos.getInstance().llamarDatos();
+        if(actualizar){
+        GestionDeCargos.getInstance().refrescarDatos();
+        }else{
+        GestionDeCargos.getInstance().llamarDatos();
+        }
+              
         listaCargos=GestionDeCargos.getInstance().cargos();
         modelo=(DefaultTableModel)TablaCargos.getModel();
         modelo.setRowCount(0);
@@ -296,7 +300,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                       JOptionPane.showMessageDialog(null, "Cargo creado exitosamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
                       operacion=0;
                       campoDescripcion.setText("");
-                      llenarTabla();
+                      llenarTabla(true);
                       panelBotones2.setVisible(false);
                       panelBotones.setVisible(true);
                       panelFormulario.setVisible(false);
@@ -324,7 +328,7 @@ int operacion=0;//1 para nuevo y 2 para actualizar
                       operacion=0;
                       campoDescripcion.setText("");
                       panelFormulario.setVisible(false);
-                      llenarTabla();
+                      llenarTabla(true);
                       panelBotones2.setVisible(false);
                       panelBotones.setVisible(true);
                     }else{
